@@ -76,7 +76,7 @@ export default function ChartJSY() {
         className="w-80 md:w-full"
         type="bar"
         // width="270"
-        height="300"
+        height="220"
         options={chartData.options}
         series={chartData.series}
       />
