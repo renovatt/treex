@@ -1,12 +1,29 @@
+import PreviewCard from './components/PreviewCard'
+import { BiTransfer } from 'react-icons/bi'
+import { IoWalletOutline } from 'react-icons/io5'
+import { MdOutlineMoneyOff } from 'react-icons/md'
+
 export default function Home() {
   return (
-    <div className="flex gap-5">
-      <div className="bg-left-card-gradient flex h-40 w-40 items-center justify-center rounded-3xl">
-        <h1 className="text-primary-800">card</h1>
-      </div>
-      <div className="bg-right-card-gradient flex h-40 w-40 items-center justify-center rounded-3xl">
-        <h1 className="text-primary-800">card</h1>
-      </div>
-    </div>
+    <section className="flex gap-5 border">
+      <PreviewCard
+        description="Carteira"
+        icon={IoWalletOutline}
+        side="left"
+        value={3500}
+      />
+      <PreviewCard
+        description="Faturamento mensal"
+        icon={BiTransfer}
+        side="right"
+        value={510}
+      />
+      <PreviewCard
+        description="Previsão de gastos"
+        icon={MdOutlineMoneyOff}
+        side="left"
+        value={500}
+      />
+    </section>
   )
 }
