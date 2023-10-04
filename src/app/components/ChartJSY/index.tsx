@@ -71,9 +71,9 @@ export default function ChartJSY() {
   })
 
   return (
-    <section className="mt-10 flex items-center justify-center md:w-1/2">
+    <section className="mt-10 flex w-full items-center justify-center md:w-1/2">
       <Chart
-        className="w-80 md:w-full"
+        className="w-[95%]"
         type="bar"
         // width="270"
         height="220"
