@@ -3,25 +3,83 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --bg-default: #171721;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar{
+  width: 3px;
+}
+
+::-webkit-scrollbar-track{
+  /* background-color: var(--background-secondary); */
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+  /* background: var(--background-primary); */
+  background: transparent;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0;
+  padding: 0;
+}
+
+ul, li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+html{
+  @media(max-width:1080px){
+      font-size:93.75%;
+  }
+
+  @media(max-width:720px){
+      font-size:87.5%;
+  }
+
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#__next,
+body {
+  @apply h-full;
+}
+
+@layer components {
+  .container {
+    @apply sm:max-w-[768px] md:max-w-[1440px] px-4 py-10 md:px-20;
+  }
+}
+
+@layer utilities{
+  .bg-right-card-gradient{
+    background: linear-gradient(
+      225deg, 
+      rgba(44,66,61,1) 0%, 
+      rgba(35,35,45,1) 49%
+    );
+  }
+
+  .bg-left-card-gradient{
+    background: linear-gradient(
+      135deg, rgba(37,43,77,1) 0%, rgba(35,35,45,1) 49%);
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--bg-default);
 }
