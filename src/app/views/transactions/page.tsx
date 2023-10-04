@@ -12,7 +12,7 @@ export default function Transactions() {
   return (
     <section className="flex w-full flex-col items-center justify-start overflow-scroll overflow-x-hidden md:items-start">
       <Header title="Transações" description="Gastos recentes " />
-      <section className="grid grid-cols-2 gap-10 md:w-1/2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="mb-10 grid grid-cols-2 gap-10 md:w-1/2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <PreviewCard
           description="Total"
           icon={HiArrowsUpDown}
