@@ -1,14 +1,16 @@
+'use client'
 import Header from './components/Header'
 import { BiTransfer } from 'react-icons/bi'
 import PreviewCard from './components/PreviewCard'
 import { IoWalletOutline } from 'react-icons/io5'
 import { MdOutlineMoneyOff } from 'react-icons/md'
+import ChartJSY from './components/ChartJSY'
 
 export default function Home() {
   return (
     <section className="flex w-full flex-col">
       <Header title="Dashboard" description="Visão geral" />
-      <section className="flex gap-5">
+      <section className="flex w-1/2 gap-5">
         <PreviewCard
           description="Carteira"
           icon={IoWalletOutline}
@@ -28,6 +30,7 @@ export default function Home() {
           value={500}
         />
       </section>
+      <ChartJSY />
     </section>
   )
 }
