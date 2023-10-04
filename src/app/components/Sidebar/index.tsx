@@ -31,7 +31,7 @@ export default function Sidebar({ children }: SidebarProps) {
         <Navbar />
       </aside>
 
-      <main className="flex flex-grow items-center justify-center">
+      <main className="flex flex-grow flex-col items-start justify-start p-5">
         {children}
       </main>
     </SidebarContainer>
