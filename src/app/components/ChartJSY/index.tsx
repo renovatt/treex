@@ -17,7 +17,7 @@ export default function ChartJSY() {
       },
       grid: {
         show: true,
-        borderColor: '#000',
+        Color: '#000',
         strokeDashArray: 5,
         xaxis: {
           lines: {
@@ -71,11 +71,12 @@ export default function ChartJSY() {
   })
 
   return (
-    <section className="mt-10 flex w-1/2 items-center justify-center">
+    <section className="mt-10 flex items-center justify-center md:w-1/2">
       <Chart
-        className="w-full"
+        className="w-80 md:w-full"
         type="bar"
-        width="500"
+        // width="270"
+        height="300"
         options={chartData.options}
         series={chartData.series}
       />

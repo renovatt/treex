@@ -19,12 +19,12 @@ export default function Sidebar({ children }: SidebarProps) {
       >
         {status.isSelected ? (
           <MdOutlineKeyboardDoubleArrowLeft
-            className="absolute -right-[5px] top-5 h-3 w-3 rounded-full bg-primary-850 text-primary-750 hover:cursor-pointer"
+            className="absolute -right-[5px] top-5 hidden h-3 w-3 rounded-full bg-primary-850 text-primary-750 hover:cursor-pointer md:flex"
             onClick={setStatus}
           />
         ) : (
           <MdOutlineKeyboardDoubleArrowRight
-            className="absolute -right-[5px] top-5 h-3 w-3 rounded-full bg-primary-850 text-primary-750 hover:cursor-pointer"
+            className="absolute -right-[5px] top-5 hidden h-3 w-3 rounded-full bg-primary-850 text-primary-750 hover:cursor-pointer md:flex"
             onClick={setStatus}
           />
         )}

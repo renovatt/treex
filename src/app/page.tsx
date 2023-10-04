@@ -8,9 +8,9 @@ import ChartJSY from './components/ChartJSY'
 
 export default function Home() {
   return (
-    <section className="flex w-full flex-col">
+    <section className="flex w-full flex-col items-center justify-center md:items-start">
       <Header title="Dashboard" description="Visão geral" />
-      <section className="flex w-1/2 gap-5">
+      <section className="grid grid-cols-2 gap-10 md:grid-cols-4">
         <PreviewCard
           description="Carteira"
           icon={IoWalletOutline}
@@ -29,7 +29,14 @@ export default function Home() {
           side="left"
           value={500}
         />
+        <PreviewCard
+          description="Alguma coisa"
+          icon={MdOutlineMoneyOff}
+          side="right"
+          value={999}
+        />
       </section>
+
       <ChartJSY />
     </section>
   )

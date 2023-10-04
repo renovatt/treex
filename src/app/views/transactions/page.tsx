@@ -8,9 +8,9 @@ import {
 
 export default function Transactions() {
   return (
-    <section className="flex w-full flex-col">
+    <section className="flex w-full flex-col items-center justify-center md:items-start">
       <Header title="Transações" description="Gastos recentes " />
-      <section className="flex gap-5">
+      <section className="grid grid-cols-2 gap-10 md:grid-cols-4">
         <PreviewCard
           description="Total"
           icon={HiArrowsUpDown}
