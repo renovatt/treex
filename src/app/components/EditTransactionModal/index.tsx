@@ -1,10 +1,10 @@
 import { Fragment } from 'react'
-import TransactionForm from '../TransactionForm'
 import { CgCloseR } from 'react-icons/cg'
 import { KeyBoardModalProps } from './types'
 import { Dialog, Transition } from '@headlessui/react'
+import EditTransactionForm from '../EditTransactionForm'
 
-export default function KeyboardModal({
+export default function EditTransactionModal({
   closeModal,
   isOpen,
 }: KeyBoardModalProps) {
@@ -43,10 +43,10 @@ export default function KeyboardModal({
                   as="h3"
                   className="text-lg font-semibold leading-6 text-white"
                 >
-                  Nova transação
+                  Editar transação
                 </Dialog.Title>
                 <section className="my-2">
-                  <TransactionForm />
+                  <EditTransactionForm />
                 </section>
               </Dialog.Panel>
             </Transition.Child>

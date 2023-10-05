@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 
-export default function ToogleInput() {
+export default function SwitchInput() {
   const [enabled, setEnabled] = useState(false)
 
   return (

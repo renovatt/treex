@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { HeaderProps } from './types'
-import KeyboardModal from '../KeyboardModal'
+import AddTransactionModal from '../AddTransactionModal'
 import { useToggle } from '@/hooks/useToogle'
 import { MdKeyboardArrowDown, MdOutlineAddBox } from 'react-icons/md'
 
@@ -9,7 +9,7 @@ export default function Header({ title, description }: HeaderProps) {
   const { isOpen, openModal, closeModal } = useToggle()
   return (
     <>
-      <KeyboardModal isOpen={isOpen} closeModal={closeModal} />
+      <AddTransactionModal isOpen={isOpen} closeModal={closeModal} />
       <header className="my-5 mb-10 flex w-full items-center justify-between">
         <article className="flex flex-col items-start justify-center">
           <h1 className="text-xl font-bold text-white md:text-2xl">{title}</h1>
