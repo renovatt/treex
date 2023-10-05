@@ -1,21 +1,19 @@
+'use client'
 import Header from '@/app/components/Header'
-import TransactionItemList from '@/app/components/TransactionItemList'
+import { BiTransfer } from 'react-icons/bi'
 import PreviewCard from '@/app/components/PreviewCard'
+import TransactionItemList from '@/app/components/TransactionItemList'
+import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import TransactionTableContainer from '@/app/components/TransactionTableContainer'
-import {
-  HiArrowTrendingUp,
-  HiArrowTrendingDown,
-  HiArrowsUpDown,
-} from 'react-icons/hi2'
 
 export default function Transactions() {
   return (
     <section className="flex w-full flex-col items-center justify-start overflow-scroll overflow-x-hidden md:items-start">
       <Header title="Transações" description="Gastos recentes " />
-      <section className="mb-10 grid grid-cols-2 gap-10 md:w-1/2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="grid grid-cols-2 gap-10 sm:grid-cols-4 md:w-1/2 md:grid-cols-3 xl:grid-cols-4">
         <PreviewCard
           description="Total"
-          icon={HiArrowsUpDown}
+          icon={BiTransfer}
           side="left"
           value={3500}
         />

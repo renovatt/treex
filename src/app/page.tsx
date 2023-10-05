@@ -1,6 +1,6 @@
 'use client'
 import Header from './components/Header'
-import { BiTransfer } from 'react-icons/bi'
+import { TbMoneybag } from 'react-icons/tb'
 import PreviewCard from './components/PreviewCard'
 import { IoWalletOutline } from 'react-icons/io5'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
@@ -22,7 +22,7 @@ export default function Home() {
         />
         <PreviewCard
           description="Faturamento mensal"
-          icon={BiTransfer}
+          icon={TbMoneybag}
           side="right"
           value={510}
         />
