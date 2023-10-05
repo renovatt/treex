@@ -34,7 +34,7 @@ export default function AddTransactionModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-primary-900 p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-primary-900 p-6 text-left align-middle shadow-xl transition-all">
                 <CgCloseR
                   onClick={closeModal}
                   className="absolute right-5 top-5 h-7 w-7 text-primary-800 hover:cursor-pointer hover:text-primary-750"
