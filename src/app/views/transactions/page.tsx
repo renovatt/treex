@@ -1,81 +1,21 @@
-'use client'
 import Header from '@/app/components/Header'
-import { BiTransfer } from 'react-icons/bi'
-import { MdOutlineCategory } from 'react-icons/md'
-import PreviewCard from '@/app/components/PreviewCard'
-import TransactionItemList from '@/app/components/TransactionItemList'
-import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
-import TransactionTableContainer from '@/app/components/TransactionTableContainer'
+import GridTransaction from '@/app/components/GridTransaction'
+import TransactionTable from '@/app/components/TransactionTable'
+import DoughnutChart from '@/app/components/PolarChart'
 
 export default function Transactions() {
   return (
     <section className="flex w-full flex-col items-center justify-start overflow-scroll overflow-x-hidden md:items-start">
-      <Header title="Transações" description="Gastos recentes " />
-      <section className="grid grid-cols-2 gap-10 sm:grid-cols-4 md:w-1/2 md:grid-cols-3 xl:grid-cols-4">
-        <PreviewCard
-          description="Total"
-          icon={BiTransfer}
-          side="left"
-          value={3500}
-        />
-        <PreviewCard
-          description="Entradas"
-          icon={HiArrowTrendingUp}
-          side="right"
-          value={510}
-        />
-        <PreviewCard
-          description="Saídas"
-          icon={HiArrowTrendingDown}
-          side="left"
-          value={500}
-        />
-        <PreviewCard
-          description="Categoria mais gasta"
-          icon={MdOutlineCategory}
-          side="left"
-          value={500}
-        />
+      <Header title="Transações" description="Gastos recentes" />
+      <section className="flex w-full flex-col justify-between gap-4 xl:flex-row xl:gap-10">
+        <section className="flex w-full flex-col items-center justify-between gap-10 xl:w-8/12">
+          <GridTransaction />
+          <TransactionTable />
+        </section>
+        <aside className="bg-left-card-gradient flex w-full items-center justify-center rounded-3xl xl:w-1/3">
+          <DoughnutChart />
+        </aside>
       </section>
-
-      <TransactionTableContainer>
-        <TransactionItemList
-          date="06/12/2023"
-          icon={HiArrowTrendingUp}
-          title="Salário"
-          value={2300}
-        />
-        <TransactionItemList
-          date="01/11/2023"
-          icon={HiArrowTrendingDown}
-          title="Faculdade"
-          value={200}
-        />
-        <TransactionItemList
-          date="26/09/2023"
-          icon={HiArrowTrendingUp}
-          title="Comida"
-          value={2300}
-        />
-        <TransactionItemList
-          date="06/12/2023"
-          icon={HiArrowTrendingUp}
-          title="Salário"
-          value={2300}
-        />
-        <TransactionItemList
-          date="01/11/2023"
-          icon={HiArrowTrendingDown}
-          title="Faculdade"
-          value={200}
-        />
-        <TransactionItemList
-          date="26/09/2023"
-          icon={HiArrowTrendingUp}
-          title="Comida"
-          value={2300}
-        />
-      </TransactionTableContainer>
     </section>
   )
 }

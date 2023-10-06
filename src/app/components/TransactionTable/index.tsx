@@ -1,3 +1,4 @@
+'use client'
 import TransactionItemList from '../TransactionItemList'
 import TransactionTableContainer from '../TransactionTableContainer'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'

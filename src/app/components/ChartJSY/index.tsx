@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import Chart from 'react-apexcharts'
 
@@ -17,7 +18,7 @@ export default function ChartJSY() {
       },
       grid: {
         show: true,
-        Color: '#000',
+        color: '#000',
         strokeDashArray: 5,
         xaxis: {
           lines: {
@@ -64,14 +65,14 @@ export default function ChartJSY() {
     },
     series: [
       {
-        name: 'series-1',
+        name: 'Faturamento',
         data: [1340, 645, 760, 549, 860, 780, 2091],
       },
     ],
   })
 
   return (
-    <section className="mt-10 flex w-full items-center justify-center">
+    <section className="my-5 flex w-full items-center justify-center">
       <Chart
         className="w-[95%]"
         type="bar"

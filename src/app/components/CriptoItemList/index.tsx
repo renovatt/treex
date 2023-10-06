@@ -1,3 +1,4 @@
+'use client'
 import { CritpoItemList } from './types'
 
 export default function CriptoItemList({

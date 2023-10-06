@@ -5,12 +5,13 @@ import { HiMiniChevronUpDown } from 'react-icons/hi2'
 import { AiOutlineCheck } from 'react-icons/ai'
 
 const people = [
-  { id: 1, name: 'Salário' },
-  { id: 2, name: 'Farmácia' },
-  { id: 3, name: 'Alimentação' },
-  { id: 4, name: 'Combustível' },
-  { id: 5, name: 'Estudos' },
-  { id: 6, name: 'Lazer' },
+  { id: 1, name: 'Estudos' },
+  { id: 2, name: 'Salário' },
+  { id: 3, name: 'Farmácia' },
+  { id: 4, name: 'Alimentação' },
+  { id: 5, name: 'Combustível' },
+  { id: 6, name: 'Pagamentos' },
+  { id: 7, name: 'Lazer' },
 ]
 
 export default function SelectCategory() {

@@ -1,3 +1,4 @@
+'use client'
 import PreviewCard from '../PreviewCard'
 import CriptoItemList from '../CriptoItemList'
 import { BiLogoBitcoin } from 'react-icons/bi'
@@ -7,7 +8,7 @@ import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 export default function CriptoInfo() {
   return (
     <aside className="flex h-full w-full flex-col items-center justify-start gap-5 xl:w-1/3">
-      <h2 className="self-start text-base text-primary-800">
+      <h2 className="self-start text-xs text-primary-800">
         Dolar nos últimos 7 dias
       </h2>
 
@@ -29,7 +30,7 @@ export default function CriptoInfo() {
       </section>
 
       <section className="w-full md:mb-4">
-        <ul className="flex h-40 w-full flex-col items-center justify-start gap-2 overflow-scroll overflow-x-hidden md:h-64">
+        <ul className="flex h-40 w-full flex-col items-center justify-start gap-2 overflow-scroll overflow-x-hidden md:h-60">
           <CriptoItemList
             cripto="Bitcoin"
             icon={BiLogoBitcoin}
