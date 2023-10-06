@@ -1,6 +1,7 @@
 'use client'
 import Header from '@/app/components/Header'
 import { BiTransfer } from 'react-icons/bi'
+import { MdOutlineCategory } from 'react-icons/md'
 import PreviewCard from '@/app/components/PreviewCard'
 import TransactionItemList from '@/app/components/TransactionItemList'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
@@ -26,6 +27,12 @@ export default function Transactions() {
         <PreviewCard
           description="Saídas"
           icon={HiArrowTrendingDown}
+          side="left"
+          value={500}
+        />
+        <PreviewCard
+          description="Categoria mais gasta"
+          icon={MdOutlineCategory}
           side="left"
           value={500}
         />
