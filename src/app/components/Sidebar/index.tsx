@@ -13,8 +13,8 @@ export default function Sidebar({ children }: SidebarProps) {
   return (
     <SidebarContainer>
       <aside
-        className={`relative flex h-full bg-primary-900 transition-all ease-in-out ${
-          status.isSelected ? 'w-48' : 'w-20'
+        className={`fixed bottom-0 left-0 z-50 flex h-20 w-full bg-primary-900 shadow-lg shadow-primary-900 transition-all ease-in-out md:relative md:h-full md:shadow-none ${
+          status.isSelected ? 'md:w-48' : 'md:w-20'
         }`}
       >
         {status.isSelected ? (
