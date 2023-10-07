@@ -1,10 +1,10 @@
 'use client'
-import Image from 'next/image'
 import ModalForm from '../Modal'
 import { HeaderProps } from './types'
+import UserDropdown from '../UserDropdown'
 import { useToggle } from '@/hooks/useToogle'
 import TransactionForm from '../TransactionForm'
-import { MdKeyboardArrowDown, MdOutlineAddBox } from 'react-icons/md'
+import { MdOutlineAddBox } from 'react-icons/md'
 
 export default function Header({ title, description }: HeaderProps) {
   const { isOpen, openModal, closeModal } = useToggle()
@@ -19,7 +19,7 @@ export default function Header({ title, description }: HeaderProps) {
           <span className="text-xs text-primary-800">{description}</span>
         </article>
 
-        <section className="flex items-center justify-between gap-2">
+        <section className="flex items-center justify-between gap-4">
           <section
             onClick={openModal}
             className="mr-2 flex items-center justify-center text-primary-800 transition-all ease-in-out hover:cursor-pointer hover:text-primary-750"
@@ -29,20 +29,7 @@ export default function Header({ title, description }: HeaderProps) {
               Adicionar
             </span>
           </section>
-          <figure className="h-8 w-8 select-none rounded-full bg-white">
-            <Image
-              src={'https://avatars.githubusercontent.com/u/94547135?v=4'}
-              alt="user-image"
-              className="h-full w-full rounded-full bg-white object-cover"
-              width={500}
-              height={500}
-              priority
-            />
-          </figure>
-          <span className="hidden items-center justify-center text-primary-800 md:flex">
-            Wildemberg
-          </span>
-          <MdKeyboardArrowDown className="h-5 w-5 text-primary-800 hover:cursor-pointer" />
+          <UserDropdown />
         </section>
       </header>
     </>
