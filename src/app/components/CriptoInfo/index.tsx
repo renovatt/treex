@@ -1,6 +1,6 @@
 'use client'
 import { BiLogoBitcoin } from 'react-icons/bi'
-import PreviewCardValue from '../PreviewCardValue'
+import PreviewCardValue from '../Cards/PreviewCardValue'
 import CriptoItemList from '../Tables/CriptoItemList'
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'

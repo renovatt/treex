@@ -4,4 +4,5 @@ export type InputProps = ComponentProps<'input'> & {
   label: string
   placeholder: string
   type: string
+  name: string
 }

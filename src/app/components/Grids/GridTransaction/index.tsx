@@ -1,5 +1,5 @@
 'use client'
-import PreviewCardValue from '../../PreviewCardValue'
+import PreviewCardValue from '../../Cards/PreviewCardValue'
 import { BiTransfer } from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'

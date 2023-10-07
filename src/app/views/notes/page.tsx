@@ -1,9 +1,9 @@
 'use client'
 import Header from '@/app/components/Layout/Header'
 import { TbReportMoney } from 'react-icons/tb'
-import PreviewCardValue from '@/app/components/PreviewCardValue'
-import MonthPreview from '@/app/components/MonthPreview'
-import PriorityPreview from '@/app/components/PriorityPreview'
+import PreviewCardValue from '@/app/components/Cards/PreviewCardValue'
+import PreviewMonthyCard from '@/app/components/Cards/PreviewMonthyCard'
+import PreviewPriorityCard from '@/app/components/Cards/PreviewPriorityCard'
 
 export default function Notes() {
   return (
@@ -17,8 +17,8 @@ export default function Notes() {
           value={3500}
         />
         <section className="flex w-full flex-col items-center justify-start gap-4 xl:flex-row">
-          <MonthPreview />
-          <PriorityPreview />
+          <PreviewMonthyCard />
+          <PreviewPriorityCard />
         </section>
       </section>
     </section>

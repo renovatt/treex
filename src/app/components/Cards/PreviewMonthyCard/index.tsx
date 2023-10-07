@@ -1,11 +1,11 @@
 'use client'
-import Modal from '../Modal'
+import Modal from '../../Modal'
 import { useToggle } from '@/hooks/useToogle'
 import { MdOutlineAddBox } from 'react-icons/md'
-import MonthPreviewForm from '../Form/MonthPreviewForm'
-import PreviewMothItemList from '../Tables/PreviewMothItemList'
+import MonthPreviewForm from '../../Form/MonthPreviewForm'
+import PreviewMothItemList from '../../Tables/PreviewMothItemList'
 
-export default function MonthPreview() {
+export default function PreviewMonthyCard() {
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>

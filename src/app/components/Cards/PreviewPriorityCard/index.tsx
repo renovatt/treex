@@ -1,11 +1,11 @@
 'use client'
-import Modal from '../Modal'
-import PriorityForm from '../Form/PriorityForm'
+import Modal from '../../Modal'
+import PriorityForm from '../../Form/PriorityForm'
 import { useToggle } from '@/hooks/useToogle'
-import PriorityItemList from '../Tables/PriorityItemList'
+import PriorityItemList from '../../Tables/PriorityItemList'
 import { MdOutlineAddBox, MdDeleteOutline } from 'react-icons/md'
 
-export default function PriorityPreview() {
+export default function PreviewPriorityCard() {
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>

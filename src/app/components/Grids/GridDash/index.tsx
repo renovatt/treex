@@ -1,5 +1,5 @@
 'use client'
-import PreviewCardValue from '../../PreviewCardValue'
+import PreviewCardValue from '../../Cards/PreviewCardValue'
 import { TbMoneybag } from 'react-icons/tb'
 import { IoWalletOutline } from 'react-icons/io5'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
