@@ -1,8 +1,8 @@
 'use client'
-import ModalForm from '../Modal'
+import Modal from '../../Modal'
 import { useToggle } from '@/hooks/useToogle'
 import { PreviewMothItemListProps } from './types'
-import EditMonthPreviewForm from '../EditMonthPreviewForm'
+import EditMonthPreviewForm from '../../Form/EditMonthPreviewForm'
 
 export default function PreviewMothItemList({
   title,
@@ -11,9 +11,9 @@ export default function PreviewMothItemList({
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>
-      <ModalForm isOpen={isOpen} closeModal={closeModal} label="Editar gasto">
+      <Modal isOpen={isOpen} closeModal={closeModal} label="Editar gasto">
         <EditMonthPreviewForm />
-      </ModalForm>
+      </Modal>
       <li
         onClick={openModal}
         className="my-1 flex w-full items-center justify-between rounded-xl bg-primary-900 px-6 py-4 shadow-lg transition-all ease-in-out hover:cursor-pointer hover:opacity-80"

@@ -4,7 +4,7 @@ import { DashCardProps } from './types'
 import { PiEyeSlash } from 'react-icons/pi'
 import { IoEyeSharp } from 'react-icons/io5'
 
-export default function PreviewCard({
+export default function PreviewCardValue({
   description,
   icon: Icon,
   side,

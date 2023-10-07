@@ -1,5 +1,5 @@
 'use client'
-import Navbar from '../Navbar'
+import Navbar from '../../Navigation/Navbar'
 import useSideBarStore from '@/store'
 import { SidebarProps } from './types'
 import SidebarContainer from '../SidebarContainer'

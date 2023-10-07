@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Chart from 'react-apexcharts'
 
-export default function ChartJSY() {
+export default function BarChart() {
   const [chartData, setChartData] = useState({
     options: {
       chart: {

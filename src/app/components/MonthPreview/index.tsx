@@ -1,21 +1,17 @@
 'use client'
-import ModalForm from '../Modal'
+import Modal from '../Modal'
 import { useToggle } from '@/hooks/useToogle'
 import { MdOutlineAddBox } from 'react-icons/md'
-import MonthPreviewForm from '../MonthPreviewForm'
-import PreviewMothItemList from '../PreviewMothItemList'
+import MonthPreviewForm from '../Form/MonthPreviewForm'
+import PreviewMothItemList from '../Tables/PreviewMothItemList'
 
 export default function MonthPreview() {
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>
-      <ModalForm
-        isOpen={isOpen}
-        label="Adicionar gasto"
-        closeModal={closeModal}
-      >
+      <Modal isOpen={isOpen} label="Adicionar gasto" closeModal={closeModal}>
         <MonthPreviewForm />
-      </ModalForm>
+      </Modal>
       <article className="bg-left-card-gradient flex h-[24.5rem] w-full flex-col items-center justify-start gap-4 rounded-3xl p-4 xl:w-1/2">
         <section className="flex w-full items-center justify-between">
           <h1 className="w-36 self-start text-xs text-white xl:w-full xl:text-base">

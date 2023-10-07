@@ -1,7 +1,7 @@
-import Header from '@/app/components/Header'
-import GridTransaction from '@/app/components/GridTransaction'
-import TransactionTable from '@/app/components/TransactionTable'
-import DoughnutChart from '@/app/components/PolarChart'
+import Header from '@/app/components/Layout/Header'
+import GridTransaction from '@/app/components/Grids/GridTransaction'
+import TransactionTable from '@/app/components/Tables/TransactionTable'
+import DoughnutChart from '@/app/components/ChartJS/PolarChart'
 
 export default function Transactions() {
   return (

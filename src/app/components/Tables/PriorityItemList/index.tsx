@@ -1,8 +1,8 @@
 'use client'
-import ModalForm from '../Modal'
+import Modal from '../../Modal'
 import { useToggle } from '@/hooks/useToogle'
 import { PriorityItemListProps } from './types'
-import EditPriorityForm from '../EditPriorityForm'
+import EditPriorityForm from '../../Form/EditPriorityForm'
 import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
 
 export default function PriorityItemList({
@@ -12,13 +12,9 @@ export default function PriorityItemList({
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>
-      <ModalForm
-        isOpen={isOpen}
-        closeModal={closeModal}
-        label="Editar prioridade"
-      >
+      <Modal isOpen={isOpen} closeModal={closeModal} label="Editar prioridade">
         <EditPriorityForm />
-      </ModalForm>
+      </Modal>
       <li
         onClick={openModal}
         className="my-1 flex w-full items-center justify-between rounded-xl bg-primary-900 px-6 py-4 shadow-lg transition-all ease-in-out hover:cursor-pointer hover:opacity-80"

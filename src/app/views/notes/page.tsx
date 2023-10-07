@@ -1,7 +1,7 @@
 'use client'
-import Header from '@/app/components/Header'
+import Header from '@/app/components/Layout/Header'
 import { TbReportMoney } from 'react-icons/tb'
-import PreviewCard from '@/app/components/PreviewCard'
+import PreviewCardValue from '@/app/components/PreviewCardValue'
 import MonthPreview from '@/app/components/MonthPreview'
 import PriorityPreview from '@/app/components/PriorityPreview'
 
@@ -10,7 +10,7 @@ export default function Notes() {
     <section className="flex w-full flex-col items-center justify-start overflow-scroll overflow-x-hidden pb-20 md:items-start md:p-0">
       <Header title="Anotações" description="Despesas e metas" />
       <section className="flex w-full flex-col items-start justify-center gap-4">
-        <PreviewCard
+        <PreviewCardValue
           description="Total"
           icon={TbReportMoney}
           side="left"

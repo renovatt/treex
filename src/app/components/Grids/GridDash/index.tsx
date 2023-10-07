@@ -1,5 +1,5 @@
 'use client'
-import PreviewCard from '../PreviewCard'
+import PreviewCardValue from '../../PreviewCardValue'
 import { TbMoneybag } from 'react-icons/tb'
 import { IoWalletOutline } from 'react-icons/io5'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
@@ -7,25 +7,25 @@ import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
 export default function GridDash() {
   return (
     <section className="grid grid-cols-2 gap-10 sm:grid-cols-4 md:grid-cols-4 lg:gap-20 xl:grid-cols-4">
-      <PreviewCard
+      <PreviewCardValue
         description="Carteira"
         icon={IoWalletOutline}
         side="left"
         value={3500}
       />
-      <PreviewCard
+      <PreviewCardValue
         description="Faturamento mensal"
         icon={TbMoneybag}
         side="right"
         value={510}
       />
-      <PreviewCard
+      <PreviewCardValue
         description="Previsão de gastos"
         icon={MdOutlineMoneyOff}
         side="left"
         value={500}
       />
-      <PreviewCard
+      <PreviewCardValue
         description="Categoria mais gasta"
         icon={MdOutlineCategory}
         side="right"

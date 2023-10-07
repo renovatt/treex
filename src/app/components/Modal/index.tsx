@@ -3,7 +3,7 @@ import { CgCloseR } from 'react-icons/cg'
 import { ModalFormProps } from './types'
 import { Dialog, Transition } from '@headlessui/react'
 
-export default function ModalForm({
+export default function Modal({
   closeModal,
   isOpen,
   children,

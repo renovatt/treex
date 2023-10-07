@@ -1,7 +1,7 @@
 'use client'
-import PreviewCard from '../PreviewCard'
-import CriptoItemList from '../CriptoItemList'
 import { BiLogoBitcoin } from 'react-icons/bi'
+import PreviewCardValue from '../PreviewCardValue'
+import CriptoItemList from '../Tables/CriptoItemList'
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 
@@ -15,13 +15,13 @@ export default function CriptoInfo() {
       <div className="h-56 w-full rounded-xl bg-white xl:h-40"></div>
 
       <section className="flex w-full items-center justify-between">
-        <PreviewCard
+        <PreviewCardValue
           description="Dolar saldo"
           icon={RiMoneyDollarCircleLine}
           side="left"
           value={500}
         />
-        <PreviewCard
+        <PreviewCardValue
           description="Dolar hoje"
           icon={LiaMoneyBillWaveSolid}
           side="right"

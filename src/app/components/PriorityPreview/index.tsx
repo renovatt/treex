@@ -1,21 +1,21 @@
 'use client'
-import ModalForm from '../Modal'
-import PriorityForm from '../PriorityForm'
+import Modal from '../Modal'
+import PriorityForm from '../Form/PriorityForm'
 import { useToggle } from '@/hooks/useToogle'
-import PriorityItemList from '../PriorityItemList'
+import PriorityItemList from '../Tables/PriorityItemList'
 import { MdOutlineAddBox, MdDeleteOutline } from 'react-icons/md'
 
 export default function PriorityPreview() {
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>
-      <ModalForm
+      <Modal
         isOpen={isOpen}
         closeModal={closeModal}
         label="Adicionar prioridade"
       >
         <PriorityForm />
-      </ModalForm>
+      </Modal>
       <article className="bg-right-card-gradient flex h-[24.5rem] w-full flex-col items-center justify-start gap-4 rounded-3xl p-4 xl:w-1/2">
         <section className="flex w-full items-center justify-between">
           <h1 className="w-36 self-start text-xs text-white xl:w-full xl:text-base">

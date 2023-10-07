@@ -1,18 +1,18 @@
 'use client'
-import ModalForm from '../Modal'
+import Modal from '../../Modal'
 import { HeaderProps } from './types'
-import UserDropdown from '../UserDropdown'
+import UserDropdown from '../../UserDropdown'
 import { useToggle } from '@/hooks/useToogle'
-import TransactionForm from '../TransactionForm'
+import TransactionForm from '../../Form/TransactionForm'
 import { MdOutlineAddBox } from 'react-icons/md'
 
 export default function Header({ title, description }: HeaderProps) {
   const { isOpen, openModal, closeModal } = useToggle()
   return (
     <>
-      <ModalForm label="Nova transação" closeModal={closeModal} isOpen={isOpen}>
+      <Modal label="Nova transação" closeModal={closeModal} isOpen={isOpen}>
         <TransactionForm />
-      </ModalForm>
+      </Modal>
       <header className="my-5 mb-10 flex w-full items-center justify-between">
         <article className="flex flex-col items-start justify-center">
           <h1 className="text-xl font-bold text-white md:text-2xl">{title}</h1>
