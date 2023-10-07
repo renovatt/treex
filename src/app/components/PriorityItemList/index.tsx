@@ -29,39 +29,30 @@ export default function PriorityItemList({
 
         {level === 'Importante' ? (
           <>
-            <abbr
-              title="Importante"
-              className="flex items-center justify-center gap-4"
-            >
+            <div className="flex items-center justify-center gap-4">
               <span className="hidden text-xs text-primary-800 md:flex">
                 Importande
               </span>
               <GiBoltShield className="h-6 w-6 text-secondary-800 shadow-sm" />
-            </abbr>
+            </div>
           </>
         ) : level === 'Menos importante' ? (
           <>
-            <abbr
-              title="Menos importante"
-              className="flex items-center justify-center gap-4"
-            >
+            <div className="flex items-center justify-center gap-4">
               <span className="hidden text-xs text-primary-800 md:flex">
                 Menos importante
               </span>
               <GiEdgedShield className="h-6 w-6 text-secondary-900 shadow-sm" />
-            </abbr>
+            </div>
           </>
         ) : (
           <>
-            <abbr
-              title="Muito importante"
-              className="flex items-center justify-center gap-4"
-            >
+            <div className="flex items-center justify-center gap-4">
               <span className="hidden text-xs text-primary-800 md:flex">
                 Muito importante
               </span>
               <GiBorderedShield className="text-secondary-750 h-6 w-6 shadow-sm" />
-            </abbr>
+            </div>
           </>
         )}
       </li>
