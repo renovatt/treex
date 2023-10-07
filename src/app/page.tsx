@@ -6,7 +6,7 @@ import TransactionTable from './components/TransactionTable'
 
 export default function Home() {
   return (
-    <section className="mb-20 flex w-full flex-col items-center justify-start overflow-scroll overflow-x-hidden md:m-0 md:items-start">
+    <section className="flex w-full flex-col items-center justify-start overflow-scroll overflow-x-hidden pb-20 md:items-start md:p-0">
       <Header title="Dashboard" description="Visão geral" />
       <section className="flex w-full flex-col justify-between gap-10 xl:flex-row">
         <section className="flex w-full flex-col items-center justify-start gap-5 xl:w-8/12">

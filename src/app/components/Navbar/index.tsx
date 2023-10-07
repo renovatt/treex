@@ -9,7 +9,7 @@ export default function Navbar() {
   const { status } = useSideBarStore()
 
   return (
-    <nav className="flex w-full items-center justify-center border border-primary-850 md:items-start">
+    <nav className="flex w-full items-center justify-center md:items-start">
       <ul className="flex w-full items-center justify-start gap-2 px-4 md:mt-14 md:flex-col">
         <RouterLink
           href="/"
