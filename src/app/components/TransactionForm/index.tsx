@@ -1,6 +1,6 @@
 import Input from '../Input'
 import SwitchInput from '../SwitchInput'
-import SubmitButton from '../SubmitButton/indext'
+import CustomButton from '../CustomButton'
 import SelectCategory from '../SelectCategory'
 
 export default function TransactionForm() {
@@ -10,7 +10,7 @@ export default function TransactionForm() {
       <Input label="Valor" placeholder="R$ 260,00" type="number" />
       <SelectCategory />
       <SwitchInput />
-      <SubmitButton />
+      <CustomButton title="Salvar" type="submit" />
     </form>
   )
 }

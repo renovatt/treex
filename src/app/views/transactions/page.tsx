@@ -13,7 +13,7 @@ export default function Transactions() {
           <TransactionTable />
         </section>
         <aside className="bg-left-card-gradient flex w-full items-center justify-center rounded-3xl xl:w-1/3">
-          <DoughnutChart />
+          {/* <DoughnutChart /> */}
         </aside>
       </section>
     </section>

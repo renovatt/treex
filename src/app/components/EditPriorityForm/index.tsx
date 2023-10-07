@@ -1,6 +1,5 @@
 import Input from '../Input'
-import DeleteButton from '../DeleteButton'
-import SubmitButton from '../SubmitButton/indext'
+import CustomButton from '../CustomButton'
 import SelectLevelPriority from '../SelectLevelPriority'
 
 export default function EditPriorityForm() {
@@ -8,8 +7,8 @@ export default function EditPriorityForm() {
     <form>
       <Input label="Nome" placeholder="Monitor" type="text" />
       <SelectLevelPriority />
-      <SubmitButton />
-      <DeleteButton />
+      <CustomButton title="Salvar" type="submit" />
+      <CustomButton title="Apagar" type="button" />
     </form>
   )
 }

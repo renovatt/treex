@@ -51,7 +51,7 @@ export default function PriorityItemList({
               <span className="hidden text-xs text-primary-800 md:flex">
                 Muito importante
               </span>
-              <GiBorderedShield className="text-secondary-750 h-6 w-6 shadow-sm" />
+              <GiBorderedShield className="h-6 w-6 text-secondary-750 shadow-sm" />
             </div>
           </>
         )}
