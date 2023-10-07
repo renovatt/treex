@@ -33,6 +33,7 @@ export default function PolarChart() {
       labels: [
         'Estudos',
         'Farmácia',
+        'Alimentação',
         'Combustível',
         'Pagamentos',
         'Salário',
@@ -84,7 +85,7 @@ export default function PolarChart() {
         },
       },
     },
-    series: [955, 634, 541, 800, 645, 510],
+    series: [955, 634, 541, 800, 645, 510, 340],
   })
 
   return (
