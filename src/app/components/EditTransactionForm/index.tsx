@@ -2,6 +2,7 @@ import Input from '../Input'
 import SwitchInput from '../SwitchInput'
 import SubmitButton from '../SubmitButton/indext'
 import SelectCategory from '../SelectCategory'
+import DeleteButton from '../DeleteButton'
 
 export default function EditTransactionForm() {
   return (
@@ -11,6 +12,7 @@ export default function EditTransactionForm() {
       <SelectCategory />
       <SwitchInput />
       <SubmitButton />
+      <DeleteButton />
     </form>
   )
 }

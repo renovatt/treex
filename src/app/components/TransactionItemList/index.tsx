@@ -1,21 +1,33 @@
 'use client'
+import ModalForm from '../Modal'
 import { useToggle } from '@/hooks/useToogle'
 import { TransactionItemListProps } from './types'
-import EditTransactionModal from '../EditTransactionModal'
+import EditTransactionForm from '../EditTransactionForm'
 
 export default function TransactionItemList({
   icon: Icon,
   title,
   value,
   date,
+  type,
 }: TransactionItemListProps) {
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>
-      <EditTransactionModal isOpen={isOpen} closeModal={closeModal} />
+      <ModalForm
+        isOpen={isOpen}
+        closeModal={closeModal}
+        label="Editar transação"
+      >
+        <EditTransactionForm />
+      </ModalForm>
       <li
         onClick={openModal}
-        className="bg-list-gradient my-1 flex w-full items-center justify-between px-6 py-4 hover:cursor-pointer"
+        className={`my-1 flex w-full items-center justify-between px-6 py-4 transition-all ease-in-out hover:cursor-pointer hover:opacity-80 ${
+          type === 'income'
+            ? 'bg-income-list-gradient'
+            : 'bg-expense-list-gradient'
+        }`}
       >
         <Icon className="h-6 w-6 text-primary-800 shadow-sm" />
         <span className="flex w-24 items-center justify-center text-xs text-primary-800 md:w-28 md:text-base">

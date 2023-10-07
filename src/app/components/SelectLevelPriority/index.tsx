@@ -4,27 +4,21 @@ import { Listbox, Transition } from '@headlessui/react'
 import { HiMiniChevronUpDown } from 'react-icons/hi2'
 import { AiOutlineCheck } from 'react-icons/ai'
 
-const categories = [
-  { category: 'Salário' },
-  { category: 'Estudos' },
-  { category: 'Farmácia' },
-  { category: 'Alimentação' },
-  { category: 'Combustível' },
-  { category: 'Pagamentos' },
-  { category: 'Lazer' },
+const level = [
+  { level: 'Importante' },
+  { level: 'Menos importante' },
+  { level: 'Muito importante' },
 ]
 
-export default function SelectCategory() {
-  const [selected, setSelected] = useState(categories[0])
+export default function SelectLevelPriority() {
+  const [selected, setSelected] = useState(level[0])
 
   return (
-    <div className="w-full">
+    <div className="my-4 w-full">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg border border-primary-800 bg-primary-900 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate text-white">
-              {selected.category}
-            </span>
+            <span className="block truncate text-white">{selected.level}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <HiMiniChevronUpDown
                 className="h-5 w-5 text-primary-800"
@@ -39,7 +33,7 @@ export default function SelectCategory() {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-secondary-950 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {categories.map((person, personIdx) => (
+              {level.map((person, personIdx) => (
                 <Listbox.Option
                   key={personIdx}
                   className={({ active }) =>
@@ -58,7 +52,7 @@ export default function SelectCategory() {
                           selected ? 'font-medium' : 'font-normal'
                         }`}
                       >
-                        {person.category}
+                        {person.level}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary-750">

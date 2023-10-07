@@ -12,7 +12,7 @@ export default function CriptoItemList({
       <span className="flex items-center justify-center gap-2 text-primary-800">
         <Icon className="h-8 w-8 text-primary-800" />
         {cripto}
-        <span className="text-secondary-950">({mark})</span>
+        <span className="text-primary-800 opacity-50">({mark})</span>
       </span>
       <span className="text-primary-800">${value}</span>
     </li>

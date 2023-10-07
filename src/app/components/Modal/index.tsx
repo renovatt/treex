@@ -1,13 +1,14 @@
 import { Fragment } from 'react'
 import { CgCloseR } from 'react-icons/cg'
-import { KeyBoardModalProps } from './types'
+import { ModalFormProps } from './types'
 import { Dialog, Transition } from '@headlessui/react'
-import EditTransactionForm from '../EditTransactionForm'
 
-export default function EditTransactionModal({
+export default function ModalForm({
   closeModal,
   isOpen,
-}: KeyBoardModalProps) {
+  children,
+  label,
+}: ModalFormProps) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-20" onClose={closeModal}>
@@ -43,11 +44,9 @@ export default function EditTransactionModal({
                   as="h3"
                   className="text-lg font-semibold leading-6 text-white"
                 >
-                  Editar transação
+                  {label}
                 </Dialog.Title>
-                <section className="my-2">
-                  <EditTransactionForm />
-                </section>
+                <section className="my-2">{children}</section>
               </Dialog.Panel>
             </Transition.Child>
           </div>

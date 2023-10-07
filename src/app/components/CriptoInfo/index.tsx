@@ -30,7 +30,7 @@ export default function CriptoInfo() {
       </section>
 
       <section className="w-full md:mb-4">
-        <ul className="flex h-40 w-full flex-col items-center justify-start gap-2 overflow-scroll overflow-x-hidden md:h-60">
+        <ul className="flex h-40 w-full flex-col items-center justify-start gap-2 overflow-scroll overflow-x-hidden md:h-72">
           <CriptoItemList
             cripto="Bitcoin"
             icon={BiLogoBitcoin}

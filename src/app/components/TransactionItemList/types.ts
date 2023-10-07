@@ -5,4 +5,5 @@ export type TransactionItemListProps = {
   icon: IconType
   value: number
   date: string
+  type: 'expense' | 'income'
 }

@@ -1,15 +1,18 @@
 'use client'
 import Image from 'next/image'
+import ModalForm from '../Modal'
 import { HeaderProps } from './types'
-import AddTransactionModal from '../AddTransactionModal'
 import { useToggle } from '@/hooks/useToogle'
+import TransactionForm from '../TransactionForm'
 import { MdKeyboardArrowDown, MdOutlineAddBox } from 'react-icons/md'
 
 export default function Header({ title, description }: HeaderProps) {
   const { isOpen, openModal, closeModal } = useToggle()
   return (
     <>
-      <AddTransactionModal isOpen={isOpen} closeModal={closeModal} />
+      <ModalForm label="Nova transação" closeModal={closeModal} isOpen={isOpen}>
+        <TransactionForm />
+      </ModalForm>
       <header className="my-5 mb-10 flex w-full items-center justify-between">
         <article className="flex flex-col items-start justify-center">
           <h1 className="text-xl font-bold text-white md:text-2xl">{title}</h1>

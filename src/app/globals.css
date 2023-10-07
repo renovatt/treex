@@ -17,12 +17,10 @@
 }
 
 ::-webkit-scrollbar-track{
-  /* background-color: var(--background-secondary); */
   background: transparent;
 }
 
 ::-webkit-scrollbar-thumb{
-  /* background: var(--background-primary); */
   background: transparent;
 }
 
@@ -94,19 +92,31 @@ body {
 
   .bg-list-gradient{
     background: linear-gradient(
-      275deg, rgba(23,23,33,1) 3%, 
-      rgba(38,46,75,1) 24%, 
-      rgba(44,65,62,1) 84%, 
+      275deg, 
+      rgba(23,23,33,1) 3%, 
+      rgba(37,43,77,1) 25%, 
+      rgba(44,66,61,1) 66%, 
+      rgba(23,23,33,1) 98%
+    );
+  }
+
+  .bg-income-list-gradient{
+    background: linear-gradient(
+      275deg, 
+      rgba(23,23,33,1) 3%, 
+      rgba(44,66,61,1) 25%, 
+      rgba(37,43,77,1) 66%, 
       rgba(23,23,33,1) 98%
     );
   }
 
   .bg-expense-list-gradient{
     background: linear-gradient(
-    275deg, rgba(23,23,33,1) 3%, 
-    rgba(75,38,38,1) 24%, 
-    rgba(44,65,62,1) 84%, 
-    rgba(23,23,33,1) 98%
+      275deg, 
+      rgba(23,23,33,1) 3%, 
+      rgba(77,37,37,1) 25%, 
+      rgba(37,43,77,1) 66%, 
+      rgba(23,23,33,1) 98%
     );
   }
 
@@ -114,6 +124,14 @@ body {
     background: linear-gradient(
     275deg, rgba(44,65,62,1) 0%, 
     rgba(37,43,77,1) 100%
+    );
+  }
+
+  .bg-delete-btn-gradient{
+    background: linear-gradient(
+    275deg, 
+    rgba(77,37,37,1) 25%, 
+    rgba(37,43,77,1) 66%
     );
   }
 }
