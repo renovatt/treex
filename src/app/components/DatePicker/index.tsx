@@ -5,12 +5,19 @@ import { CustomFlowbiteTheme, Datepicker } from 'flowbite-react'
 export default function DatepickerComponent() {
   const customTheme: CustomFlowbiteTheme['datepicker'] = {
     root: {
-      base: 'relative',
+      base: 'relative bg-transparent text-transparent',
       input: {
-        base: 'w-5 md:mr-3',
+        base: 'bg-transparent text-transparent',
         field: {
+          base: 'relative',
           icon: {
-            base: 'text-primary-800 pointer-events-none absolute inset-0 flex items-center',
+            svg: 'text-primary-800 w-6 h-6 hover:text-primary-750 hover:border absolute top-1 left-1',
+          },
+          input: {
+            base: 'bg-transparent text-transparent',
+            withIcon: {
+              on: 'w-8 h-8 bg-transparent text-transparent hover:cursor-pointer hover:bg-secondary-950 outline-none select-none',
+            },
           },
         },
       },
@@ -110,12 +117,15 @@ export default function DatepickerComponent() {
         theme={customTheme}
         labelTodayButton="Hoje"
         labelClearButton="Limpar"
-        style={{
-          backgroundColor: 'transparent',
-          outline: 'none',
-          border: 'none',
-          cursor: 'pointer',
-        }}
+        style={
+          {
+            // backgroundColor: 'transparent',
+            // outline: 'none',
+            // border: 'none',
+            // cursor: 'pointer',
+            // position: 'relative',
+          }
+        }
         onSelectedDateChanged={(date: Date) => handleDatePicker(date)}
       />
     </section>
