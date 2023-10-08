@@ -17,6 +17,8 @@
     "apexcharts": "^3.43.0",
     "autoprefixer": "10.4.16",
     "eslint-config-next": "13.5.4",
+    "flowbite": "^1.8.1",
+    "flowbite-react": "^0.6.4",
     "next": "13.5.4",
     "postcss": "8.4.31",
     "react": "18.2.0",

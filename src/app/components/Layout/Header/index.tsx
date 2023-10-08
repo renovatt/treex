@@ -3,8 +3,9 @@ import Modal from '../../Modal'
 import { HeaderProps } from './types'
 import UserDropdown from '../../UserDropdown'
 import { useToggle } from '@/hooks/useToogle'
-import TransactionForm from '../../Form/TransactionForm'
 import { MdOutlineAddBox } from 'react-icons/md'
+import DatepickerComponent from '../../DatePicker'
+import TransactionForm from '../../Form/TransactionForm'
 
 export default function Header({ title, description }: HeaderProps) {
   const { isOpen, openModal, closeModal } = useToggle()
@@ -20,6 +21,7 @@ export default function Header({ title, description }: HeaderProps) {
         </article>
 
         <section className="flex items-center justify-between gap-4">
+          {title === 'Transações' ? <DatepickerComponent /> : ''}
           <section
             onClick={openModal}
             className="mr-2 flex items-center justify-center text-primary-800 transition-all ease-in-out hover:cursor-pointer hover:text-primary-750"
