@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Sidebar from './components/Layout/Sidebar'
+import ReactQueryProvider from './components/Providers/ReactQueryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <Sidebar>{children}</Sidebar>
+        <ReactQueryProvider>
+          <Sidebar>{children}</Sidebar>
+        </ReactQueryProvider>
       </body>
     </html>
   )
