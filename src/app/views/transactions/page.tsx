@@ -1,10 +1,14 @@
+import dynamic from 'next/dynamic'
 import Header from '@/app/components/Layout/Header'
-import DoughnutChart from '@/app/components/ChartJS/PolarChart'
 import ViewContainer from '@/app/components/Layout/ViewContainer'
 import GridTransaction from '@/app/components/Grids/GridTransaction'
 import TransactionTable from '@/app/components/Tables/TransactionTable'
 
 export default function Transactions() {
+  const PolarChart = dynamic(
+    () => import('@/app/components/ChartJS/PolarChart'),
+    { ssr: false },
+  )
   return (
     <ViewContainer>
       <Header title="Transações" description="Gastos recentes" />
@@ -14,7 +18,7 @@ export default function Transactions() {
           <TransactionTable />
         </section>
         <aside className="bg-left-card-gradient flex w-full items-center justify-center rounded-3xl xl:w-1/3">
-          <DoughnutChart />
+          <PolarChart />
         </aside>
       </section>
     </ViewContainer>

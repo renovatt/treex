@@ -1,12 +1,15 @@
 'use client'
+import dynamic from 'next/dynamic'
 import { BiLogoBitcoin } from 'react-icons/bi'
-import Candlestick from '../ChartJS/Candlestick'
 import CriptoItemList from '../Tables/CriptoItemList'
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import PreviewCardValue from '../Cards/PreviewCardValue'
 
 export default function CriptoInfo() {
+  const Candlestick = dynamic(() => import('../ChartJS/Candlestick'), {
+    ssr: false,
+  })
   return (
     <aside className="flex h-full w-full flex-col items-center justify-start space-y-4 xl:w-1/3">
       <h2 className="self-start text-xs text-primary-800">

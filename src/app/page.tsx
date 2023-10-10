@@ -1,11 +1,14 @@
+import dynamic from 'next/dynamic'
 import Header from './components/Layout/Header'
 import CriptoInfo from './components/CriptoInfo'
 import GridDash from './components/Grids/GridDash'
-import BarChart from './components/ChartJS/BarChart'
 import ViewContainer from './components/Layout/ViewContainer'
 import TransactionTable from './components/Tables/TransactionTable'
 
 export default function Home() {
+  const BarChart = dynamic(() => import('./components/ChartJS/BarChart'), {
+    ssr: false,
+  })
   return (
     <ViewContainer>
       <Header title="Dashboard" description="Visão geral" />

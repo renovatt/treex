@@ -94,7 +94,7 @@ export default function Candlestick() {
     setCandles(data as CandleTypeProps[])
   }, [candles, data, isError, isLoading])
 
-  if (!isError)
+  if (isError)
     return (
       <section className="my-5 flex w-full flex-col items-center justify-center xl:m-0 xl:h-full">
         <h1 className="text-xs text-white">Dados não podem ser carregados</h1>
