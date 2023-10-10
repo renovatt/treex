@@ -11,25 +11,25 @@ export default function GridTransaction() {
         description="Total"
         icon={BiTransfer}
         side="left"
-        value={3500}
+        value={'R$ 3500'}
       />
       <PreviewCardValue
         description="Entradas"
         icon={HiArrowTrendingUp}
         side="right"
-        value={510}
+        value={'R$ 3500'}
       />
       <PreviewCardValue
         description="Saídas"
         icon={HiArrowTrendingDown}
         side="left"
-        value={500}
+        value={'R$ 3500'}
       />
       <PreviewCardValue
         description="Categoria mais gasta"
         icon={MdOutlineCategory}
         side="left"
-        value={500}
+        value={'R$ 3500'}
       />
     </section>
   )

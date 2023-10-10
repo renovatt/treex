@@ -5,7 +5,7 @@ export default function TransactionTableContainer({
 }: TransactionTableContainerProps) {
   return (
     <section className="flex w-full">
-      <ul className="flex max-h-52 w-full flex-col items-start justify-start overflow-scroll overflow-x-hidden">
+      <ul className="flex h-52 w-full flex-col items-start justify-start overflow-scroll overflow-x-hidden md:h-[19rem]">
         {children}
       </ul>
     </section>

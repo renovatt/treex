@@ -11,25 +11,25 @@ export default function GridDash() {
         description="Carteira"
         icon={IoWalletOutline}
         side="left"
-        value={3500}
+        value={'R$ 3500'}
       />
       <PreviewCardValue
         description="Faturamento mensal"
         icon={TbMoneybag}
         side="right"
-        value={510}
+        value={'R$ 3500'}
       />
       <PreviewCardValue
         description="Previsão de gastos"
         icon={MdOutlineMoneyOff}
         side="left"
-        value={500}
+        value={'R$ 3500'}
       />
       <PreviewCardValue
         description="Categoria mais gasta"
         icon={MdOutlineCategory}
         side="right"
-        value={230}
+        value={'R$ 3500'}
       />
     </section>
   )

@@ -5,6 +5,7 @@ import {
   CandleTypeProps,
 } from '@/app/components/ChartJS/Candlestick/types'
 import { CriptoCoinTypeResponse } from '@/app/components/Tables/CriptoItemList/types'
+import { USDBRLResponse } from '@/app/components/CriptoInfo/types'
 
 export interface ErrorMessageResponse extends Error {
   message: string
@@ -44,6 +45,23 @@ export const getCriptoCoins = async () => {
 
     if (response) {
       return response.data
+    } else {
+      throw new Error('Error')
+    }
+  } catch (error) {
+    const errorWithMessage: ErrorMessageResponse = new Error('Erro interno')
+    throw errorWithMessage
+  }
+}
+
+export const getDolar = async () => {
+  try {
+    const response: USDBRLResponse = await axios.get(
+      'https://economia.awesomeapi.com.br/json/last/USD-BRL',
+    )
+
+    if (response) {
+      return response
     } else {
       throw new Error('Error')
     }

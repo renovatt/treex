@@ -100,17 +100,11 @@ export default function Candlestick() {
         <h1 className="text-xs text-white">Dados não podem ser carregados</h1>
       </section>
     )
-  if (isLoading)
-    return (
-      <section className="my-5 flex w-full items-center justify-center xl:m-0 xl:h-full">
-        <p className="text-xs text-primary-800">Carregando...</p>
-      </section>
-    )
 
   return (
     <section className="my-5 flex w-full items-center justify-center xl:m-0 xl:h-full">
       {isLoading ? (
-        <p className="text-white">Carregando..</p>
+        <p className="text-xs text-primary-800">Carregando..</p>
       ) : (
         <Chart
           type="candlestick"

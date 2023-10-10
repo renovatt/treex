@@ -2,7 +2,7 @@ import { IconType } from 'react-icons'
 
 export type DashCardProps = {
   icon: IconType
-  value: number
+  value: string
   description: string
   side: 'left' | 'right'
 }

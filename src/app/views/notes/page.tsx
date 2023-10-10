@@ -16,7 +16,7 @@ export default function Notes() {
             description="Total"
             icon={TbReportMoney}
             side="left"
-            value={3500}
+            value={'R$ 3500'}
           />
         </section>
         <section className="flex w-full flex-col items-center justify-start gap-4 xl:flex-row">

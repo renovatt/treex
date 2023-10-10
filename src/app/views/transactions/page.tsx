@@ -17,7 +17,7 @@ export default function Transactions() {
           <GridTransaction />
           <TransactionTable />
         </section>
-        <aside className="bg-left-card-gradient flex w-full items-center justify-center rounded-3xl xl:w-1/3">
+        <aside className="flex w-full items-center justify-center rounded-3xl xl:w-1/3">
           <PolarChart />
         </aside>
       </section>

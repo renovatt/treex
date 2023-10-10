@@ -39,7 +39,7 @@ export default function PreviewCardValue({
             : 'rounded-lg bg-primary-800 text-transparent opacity-10'
         } w-full text-xs font-bold md:text-base`}
       >
-        R$ {value}
+        {value}
       </span>
     </section>
   )
