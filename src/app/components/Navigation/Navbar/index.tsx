@@ -18,13 +18,13 @@ export default function Navbar() {
           name="Dashboard"
         />
         <RouterLink
-          href="/views/transactions"
+          href="/transactions"
           icon={TbTransfer}
           isOpen={status.isSelected}
           name="Transações"
         />
         <RouterLink
-          href="/views/notes"
+          href="/notes"
           icon={FaRegNoteSticky}
           isOpen={status.isSelected}
           name="Anotações"
