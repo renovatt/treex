@@ -1,6 +1,6 @@
 'use client'
 import Input from '@elements/Input'
-import CustomButton from '@elements/CustomButton'
+import AuthButton from '@elements/AuthButton'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { RegisterSchema, RegisterFormProps } from '@/schemas/auth'
@@ -38,8 +38,7 @@ export default function RegisterForm() {
           placeholder="Digite a sua senha"
           type="password"
         />
-
-        <CustomButton title="Cadastrar" type="submit" />
+        <AuthButton title="Cadastrar" type="submit" />
       </form>
     </FormProvider>
   )

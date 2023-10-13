@@ -1,6 +1,6 @@
 'use client'
 import Input from '@elements/Input'
-import CustomButton from '@elements/CustomButton'
+import AuthButton from '@elements/AuthButton'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { RecoverySchema, RecoverySchemaProps } from '@/schemas/auth'
@@ -27,8 +27,7 @@ export default function RecoveryForm() {
           placeholder="Informe o seu email"
           type="text"
         />
-
-        <CustomButton title="Enviar" type="submit" />
+        <AuthButton title="Enviar" type="submit" />
       </form>
     </FormProvider>
   )

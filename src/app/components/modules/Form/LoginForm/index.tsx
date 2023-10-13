@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Input from '@elements/Input'
-import CustomButton from '@elements/CustomButton'
+import AuthButton from '@elements/AuthButton'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { LoginFormProps, LoginSchema } from '@/schemas/auth'
@@ -33,15 +33,13 @@ export default function LoginForm() {
           placeholder="Digite a sua senha"
           type="password"
         />
-
         <Link
           href={'/recovery'}
           className="self-end text-xs text-secondary-800"
         >
           Esqueceu sua senha?
         </Link>
-
-        <CustomButton title="Fazer login" type="submit" />
+        <AuthButton title="Fazer login" type="submit" />
       </form>
     </FormProvider>
   )
