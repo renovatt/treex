@@ -6,7 +6,7 @@ export const TransactionSchema = z.object({
     .string()
     .min(1, 'Valor obrigatório')
     .refine(
-      (value) => {
+      (value: string) => {
         const numericValue = parseFloat(value)
         return !isNaN(numericValue) && numericValue >= 0
       },
@@ -30,7 +30,7 @@ export const MonthyPreviewSchema = z.object({
     .string()
     .min(1, 'Valor obrigatório')
     .refine(
-      (value) => {
+      (value: string) => {
         const numericValue = parseFloat(value)
         return !isNaN(numericValue) && numericValue >= 0
       },
@@ -41,6 +41,6 @@ export const MonthyPreviewSchema = z.object({
     ),
 })
 
-export type TransactionFormProps = z.infer<typeof TransactionSchema>
 export type PriorityFormProps = z.infer<typeof PrioritySchema>
+export type TransactionFormProps = z.infer<typeof TransactionSchema>
 export type MonthyPreviewFormProps = z.infer<typeof MonthyPreviewSchema>
