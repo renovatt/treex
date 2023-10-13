@@ -7,20 +7,16 @@ const KEY_API = process.env.NEXT_PUBLIC_KEY
 
 export async function GET() {
   try {
-    const response = await axios.get(
-      '',
-      // URL_API,
-      {
-        params: {
-          start: 1,
-          limit: 50,
-          convert: 'USD',
-        },
-        headers: {
-          'X-CMC_PRO_API_KEY': KEY_API,
-        },
+    const response = await axios.get(URL_API, {
+      params: {
+        start: 1,
+        limit: 50,
+        convert: 'USD',
       },
-    )
+      headers: {
+        'X-CMC_PRO_API_KEY': KEY_API,
+      },
+    })
     // console.log(response.data.data)
     return NextResponse.json(response.data.data)
   } catch (error) {
