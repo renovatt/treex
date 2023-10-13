@@ -1,12 +1,13 @@
 import { z } from 'zod'
 
 export const LoginSchema = z.object({
-  name: z.string().min(1, 'Nome obrigatório'),
+  email: z.string().email('Insira um e-mail válido.'),
   password: z.string().min(8, 'Precisa de pelo menos 8 caracteres'),
 })
 
 export const RegisterSchema = z.object({
   name: z.string().min(1, 'Nome obrigatório'),
+  email: z.string().email('Insira um e-mail válido.'),
   password: z.string().min(8, 'Precisa de pelo menos 8 caracteres'),
 })
 
