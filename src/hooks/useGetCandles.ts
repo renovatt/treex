@@ -1,6 +1,6 @@
 import { getCandles } from '@/services'
 import { useQuery } from '@tanstack/react-query'
-import { CandleTypeProps } from '@/app/components/ChartJS/Candlestick/types'
+import { CandleTypeProps } from '@elements/ChartJS/Candlestick/types'
 
 export const useGetCandles = () => {
   const { data, isLoading, error, isError } = useQuery<CandleTypeProps[]>({

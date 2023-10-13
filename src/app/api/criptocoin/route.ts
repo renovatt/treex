@@ -1,12 +1,15 @@
 import axios from 'axios'
 import { NextResponse } from 'next/server'
 
-const apiKey = '8c676bc0-16ef-4bcf-9750-3aa86c3e5d06'
+const URL_API =
+  'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+const KEY_API = process.env.NEXT_PUBLIC_KEY
 
 export async function GET() {
   try {
     const response = await axios.get(
-      'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
+      '',
+      // URL_API,
       {
         params: {
           start: 1,
@@ -14,7 +17,7 @@ export async function GET() {
           convert: 'USD',
         },
         headers: {
-          'X-CMC_PRO_API_KEY': apiKey,
+          'X-CMC_PRO_API_KEY': KEY_API,
         },
       },
     )
