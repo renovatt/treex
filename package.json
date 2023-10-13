@@ -19,6 +19,7 @@
     "autoprefixer": "10.4.16",
     "axios": "^1.5.1",
     "eslint-config-next": "13.5.4",
+    "firebase": "^10.5.0",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",
     "framer-motion": "^10.16.4",
