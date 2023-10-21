@@ -3,7 +3,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'avatars.githubusercontent.com',
+        hostname: 'api.dicebear.com',
+      },
+      {
+        hostname: 'lh3.googleusercontent.com',
       },
     ],
   },
