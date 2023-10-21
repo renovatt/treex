@@ -1,17 +1,18 @@
 'use client'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { auth } from '@/firebase'
 import { motion } from 'framer-motion'
 import { TbLetterX } from 'react-icons/tb'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
-  const route = useRouter()
+  const router = useRouter()
+  const [user] = useAuthState(auth)
 
   useEffect(() => {
-    setTimeout(() => {
-      route.push('/login')
-    }, 3000)
-  }, [route])
+    user ? router.push('/dashboard') : router.push('/login')
+  }, [router, user])
 
   return (
     <section className="flex h-screen w-screen items-center justify-center bg-primary-900">

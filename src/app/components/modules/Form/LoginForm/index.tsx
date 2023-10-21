@@ -1,7 +1,10 @@
 'use client'
 import Link from 'next/link'
 import Input from '@elements/Input'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 import AuthButton from '@elements/AuthButton'
+import { signInWithCredential } from '@/lib/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { LoginFormProps, LoginSchema } from '@/schemas/auth'
@@ -13,7 +16,17 @@ export default function LoginForm() {
     resolver: zodResolver(LoginSchema),
   })
 
-  const handleFormSubmit = async (data: LoginFormProps) => console.log(data)
+  const router = useRouter()
+
+  const handleFormSubmit = async (data: LoginFormProps) => {
+    const { status, message } = await signInWithCredential(data)
+    if (!status) {
+      toast.error(message)
+      return
+    }
+    router.push('/dashboard')
+    toast.success(message)
+  }
 
   return (
     <FormProvider {...methods}>

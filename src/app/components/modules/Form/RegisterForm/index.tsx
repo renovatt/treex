@@ -1,9 +1,12 @@
 'use client'
 import Input from '@elements/Input'
+import { useRouter } from 'next/navigation'
 import AuthButton from '@elements/AuthButton'
+import { createCredential } from '@/lib/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { RegisterSchema, RegisterFormProps } from '@/schemas/auth'
+import toast from 'react-hot-toast'
 
 export default function RegisterForm() {
   const methods = useForm<RegisterFormProps>({
@@ -12,7 +15,17 @@ export default function RegisterForm() {
     resolver: zodResolver(RegisterSchema),
   })
 
-  const handleFormSubmit = async (data: RegisterFormProps) => console.log(data)
+  const router = useRouter()
+
+  const handleFormSubmit = async (data: RegisterFormProps) => {
+    const { status, message } = await createCredential(data)
+    if (!status) {
+      toast.error(message)
+      return
+    }
+    router.push('/login')
+    toast.success(message)
+  }
 
   return (
     <FormProvider {...methods}>

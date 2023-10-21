@@ -1,9 +1,11 @@
 'use client'
 import Input from '@elements/Input'
+import { passwordReset } from '@/lib/auth'
 import AuthButton from '@elements/AuthButton'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { RecoverySchema, RecoverySchemaProps } from '@/schemas/auth'
+import toast from 'react-hot-toast'
 
 export default function RecoveryForm() {
   const methods = useForm<RecoverySchemaProps>({
@@ -12,8 +14,15 @@ export default function RecoveryForm() {
     resolver: zodResolver(RecoverySchema),
   })
 
-  const handleFormSubmit = async (data: RecoverySchemaProps) =>
-    console.log(data)
+  const handleFormSubmit = async (data: RecoverySchemaProps) => {
+    const { status, message } = await passwordReset(data)
+    if (!status) {
+      toast.error(message)
+      return
+    }
+    toast.success(message)
+    methods.reset()
+  }
 
   return (
     <FormProvider {...methods}>

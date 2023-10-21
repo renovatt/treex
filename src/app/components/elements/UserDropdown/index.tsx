@@ -1,40 +1,56 @@
+'use client'
 import Image from 'next/image'
 import { Fragment } from 'react'
+import { auth } from '@/firebase'
+import { logout } from '@/lib/auth'
+import { useRouter } from 'next/navigation'
 import { IoLogOutOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { Menu, Transition } from '@headlessui/react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { MdKeyboardArrowDown, MdOutlineMail } from 'react-icons/md'
 
-const userOptions = [
-  {
-    name: 'email',
-    topic: 'wlymes@gmail.com',
-  },
-  {
-    name: 'settings',
-    topic: 'Configurações',
-  },
-]
-
 export default function UserDropdown() {
+  const router = useRouter()
+  const [user] = useAuthState(auth)
+  const letter = `${user?.email?.charAt(0)}`
+  const avatar = `https://api.dicebear.com/7.x/initials/svg?seed=${letter}`
+
+  const handleLogout = async () => {
+    logout()
+    router.push('/login')
+  }
+
   return (
     <div className="z-20 flex items-center justify-center">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="flex w-full items-center justify-center gap-3 rounded-md text-sm font-medium text-primary-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            <figure className="h-8 w-8 select-none rounded-full bg-white">
-              <Image
-                src={'https://avatars.githubusercontent.com/u/94547135?v=4'}
-                alt="user-image"
-                className="h-full w-full rounded-full bg-white object-cover"
-                width={500}
-                height={500}
-                priority
-              />
+            <figure className="h-8 w-8 select-none rounded-full">
+              {user?.photoURL ? (
+                <Image
+                  src={user.photoURL}
+                  alt="user-avatar"
+                  className="h-full w-full rounded-full object-cover"
+                  width={500}
+                  height={500}
+                  priority
+                />
+              ) : (
+                <object
+                  data={avatar}
+                  type="image/svg+xml"
+                  className="h-full w-full rounded-full object-cover"
+                />
+              )}
             </figure>
-            <span className="hidden items-center justify-center text-primary-800 md:flex">
-              Wildemberg
-            </span>
+
+            {user?.displayName && (
+              <span className="hidden items-center justify-center text-primary-800 md:flex">
+                {user.displayName}
+              </span>
+            )}
+
             <MdKeyboardArrowDown
               className="-mr-1 ml-1 h-5 w-5 text-primary-800 hover:text-primary-750"
               aria-hidden="true"
@@ -55,38 +71,47 @@ export default function UserDropdown() {
             shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           >
             <div className="px-1 py-1">
-              {userOptions.map(({ name, topic }) => (
-                <Menu.Item key={name}>
-                  {({ active }) => (
-                    <button
-                      className={`${
-                        active
-                          ? 'bg-secondary-700 text-white'
-                          : 'text-primary-800'
-                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    >
-                      {name === 'email' ? (
-                        <MdOutlineMail
-                          className="mr-2 h-5 w-5"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <AiOutlineSetting
-                          className="mr-2 h-5 w-5"
-                          aria-hidden="true"
-                        />
-                      )}
-                      {topic}
-                    </button>
-                  )}
-                </Menu.Item>
-              ))}
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active
+                        ? 'bg-secondary-700 text-white'
+                        : 'text-primary-800'
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  >
+                    <MdOutlineMail
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                    {user && user.email}
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active
+                        ? 'bg-secondary-700 text-white'
+                        : 'text-primary-800'
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  >
+                    <AiOutlineSetting
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                    Configurações
+                  </button>
+                )}
+              </Menu.Item>
             </div>
 
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={handleLogout}
                     className={`${
                       active
                         ? 'bg-secondary-700 text-white'
