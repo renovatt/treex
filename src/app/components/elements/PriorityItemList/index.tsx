@@ -8,18 +8,20 @@ import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
 export default function PriorityItemList({
   title,
   level,
+  id,
 }: PriorityItemListProps) {
   const { isOpen, closeModal, openModal } = useToggle()
   return (
     <>
       <Modal isOpen={isOpen} closeModal={closeModal} label="Editar prioridade">
-        <EditPriorityForm />
+        <EditPriorityForm id={id} closeModal={closeModal} />
       </Modal>
       <li
+        id={id}
         onClick={openModal}
         className="my-1 flex w-full items-center justify-between rounded-xl bg-primary-900 px-6 py-4 shadow-lg transition-all ease-in-out hover:cursor-pointer hover:opacity-80"
       >
-        <span className="flex w-20 items-center justify-center text-xs text-primary-800 md:w-28 md:text-base">
+        <span className="flex items-center justify-center text-xs capitalize text-primary-800 md:text-base">
           {title}
         </span>
 
@@ -27,7 +29,7 @@ export default function PriorityItemList({
           <>
             <div className="flex items-center justify-center gap-4">
               <span className="hidden text-xs text-primary-800 md:flex">
-                Importande
+                Importante
               </span>
               <GiBoltShield className="h-6 w-6 text-secondary-800 shadow-sm" />
             </div>

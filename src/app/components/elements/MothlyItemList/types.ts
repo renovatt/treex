@@ -1,4 +1,5 @@
 export type PreviewMothItemListProps = {
+  id: string
   title: string
-  value: number
+  value: string
 }

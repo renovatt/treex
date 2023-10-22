@@ -1,7 +1,12 @@
+import { auth } from '@/firebase'
 import Input from '@elements/Input'
+import toast from 'react-hot-toast'
+import { UserData } from '@/lib/types'
 import CustomButton from '@elements/CustomButton'
+import { savingUserMonthlyExpense } from '@/lib/db'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { MonthyPreviewFormProps, MonthyPreviewSchema } from '@/schemas'
 
 export default function MonthlyForm() {
@@ -11,8 +16,20 @@ export default function MonthlyForm() {
     resolver: zodResolver(MonthyPreviewSchema),
   })
 
-  const handleFormSubmit = async (data: MonthyPreviewFormProps) =>
-    console.log(data)
+  const [user] = useAuthState(auth)
+
+  const handleFormSubmit = async (data: MonthyPreviewFormProps) => {
+    const { status, message } = await savingUserMonthlyExpense(
+      data,
+      user as UserData,
+    )
+    if (!status) {
+      toast.error(message)
+      return
+    }
+    toast.success(message)
+    methods.reset()
+  }
 
   return (
     <FormProvider {...methods}>

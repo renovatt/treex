@@ -1,12 +1,25 @@
 'use client'
 import Modal from '../Modal'
+import { auth } from '@/firebase'
+import { UserData } from '@/lib/types'
+import { useEffect, useRef } from 'react'
 import { useToggle } from '@/hooks/useToogle'
 import MonthlyForm from '../Form/MonthlyForm'
 import { MdOutlineAddBox } from 'react-icons/md'
 import MothlyItemList from '@elements/MothlyItemList'
+import { useGetMonthly } from '@/hooks/useGetMonthly'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 export default function PreviewMonthyCard() {
+  const [user] = useAuthState(auth)
+  const { monthlyData } = useGetMonthly(user as UserData)
   const { isOpen, closeModal, openModal } = useToggle()
+  const tableRef = useRef<HTMLUListElement | null>(null)
+
+  useEffect(() => {
+    tableRef.current?.scrollTo(0, -tableRef.current.scrollHeight)
+  }, [monthlyData])
+
   return (
     <>
       <Modal isOpen={isOpen} label="Adicionar gasto" closeModal={closeModal}>
@@ -28,13 +41,21 @@ export default function PreviewMonthyCard() {
           </section>
         </section>
 
-        <ul className="flex max-h-full w-full flex-col items-start justify-start overflow-scroll overflow-x-hidden">
-          <MothlyItemList value={123} title="Faculdade" />
-          <MothlyItemList value={123} title="Faculdade" />
-          <MothlyItemList value={123} title="Faculdade" />
-          <MothlyItemList value={123} title="Faculdade" />
-          <MothlyItemList value={123} title="Faculdade" />
-          <MothlyItemList value={123} title="Faculdade" />
+        <ul
+          ref={tableRef}
+          className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
+        >
+          {monthlyData.map((monthly) => (
+            <MothlyItemList
+              id={monthly.id ?? ''}
+              key={monthly.id}
+              title={monthly.name}
+              value={Number(monthly.value).toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            />
+          ))}
         </ul>
       </article>
     </>

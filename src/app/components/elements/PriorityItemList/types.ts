@@ -1,7 +1,5 @@
-import { IconType } from 'react-icons'
-
 export type PriorityItemListProps = {
+  id: string
   title: string
-  icon: IconType
   level: 'Importante' | 'Menos importante' | 'Muito importante'
 }
