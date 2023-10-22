@@ -2,23 +2,23 @@
 import Modal from '../Modal'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
-import { useRef, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useToggle } from '@/hooks/useToogle'
 import PriorityForm from '../Form/PriorityForm'
 import { MdOutlineAddBox } from 'react-icons/md'
-import { useGetPriority } from '@/hooks/useGetPriority'
-import PriorityItemList from '@elements/PriorityItemList'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import PriorityTableContent from '../PriorityTableContent'
 
 export default function PreviewPriorityCard() {
-  const [user] = useAuthState(auth)
-  const { priorityData } = useGetPriority(user as UserData)
+  const [user, loading] = useAuthState(auth)
   const { isOpen, closeModal, openModal } = useToggle()
-  const tableRef = useRef<HTMLUListElement | null>(null)
+  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
 
   useEffect(() => {
-    tableRef.current?.scrollTo(0, -tableRef.current.scrollHeight)
-  }, [priorityData])
+    if (user) {
+      setUserLoaded(user as UserData)
+    }
+  }, [user])
 
   return (
     <>
@@ -45,19 +45,11 @@ export default function PreviewPriorityCard() {
           </section>
         </section>
 
-        <ul
-          ref={tableRef}
-          className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
-        >
-          {priorityData.map((priority) => (
-            <PriorityItemList
-              id={priority.id ?? ''}
-              key={priority.id}
-              title={priority.name}
-              level={priority.level}
-            />
-          ))}
-        </ul>
+        {userLoaded && !loading ? (
+          <PriorityTableContent user={userLoaded} />
+        ) : (
+          <p className="text-xs font-bold text-primary-800">Aguardando...</p>
+        )}
       </article>
     </>
   )

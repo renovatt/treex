@@ -1,48 +1,27 @@
 'use client'
 import { auth } from '@/firebase'
-import { UserData } from '@/lib/types'
-import { useRef, useEffect } from 'react'
+import { UserData } from '@/lib/types.js'
+import { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
-import TransactionItemList from '@elements/TransactionItemList'
-import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
+import TransactionTableContent from '../TransactionTableContent'
 
 export default function TransactionTable() {
-  const [user] = useAuthState(auth)
-  const { transactionData } = useGetTransactions(user as UserData)
-  const tableRef = useRef<HTMLUListElement | null>(null)
+  const [user, loading] = useAuthState(auth)
+  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
 
   useEffect(() => {
-    tableRef.current?.scrollTo(0, -tableRef.current.scrollHeight)
-  }, [transactionData])
+    if (user) {
+      setUserLoaded(user as UserData)
+    }
+  }, [user])
 
   return (
     <section className="flex w-full">
-      <ul
-        ref={tableRef}
-        className="flex h-52 w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden md:h-[19rem]"
-      >
-        {transactionData.map((transaction) => (
-          <TransactionItemList
-            key={transaction.id}
-            id={transaction.id ?? ''}
-            type={transaction.transaction ? 'expense' : 'income'}
-            date={new Date(transaction.date ?? '').toLocaleDateString('pt-br', {
-              year: 'numeric',
-              month: 'numeric',
-              day: 'numeric',
-            })}
-            icon={
-              transaction.transaction ? HiArrowTrendingDown : HiArrowTrendingUp
-            }
-            title={transaction.name}
-            value={Number(transaction.value).toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
-          />
-        ))}
-      </ul>
+      {userLoaded && !loading ? (
+        <TransactionTableContent user={userLoaded} />
+      ) : (
+        <p className="text-xs font-bold text-primary-800">Aguardando...</p>
+      )}
     </section>
   )
 }

@@ -2,23 +2,23 @@
 import Modal from '../Modal'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useToggle } from '@/hooks/useToogle'
 import MonthlyForm from '../Form/MonthlyForm'
 import { MdOutlineAddBox } from 'react-icons/md'
-import MothlyItemList from '@elements/MothlyItemList'
-import { useGetMonthly } from '@/hooks/useGetMonthly'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import MonthlyTableContent from '../MonthlyTableContent'
 
 export default function PreviewMonthyCard() {
-  const [user] = useAuthState(auth)
-  const { monthlyData } = useGetMonthly(user as UserData)
+  const [user, loading] = useAuthState(auth)
   const { isOpen, closeModal, openModal } = useToggle()
-  const tableRef = useRef<HTMLUListElement | null>(null)
+  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
 
   useEffect(() => {
-    tableRef.current?.scrollTo(0, -tableRef.current.scrollHeight)
-  }, [monthlyData])
+    if (user) {
+      setUserLoaded(user as UserData)
+    }
+  }, [user])
 
   return (
     <>
@@ -41,22 +41,11 @@ export default function PreviewMonthyCard() {
           </section>
         </section>
 
-        <ul
-          ref={tableRef}
-          className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
-        >
-          {monthlyData.map((monthly) => (
-            <MothlyItemList
-              id={monthly.id ?? ''}
-              key={monthly.id}
-              title={monthly.name}
-              value={Number(monthly.value).toLocaleString('pt-br', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            />
-          ))}
-        </ul>
+        {userLoaded && !loading ? (
+          <MonthlyTableContent user={userLoaded} />
+        ) : (
+          <p className="text-xs font-bold text-primary-800">Aguardando...</p>
+        )}
       </article>
     </>
   )
