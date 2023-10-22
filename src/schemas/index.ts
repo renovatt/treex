@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 export const TransactionSchema = z.object({
+  id: z.string().optional(),
   name: z.string().min(3, 'Nome obrigatório').max(24, 'Nome é muito longo'),
   value: z
     .string()
@@ -17,14 +18,18 @@ export const TransactionSchema = z.object({
     ),
   transaction: z.boolean(),
   category: z.string(),
+  date: z.string().optional(),
 })
 
 export const PrioritySchema = z.object({
+  id: z.string().optional(),
   name: z.string().min(3, 'Nome obrigatório').max(24, 'Nome é muito longo'),
-  level: z.string(),
+  level: z.enum(['Importante', 'Menos importante', 'Muito importante']),
+  date: z.string().optional(),
 })
 
 export const MonthyPreviewSchema = z.object({
+  id: z.string().optional(),
   name: z.string().min(3, 'Nome obrigatório').max(24, 'Nome é muito longo'),
   value: z
     .string()
@@ -39,6 +44,7 @@ export const MonthyPreviewSchema = z.object({
         path: ['value'],
       },
     ),
+  date: z.string().optional(),
 })
 
 export type PriorityFormProps = z.infer<typeof PrioritySchema>
