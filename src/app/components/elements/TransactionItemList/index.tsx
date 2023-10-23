@@ -3,6 +3,7 @@ import Modal from '@modules/Modal'
 import { useToggle } from '@/hooks/useToogle'
 import { TransactionItemListProps } from './types'
 import EditTransactionForm from '@modules/Form/EditTransactionForm'
+import { motion } from 'framer-motion'
 
 export default function TransactionItemList({
   icon: Icon,
@@ -18,7 +19,10 @@ export default function TransactionItemList({
       <Modal isOpen={isOpen} closeModal={closeModal} label="Editar transação">
         <EditTransactionForm id={id} closeModal={closeModal} />
       </Modal>
-      <li
+      <motion.li
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         id={id}
         onClick={openModal}
         className={`my-1 flex w-full items-center justify-between px-6 py-4 transition-all ease-in-out hover:cursor-pointer hover:opacity-80 ${
@@ -37,7 +41,7 @@ export default function TransactionItemList({
         <span className="flex w-24 items-center justify-center text-xs text-primary-800 md:w-24 md:text-base">
           {value}
         </span>
-      </li>
+      </motion.li>
     </>
   )
 }

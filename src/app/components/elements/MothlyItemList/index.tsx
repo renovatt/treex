@@ -3,6 +3,7 @@ import Modal from '@modules/Modal'
 import { useToggle } from '@/hooks/useToogle'
 import { PreviewMothItemListProps } from './types'
 import EditMonthlyForm from '@modules/Form/EditMonthlyForm'
+import { motion } from 'framer-motion'
 
 export default function MothlyItemList({
   title,
@@ -15,7 +16,10 @@ export default function MothlyItemList({
       <Modal isOpen={isOpen} closeModal={closeModal} label="Editar gasto">
         <EditMonthlyForm id={id} closeModal={closeModal} />
       </Modal>
-      <li
+      <motion.li
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         id={id}
         onClick={openModal}
         className="my-1 flex w-full items-center justify-between rounded-xl bg-primary-900 px-6 py-4 shadow-lg transition-all ease-in-out hover:cursor-pointer hover:opacity-80"
@@ -26,7 +30,7 @@ export default function MothlyItemList({
         <span className="flex w-20 items-center justify-center text-xs text-primary-800 md:w-24 md:text-base">
           {value}
         </span>
-      </li>
+      </motion.li>
     </>
   )
 }

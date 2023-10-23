@@ -4,6 +4,7 @@ import { useToggle } from '@/hooks/useToogle'
 import { PriorityItemListProps } from './types'
 import EditPriorityForm from '@modules/Form/EditPriorityForm'
 import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
+import { motion } from 'framer-motion'
 
 export default function PriorityItemList({
   title,
@@ -16,7 +17,10 @@ export default function PriorityItemList({
       <Modal isOpen={isOpen} closeModal={closeModal} label="Editar prioridade">
         <EditPriorityForm id={id} closeModal={closeModal} />
       </Modal>
-      <li
+      <motion.li
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         id={id}
         onClick={openModal}
         className="my-1 flex w-full items-center justify-between rounded-xl bg-primary-900 px-6 py-4 shadow-lg transition-all ease-in-out hover:cursor-pointer hover:opacity-80"
@@ -53,7 +57,7 @@ export default function PriorityItemList({
             </div>
           </>
         )}
-      </li>
+      </motion.li>
     </>
   )
 }
