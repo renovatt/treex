@@ -2,7 +2,7 @@
 import Modal from '../Modal'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
-import { useEffect, useState } from 'react'
+import { useUser } from '@/hooks/useUser'
 import { useToggle } from '@/hooks/useToogle'
 import PriorityForm from '../Form/PriorityForm'
 import { MdOutlineAddBox } from 'react-icons/md'
@@ -12,14 +12,7 @@ import PriorityTableContent from '../PriorityTableContent'
 export default function PreviewPriorityCard() {
   const [user, loading] = useAuthState(auth)
   const { isOpen, closeModal, openModal } = useToggle()
-  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
-
-  useEffect(() => {
-    if (user) {
-      setUserLoaded(user as UserData)
-    }
-  }, [user])
-
+  const { userLoaded } = useUser(user as UserData)
   return (
     <>
       <Modal

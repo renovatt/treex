@@ -1,24 +1,17 @@
 'use client'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
-import { useState, useEffect } from 'react'
+import { useUser } from '@/hooks/useUser'
 import { BiTransfer } from 'react-icons/bi'
 import CardValue from '@elements/CardValue'
 import { MdOutlineCategory } from 'react-icons/md'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import TransactionsMonthly from '../../PreviewCards/TransactionsMonthly'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
+import TransactionsMonthly from '../../PreviewCards/TransactionsMonthly'
 
 export default function GridTransaction() {
   const [user, loading] = useAuthState(auth)
-  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
-
-  useEffect(() => {
-    if (user) {
-      setUserLoaded(user as UserData)
-    }
-  }, [user])
-
+  const { userLoaded } = useUser(user as UserData)
   return (
     <section className="grid grid-cols-2 gap-10 sm:grid-cols-4 md:grid-cols-4 lg:gap-20 xl:grid-cols-4">
       {userLoaded && !loading ? (

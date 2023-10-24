@@ -1,13 +1,13 @@
-import { UserData } from '@/lib/types'
-import CardValue from '../../../elements/CardValue'
 import {
   handleCurrentMonthlyBalance,
   handleMostSpentCategory,
   shortNumber,
 } from '@/utils'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
-import { MdOutlineCategory } from 'react-icons/md'
+import { UserData } from '@/lib/types'
+import CardValue from '@elements/CardValue'
 import { BiTransfer } from 'react-icons/bi'
+import { MdOutlineCategory } from 'react-icons/md'
+import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 
 export default function TransactionsMonthly({ user }: { user: UserData }) {

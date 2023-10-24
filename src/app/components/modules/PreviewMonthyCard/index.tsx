@@ -2,7 +2,7 @@
 import Modal from '../Modal'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
-import { useEffect, useState } from 'react'
+import { useUser } from '@/hooks/useUser'
 import { useToggle } from '@/hooks/useToogle'
 import MonthlyForm from '../Form/MonthlyForm'
 import { MdOutlineAddBox } from 'react-icons/md'
@@ -11,15 +11,8 @@ import MonthlyTableContent from '../MonthlyTableContent'
 
 export default function PreviewMonthyCard() {
   const [user, loading] = useAuthState(auth)
+  const { userLoaded } = useUser(user as UserData)
   const { isOpen, closeModal, openModal } = useToggle()
-  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
-
-  useEffect(() => {
-    if (user) {
-      setUserLoaded(user as UserData)
-    }
-  }, [user])
-
   return (
     <>
       <Modal isOpen={isOpen} label="Adicionar gasto" closeModal={closeModal}>

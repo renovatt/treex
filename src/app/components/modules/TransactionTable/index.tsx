@@ -1,20 +1,13 @@
 'use client'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types.js'
-import { useEffect, useState } from 'react'
+import { useUser } from '@/hooks/useUser'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import TransactionTableContent from '../TransactionTableContent'
 
 export default function TransactionTable() {
   const [user, loading] = useAuthState(auth)
-  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
-
-  useEffect(() => {
-    if (user) {
-      setUserLoaded(user as UserData)
-    }
-  }, [user])
-
+  const { userLoaded } = useUser(user as UserData)
   return (
     <section className="flex w-full">
       {userLoaded && !loading ? (
