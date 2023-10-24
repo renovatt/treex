@@ -1,8 +1,12 @@
 'use client'
-import { useState } from 'react'
 import Chart from 'react-apexcharts'
+import { UserData } from '@/lib/types'
+import { useEffect, useState } from 'react'
+import { calculateRevenueByMonth } from '@/utils'
+import { useGetTransactions } from '@/hooks/useGetTransactions'
 
-export default function BarChart() {
+export default function BarChart({ user }: { user: UserData }) {
+  const { transactionData } = useGetTransactions(user)
   const [chartData, setChartData] = useState({
     options: {
       chart: {
@@ -70,6 +74,30 @@ export default function BarChart() {
       },
     ],
   })
+
+  useEffect(() => {
+    if (transactionData) {
+      const revenueByMonth = calculateRevenueByMonth(transactionData)
+      const monthNames = revenueByMonth.map((item) => item.month)
+      const revenueValues = revenueByMonth.map((item) => item.revenue)
+
+      setChartData((prevChartData) => ({
+        ...prevChartData,
+        options: {
+          ...prevChartData.options,
+          xaxis: {
+            categories: monthNames,
+          },
+        },
+        series: [
+          {
+            name: 'Faturamento',
+            data: revenueValues,
+          },
+        ],
+      }))
+    }
+  }, [transactionData])
 
   return (
     <section className="my-5 flex w-full items-center justify-center">

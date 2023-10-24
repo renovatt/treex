@@ -11,9 +11,12 @@ export const metadata: Metadata = {
 }
 
 export default function Transactions() {
-  const PolarChart = dynamic(() => import('@elements/ChartJS/PolarChart'), {
-    ssr: false,
-  })
+  const PolarChartPreloader = dynamic(
+    () => import('@elements/ChartJS/PolarChartPreloader'),
+    {
+      ssr: false,
+    },
+  )
   return (
     <ViewContainer>
       <Header title="Transações" description="Gastos recentes" />
@@ -23,7 +26,7 @@ export default function Transactions() {
           <TransactionTable />
         </section>
         <aside className="flex w-full items-center justify-center rounded-3xl xl:w-1/3">
-          <PolarChart />
+          <PolarChartPreloader />
         </aside>
       </section>
     </ViewContainer>

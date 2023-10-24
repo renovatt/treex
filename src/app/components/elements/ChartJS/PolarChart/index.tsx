@@ -1,9 +1,13 @@
 'use client'
-import { useState } from 'react'
 import Chart from 'react-apexcharts'
 import { ChartState } from './types'
+import { UserData } from '@/lib/types'
+import { useEffect, useState } from 'react'
+import { calculateCategoryByMonth } from '@/utils'
+import { useGetTransactions } from '@/hooks/useGetTransactions'
 
-export default function PolarChart() {
+export default function PolarChart({ user }: { user: UserData }) {
+  const { transactionData } = useGetTransactions(user)
   const [chartData, setChartData] = useState<ChartState>({
     options: {
       chart: {
@@ -87,6 +91,13 @@ export default function PolarChart() {
     },
     series: [955, 634, 541, 800, 645, 510, 340],
   })
+
+  useEffect(() => {
+    if (transactionData) {
+      const result = calculateCategoryByMonth(transactionData)
+      setChartData(result)
+    }
+  }, [transactionData])
 
   return (
     <section className="mb-2 flex w-full items-center justify-center xl:m-0 xl:h-full">

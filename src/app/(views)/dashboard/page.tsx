@@ -12,16 +12,19 @@ export const metadata: Metadata = {
 }
 
 export default function Dashboard() {
-  const BarChart = dynamic(() => import('@elements/ChartJS/BarChart'), {
-    ssr: false,
-  })
+  const BarChartPreloader = dynamic(
+    () => import('@/app/components/elements/ChartJS/BarChartPreloader'),
+    {
+      ssr: false,
+    },
+  )
   return (
     <ViewContainer>
       <Header title="Dashboard" description="Visão geral" />
       <section className="flex w-full flex-col justify-between gap-10 overflow-y-auto overflow-x-hidden xl:flex-row">
         <section className="flex w-full flex-col items-center justify-start gap-10 xl:w-8/12">
           <GridDash />
-          <BarChart />
+          <BarChartPreloader />
           <TransactionTable />
         </section>
         <CriptoAside />

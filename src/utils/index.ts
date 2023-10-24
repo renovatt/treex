@@ -130,3 +130,94 @@ export const shortNumber = (numero: number) => {
     return numero.toString()
   }
 }
+
+export const calculateRevenueByMonth = (data: TransactionFormProps[]) => {
+  const currentDate = new Date()
+  const last7Months = []
+
+  for (let i = 6; i >= 0; i--) {
+    const month = new Date(currentDate)
+    month.setMonth(currentDate.getMonth() - i)
+    last7Months.push(month)
+  }
+
+  const revenueByMonth = last7Months.map((month) => {
+    const firstDay = new Date(month.getFullYear(), month.getMonth(), 1)
+    const lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 0)
+
+    const monthName = new Intl.DateTimeFormat('pt-BR', {
+      month: 'short',
+    }).format(month)
+
+    const capitalizedMonthName =
+      monthName.charAt(0).toUpperCase() + monthName.slice(1).toLowerCase()
+
+    const income = data
+      .filter((transaction) => {
+        const transactionDate = new Date(transaction.date ?? '')
+        return (
+          transactionDate >= firstDay &&
+          transactionDate <= lastDay &&
+          !transaction.transaction
+        )
+      })
+      .reduce((total, transaction) => total + parseFloat(transaction.value), 0)
+
+    const expenses = data
+      .filter((transaction) => {
+        const transactionDate = new Date(transaction.date ?? '')
+        return (
+          transactionDate >= firstDay &&
+          transactionDate <= lastDay &&
+          transaction.transaction
+        )
+      })
+      .reduce((total, transaction) => total + parseFloat(transaction.value), 0)
+
+    const revenue = income - expenses
+
+    return {
+      month: capitalizedMonthName,
+      revenue,
+    }
+  })
+
+  return revenueByMonth
+}
+
+export const calculateCategoryByMonth = (data: TransactionFormProps[]) => {
+  const currentDate = new Date()
+  const currentMonth = currentDate.getMonth()
+  const currentYear = currentDate.getFullYear()
+
+  const categoryTotals: { [key: string]: number } = {}
+
+  data.forEach((transaction) => {
+    const transactionDate = new Date(transaction.date || '')
+    const isIncome = !transaction.transaction
+
+    if (
+      !isIncome &&
+      transactionDate.getMonth() === currentMonth &&
+      transactionDate.getFullYear() === currentYear
+    ) {
+      const category = transaction.category
+      const value = parseFloat(transaction.value) || 0
+
+      if (!categoryTotals[category]) {
+        categoryTotals[category] = 0
+      }
+
+      categoryTotals[category] += value
+    }
+  })
+
+  const chartData = {
+    options: {
+      labels: Object.keys(categoryTotals),
+    },
+    series: Object.values(categoryTotals),
+  }
+
+  return chartData
+}
