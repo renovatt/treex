@@ -7,6 +7,11 @@ import CriptoItemList from '@elements/CriptoItemList'
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { CriptoCoinTypeProps } from '@elements/CriptoItemList/types'
+import { auth } from '@/firebase'
+import { UserData } from '@/lib/types'
+import { useState, useEffect } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import WalletCardDolar from '../PreviewCards/WalletDolar'
 
 export default function CriptoAside() {
   const Candlestick = dynamic(() => import('@elements/ChartJS/Candlestick'), {
@@ -14,16 +19,15 @@ export default function CriptoAside() {
   })
 
   const { data: dolar } = useGetDolar()
+  const [user, loading] = useAuthState(auth)
   const { data, isError, isLoading } = useGetCrypto()
+  const [userLoaded, setUserLoaded] = useState<UserData | null>(null)
 
-  const handleWalletToDolar = (walletValue: string) => {
-    const rate = dolar?.data.USDBRL.bid
-    const converted = Number(walletValue) / Number(rate)
-    return converted.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    })
-  }
+  useEffect(() => {
+    if (user) {
+      setUserLoaded(user as UserData)
+    }
+  }, [user])
 
   return (
     <aside className="flex h-full w-full flex-col items-center justify-start space-y-6 xl:w-1/3 xl:space-y-4">
@@ -37,12 +41,16 @@ export default function CriptoAside() {
         </section>
 
         <section className="flex w-full items-center justify-between">
-          <CardValue
-            description="Dolar saldo"
-            icon={RiMoneyDollarCircleLine}
-            side="left"
-            value={handleWalletToDolar('3500')}
-          />
+          {userLoaded && !loading ? (
+            <WalletCardDolar user={userLoaded} />
+          ) : (
+            <CardValue
+              description="Dolar saldo"
+              icon={RiMoneyDollarCircleLine}
+              side="left"
+              value={'0'}
+            />
+          )}
           <CardValue
             description="Dolar hoje"
             icon={LiaMoneyBillWaveSolid}
