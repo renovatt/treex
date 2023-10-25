@@ -1,9 +1,10 @@
 import {
-  handleCurrentMonthlyBalance,
-  handleMostSpentCategory,
+  handleCombinedMonthlyBalance,
+  handleMostSpentCategoryByMonth,
   shortNumber,
 } from '@/utils'
 import { UserData } from '@/lib/types'
+import { useDateStore } from '@/store'
 import CardValue from '@elements/CardValue'
 import { BiTransfer } from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
@@ -11,10 +12,14 @@ import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 
 export default function TransactionsMonthly({ user }: { user: UserData }) {
+  const { date } = useDateStore()
   const { transactionData } = useGetTransactions(user)
 
-  const monthlyResult = handleCurrentMonthlyBalance(transactionData)
-  const categoryResultMonthly = handleMostSpentCategory(transactionData, true)
+  const monthlyResult = handleCombinedMonthlyBalance(transactionData, date)
+  const categoryResultMonthly = handleMostSpentCategoryByMonth(
+    transactionData,
+    date,
+  )
 
   const monthlyBalance = shortNumber(monthlyResult.total)
   const monthlyIncome = shortNumber(monthlyResult.income)

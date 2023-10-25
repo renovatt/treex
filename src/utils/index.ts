@@ -70,6 +70,67 @@ export const handleCurrentMonthlyBalance = (data: TransactionFormProps[]) => {
   }
 }
 
+export const handleDailyBalance = (
+  data: TransactionFormProps[],
+  customDate?: string,
+) => {
+  const currentDate = customDate ? new Date(customDate) : new Date()
+
+  const filteredTransactions = data.filter((transaction) => {
+    const transactionDate = new Date(transaction.date || '')
+
+    if (customDate) {
+      const brlDate = customDate.split('T')[0]
+      const dateParts = brlDate.split('/')
+      const selectedDate = new Date(
+        `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
+      ).getTime()
+
+      return (
+        transactionDate.getFullYear() ===
+          new Date(selectedDate).getFullYear() &&
+        transactionDate.getMonth() === new Date(selectedDate).getMonth() &&
+        transactionDate.getDate() === new Date(selectedDate).getDate()
+      )
+    }
+
+    return (
+      transactionDate.getFullYear() === currentDate.getFullYear() &&
+      transactionDate.getMonth() === currentDate.getMonth() &&
+      transactionDate.getDate() === currentDate.getDate()
+    )
+  })
+
+  const income = filteredTransactions
+    .filter((transaction) => !transaction.transaction)
+    .map((transaction) => parseFloat(transaction.value) || 0)
+
+  const expense = filteredTransactions
+    .filter((transaction) => transaction.transaction)
+    .map((transaction) => parseFloat(transaction.value) || 0)
+
+  const incomeTotal = income.reduce((acc, cur) => acc + cur, 0)
+  const expenseTotal = expense.reduce((acc, cur) => acc + cur, 0)
+  const total = incomeTotal - expenseTotal
+
+  return {
+    income: incomeTotal,
+    expense: expenseTotal,
+    total,
+  }
+}
+
+export const handleCombinedMonthlyBalance = (
+  data: TransactionFormProps[],
+  customDate?: string,
+) => {
+  if (customDate) {
+    return handleDailyBalance(data, customDate)
+  } else {
+    return handleCurrentMonthlyBalance(data)
+  }
+}
+
 export const handleMostSpentCategory = (
   data: TransactionFormProps[],
   currentMonthOnly = false,
@@ -90,6 +151,61 @@ export const handleMostSpentCategory = (
       (!currentMonthOnly ||
         (transactionDate.getMonth() === currentMonth &&
           transactionDate.getFullYear() === currentYear))
+    ) {
+      if (!categoryTotals[category]) {
+        categoryTotals[category] = 0
+      }
+
+      categoryTotals[category] += value
+    }
+  })
+
+  let mostSpentCategory = null
+  let mostSpentTotal = 0
+
+  for (const category in categoryTotals) {
+    if (categoryTotals[category] > mostSpentTotal) {
+      mostSpentCategory = category
+      mostSpentTotal = categoryTotals[category]
+    }
+  }
+
+  return {
+    category: mostSpentCategory,
+    total: mostSpentTotal,
+  }
+}
+
+export const handleMostSpentCategoryByMonth = (
+  data: TransactionFormProps[],
+  selectedDateString?: string,
+) => {
+  const currentDate = new Date()
+  let currentMonth = currentDate.getMonth()
+  let currentYear = currentDate.getFullYear()
+
+  if (selectedDateString) {
+    const brlDate = selectedDateString.split('T')[0]
+    const dateParts = brlDate.split('/')
+    const selectedDate = new Date(
+      `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
+    )
+
+    currentMonth = selectedDate.getMonth()
+    currentYear = selectedDate.getFullYear()
+  }
+
+  const categoryTotals: CategoryTotals = {}
+
+  data.forEach((transaction) => {
+    const category = transaction.category
+    const value = parseFloat(transaction.value) || 0
+    const transactionDate = new Date(transaction.date || '')
+
+    if (
+      category !== 'Salário' &&
+      transactionDate.getMonth() === currentMonth &&
+      transactionDate.getFullYear() === currentYear
     ) {
       if (!categoryTotals[category]) {
         categoryTotals[category] = 0
@@ -185,10 +301,63 @@ export const calculateRevenueByMonth = (data: TransactionFormProps[]) => {
   return revenueByMonth
 }
 
-export const calculateCategoryByMonth = (data: TransactionFormProps[]) => {
-  const currentDate = new Date()
-  const currentMonth = currentDate.getMonth()
-  const currentYear = currentDate.getFullYear()
+// export const calculateCategoryByMonth = (data: TransactionFormProps[]) => {
+//   const currentDate = new Date()
+//   const currentMonth = currentDate.getMonth()
+//   const currentYear = currentDate.getFullYear()
+
+//   const categoryTotals: { [key: string]: number } = {}
+
+//   data.forEach((transaction) => {
+//     const transactionDate = new Date(transaction.date || '')
+//     const isIncome = !transaction.transaction
+
+//     if (
+//       !isIncome &&
+//       transactionDate.getMonth() === currentMonth &&
+//       transactionDate.getFullYear() === currentYear
+//     ) {
+//       const category = transaction.category
+//       const value = parseFloat(transaction.value) || 0
+
+//       if (!categoryTotals[category]) {
+//         categoryTotals[category] = 0
+//       }
+
+//       categoryTotals[category] += value
+//     }
+//   })
+
+//   const chartData = {
+//     options: {
+//       labels: Object.keys(categoryTotals),
+//     },
+//     series: Object.values(categoryTotals),
+//   }
+
+//   return chartData
+// }
+
+export const calculateCategoryByMonth = (
+  data: TransactionFormProps[],
+  selectedDateString?: string,
+) => {
+  let currentMonth: number, currentYear: number
+
+  if (selectedDateString) {
+    const brlDate = selectedDateString.split('T')[0]
+    const dateParts = brlDate.split('/')
+    const selectedDate = new Date(
+      `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
+    )
+
+    currentMonth = selectedDate.getMonth()
+    currentYear = selectedDate.getFullYear()
+  } else {
+    const currentDate = new Date()
+    currentMonth = currentDate.getMonth()
+    currentYear = currentDate.getFullYear()
+  }
 
   const categoryTotals: { [key: string]: number } = {}
 
