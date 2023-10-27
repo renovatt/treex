@@ -15,7 +15,7 @@ export default function Home() {
   }, [router, user])
 
   return (
-    <section className="flex h-screen w-screen items-center justify-center bg-primary-900">
+    <section className="flex h-screen w-screen items-center justify-center bg-primary-650 dark:bg-primary-900">
       <motion.div
         animate={{
           scale: [1, 2, 2, 1, 1],

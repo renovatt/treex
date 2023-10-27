@@ -20,7 +20,7 @@ export default function GoogleButton() {
     <>
       <button
         onClick={handleGoogleLogin}
-        className="flex items-center justify-center gap-4 rounded-full border py-3 focus-within:opacity-70 hover:cursor-pointer"
+        className="flex items-center justify-center gap-4 rounded-full border bg-gray-50 py-3 focus-within:opacity-70 hover:cursor-pointer"
       >
         <FcGoogle className="h-5 w-5" />
         <span className="text-xs font-bold text-primary-800">

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 export default function AuthContainer({ children }: AuthContainerProps) {
   return (
-    <section className="container relative flex h-[95%] w-[90%] items-center justify-center gap-2 overflow-hidden rounded-3xl bg-white p-4 lg:justify-between">
+    <section className="container relative flex h-[95%] w-[90%] items-center justify-center gap-2 overflow-hidden rounded-3xl bg-primary-650 p-4 dark:bg-white lg:justify-between">
       <ThumbSlider />
       <aside className="flex h-full w-full items-center justify-center rounded-3xl lg:w-1/2">
         <motion.section
