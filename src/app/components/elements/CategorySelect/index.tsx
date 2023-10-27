@@ -1,20 +1,11 @@
 'use client'
 import { Fragment } from 'react'
+import { categories } from '@/app/mocks'
 import { ErrorMessage } from '../ErrorMessage'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { HiMiniChevronUpDown } from 'react-icons/hi2'
 import { Listbox, Transition } from '@headlessui/react'
 import { useFormContext, Controller } from 'react-hook-form'
-
-const categories = [
-  'Salário',
-  'Estudos',
-  'Farmácia',
-  'Alimentação',
-  'Combustível',
-  'Pagamentos',
-  'Lazer',
-]
 
 export default function CategorySelect() {
   const { control } = useFormContext()

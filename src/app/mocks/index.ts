@@ -1,0 +1,18 @@
+export const categories = [
+  'Salário',
+  'Educação',
+  'Despesas Diversas',
+  'Farmácia',
+  'Alimentação',
+  'Combustível',
+  'Transporte',
+  'Pagamentos',
+  'Lazer',
+  'Saúde',
+  'Higiene',
+  'Vestuário',
+  'Veículo',
+  'Moradia',
+  'Animais de Estimação',
+  'Economias/Investimentos',
+]
