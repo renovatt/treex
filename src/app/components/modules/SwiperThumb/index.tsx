@@ -6,12 +6,14 @@ import { Autoplay, EffectCoverflow } from 'swiper/modules'
 
 export default function SwiperThumb() {
   const images = [
-    '/laptop.png',
-    '/phone.png',
-    '/laptop.png',
-    '/phone.png',
-    '/laptop.png',
-    '/phone.png',
+    '/laptop-1.png',
+    '/laptop-2.png',
+    '/mobile-1.png',
+    '/mobile-2.png',
+    '/laptop-3.png',
+    '/laptop-4.png',
+    '/mobile-3.png',
+    '/mobile-4.png',
   ]
   return (
     <Fragment>
@@ -38,7 +40,7 @@ export default function SwiperThumb() {
                 alt={thumb}
                 width={1000}
                 height={1000}
-                className="h-full w-full rounded-lg object-contain"
+                className="h-full w-[90%] rounded-lg object-contain"
               />
             </SwiperSlide>
           ))}
