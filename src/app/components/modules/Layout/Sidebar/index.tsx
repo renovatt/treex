@@ -13,7 +13,7 @@ export default function Sidebar({ children }: SidebarProps) {
   return (
     <SidebarContainer>
       <aside
-        className={`fixed bottom-0 left-0 z-50 flex h-20 w-full border border-x-transparent border-t-primary-800 shadow-lg shadow-primary-900 transition-all ease-in-out dark:border-t-primary-850 md:relative md:h-full md:border-y-transparent md:border-r-primary-800 md:shadow-none md:dark:border-r-primary-850 ${
+        className={`fixed bottom-0 left-0 z-50 flex h-20 w-full border border-x-transparent border-t-primary-800 bg-primary-650 shadow-lg shadow-primary-900 transition-all ease-in-out dark:border-t-primary-850 dark:bg-primary-900 md:relative md:h-full md:border-y-transparent md:border-r-primary-800 md:shadow-none md:dark:border-r-primary-850 ${
           status.isSelected ? 'md:w-48' : 'md:w-20'
         }`}
       >

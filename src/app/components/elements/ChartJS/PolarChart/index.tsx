@@ -53,10 +53,11 @@ export default function PolarChart({ user }: { user: UserData }) {
           },
         },
         {
-          breakpoint: 480,
+          breakpoint: 1279,
           options: {
             chart: {
-              width: 250,
+              width: 350,
+              height: 550,
             },
           },
         },

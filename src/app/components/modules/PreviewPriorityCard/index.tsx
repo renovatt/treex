@@ -24,7 +24,7 @@ export default function PreviewPriorityCard() {
       </Modal>
       <article className="dark:bg-right-card-gradient flex h-[24.5rem] w-full flex-col items-center justify-start gap-4 rounded-3xl bg-white p-4 xl:w-1/2">
         <section className="flex w-full items-center justify-between">
-          <h1 className="w-36 self-start text-xs text-primary-800 dark:text-white xl:w-full xl:text-base">
+          <h1 className="self-start text-xs text-primary-800 dark:text-white xl:w-full xl:text-base">
             Lista de prioridades
           </h1>
           <section

@@ -13,7 +13,7 @@ export default function GridDash() {
   const [user, loading] = useAuthState(auth)
   const { userLoaded } = useUser(user as UserData)
   return (
-    <section className="grid grid-cols-2 gap-10 sm:grid-cols-4 md:grid-cols-4 lg:gap-20 xl:grid-cols-4">
+    <section className="grid grid-cols-2 gap-10 gap-x-28 sm:grid-cols-4 sm:gap-x-10 md:grid-cols-4 lg:gap-20 xl:grid-cols-4">
       {userLoaded && !loading ? (
         <DashCardValues user={userLoaded} />
       ) : (
