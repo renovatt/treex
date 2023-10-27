@@ -22,7 +22,7 @@ export default function MothlyItemList({
         transition={{ duration: 0.5 }}
         id={id}
         onClick={openModal}
-        className="my-1 flex w-full items-center justify-between rounded-xl bg-primary-900 px-6 py-4 shadow-lg transition-all ease-in-out hover:cursor-pointer hover:opacity-80"
+        className="horver:bg-white my-1 flex w-full items-center justify-between rounded-xl bg-primary-650 px-6 py-4 shadow-md transition-all ease-in-out hover:cursor-pointer hover:opacity-80 dark:bg-primary-900"
       >
         <span className="flex items-center justify-center text-xs capitalize text-primary-800 md:text-base">
           {title}

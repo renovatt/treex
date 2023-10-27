@@ -27,8 +27,10 @@ export default function CategorySelect() {
         render={({ field }) => (
           <Listbox value={field.value} onChange={field.onChange}>
             <div className="relative mt-1">
-              <Listbox.Button className="relative w-full cursor-default rounded-lg border border-primary-800 bg-primary-900 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                <span className="block truncate text-white">{field.value}</span>
+              <Listbox.Button className="relative w-full cursor-default rounded-lg border border-gray-300 bg-gray-50 py-[.60rem] pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 dark:border-gray-600 dark:bg-primary-900 dark:shadow-md sm:text-sm">
+                <span className="block truncate text-primary-800 dark:text-white">
+                  {field.value}
+                </span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <HiMiniChevronUpDown
                     className="h-5 w-5 text-primary-800"
@@ -42,14 +44,14 @@ export default function CategorySelect() {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-secondary-950 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-secondary-950 sm:text-sm">
                   {categories.map((category, categoryIndex) => (
                     <Listbox.Option
                       key={categoryIndex}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${
                           active
-                            ? 'bg-secondary-700 text-white'
+                            ? 'bg-primary-800 text-white dark:bg-secondary-700'
                             : 'text-primary-800'
                         }`
                       }
@@ -65,7 +67,7 @@ export default function CategorySelect() {
                             {category}
                           </span>
                           {selected ? (
-                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary-750">
+                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary-800 dark:text-primary-750">
                               <AiOutlineCheck
                                 className="h-5 w-5"
                                 aria-hidden="true"

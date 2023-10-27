@@ -6,6 +6,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage: {
@@ -19,6 +20,8 @@ const config: Config = {
           850: '#30303c',
           800: '#787878',
           750: '#baf5ed',
+          650: '#f5f5fd ',
+          550: '#34d399cb ',
         },
         secondary: {
           900: '#2c423d',

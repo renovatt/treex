@@ -34,18 +34,21 @@ export default function RegisterForm() {
         className="flex w-full flex-col space-y-4 lg:space-y-2"
       >
         <Input
+          noDark
           name="name"
           label="Nome"
           placeholder="Digite o seu nome"
           type="text"
         />
         <Input
+          noDark
           name="email"
           label="Email"
           placeholder="Digite o seu email"
           type="email"
         />
         <Input
+          noDark
           name="password"
           label="Senha"
           placeholder="Digite a sua senha"

@@ -13,18 +13,18 @@ export default function Sidebar({ children }: SidebarProps) {
   return (
     <SidebarContainer>
       <aside
-        className={`fixed bottom-0 left-0 z-50 flex h-20 w-full border border-x-transparent border-t-primary-850 shadow-lg shadow-primary-900 transition-all ease-in-out md:relative md:h-full md:border-y-transparent md:border-r-primary-850 md:shadow-none ${
+        className={`fixed bottom-0 left-0 z-50 flex h-20 w-full border border-x-transparent border-t-primary-800 shadow-lg shadow-primary-900 transition-all ease-in-out dark:border-t-primary-850 md:relative md:h-full md:border-y-transparent md:border-r-primary-800 md:shadow-none md:dark:border-r-primary-850 ${
           status.isSelected ? 'md:w-48' : 'md:w-20'
         }`}
       >
         {status.isSelected ? (
           <MdOutlineKeyboardDoubleArrowLeft
-            className="absolute -right-[5px] top-5 hidden h-3 w-3 rounded-full bg-primary-850 text-primary-750 hover:cursor-pointer md:flex"
+            className="absolute -right-[5px] top-5 hidden h-3 w-3 rounded-full bg-primary-850 text-primary-650 hover:cursor-pointer dark:text-primary-750 md:flex"
             onClick={setStatus}
           />
         ) : (
           <MdOutlineKeyboardDoubleArrowRight
-            className="absolute -right-[5px] top-5 hidden h-3 w-3 rounded-full bg-primary-850 text-primary-750 hover:cursor-pointer md:flex"
+            className="absolute -right-[5px] top-5 hidden h-3 w-3 rounded-full bg-primary-850 text-primary-650 hover:cursor-pointer dark:text-primary-750 md:flex"
             onClick={setStatus}
           />
         )}

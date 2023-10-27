@@ -35,12 +35,14 @@ export default function LoginForm() {
         className="flex w-full flex-col space-y-4"
       >
         <Input
+          noDark
           name="email"
           label="Email"
           placeholder="Digite o seu email"
           type="email"
         />
         <Input
+          noDark
           name="password"
           label="Senha"
           placeholder="Digite a sua senha"

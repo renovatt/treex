@@ -16,7 +16,9 @@ export default function Header({ title, description }: HeaderProps) {
       </Modal>
       <header className="my-5 mb-10 flex w-full items-center justify-between">
         <article className="flex flex-col items-start justify-center">
-          <h1 className="text-xl font-bold text-white md:text-2xl">{title}</h1>
+          <h1 className="text-xl font-bold text-black dark:text-white md:text-2xl">
+            {title}
+          </h1>
           <span className="text-xs text-primary-800">{description}</span>
         </article>
 
@@ -24,7 +26,7 @@ export default function Header({ title, description }: HeaderProps) {
           {title === 'Transações' ? <DatepickerComponent /> : ''}
           <section
             onClick={openModal}
-            className="mr-2 flex items-center justify-center text-primary-800 transition-all ease-in-out hover:cursor-pointer hover:text-primary-750"
+            className="mr-2 flex items-center justify-center text-primary-800 transition-all ease-in-out hover:cursor-pointer hover:text-primary-900 dark:hover:text-primary-750"
           >
             <MdOutlineAddBox className="h-6 w-6" />
             <span className="flex select-none items-center justify-center pl-2 text-xs md:text-base">

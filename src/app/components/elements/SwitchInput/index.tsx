@@ -7,7 +7,7 @@ export default function SwitchInput() {
   const transactionValue = useWatch({ control, name: 'transaction' })
   return (
     <section className="my-4 flex items-center justify-between">
-      <span className="text-white">
+      <span className="text-primary-800 dark:text-white">
         {transactionValue ? 'Saída' : 'Entrada'}
       </span>
       <Controller

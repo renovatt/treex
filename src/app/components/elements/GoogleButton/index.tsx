@@ -23,7 +23,9 @@ export default function GoogleButton() {
         className="flex items-center justify-center gap-4 rounded-full border py-3 focus-within:opacity-70 hover:cursor-pointer"
       >
         <FcGoogle className="h-5 w-5" />
-        <span className="text-xs font-bold">Login com o Google</span>
+        <span className="text-xs font-bold text-primary-800">
+          Login com o Google
+        </span>
       </button>
 
       <section className="flex items-center justify-around opacity-50">

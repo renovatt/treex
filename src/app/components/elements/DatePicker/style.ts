@@ -13,7 +13,7 @@ export const customTheme: CustomFlowbiteTheme['datepicker'] = {
         input: {
           base: 'bg-transparent text-transparent',
           withIcon: {
-            on: 'w-8 h-8 bg-transparent text-transparent hover:cursor-pointer hover:bg-secondary-950 outline-none select-none',
+            on: 'w-8 h-8 dark:bg-transparent bg-transparent text-transparent dark:text-transparent hover:cursor-pointer hover:bg-white dark:hover:bg-secondary-950 outline-none select-none',
           },
         },
       },
@@ -21,9 +21,9 @@ export const customTheme: CustomFlowbiteTheme['datepicker'] = {
   },
   popup: {
     root: {
-      inner: 'bg-secondary-950 rounded-xl p-3',
+      inner: 'dark:bg-secondary-950 bg-white rounded-xl p-3',
       inline: 'relative top-0 z-auto',
-      base: 'absolute top-16 md:top-10 rounded-xl -right-36 md:right-0 z-20 block shadow-xl shadow-primary-900',
+      base: 'absolute top-16 md:top-10 rounded-xl -right-36 md:right-0 z-20 block dark:shadow-xl shadow-sm shadow-primary-900',
     },
     header: {
       base: '',
@@ -33,9 +33,9 @@ export const customTheme: CustomFlowbiteTheme['datepicker'] = {
         base: 'flex justify-between mb-2',
         button: {
           base: 'text-sm text-primary-800 dark:text-white bg-secondary-700 dark:bg-gray-700 font-semibold py-2.5 px-5 hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none view-switch',
-          prev: 'text-white bg-secondary-950 hover:bg-secondary-700 outline-none',
-          next: 'text-white bg-secondary-950 hover:bg-secondary-700 outline-none',
-          view: 'text-white bg-secondary-950 hover:bg-secondary-700 outline-none',
+          prev: 'dark:text-white text-primary-800 dark:bg-secondary-950 bg-white outline-none',
+          next: 'dark:text-white text-primary-800 dark:bg-secondary-950 bg-white outline-none',
+          view: 'dark:text-white text-primary-800 dark:bg-secondary-950 bg-white outline-none',
         },
       },
     },
@@ -60,8 +60,8 @@ export const customTheme: CustomFlowbiteTheme['datepicker'] = {
       items: {
         base: 'grid w-64 grid-cols-7',
         item: {
-          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-white hover:text-white',
-          selected: 'bg-secondary-700 text-white hover:bg-secondary-900',
+          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-secondary-700 hover:text-white',
+          selected: 'bg-secondary-700 text-white',
           disabled: 'text-primary-800',
         },
       },
@@ -70,8 +70,8 @@ export const customTheme: CustomFlowbiteTheme['datepicker'] = {
       items: {
         base: 'grid w-64 grid-cols-7',
         item: {
-          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-white hover:text-white',
-          selected: 'bg-secondary-700 text-white hover:bg-secondary-900',
+          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-secondary-700 hover:text-white',
+          selected: 'bg-secondary-700 text-white',
           disabled: 'text-primary-800',
         },
       },
@@ -80,8 +80,8 @@ export const customTheme: CustomFlowbiteTheme['datepicker'] = {
       items: {
         base: 'grid w-64 grid-cols-4',
         item: {
-          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-white hover:text-white',
-          selected: 'bg-secondary-700 text-white hover:bg-secondary-900',
+          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-secondary-700 hover:text-white',
+          selected: 'bg-secondary-700 text-white',
           disabled: 'text-primary-800',
         },
       },
@@ -90,8 +90,8 @@ export const customTheme: CustomFlowbiteTheme['datepicker'] = {
       items: {
         base: 'grid w-64 grid-cols-4',
         item: {
-          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-white hover:text-white',
-          selected: 'bg-secondary-700 text-white hover:bg-secondary-900',
+          base: 'block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-primary-800 hover:bg-secondary-700 dark:text-white dark:hover:bg-secondary-700 hover:text-white',
+          selected: 'bg-secondary-700 text-white',
           disabled: 'text-primary-800',
         },
       },

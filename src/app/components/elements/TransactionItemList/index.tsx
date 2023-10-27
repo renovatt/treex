@@ -25,13 +25,13 @@ export default function TransactionItemList({
         transition={{ duration: 0.5 }}
         id={id}
         onClick={openModal}
-        className={`my-1 flex w-full items-center justify-between px-6 py-4 transition-all ease-in-out hover:cursor-pointer hover:opacity-80 ${
+        className={`my-1 flex w-full items-center justify-between rounded-lg px-6 py-4 transition-all ease-in-out hover:cursor-pointer hover:bg-white hover:shadow-sm dark:hover:opacity-80 ${
           type === 'income'
-            ? 'bg-income-list-gradient'
-            : 'bg-expense-list-gradient'
+            ? 'dark:bg-income-list-gradient bg-primary-650'
+            : 'dark:bg-expense-list-gradient bg-primary-650'
         }`}
       >
-        <Icon className="h-6 w-6 text-primary-800 shadow-sm" />
+        <Icon className="h-6 w-6 text-primary-800 dark:shadow-sm" />
         <span className="flex w-24 items-center justify-center text-xs capitalize text-primary-800 md:w-32 md:text-base">
           {title}
         </span>

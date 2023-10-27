@@ -6,8 +6,10 @@ import { useDateStore } from '@/store'
 import { useEffect, useState } from 'react'
 import { calculateCategoryByMonth } from '@/utils'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
+import { useTheme } from 'next-themes'
 
 export default function PolarChart({ user }: { user: UserData }) {
+  const { theme } = useTheme()
   const { date } = useDateStore()
   const { transactionData } = useGetTransactions(user)
   const [chartData, setChartData] = useState<ChartState>({
@@ -97,9 +99,35 @@ export default function PolarChart({ user }: { user: UserData }) {
   useEffect(() => {
     if (transactionData) {
       const result = calculateCategoryByMonth(transactionData, date)
-      setChartData(result)
+      const polarClass = theme === 'dark' ? '#baf5ed' : '#14121f'
+
+      const updatedOptions = {
+        fill: {
+          type: 'gradient',
+          colors: [polarClass],
+        },
+        tooltip: {
+          theme: theme === 'dark' ? 'dark' : 'light',
+        },
+        stroke: {
+          colors: theme === 'dark' ? ['#30dec7'] : ['#fff'],
+        },
+        theme: {
+          monochrome: {
+            color: theme === 'dark' ? '#30dec7' : '#8b8791',
+            colors: theme === 'dark' ? ['#30dec7'] : ['#8b8791'],
+            shadeIntensity: 0.6,
+          },
+        },
+      }
+
+      setChartData((prevChartData) => ({
+        ...prevChartData,
+        options: updatedOptions,
+        series: result.series,
+      }))
     }
-  }, [transactionData, date])
+  }, [transactionData, date, theme])
 
   return (
     <section className="mb-2 flex w-full items-center justify-center xl:m-0 xl:h-full">

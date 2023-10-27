@@ -8,7 +8,7 @@ export default function SidebarContainer({ children }: SidebarContainerProps) {
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="container relative flex h-screen overflow-hidden rounded-xl border border-primary-850 bg-primary-900 shadow-xl"
+        className="container relative flex h-screen overflow-hidden border border-primary-850 bg-primary-650 shadow-xl dark:bg-primary-900 2xl:rounded-xl"
       >
         {children}
       </motion.section>

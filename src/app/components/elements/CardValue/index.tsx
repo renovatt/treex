@@ -14,8 +14,10 @@ export default function CardValue({
   return (
     <section
       className={`${
-        side === 'left' ? 'bg-left-card-gradient' : 'bg-right-card-gradient'
-      } flex h-32 w-32 flex-col items-start justify-center gap-3 rounded-3xl px-5 md:h-36 md:w-36`}
+        side === 'left'
+          ? 'dark:bg-left-card-gradient bg-white'
+          : 'dark:bg-right-card-gradient bg-white'
+      } flex h-32 w-32 flex-col items-start justify-center gap-3 rounded-3xl px-5 shadow-lg md:h-36 md:w-36`}
     >
       <div className="flex w-full items-center justify-between gap-2">
         <Icon className="h-8 w-8 text-primary-800" />
@@ -35,7 +37,7 @@ export default function CardValue({
       <span
         className={`${
           isOpen
-            ? 'text-white '
+            ? 'text-black dark:text-white'
             : 'rounded-lg bg-primary-800 text-transparent opacity-10'
         } w-full text-xs font-bold md:text-base`}
       >

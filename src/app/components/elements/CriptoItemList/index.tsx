@@ -12,7 +12,7 @@ export default function CriptoItemList({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-list-gradient flex w-full items-center justify-between rounded-lg p-2 py-4 text-white"
+      className="dark:bg-list-gradient flex w-full items-center justify-between rounded-lg bg-white p-2 py-4 shadow-sm dark:text-white"
     >
       <span className="flex items-center justify-center gap-2 text-primary-800">
         {name}

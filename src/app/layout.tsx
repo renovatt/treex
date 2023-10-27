@@ -1,5 +1,6 @@
 import 'swiper/css'
 import './globals.css'
+import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
@@ -16,11 +17,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const NextThemeProvider = dynamic(
+    () => import('@modules/Providers/ThemeProvider'),
+    { ssr: false },
+  )
   return (
     <html lang="pt-br">
       <body className={inter.className}>
         <Toaster />
-        {children}
+        <NextThemeProvider>{children}</NextThemeProvider>
       </body>
     </html>
   )

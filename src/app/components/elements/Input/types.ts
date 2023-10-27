@@ -5,4 +5,5 @@ export type InputProps = ComponentProps<'input'> & {
   placeholder: string
   type: string
   name: string
+  noDark?: boolean
 }

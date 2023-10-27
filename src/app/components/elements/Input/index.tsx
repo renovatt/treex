@@ -7,6 +7,7 @@ export default function Input({
   placeholder,
   type,
   name,
+  noDark,
   ...rest
 }: InputProps) {
   const { control } = useFormContext()
@@ -30,7 +31,11 @@ export default function Input({
               id={label}
               type={type}
               placeholder={placeholder}
-              className="focus:primary-750 dark:focus:primary-750 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none transition-all ease-in-out focus:border-primary-750 dark:border-gray-600 dark:bg-primary-900 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-750"
+              className={`focus:primary-750 dark:focus:primary-750 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm outline-none transition-all ease-in-out focus:border-primary-750 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:border-primary-750 ${
+                noDark
+                  ? 'text-primary-800'
+                  : 'text-primary-800 dark:bg-primary-900 dark:text-white'
+              }`}
             />
             <ErrorMessage field={name} />
           </>

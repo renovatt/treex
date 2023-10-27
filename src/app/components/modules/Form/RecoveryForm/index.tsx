@@ -31,6 +31,7 @@ export default function RecoveryForm() {
         className="flex w-full flex-col space-y-4"
       >
         <Input
+          noDark
           name="email"
           label="Email"
           placeholder="Informe o seu email"

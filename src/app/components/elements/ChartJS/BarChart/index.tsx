@@ -1,11 +1,13 @@
 'use client'
 import Chart from 'react-apexcharts'
 import { UserData } from '@/lib/types'
+import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { calculateRevenueByMonth } from '@/utils'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 
 export default function BarChart({ user }: { user: UserData }) {
+  const { theme } = useTheme()
   const { transactionData } = useGetTransactions(user)
   const [chartData, setChartData] = useState({
     options: {
@@ -47,20 +49,20 @@ export default function BarChart({ user }: { user: UserData }) {
           opacityFrom: 1,
           opacityTo: 1,
           stops: [0, 50, 75, 100],
-          colorStops: [
-            [
-              {
-                offset: 0,
-                color: 'rgba(35,35,45,0.6908263305322129)',
-                opacity: 0.66,
-              },
-              {
-                offset: 50,
-                color: 'rgba(186,245,237,1)',
-                opacity: 0.46,
-              },
-            ],
-          ],
+          // colorStops: [
+          //   [
+          //     {
+          //       offset: 0,
+          //       color: 'rgba(35,35,45,0.6908263305322129)',
+          //       opacity: 0.66,
+          //     },
+          //     {
+          //       offset: 50,
+          //       color: 'rgba(186,245,237,1)',
+          //       opacity: 0.46,
+          //     },
+          //   ],
+          // ],
         },
       },
       xaxis: {
@@ -80,13 +82,18 @@ export default function BarChart({ user }: { user: UserData }) {
       const revenueByMonth = calculateRevenueByMonth(transactionData)
       const monthNames = revenueByMonth.map((item) => item.month)
       const revenueValues = revenueByMonth.map((item) => item.revenue)
+      const barClass = theme === 'dark' ? '#baf5ed' : '#14121f'
 
       setChartData((prevChartData) => ({
         ...prevChartData,
         options: {
           ...prevChartData.options,
+          colors: [barClass],
           xaxis: {
             categories: monthNames,
+          },
+          tooltip: {
+            theme: theme === 'dark' ? 'dark' : 'light',
           },
         },
         series: [
@@ -97,7 +104,7 @@ export default function BarChart({ user }: { user: UserData }) {
         ],
       }))
     }
-  }, [transactionData])
+  }, [theme, transactionData])
 
   return (
     <section className="my-5 flex w-full items-center justify-center">

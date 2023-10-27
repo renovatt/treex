@@ -22,14 +22,14 @@ export default function PreviewPriorityCard() {
       >
         <PriorityForm />
       </Modal>
-      <article className="bg-right-card-gradient flex h-[24.5rem] w-full flex-col items-center justify-start gap-4 rounded-3xl p-4 xl:w-1/2">
+      <article className="dark:bg-right-card-gradient flex h-[24.5rem] w-full flex-col items-center justify-start gap-4 rounded-3xl bg-white p-4 xl:w-1/2">
         <section className="flex w-full items-center justify-between">
-          <h1 className="w-36 self-start text-xs text-white xl:w-full xl:text-base">
+          <h1 className="w-36 self-start text-xs text-primary-800 dark:text-white xl:w-full xl:text-base">
             Lista de prioridades
           </h1>
           <section
             onClick={openModal}
-            className="mr-2 flex items-center justify-start text-primary-800 transition-all ease-in-out hover:cursor-pointer hover:text-primary-750"
+            className="mr-2 flex items-center justify-start text-primary-800 transition-all ease-in-out hover:cursor-pointer hover:text-primary-900 dark:hover:text-primary-750"
           >
             <MdOutlineAddBox className="h-6 w-6" />
             <span className="flex select-none items-center justify-center pl-2 text-xs md:text-base">

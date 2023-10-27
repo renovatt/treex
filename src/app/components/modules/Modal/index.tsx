@@ -11,7 +11,7 @@ export default function Modal({
 }: ModalFormProps) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-20" onClose={closeModal}>
+      <Dialog as="div" className="relative z-50" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -35,10 +35,10 @@ export default function Modal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-primary-900 p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-primary-900">
                 <CgCloseR
                   onClick={closeModal}
-                  className="absolute right-5 top-5 h-7 w-7 text-primary-800 hover:cursor-pointer hover:text-primary-750"
+                  className="absolute right-5 top-5 h-7 w-7 text-primary-800 hover:cursor-pointer hover:text-primary-900 dark:hover:text-primary-750"
                 />
                 <Dialog.Title
                   as="h3"
