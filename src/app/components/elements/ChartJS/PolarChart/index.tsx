@@ -1,12 +1,13 @@
 'use client'
 import Chart from 'react-apexcharts'
+import { useTheme } from 'next-themes'
 import { ChartState } from './types'
 import { UserData } from '@/lib/types'
+import { categories } from '@/app/mocks'
 import { useDateStore } from '@/store'
 import { useEffect, useState } from 'react'
 import { calculateCategoryByMonth } from '@/utils'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
-import { useTheme } from 'next-themes'
 
 export default function PolarChart({ user }: { user: UserData }) {
   const { theme } = useTheme()
@@ -38,15 +39,7 @@ export default function PolarChart({ user }: { user: UserData }) {
         type: 'gradient',
         colors: ['#baf5ed'],
       },
-      labels: [
-        'Estudos',
-        'Farmácia',
-        'Alimentação',
-        'Combustível',
-        'Pagamentos',
-        'Salário',
-        'Lazer',
-      ],
+      labels: categories,
       responsive: [
         {
           breakpoint: 1280,
@@ -119,6 +112,7 @@ export default function PolarChart({ user }: { user: UserData }) {
             shadeIntensity: 0.6,
           },
         },
+        labels: result.options.labels,
       }
 
       setChartData((prevChartData) => ({
