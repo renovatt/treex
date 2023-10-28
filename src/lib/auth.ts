@@ -5,10 +5,8 @@ import {
 } from '@/schemas/auth'
 import {
   signOut,
-  setPersistence,
   signInWithPopup,
   sendPasswordResetEmail,
-  browserSessionPersistence,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from 'firebase/auth'
@@ -22,7 +20,6 @@ export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider)
     const user = result.user
-    // await setPersistence(auth, browserSessionPersistence)
 
     let accessToken = ''
 
@@ -97,7 +94,6 @@ export const signInWithCredential = async (data: LoginFormProps) => {
   try {
     const { email, password } = data
     const { user } = await signInWithEmailAndPassword(auth, email, password)
-    // await setPersistence(auth, browserSessionPersistence)
 
     let accessToken = ''
 
