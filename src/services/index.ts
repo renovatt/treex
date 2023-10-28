@@ -18,9 +18,12 @@ export interface ErrorMessageResponse extends Error {
 //   return candles
 // }
 
+const BINANCE_URL_API =
+  'https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&limit=60'
+
 export const getCandles = async () => {
   try {
-    const response = await axios.get('/api/websocket')
+    const response = await axios.get(BINANCE_URL_API)
 
     if (response) {
       const candles: CandleTypeProps[] = response.data.map((k: KlineData) => {
