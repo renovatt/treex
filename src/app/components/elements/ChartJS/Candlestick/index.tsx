@@ -1,12 +1,14 @@
 'use client'
 import createCandle from '@/utils'
 import Chart from 'react-apexcharts'
+import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { useGetCandles } from '@/hooks/useGetCandles'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { CandleTypeProps, ChartState, LastJsonMessage } from './types'
 
 export default function Candlestick() {
+  const { theme } = useTheme()
   const { data, isError, isLoading } = useGetCandles()
   const [candles, setCandles] = useState<CandleTypeProps[]>([])
   const [chartData, setChartData] = useState<ChartState>({
@@ -83,6 +85,9 @@ export default function Candlestick() {
           dataLabels: {
             enabled: false,
           },
+          tooltip: {
+            theme: theme === 'dark' ? 'dark' : 'light',
+          },
         },
         series: [
           {
@@ -92,7 +97,7 @@ export default function Candlestick() {
       })
     }
     setCandles(data as CandleTypeProps[])
-  }, [candles, data, isError, isLoading])
+  }, [candles, data, isError, isLoading, theme])
 
   if (isError)
     return (
