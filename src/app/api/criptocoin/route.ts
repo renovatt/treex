@@ -5,7 +5,7 @@ const URL_API =
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 const KEY_API = process.env.NEXT_PUBLIC_KEY
 
-export const runtime = 'edge'
+export const dynamic = 'force-dynamic'
 export async function GET() {
   try {
     const response = await axios.get(URL_API, {
@@ -18,7 +18,6 @@ export async function GET() {
         'X-CMC_PRO_API_KEY': KEY_API,
       },
     })
-    // console.log(response.data.data)
     return NextResponse.json(response.data.data)
   } catch (error) {
     return NextResponse.error()
