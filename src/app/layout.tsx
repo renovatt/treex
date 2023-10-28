@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: 'website',
-    url: 'https://portfolio-renovatt.vercel.app/',
+    url: 'https://treex-renovatt.vercel.app/',
     title: APP_NAME,
     description: APP_DESCRIPTION,
     siteName: APP_NAME,
