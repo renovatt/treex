@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align='center'>
+<img src="./public/icon-512x512.png" width="50px"></h1>
+<br/> <br/>
+<h1>Treex</h1> 
+</div>
 
-## Getting Started
+## Descrição
 
-First, run the development server:
+### "Estou empolgado em apresentar a evolução do meu primeiro projeto solo em React.js, agora construído em [Next.js 13.5](https://nextjs.org/docs). Apresento o [Treex](https://treex.vercel.app/), um sistema financeiro inovador que permite que você gerencie suas despesas e ganhos. Com o [Treex](https://treex.vercel.app/), você terá uma visão abrangente de suas finanças, incluindo um gráfico de faturamento dos últimos 7 meses, juntamente com a capacidade de filtrar despesas por categoria e visualizar seus ganhos mensais ou diários.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Além disso, o [Treex](https://treex.vercel.app/) oferece informações atualizadas sobre as ``50 criptomoedas em alta`` e o valor do ``dólar atual``. Estamos integrando a ``API da Binance`` para fornecer dados em tempo real do ``Bitcoin`` via ``WebSockets``, mantendo você sempre atualizado com as últimas informações do mercado.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### O [Treex](https://treex.vercel.app/) também inclui uma seção de anotações para que você possa planejar suas despesas futuras e manter uma lista de prioridades financeiras em ordem. Para garantir segurança e facilidade de uso, estamos utilizando o ``Firebase`` como ``banco de dados`` e ``autenticação``, mantendo a mesma abordagem confiável do nosso projeto anterior.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Além das melhorias funcionais, o [Treex](https://treex.vercel.app/) também recebeu uma atualização de design, oferecendo aos usuários um tema atraente com modos claro e escuro. Estou entusiasmado em compartilhar essa jornada de evolução e aprimoramento, e espero que o [Treex](https://treex.vercel.app/) seja uma ferramenta valiosa para você no gerenciamento de suas finanças."
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[Ver Projeto](https://treex.vercel.app/)
 
-## Learn More
+#
 
-To learn more about Next.js, take a look at the following resources:
+## Layout mobile
+![Mobile 1](./public/mobile-1.png)
+![Mobile 2](./public/mobile-2.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Layout web
+![Web 1](./public/web-1.png) 
+![Web 2](./public/web-2.png)
+![Web 3](./public/web-3.png)
+![Web 4](./public/web-4.png)
+![Web 5](./public/web-5.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<br>
 
-## Deploy on Vercel
+## 🛠️ Tecnologias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+💻 **Front-end**
+- [Next.js 13.5.4](https://nextjs.org)
+- [Typescript](https://www.typescriptlang.org)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+📚 **Bibliotecas**
+- [zustand](https://zustand-demo.pmnd.rs/)
+- [zod](https://zod.dev/)
+- [react-query](https://tanstack.com/query/latest/docs/react/overview)
+- [nookies](https://www.npmjs.com/package/nookies)
+- [next-pwa](https://www.npmjs.com/package/next-pwa)
+- [apexcharts](https://apexcharts.com/)
+- [react-hook-form](https://react-hook-form.com/)
+- [react-hot-toast](https://react-hot-toast.com/)
+- [react-icons](https://react-icons.github.io/react-icons/)
+- [uuid-v4](https://www.npmjs.com/package/uuid)
+- [axios](https://axios-http.com/ptbr/docs/intro)
+
+🔌 **APIs**
+- [awesomeapi](https://docs.awesomeapi.com.br/)
+- [coinmarketcap](https://coinmarketcap.com/pt-br/)
+- [binance](https://binance-docs.github.io/apidocs/spot/en/#old-trade-lookup)
+
+🎨 **Estilização**
+- [tailwindcss](https://tailwindcss.com/docs/installation)
+- [frame-motion](https://www.framer.com/motion/)
+- [swiper](https://swiperjs.com/demos)
+- [flowbite](https://flowbite.com/)
+- [next-themes](https://www.npmjs.com/package/next-themes)
+
+📁 **Back-end**
+- [firebase](https://firebase.google.com/?hl=pt)
+
+🔋 **Versionamento e Deploy**
+- [Git](https://git-scm.com)
+- [Vercel](https://vercel.com/)
+
+<br>
+
+⚙️ **Configuranções e Instalações**
+
+Clone do Projeto
+
+    $ git clone https://github.com/renovatt/treex.git
+
+Instalando as dependências
+
+    $ npm install
+
+Iniciando o projeto
+
+    $ npm run dev
+
+<br>
+
+**Como contribuir?**
+
+- Você pode dar suporte me seguindo aqui no GitHub
+- Dando uma estrela no projeto
+- Criar uma conexão comigo no linkedin fazendo parte da minha networking e curtir o meu projeto.
+
+<br>
+
+**Autor**
+[Wildemberg Renovato de Lima](https://www.linkedin.com/in/renovatt/)
