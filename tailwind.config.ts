@@ -21,6 +21,7 @@ const config: Config = {
           800: '#787878',
           750: '#baf5ed',
           650: '#f5f5fd ',
+          640: '#c5c4c8 ',
           550: '#34d399cb ',
         },
         secondary: {

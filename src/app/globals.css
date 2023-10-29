@@ -115,18 +115,18 @@ body {
       rgba(44,66,61,1) 25%, 
       rgba(37,43,77,1) 66%, 
       rgba(23,23,33,1) 98%
-    );
+    );    
   }
-
+  
   .bg-expense-list-gradient{
     background: linear-gradient(
       275deg, 
       rgba(23,23,33,1) 3%, 
-      rgba(77,37,37,1) 25%, 
+      rgba(239,64,60,0.4) 25%, 
       rgba(37,43,77,1) 66%, 
       rgba(23,23,33,1) 98%
-    );
-  }
+    );    
+  }  
 
   .bg-light-income-list-gradient{
     background: linear-gradient(
@@ -136,11 +136,6 @@ body {
       rgba(37,43,77,1) 66%, 
       rgba(23,23,33,1) 98%
     );
-  }
-
-  .bg-light-expense-list-gradient{
-    background: linear-gradient(
-      275deg, rgba(140,38,38,0.8140756302521008) 0%, rgba(66,65,65,0.8112745098039216) 100%);
   }
 
   .bg-btn-gradient{

@@ -18,7 +18,7 @@ export default function PreviewMonthyCard() {
       <Modal isOpen={isOpen} label="Adicionar gasto" closeModal={closeModal}>
         <MonthlyForm />
       </Modal>
-      <article className="dark:bg-left-card-gradient flex h-[24.5rem] w-full flex-col items-center justify-start gap-4 rounded-3xl bg-white p-4 xl:w-1/2">
+      <article className="dark:bg-left-card-gradient my-2 flex h-[24.5rem] w-full flex-col items-center justify-start gap-4 rounded-3xl bg-white p-4 shadow-md dark:shadow-none xl:w-1/2">
         <section className="flex w-full items-center justify-between">
           <h1 className="self-start text-xs text-primary-800 dark:text-white xl:w-full xl:text-base">
             Previsão de gastos do mês
