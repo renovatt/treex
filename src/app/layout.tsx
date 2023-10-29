@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 const APP_NAME = 'TreeX'
 const APP_DESCRIPTION =
-  'Bem-vindo ao TreeX - Seu sistema financeiro gratuito. Tenha mais controle sobre suas finanças com o TreeX.'
+  'Bem-vindo ao TreeX - Sua ferramenta financeira gratuita. Capacite-se para um maior controle sobre suas finanças com o TreeX.'
 
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
@@ -19,12 +19,29 @@ export const metadata: Metadata = {
   generator: 'Next.js',
   manifest: '/manifest.json',
   keywords: [
-    'treex',
-    'sistema financeiro gratuito',
-    'sistema financeiro',
-    'fincanças',
-    'Wildemberg Renovato',
-    'controe de finanças',
+    'Treex',
+    'Sistema Financeiro',
+    'Next.js',
+    'Gráficos Financeiros',
+    'Filtros por Categoria',
+    'Ganho Mensal',
+    'Ganho Diário',
+    'Criptomoedas',
+    'Valor do Dólar',
+    'Bitcoin',
+    'API da Binance',
+    'Anotações Financeiras',
+    'Lista de Prioridades',
+    'Segurança',
+    'Firebase',
+    'Autenticação',
+    'Controle Financeiro',
+    'Ferramenta Financeira',
+    'Planejamento Financeiro',
+    'Finanças Pessoais',
+    'Dados em Tempo Real',
+    'Jornada Financeira',
+    'renovatt',
   ],
   themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#fff' }],
   authors: [
