@@ -12,8 +12,6 @@ export default function SwiperThumb() {
     '/mobile-2.png',
     '/laptop-3.png',
     '/laptop-4.png',
-    '/mobile-3.png',
-    '/mobile-4.png',
   ]
   return (
     <Fragment>
