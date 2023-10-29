@@ -25,14 +25,14 @@ export default function PriorityItemList({
         onClick={openModal}
         className="horver:bg-white my-1 flex w-full items-center justify-between rounded-xl bg-primary-650 px-6 py-4 shadow-md transition-all ease-in-out hover:cursor-pointer hover:opacity-80 dark:bg-primary-900 dark:shadow-none"
       >
-        <span className="dark:text-primary-640 flex items-center justify-center text-xs capitalize text-primary-800 md:text-base">
+        <span className="flex items-center justify-center text-xs capitalize text-primary-800 dark:text-primary-640 md:text-base">
           {title}
         </span>
 
         {level === 'Importante' ? (
           <>
             <div className="flex items-center justify-center gap-4">
-              <span className="dark:text-primary-640 hidden text-xs text-primary-800 md:flex">
+              <span className="hidden text-xs text-primary-800 dark:text-primary-640 md:flex">
                 Importante
               </span>
               <GiBoltShield className="h-6 w-6 text-secondary-800 shadow-sm" />
@@ -41,7 +41,7 @@ export default function PriorityItemList({
         ) : level === 'Menos importante' ? (
           <>
             <div className="flex items-center justify-center gap-4">
-              <span className="dark:text-primary-640 hidden text-xs text-primary-800 md:flex">
+              <span className="hidden text-xs text-primary-800 dark:text-primary-640 md:flex">
                 Menos importante
               </span>
               <GiEdgedShield className="h-6 w-6 text-secondary-900 shadow-sm" />
@@ -50,7 +50,7 @@ export default function PriorityItemList({
         ) : (
           <>
             <div className="flex items-center justify-center gap-4">
-              <span className="dark:text-primary-640 hidden text-xs text-primary-800 md:flex">
+              <span className="hidden text-xs text-primary-800 dark:text-primary-640 md:flex">
                 Muito importante
               </span>
               <GiBorderedShield className="h-6 w-6 text-secondary-750 shadow-sm" />

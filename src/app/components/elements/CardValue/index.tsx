@@ -20,20 +20,20 @@ export default function CardValue({
       } flex h-32 w-32 flex-col items-start justify-center gap-3 rounded-3xl px-5 shadow-lg md:h-36 md:w-36`}
     >
       <div className="flex w-full items-center justify-between gap-2">
-        <Icon className="dark:text-primary-640 h-8 w-8 text-primary-800" />
+        <Icon className="h-8 w-8 text-primary-800 dark:text-primary-640" />
         {isOpen ? (
           <IoEyeSharp
             onClick={toggleModal}
-            className="dark:text-primary-640 h-5 w-5 text-primary-800 hover:cursor-pointer"
+            className="h-5 w-5 text-primary-800 hover:cursor-pointer dark:text-primary-640"
           />
         ) : (
           <PiEyeSlash
             onClick={toggleModal}
-            className="dark:text-primary-640 h-5 w-5 text-primary-800 hover:cursor-pointer"
+            className="h-5 w-5 text-primary-800 hover:cursor-pointer dark:text-primary-640"
           />
         )}
       </div>
-      <h1 className="dark:text-primary-640 text-xs text-primary-800 md:text-base">
+      <h1 className="text-xs text-primary-800 dark:text-primary-640 md:text-base">
         {description}
       </h1>
       <span

@@ -24,10 +24,10 @@ export default function MothlyItemList({
         onClick={openModal}
         className="horver:bg-white my-1 flex w-full items-center justify-between rounded-xl bg-primary-650 px-6 py-4 shadow-md transition-all ease-in-out hover:cursor-pointer hover:opacity-80 dark:bg-primary-900 dark:shadow-none"
       >
-        <span className="dark:text-primary-640 flex items-center justify-center text-xs capitalize text-primary-800 md:text-base">
+        <span className="flex items-center justify-center text-xs capitalize text-primary-800 dark:text-primary-640 md:text-base">
           {title}
         </span>
-        <span className="dark:text-primary-640 flex h-6 w-20 items-center justify-center text-xs text-primary-800 md:w-24 md:text-base">
+        <span className="flex h-6 w-20 items-center justify-center text-xs text-primary-800 dark:text-primary-640 md:w-24 md:text-base">
           {value}
         </span>
       </motion.li>

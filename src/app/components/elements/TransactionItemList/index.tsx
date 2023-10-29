@@ -31,14 +31,14 @@ export default function TransactionItemList({
             : 'dark:bg-expense-list-gradient bg-primary-650'
         }`}
       >
-        <Icon className="dark:text-primary-640 h-6 w-6 text-primary-800 dark:shadow-sm" />
-        <span className="dark:text-primary-640 flex w-auto items-center justify-center text-xs capitalize text-primary-800 md:w-60 md:text-base">
+        <Icon className="h-6 w-6 text-primary-800 dark:text-primary-640 dark:shadow-sm" />
+        <span className="flex w-auto items-center justify-center text-xs capitalize text-primary-800 dark:text-primary-640 md:w-60 md:text-base">
           {title}
         </span>
-        <span className="dark:text-primary-640 hidden w-24 items-center justify-center text-xs text-primary-800 md:flex md:text-base">
+        <span className="hidden w-24 items-center justify-center text-xs text-primary-800 dark:text-primary-640 md:flex md:text-base">
           {date}
         </span>
-        <span className="dark:text-primary-640 flex w-auto items-center justify-center text-xs text-primary-800 md:w-60 md:text-base">
+        <span className="flex w-auto items-center justify-center text-xs text-primary-800 dark:text-primary-640 md:w-60 md:text-base">
           {value}
         </span>
       </motion.li>

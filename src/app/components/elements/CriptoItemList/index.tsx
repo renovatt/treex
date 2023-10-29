@@ -14,13 +14,13 @@ export default function CriptoItemList({
       transition={{ duration: 0.5 }}
       className="dark:bg-list-gradient flex w-full items-center justify-between rounded-lg bg-white p-2 py-4 shadow-sm dark:text-white"
     >
-      <span className="dark:text-primary-640 flex items-center justify-center gap-2 text-primary-800">
+      <span className="flex items-center justify-center gap-2 text-primary-800 dark:text-primary-640">
         {name}
-        <span className="dark:text-primary-640 text-primary-800 opacity-50">
+        <span className="text-primary-800 opacity-50 dark:text-primary-640">
           ({symbol})
         </span>
       </span>
-      <span className="dark:text-primary-640 text-primary-800">
+      <span className="text-primary-800 dark:text-primary-640">
         {currentPrice}
       </span>
     </motion.li>
