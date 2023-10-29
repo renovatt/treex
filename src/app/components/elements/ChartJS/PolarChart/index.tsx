@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts'
 import { useTheme } from 'next-themes'
 import { ChartState } from './types'
 import { UserData } from '@/lib/types'
-import { categories } from '@/app/mocks'
+import { categories } from '@/mocks'
 import { useDateStore } from '@/store'
 import { useEffect, useState } from 'react'
 import { calculateCategoryByMonth } from '@/utils'
@@ -22,12 +22,22 @@ export default function PolarChart({ user }: { user: UserData }) {
         position: 'bottom',
       },
       colors: [
-        'rgb(255, 99, 132)',
-        'rgb(75, 192, 192)',
-        'rgb(255, 205, 86)',
-        'rgb(201, 203, 207)',
-        'rgb(54, 162, 235)',
-        'rgb(78, 150, 73)',
+        'rgb(123, 153, 184)', // Salário - Azul Suave
+        'rgb(190, 127, 86)', // Educação - Laranja Suave
+        'rgb(162, 99, 96)', // Despesas Diversas - Vermelho Suave
+        'rgb(190, 123, 91)', // Farmácia - Laranja Suave
+        'rgb(119, 119, 143)', // Alimentação - Azul Suave
+        'rgb(108, 142, 108)', // Combustível - Verde Suave
+        'rgb(122, 122, 160)', // Transporte - Azul Suave
+        'rgb(162, 162, 166)', // Pagamentos - Cinza Claro Suave
+        'rgb(127, 156, 122)', // Lazer - Verde Suave
+        'rgb(139, 114, 130)', // Saúde - Roxo Suave
+        'rgb(142, 142, 172)', // Higiene - Azul Claro Suave
+        'rgb(72, 72, 72)', // Vestuário - Cinza Escuro
+        'rgb(100, 150, 194)', // Veículo - Azul Suave
+        'rgb(100, 100, 119)', // Moradia - Cinza Suave
+        'rgb(108, 178, 108)', // Animais de Estimação - Verde Suave
+        'rgb(190, 127, 102)', // Economias/Investimentos - Laranja Suave
       ],
       dataLabels: {
         enabled: false,
@@ -36,8 +46,8 @@ export default function PolarChart({ user }: { user: UserData }) {
         },
       },
       fill: {
-        type: 'gradient',
-        colors: ['#baf5ed'],
+        // type: 'gradient',
+        // colors: ['#baf5ed'],
       },
       labels: categories,
       responsive: [
@@ -76,16 +86,16 @@ export default function PolarChart({ user }: { user: UserData }) {
         show: false,
       },
       stroke: {
-        width: 1,
+        width: 0,
         colors: undefined,
       },
-      theme: {
-        monochrome: {
-          enabled: true,
-          color: '#30dec7',
-          shadeIntensity: 0.6,
-        },
-      },
+      // theme: {
+      //   monochrome: {
+      //     enabled: true,
+      //     color: '#30dec7',
+      //     shadeIntensity: 0.6,
+      //   },
+      // },
     },
     series: [955, 634, 541, 800, 645, 510, 340],
   })
@@ -93,32 +103,34 @@ export default function PolarChart({ user }: { user: UserData }) {
   useEffect(() => {
     if (transactionData) {
       const result = calculateCategoryByMonth(transactionData, date)
-      const polarClass = theme === 'dark' ? '#baf5ed' : '#14121f'
+      // const polarClass = theme === 'dark' ? '#baf5ed' : '#14121f'
 
-      const updatedOptions = {
-        fill: {
-          type: 'gradient',
-          colors: [polarClass],
-        },
-        tooltip: {
-          theme: theme === 'dark' ? 'dark' : 'light',
-        },
-        stroke: {
-          colors: theme === 'dark' ? ['#30dec7'] : ['#fff'],
-        },
-        theme: {
-          monochrome: {
-            color: theme === 'dark' ? '#30dec7' : '#8b8791',
-            colors: theme === 'dark' ? ['#30dec7'] : ['#8b8791'],
-            shadeIntensity: 0.6,
-          },
-        },
-        labels: result.options.labels,
-      }
+      // const updatedOptions = {
+      // fill: {
+      //   type: 'gradient',
+      //   colors: [polarClass],
+      // },
+      // tooltip: {
+      //   theme: theme === 'dark' ? 'dark' : 'light',
+      // },
+      // stroke: {
+      // colors: theme === 'dark' ? ['#30dec7'] : ['#fff'],
+      // },
+      // theme: {
+      //   monochrome: {
+      //     color: theme === 'dark' ? '#30dec7' : '#8b8791',
+      //     colors: theme === 'dark' ? ['#30dec7'] : ['#8b8791'],
+      //     shadeIntensity: 0.6,
+      //   },
+      // },
+      // labels: result.options.labels,
+      // }
 
       setChartData((prevChartData) => ({
         ...prevChartData,
-        options: updatedOptions,
+        options: {
+          labels: result.options.labels,
+        },
         series: result.series,
       }))
     }

@@ -95,6 +95,20 @@ export default function BarChart({ user }: { user: UserData }) {
           tooltip: {
             theme: theme === 'dark' ? 'dark' : 'light',
           },
+          fill: {
+            colors: undefined,
+            opacity: 0.6,
+            type: theme === 'dark' ? 'gradient' : '',
+            gradient: {
+              type: 'vertical',
+              shadeIntensity: 0.5,
+              gradientToColors: undefined,
+              inverseColors: true,
+              opacityFrom: 1,
+              opacityTo: 1,
+              stops: [0, 50, 75, 100],
+            },
+          },
         },
         series: [
           {

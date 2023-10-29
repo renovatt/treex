@@ -1,7 +1,7 @@
 import 'swiper/css'
 import './globals.css'
 import dynamic from 'next/dynamic'
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 
@@ -12,6 +12,7 @@ const APP_DESCRIPTION =
   'Bem-vindo ao TreeX - Seu sistema financeiro gratuito. Tenha mais controle sobre suas finanças com o TreeX.'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: APP_NAME,
   applicationName: APP_NAME,
   description: APP_DESCRIPTION,

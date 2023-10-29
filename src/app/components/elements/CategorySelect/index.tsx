@@ -1,6 +1,6 @@
 'use client'
 import { Fragment } from 'react'
-import { categories } from '@/app/mocks'
+import { categories } from '@/mocks'
 import { ErrorMessage } from '../ErrorMessage'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { HiMiniChevronUpDown } from 'react-icons/hi2'

@@ -7,7 +7,7 @@ export default function ViewContainer({ children }: ViewContainerProps) {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex w-full flex-col items-center justify-start overflow-y-auto pb-20 md:items-start md:p-0"
+      className="flex w-full flex-col items-center justify-start overflow-hidden overflow-y-auto pb-20 md:items-start md:p-0"
     >
       {children}
     </motion.section>
