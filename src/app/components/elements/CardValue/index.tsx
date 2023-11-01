@@ -17,7 +17,7 @@ export default function CardValue({
         side === 'left'
           ? 'dark:bg-left-card-gradient bg-white'
           : 'dark:bg-right-card-gradient bg-white'
-      } flex h-32 w-32 flex-col items-start justify-center gap-3 rounded-3xl px-5 shadow-lg md:h-36 md:w-36`}
+      } flex h-32 w-32 flex-col items-start justify-center gap-3 overflow-hidden rounded-3xl px-5 shadow-lg md:h-36 md:w-36`}
     >
       <div className="flex w-full items-center justify-between gap-2">
         <Icon className="h-8 w-8 text-primary-800 dark:text-primary-640" />

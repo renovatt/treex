@@ -13,17 +13,17 @@ export default function WalletCardDolar({ user }: { user: UserData }) {
   const handleWalletToDolar = (walletValue: number) => {
     const rate = dolar?.data.USDBRL.bid
     const converted = walletValue / Number(rate)
-    return shortNumber(converted)
+    return converted
   }
 
-  const dolarResult = handleWalletToDolar(Allresult.total)
-
+  const dolarResult = handleWalletToDolar(Allresult.total).toFixed(2)
+  const shortConvertedNumber = shortNumber(Number(dolarResult))
   return (
     <CardValue
       description="Dolar saldo"
       icon={RiMoneyDollarCircleLine}
       side="left"
-      value={`$ ${dolarResult}`}
+      value={`$${shortConvertedNumber}`}
     />
   )
 }
