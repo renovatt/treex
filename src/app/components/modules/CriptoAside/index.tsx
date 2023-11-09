@@ -55,9 +55,9 @@ export default function CriptoAside() {
             description="Dolar hoje"
             icon={LiaMoneyBillWaveSolid}
             side="right"
-            value={Number(dolar?.data.USDBRL.high).toLocaleString('en-US', {
+            value={Number(dolar?.data.USDBRL.high).toLocaleString('pt-BR', {
               style: 'currency',
-              currency: 'USD',
+              currency: 'BRL',
             })}
           />
         </section>
