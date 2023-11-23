@@ -147,7 +147,7 @@ export const handleMostSpentCategory = (
     const transactionDate = new Date(transaction.date ?? '')
 
     if (
-      category !== 'Salário' &&
+      category !== 'Bônus/Entrada/Salário' &&
       (!currentMonthOnly ||
         (transactionDate.getMonth() === currentMonth &&
           transactionDate.getFullYear() === currentYear))
@@ -203,7 +203,7 @@ export const handleMostSpentCategoryByMonth = (
     const transactionDate = new Date(transaction.date || '')
 
     if (
-      category !== 'Salário' &&
+      category !== 'Bônus/Entrada/Salário' &&
       transactionDate.getMonth() === currentMonth &&
       transactionDate.getFullYear() === currentYear
     ) {
@@ -237,13 +237,33 @@ export const monthlyExpensesCalculator = (data: MonthyPreviewFormProps[]) => {
   return total
 }
 
+// export const shortNumber = (numero: number) => {
+//   if (numero >= 1e6) {
+//     return (numero / 1e6).toFixed(1) + 'M'
+//   } else if (numero >= 1e3) {
+//     return (numero / 1e3).toFixed(1) + 'k'
+//   } else {
+//     return numero.toString()
+//   }
+// }
+
 export const shortNumber = (numero: number) => {
   if (numero >= 1e6) {
-    return (numero / 1e6).toFixed(1) + 'M'
+    return (
+      (numero / 1e6).toLocaleString(undefined, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }) + 'M'
+    )
   } else if (numero >= 1e3) {
-    return (numero / 1e3).toFixed(1) + 'k'
+    return (
+      (numero / 1e3).toLocaleString(undefined, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }) + 'k'
+    )
   } else {
-    return numero.toString()
+    return numero.toLocaleString()
   }
 }
 

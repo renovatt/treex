@@ -1,7 +1,7 @@
 export const categories = [
-  'Salário',
-  'Educação',
+  'Bônus/Entrada/Salário',
   'Despesas Diversas',
+  'Educação',
   'Farmácia',
   'Alimentação',
   'Combustível',

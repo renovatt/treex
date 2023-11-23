@@ -154,6 +154,11 @@ body {
   }
 }
 
+#barChart .apexcharts-tooltip span {
+  padding: 0.313rem 0.625rem;
+  display: inline-block;
+}
+
 body {
   /* background: var(--bg-default); */
 }

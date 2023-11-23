@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import Chart from 'react-apexcharts'
 import { UserData } from '@/lib/types'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
-import { calculateRevenueByMonth } from '@/utils'
+import { calculateRevenueByMonth, shortNumber } from '@/utils'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 
 export default function BarChart({ user }: { user: UserData }) {
@@ -94,6 +96,18 @@ export default function BarChart({ user }: { user: UserData }) {
           },
           tooltip: {
             theme: theme === 'dark' ? 'dark' : 'light',
+            custom: ({ series, seriesIndex, dataPointIndex, w }: any) => {
+              const seriesName = w.globals.seriesNames[0]
+              const label = w.globals.labels[dataPointIndex]
+              const formattedValue = shortNumber(
+                w.globals.series[seriesIndex][dataPointIndex],
+              )
+
+              return `<div">
+                <span>${label}</span>
+                <span>${seriesName}: ${formattedValue}</span>
+              </div>`
+            },
           },
           fill: {
             colors: undefined,
@@ -123,6 +137,7 @@ export default function BarChart({ user }: { user: UserData }) {
   return (
     <section className="my-5 flex w-full items-center justify-center">
       <Chart
+        id="barChart"
         className="w-[95%]"
         type="bar"
         height="220"
