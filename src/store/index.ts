@@ -3,7 +3,7 @@ import { DateStore, UseStoreProps } from './types'
 
 const useSideBarStore = create<UseStoreProps>((set) => ({
   status: {
-    isSelected: false,
+    isSelected: true,
   },
   setStatus: () => {
     set((state) => {
