@@ -43,13 +43,10 @@ export const metadata: Metadata = {
     'Jornada Financeira',
     'renovatt',
   ],
-  themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#fff' }],
   authors: [
     { name: 'renovatt' },
     { name: 'renovatt', url: 'https://www.linkedin.com/in/renovatt/' },
   ],
-  viewport:
-    'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
 
   openGraph: {
     type: 'website',
