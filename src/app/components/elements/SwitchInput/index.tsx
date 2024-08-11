@@ -18,15 +18,13 @@ export default function SwitchInput() {
           <Switch
             checked={field.value}
             onChange={(value) => field.onChange(value)}
-            className={`${transactionValue ? 'bg-red-500' : 'bg-emerald-400'}
-          relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+            className={`${transactionValue ? 'bg-red-500' : 'bg-emerald-400'} relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
           >
             <span
               aria-hidden="true"
               className={`${
                 transactionValue ? 'translate-x-9' : 'translate-x-0'
-              }
-          pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+              } pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
             />
             <ErrorMessage field={field.value} />
           </Switch>

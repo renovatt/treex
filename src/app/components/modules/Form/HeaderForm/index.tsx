@@ -22,7 +22,7 @@ export default function HeaderForm({ description, title }: HeaderFormProps) {
       </span>
 
       <section className="self-start py-2 pb-4">
-        <h1 className=" text-xl font-bold text-primary-900">{title}</h1>
+        <h1 className="text-xl font-bold text-primary-900">{title}</h1>
         <span className="text-xs text-primary-800">{description}</span>
       </section>
     </>
