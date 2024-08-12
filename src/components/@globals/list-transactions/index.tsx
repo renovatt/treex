@@ -1,19 +1,19 @@
 'use client'
 import { auth } from '@/firebase'
-import { UserData } from '@/lib/types'
+import { UserData } from '@/lib/types.js'
 import { useUser } from '@/hooks/useUser'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import DashCards from './dash-cards'
+import ListContent from './list-content'
 
-export default function GridWallet() {
+export default function ListTransactions() {
   const [user, loading] = useAuthState(auth)
   const { userLoaded } = useUser(user as UserData)
   return (
-    <section className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <section className="flex w-full">
       {userLoaded && !loading ? (
-        <DashCards user={userLoaded} />
+        <ListContent user={userLoaded} />
       ) : (
-        <p>carregando...</p>
+        <p className="text-xs font-bold text-muted-foreground">Aguardando...</p>
       )}
     </section>
   )

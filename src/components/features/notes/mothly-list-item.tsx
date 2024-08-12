@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import EditMonthlyForm from '@/components/features/forms/edit-monthly-form'
+import EditMonthlyForm from '@/components/features/notes/forms/edit-monthly-form'
 import {
   Dialog,
   DialogContent,
@@ -15,7 +15,7 @@ type Props = {
   value: string
 }
 
-export default function MothlyItemList({ title, value, id }: Props) {
+export default function MothlyListItem({ title, value, id }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild className="w-full">

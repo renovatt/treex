@@ -1,9 +1,8 @@
 import { Metadata } from 'next'
 import ViewContainer from '@/components/features/layout/view-container'
 import Header from '@/components/features/layout/header'
-import PreviewMonthyCard from '@/components/features/cards/preview-monthy-card'
-import PreviewPriorityCard from '@/components/features/cards/preview-priority-card'
-import GridNotes from '@/components/features/grid-notes'
+import GridNotes from '@/components/features/notes/grid-notes'
+import Overview from '@/components/features/notes/overview'
 
 export const metadata: Metadata = {
   title: 'TreeX | Anotações',
@@ -11,15 +10,14 @@ export const metadata: Metadata = {
     'Mantenha uma lista atualizada dos seus gráficos de previsão mensal e da sua lista de prioridades.',
 }
 
-export default function Notes() {
+export default function Page() {
   return (
     <ViewContainer>
       <Header title="Anotações" description="Despesas e metas" />
       <section className="flex w-full flex-col items-start justify-start gap-4 overflow-y-auto">
         <GridNotes />
-        <section className="flex w-full flex-col items-center justify-start gap-4 xl:flex-row">
-          <PreviewMonthyCard />
-          <PreviewPriorityCard />
+        <section className="w-full space-y-5">
+          <Overview />
         </section>
       </section>
     </ViewContainer>

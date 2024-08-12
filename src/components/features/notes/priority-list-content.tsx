@@ -2,9 +2,9 @@
 import { UserData } from '@/lib/types'
 import { useEffect, useRef } from 'react'
 import { useGetPriority } from '@/hooks/useGetPriority'
-import PriorityItemList from '@/components/features/table/priority-item-list'
+import PriorityListItem from './priority-list-item'
 
-export default function PriorityTableContent({ user }: { user: UserData }) {
+export default function PriorityListContent({ user }: { user: UserData }) {
   const { priorityData } = useGetPriority(user)
   const tableRef = useRef<HTMLUListElement | null>(null)
 
@@ -20,7 +20,7 @@ export default function PriorityTableContent({ user }: { user: UserData }) {
       className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
     >
       {priorityData.map((priority) => (
-        <PriorityItemList
+        <PriorityListItem
           id={priority.id ?? ''}
           key={priority.id}
           title={priority.name}

@@ -2,8 +2,8 @@
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
 import { useUser } from '@/hooks/useUser'
-import BarChart from './bar-chart'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import BarChart from './bar-chart'
 
 export default function BarChartPreloader() {
   const [user, loading] = useAuthState(auth)

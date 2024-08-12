@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
-import EditPriorityForm from '@/components/features/forms/edit-priority-form'
+import EditPriorityForm from '@/components/features/notes/forms/edit-priority-form'
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ type PriorityItemListProps = {
   level: 'Importante' | 'Menos importante' | 'Muito importante'
 }
 
-export default function PriorityItemList({
+export default function PriorityListItem({
   title,
   level,
   id,

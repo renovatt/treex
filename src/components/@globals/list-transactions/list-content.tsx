@@ -1,12 +1,12 @@
 'use client'
 import { UserData } from '@/lib/types'
 import { useEffect, useRef } from 'react'
-import TransactionItemList from '@/components/features/table/transaction-item-list'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import { useDateStore } from '@/store'
+import ListItem from './list-item'
 
-export default function TransactionTableContent({ user }: { user: UserData }) {
+export default function ListContent({ user }: { user: UserData }) {
   const { date, setDate } = useDateStore()
   const { transactionData } = useGetTransactions(user)
   const tableRef = useRef<HTMLUListElement | null>(null)
@@ -43,10 +43,10 @@ export default function TransactionTableContent({ user }: { user: UserData }) {
   return (
     <ul
       ref={tableRef}
-      className="flex h-52 w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden md:h-[19rem]"
+      className="flex h-52 w-full flex-col-reverse items-start justify-center space-y-2 overflow-scroll overflow-x-hidden md:h-80"
     >
       {filteredData?.map((transaction) => (
-        <TransactionItemList
+        <ListItem
           key={transaction.id}
           id={transaction.id ?? ''}
           type={transaction.transaction ? 'expense' : 'income'}

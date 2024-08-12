@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import RegisterForm from '@/components/features/forms/auth/register-form'
+import RegisterForm from '@/components/features/auth/register-form'
 import FooterForm from '@/components/features/footer-form'
 import HeaderForm from '@/components/features/header-form'
 import AuthContainer from '@/components/features/auth-container'

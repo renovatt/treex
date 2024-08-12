@@ -9,7 +9,7 @@ import { BiTransfer } from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
-import WalletCard from '../cards/wallet-card'
+import WalletCard from '../../@globals/wallet-card'
 
 export default function TransactionsCards({ user }: { user: UserData }) {
   const { date } = useDateStore()

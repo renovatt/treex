@@ -1,4 +1,4 @@
-import { CriptoCoinTypeProps } from '@/components/features/table/cripto-item-list'
+import { CriptoCoinTypeProps } from '@/components/features/cripto/list-item'
 import { getCriptoCoins } from '@/services'
 import { useQuery } from '@tanstack/react-query'
 

@@ -23,7 +23,7 @@ export type CriptoCoinTypeResponse = {
   data: CriptoCoinTypeProps[]
 }
 
-export default function CriptoItemList({
+export default function ListItem({
   name,
   symbol,
   currentPrice,
@@ -33,7 +33,7 @@ export default function CriptoItemList({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex w-full items-center justify-between rounded-lg p-2 py-4 shadow-sm"
+      className="flex w-full items-center justify-between rounded-xl p-2 py-4 hover:bg-muted"
     >
       <span className="flex items-center justify-center gap-2 text-muted-foreground">
         {name}

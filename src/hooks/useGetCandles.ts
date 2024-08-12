@@ -1,4 +1,4 @@
-import { CandleTypeProps } from '@/components/features/charts/candlestick-chart'
+import { CandleTypeProps } from '@/components/features/cripto/charts/candlestick-chart'
 import { getCandles } from '@/services'
 import { useQuery } from '@tanstack/react-query'
 

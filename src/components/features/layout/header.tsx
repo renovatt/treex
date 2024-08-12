@@ -1,8 +1,8 @@
 'use client'
 import { MdOutlineAddBox } from 'react-icons/md'
 import UserDropdown from '@/components/features/user-dropdown'
-import DatepickerComponent from '@/components/features/date-picker'
-import TransactionForm from '../forms/transaction-form'
+import DatepickerComponent from '@/components/@globals/date-picker'
+import TransactionForm from '../transactions/forms/transaction-form'
 import { ModeToggle } from '../../@globals/dark-mode'
 import {
   Dialog,

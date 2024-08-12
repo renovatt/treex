@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import FooterForm from '@/components/features/footer-form'
 import HeaderForm from '@/components/features/header-form'
-import RecoveryForm from '@/components/features/forms/auth/recovery-form'
+import RecoveryForm from '@/components/features/auth/recovery-form'
 import AuthContainer from '@/components/features/auth-container'
 
 export const metadata: Metadata = {

@@ -136,7 +136,7 @@ export default function CandlestickChart() {
     )
 
   return (
-    <section className="my-5 flex w-full items-center justify-center xl:m-0 xl:h-full">
+    <section className="my-5 flex w-full items-center justify-center xl:m-0">
       {isLoading ? (
         <p className="text-xs text-muted-foreground">Carregando..</p>
       ) : (

@@ -12,7 +12,7 @@ import {
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
 import { useGetMonthly } from '@/hooks/useGetMonthly'
-import WalletCard from '../cards/wallet-card'
+import WalletCard from '../../@globals/wallet-card'
 
 export default function DashCards({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
