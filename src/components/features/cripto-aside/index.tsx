@@ -3,16 +3,15 @@ import dynamic from 'next/dynamic'
 import { useGetDolar } from '@/hooks/useGetDolar'
 import { useGetCrypto } from '@/hooks/useGetCrypto'
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia'
-import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
 import { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import WalletCardDolar from '@/components/features/cards/wallet-card-colar'
-import CardWallet from '@/components/features/cards/card-wallet'
+import CardDolar from '@/components/features/cripto-aside/card-dolar'
 import CriptoItemList, {
   CriptoCoinTypeProps,
 } from '@/components/features/table/cripto-item-list'
+import WalletCard from '../cards/wallet-card'
 
 export default function CriptoAside() {
   const Candlestick = dynamic(
@@ -34,36 +33,32 @@ export default function CriptoAside() {
   }, [user])
 
   return (
-    <aside className="flex h-full w-full flex-col items-center justify-start space-y-6 xl:w-1/3 xl:space-y-4">
+    <aside className="flex size-full flex-col items-center justify-start space-y-6 xl:space-y-4">
       <h2 className="self-start text-xs text-muted-foreground">
         Bitcoin em tempo real
       </h2>
 
       <section className="flex w-full flex-col items-center justify-center space-y-4">
-        <section className="flex h-full min-h-[19rem] w-full items-center justify-center rounded-xl">
-          <Candlestick />
-        </section>
-
-        <section className="flex w-full items-center justify-between">
+        <section className="flex w-full items-center justify-start gap-4">
           {userLoaded && !loading ? (
-            <WalletCardDolar user={userLoaded} />
+            <CardDolar user={userLoaded} />
           ) : (
-            <CardWallet
-              description="Dolar saldo"
-              icon={RiMoneyDollarCircleLine}
-              side="left"
-              value={'0'}
-            />
+            <p>Carregando..</p>
           )}
-          <CardWallet
+
+          <WalletCard
+            title="Dolar hoje"
             description="Dolar hoje"
             icon={LiaMoneyBillWaveSolid}
-            side="right"
             value={Number(dolar?.data.USDBRL.high).toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}
           />
+        </section>
+
+        <section className="flex h-full min-h-[19rem] w-full items-center justify-center rounded-xl">
+          <Candlestick />
         </section>
       </section>
 

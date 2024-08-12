@@ -1,31 +1,21 @@
 import { Metadata } from 'next'
-// import dynamic from 'next/dynamic'
 import ViewContainer from '@/components/features/layout/view-container'
 import Header from '@/components/features/layout/header'
-import GridWallet from '@/components/features/grid-dash'
-import TransactionTable from '@/components/features/table/transaction-table'
+import CriptoAside from '@/components/features/cripto-aside'
 
 export const metadata: Metadata = {
-  title: 'TreeX | Dashboard',
+  title: 'TreeX | Cripto',
   description:
     'Obtenha uma visão abrangente de sua situação financeira, acompanhada por gráficos personalizados que representam seus rendimentos.',
 }
 
 export default function Dashboard() {
-  // const BarChartPreloader = dynamic(
-  //   () => import('@/components/features/charts/bar-chart-preloader'),
-  //   {
-  //     ssr: false,
-  //   },
-  // )
   return (
     <ViewContainer>
-      <Header title="Dashboard" description="Visão geral" />
+      <Header title="Cripto" description="Mundo cripto" />
       <section className="flex w-full flex-col justify-between gap-10 overflow-y-auto overflow-x-hidden xl:flex-row">
         <section className="flex w-full flex-col items-center justify-start gap-10">
-          <GridWallet />
-          {/* <BarChartPreloader /> */}
-          <TransactionTable />
+          <CriptoAside />
         </section>
       </section>
     </ViewContainer>

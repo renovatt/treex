@@ -2,17 +2,17 @@ import { UserData } from '@/lib/types'
 import { TbReportMoney } from 'react-icons/tb'
 import { monthlyExpensesCalculator, shortNumber } from '@/utils'
 import { useGetMonthly } from '@/hooks/useGetMonthly'
-import CardWallet from '@/components/features/cards/card-wallet'
+import WalletCard from '../cards/wallet-card'
 
-export default function MontlhyCardValue({ user }: { user: UserData }) {
+export default function MontlhyCard({ user }: { user: UserData }) {
   const { monthlyData } = useGetMonthly(user)
   const result = monthlyExpensesCalculator(monthlyData)
   const shortResult = shortNumber(result)
   return (
-    <CardWallet
+    <WalletCard
+      title="Total"
       description="Total"
       icon={TbReportMoney}
-      side="left"
       value={`R$ ${shortResult}`}
     />
   )

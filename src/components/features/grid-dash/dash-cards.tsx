@@ -1,6 +1,6 @@
+'use client'
 import { UserData } from '@/lib/types'
 import { TbMoneybag } from 'react-icons/tb'
-import CardWallet from './card-wallet'
 import { IoWalletOutline } from 'react-icons/io5'
 import {
   handleCurrentMonthlyBalance,
@@ -12,46 +12,47 @@ import {
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
 import { useGetMonthly } from '@/hooks/useGetMonthly'
+import WalletCard from '../cards/wallet-card'
 
-export default function DashCardValues({ user }: { user: UserData }) {
+export default function DashCards({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
   const { monthlyData } = useGetMonthly(user)
 
   const monthlyPreview = monthlyExpensesCalculator(monthlyData)
-  const Allresult = handleWalletBalance(transactionData)
+  const allResult = handleWalletBalance(transactionData)
   const monthlyResult = handleCurrentMonthlyBalance(transactionData)
   const categoryResultAll = handleMostSpentCategory(transactionData)
 
-  const wallet = shortNumber(Allresult.total)
+  const wallet = shortNumber(allResult.total)
   const monthlyBalance = shortNumber(monthlyResult.total)
   const categoryResult = shortNumber(categoryResultAll.total)
   return (
     <>
-      <CardWallet
+      <WalletCard
+        title="Carteira"
         description="Carteira"
         icon={IoWalletOutline}
-        side="left"
         value={`R$ ${wallet}`}
       />
-      <CardWallet
+      <WalletCard
+        title="Faturamento mensal"
         description="Faturamento mensal"
         icon={TbMoneybag}
-        side="right"
         value={`R$ ${monthlyBalance}`}
       />
-      <CardWallet
+      <WalletCard
+        title="Previsão de gastos"
         description="Previsão de gastos"
         icon={MdOutlineMoneyOff}
-        side="left"
         value={monthlyPreview.toLocaleString('pt-br', {
           style: 'currency',
           currency: 'BRL',
         })}
       />
-      <CardWallet
+      <WalletCard
+        title="Categoria mais gasta"
         description="Categoria mais gasta"
         icon={MdOutlineCategory}
-        side="right"
         value={`R$ ${categoryResult}`}
       />
     </>

@@ -9,9 +9,9 @@ import { BiTransfer } from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
-import CardWallet from '@/components/features/cards/card-wallet'
+import WalletCard from '../cards/wallet-card'
 
-export default function TransactionsMonthly({ user }: { user: UserData }) {
+export default function TransactionsCards({ user }: { user: UserData }) {
   const { date } = useDateStore()
   const { transactionData } = useGetTransactions(user)
 
@@ -27,28 +27,28 @@ export default function TransactionsMonthly({ user }: { user: UserData }) {
   const categoryResult = shortNumber(categoryResultMonthly.total)
   return (
     <>
-      <CardWallet
+      <WalletCard
+        title="Total"
         description="Total"
         icon={BiTransfer}
-        side="left"
         value={`R$ ${monthlyBalance}`}
       />
-      <CardWallet
+      <WalletCard
+        title="Entradas"
         description="Entradas"
         icon={HiArrowTrendingUp}
-        side="right"
         value={`R$ ${monthlyIncome}`}
       />
-      <CardWallet
+      <WalletCard
+        title="Saídas"
         description="Saídas"
         icon={HiArrowTrendingDown}
-        side="left"
         value={`R$ ${monthlyExpense}`}
       />
-      <CardWallet
+      <WalletCard
+        title="Categoria mais gasta"
         description="Categoria mais gasta"
         icon={MdOutlineCategory}
-        side="left"
         value={`R$ ${categoryResult}`}
       />
     </>
