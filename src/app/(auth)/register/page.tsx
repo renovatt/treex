@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
-import FooterForm from '@modules/Form/FooterForm'
-import HeaderForm from '@modules/Form/HeaderForm'
-import AuthContainer from '@modules/AuthContainer'
-import RegisterForm from '@modules/Form/RegisterForm'
-import GoogleButton from '@elements/GoogleButton'
+import RegisterForm from '@/components/features/forms/auth/register-form'
+import FooterForm from '@/components/features/footer-form'
+import HeaderForm from '@/components/features/header-form'
+import AuthContainer from '@/components/features/auth-container'
+import GoogleButton from '@/components/features/google-button'
 
 export const metadata: Metadata = {
   title: 'TreeX | Cadastro',

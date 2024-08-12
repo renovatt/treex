@@ -1,5 +1,5 @@
+import { CandleTypeProps } from '@/components/features/charts/candlestick-chart'
 import { MonthyPreviewFormProps, TransactionFormProps } from '@/schemas'
-import { CandleTypeProps } from '@elements/ChartJS/Candlestick/types'
 
 interface CategoryTotals {
   [category: string]: number

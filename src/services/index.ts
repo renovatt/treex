@@ -1,8 +1,11 @@
 import axios from 'axios'
 import createCandle from '@/utils'
-import { USDBRLResponse } from '@/app/components/modules/CriptoAside/types'
-import { CriptoCoinTypeResponse } from '@/app/components/elements/CriptoItemList/types'
-import { CandleTypeProps, KlineData } from '@elements/ChartJS/Candlestick/types'
+import { USDBRLResponse } from '@/components/features/cripto-aside/types'
+import { CriptoCoinTypeResponse } from '@/components/features/table/cripto-item-list'
+import {
+  CandleTypeProps,
+  KlineData,
+} from '@/components/features/charts/candlestick-chart'
 
 export interface ErrorMessageResponse extends Error {
   message: string

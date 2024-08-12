@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import Header from '@modules/Layout/Header'
-import CriptoAside from '@modules/CriptoAside'
-import GridDash from '@modules/Grids/GridDash'
-import TransactionTable from '@modules/TransactionTable'
-import ViewContainer from '@modules/Layout/ViewContainer'
+import ViewContainer from '@/components/features/layout/view-container'
+import Header from '@/components/features/layout/header'
+import CriptoAside from '@/components/features/cripto-aside'
+import GridDash from '@/components/features/grid-dash'
+import TransactionTable from '@/components/features/table/transaction-table'
 
 export const metadata: Metadata = {
   title: 'TreeX | Dashboard',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Dashboard() {
   const BarChartPreloader = dynamic(
-    () => import('@/app/components/elements/ChartJS/BarChartPreloader'),
+    () => import('@/components/features/charts/bar-chart-preloader'),
     {
       ssr: false,
     },

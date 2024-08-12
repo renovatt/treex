@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
-import Header from '@modules/Layout/Header'
-import GridNotes from '@modules/Grids/GridNotes'
-import ViewContainer from '@modules/Layout/ViewContainer'
-import PreviewMonthyCard from '@modules/PreviewMonthyCard'
-import PreviewPriorityCard from '@modules/PreviewPriorityCard'
+import ViewContainer from '@/components/features/layout/view-container'
+import Header from '@/components/features/layout/header'
+import PreviewMonthyCard from '@/components/features/cards/preview-monthy-card'
+import PreviewPriorityCard from '@/components/features/cards/preview-priority-card'
+import GridNotes from '@/components/features/grid-notes'
 
 export const metadata: Metadata = {
   title: 'TreeX | Anotações',

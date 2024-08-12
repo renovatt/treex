@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import Header from '@modules/Layout/Header'
-import TransactionTable from '@modules/TransactionTable'
-import ViewContainer from '@modules/Layout/ViewContainer'
-import GridTransaction from '@modules/Grids/GridTransaction'
+import ViewContainer from '@/components/features/layout/view-container'
+import Header from '@/components/features/layout/header'
+import GridTransaction from '@/components/features/grid-transaction'
+import TransactionTable from '@/components/features/table/transaction-table'
 
 export const metadata: Metadata = {
   title: 'TreeX | Transações',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Transactions() {
   const PolarChartPreloader = dynamic(
-    () => import('@elements/ChartJS/PolarChartPreloader'),
+    () => import('@/components/features/charts/polar-chart-preloader'),
     {
       ssr: false,
     },

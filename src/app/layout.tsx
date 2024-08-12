@@ -1,9 +1,9 @@
 import 'swiper/css'
 import './globals.css'
-import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
+import { ThemeProvider } from '@/components/features/providers/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -72,15 +72,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const NextThemeProvider = dynamic(
-    () => import('@modules/Providers/ThemeProvider'),
-    { ssr: false },
-  )
   return (
     <html lang="pt-br">
       <body className={inter.className}>
         <Toaster />
-        <NextThemeProvider>{children}</NextThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

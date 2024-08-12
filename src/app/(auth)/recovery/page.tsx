@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import FooterForm from '@modules/Form/FooterForm'
-import HeaderForm from '@modules/Form/HeaderForm'
-import AuthContainer from '@modules/AuthContainer'
-import RecoveryForm from '@modules/Form/RecoveryForm'
+import FooterForm from '@/components/features/footer-form'
+import HeaderForm from '@/components/features/header-form'
+import RecoveryForm from '@/components/features/forms/auth/recovery-form'
+import AuthContainer from '@/components/features/auth-container'
 
 export const metadata: Metadata = {
   title: 'TreeX | Recuperação',
