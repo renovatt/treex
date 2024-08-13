@@ -20,9 +20,11 @@ export default function PriorityListContent({ user }: { user: UserData }) {
       className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
     >
       {!priorityData.length ? (
-        <div className="flex w-full h-80 items-center justify-center">
-        <p className="text-sm text-muted-foreground font-semibold">Ainda não há itens</p>
-      </div>
+        <div className="flex h-80 w-full items-center justify-center">
+          <p className="text-sm font-semibold text-muted-foreground">
+            Ainda não há itens
+          </p>
+        </div>
       ) : (
         priorityData.map((priority) => (
           <PriorityListItem

@@ -34,12 +34,12 @@ export default function LoginForm() {
     setIsLoading(true)
     try {
       const { status, message } = await signInWithCredential(data)
-    if (!status) {
-      toast.error(message)
-      return
-    }
-    router.push('/dashboard')
-    toast.success(message)
+      if (!status) {
+        toast.error(message)
+        return
+      }
+      router.push('/dashboard')
+      toast.success(message)
     } catch (error) {
       toast.error('Erro desconhecido')
     } finally {
@@ -94,14 +94,14 @@ export default function LoginForm() {
           Esqueceu sua senha?
         </Link>
         {isLoading ? (
-            <Button disabled className="w-full">
-              <LoaderCircle className="animate-spin" />
-            </Button>
-          ) : (
-            <Button type="submit" className="w-full">
-              Fazer login
-            </Button>
-          )}
+          <Button disabled className="w-full">
+            <LoaderCircle className="animate-spin" />
+          </Button>
+        ) : (
+          <Button type="submit" className="w-full">
+            Fazer login
+          </Button>
+        )}
       </form>
     </Form>
   )

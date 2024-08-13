@@ -19,10 +19,11 @@ export default function MonthlyListContent({ user }: { user: UserData }) {
       ref={tableRef}
       className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
     >
-    
       {!monthlyData.length ? (
-        <div className="flex w-full h-80 items-center justify-center">
-          <p className="text-sm text-muted-foreground font-semibold">Sem despesas mensais</p>
+        <div className="flex h-80 w-full items-center justify-center">
+          <p className="text-sm font-semibold text-muted-foreground">
+            Sem despesas mensais
+          </p>
         </div>
       ) : (
         monthlyData.map((monthly) => (

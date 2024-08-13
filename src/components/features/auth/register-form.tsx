@@ -31,19 +31,19 @@ export default function RegisterForm() {
 
   const handleFormSubmit = async (data: RegisterFormProps) => {
     setIsLoading(true)
-  try{
-    const { status, message } = await createCredential(data)
-    if (!status) {
-      toast.error(message)
-      return
+    try {
+      const { status, message } = await createCredential(data)
+      if (!status) {
+        toast.error(message)
+        return
+      }
+      router.push('/login')
+      toast.success(message)
+    } catch (error) {
+      toast.error('Erro desconhecido')
+    } finally {
+      setIsLoading(false)
     }
-    router.push('/login')
-    toast.success(message)
-  } catch (error) {
-    toast.error('Erro desconhecido')
-  } finally{
-    setIsLoading(false)
-  }
   }
 
   return (
@@ -101,14 +101,14 @@ export default function RegisterForm() {
           )}
         />
         {isLoading ? (
-            <Button disabled className="w-full">
-              <LoaderCircle className="animate-spin" />
-            </Button>
-          ) : (
-            <Button type="submit" className="w-full">
-              Cadastrar
-            </Button>
-          )}
+          <Button disabled className="w-full">
+            <LoaderCircle className="animate-spin" />
+          </Button>
+        ) : (
+          <Button type="submit" className="w-full">
+            Cadastrar
+          </Button>
+        )}
       </form>
     </Form>
   )
