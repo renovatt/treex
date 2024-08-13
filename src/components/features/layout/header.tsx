@@ -1,7 +1,7 @@
 'use client'
 import { MdOutlineAddBox } from 'react-icons/md'
 import UserDropdown from '@/components/features/user-dropdown'
-import TransactionForm from '../transactions/forms/transaction-form'
+import CreateAndEditTransactionForm from '../transactions/create-and-edit-transaction-form'
 import { ModeToggle } from '../../@globals/dark-mode'
 import {
   Dialog,
@@ -88,10 +88,10 @@ export default function Header({ title, description }: HeaderProps) {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <DialogHeader>
+            <DialogHeader className="items-start">
               <DialogTitle>Adicionar transação</DialogTitle>
             </DialogHeader>
-            <TransactionForm />
+            <CreateAndEditTransactionForm />
           </DialogContent>
         </Dialog>
         <UserDropdown />

@@ -1,7 +1,11 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
 import { UserData } from '@/lib/types'
-import { savingUserTransaction } from '@/lib/db'
+import {
+  deleteTransactionDoc,
+  savingUserTransaction,
+  updatingUserTransaction,
+} from '@/lib/db'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -25,30 +29,95 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { categories } from '@/mocks'
+import { useEffect, useState } from 'react'
+import { getTransactionDoc } from '@/lib/gets'
+import { LoaderCircle } from 'lucide-react'
 
-export default function TransactionForm() {
+export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<TransactionFormProps>({
     mode: 'all',
     reValidateMode: 'onChange',
     resolver: zodResolver(TransactionSchema),
   })
 
-  const transactionValue = form.watch('transaction')
-
   const [user] = useAuthState(auth)
+  const transactionValue = form.watch('transaction')
+  const category = form.watch('category')
 
   const handleFormSubmit = async (data: TransactionFormProps) => {
-    const { status, message } = await savingUserTransaction(
-      data,
+    setIsLoading(true)
+    try {
+      if (category === categories[0] && transactionValue) {
+        toast.error('Salário não pode ser uma saída')
+        return
+      }
+
+      if (id) {
+        const newData = { ...data }
+        newData.id = id
+
+        const { status, message } = await updatingUserTransaction(
+          newData,
+          user as UserData,
+        )
+
+        if (!status) {
+          toast.error(message)
+          return
+        }
+
+        toast.success(message)
+        return
+      }
+
+      const { status, message } = await savingUserTransaction(
+        data,
+        user as UserData,
+      )
+
+      if (!status) {
+        toast.error(message)
+        return
+      }
+
+      toast.success(message)
+      form.reset()
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDelete = async () => {
+    const { status, message } = await deleteTransactionDoc(
       user as UserData,
+      id as string,
     )
     if (!status) {
       toast.error(message)
       return
     }
     toast.success(message)
-    form.reset()
   }
+
+  useEffect(() => {
+    if (id) {
+      const handleGetTransactionDoc = async () => {
+        const data = await getTransactionDoc(user as UserData, id)
+        const defaultValues = {
+          name: data?.name,
+          value: data?.value,
+          category: data?.category,
+          transaction: data?.transaction,
+        }
+
+        form.reset(defaultValues)
+      }
+      handleGetTransactionDoc()
+    }
+  }, [id, form, user])
 
   return (
     <Form {...form}>
@@ -86,11 +155,15 @@ export default function TransactionForm() {
         <FormField
           control={form.control}
           name="category"
-          defaultValue={categories[0]}
+          defaultValue={categories[1]}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Categoria</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Selecione uma categoria" />
@@ -112,7 +185,7 @@ export default function TransactionForm() {
         <FormField
           control={form.control}
           name="transaction"
-          defaultValue={false}
+          defaultValue={true}
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg p-3">
               <div className="space-y-0.5">
@@ -127,9 +200,28 @@ export default function TransactionForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Salvar
-        </Button>
+
+        <div className="space-y-2">
+          {isLoading ? (
+            <Button type="submit" className="w-full">
+              <LoaderCircle className="animate-spin" />
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full">
+              {id ? 'Editar' : 'Salvar'}
+            </Button>
+          )}
+          {id && (
+            <Button
+              variant="outline"
+              type="button"
+              className="w-full"
+              onClick={handleDelete}
+            >
+              Excluir
+            </Button>
+          )}
+        </div>
       </form>
     </Form>
   )

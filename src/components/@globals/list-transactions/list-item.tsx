@@ -1,3 +1,4 @@
+import CreateAndEditTransactionForm from '@/components/features/transactions/create-and-edit-transaction-form'
 import {
   DialogHeader,
   Dialog,
@@ -7,7 +8,6 @@ import {
 } from '@/components/ui/dialog'
 import { motion } from 'framer-motion'
 import { IconType } from 'react-icons'
-import EditTransactionForm from '../../features/transactions/forms/edit-transaction-form'
 
 type Props = {
   id: string
@@ -50,10 +50,10 @@ export default function ListItem({
         </motion.div>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="items-start">
           <DialogTitle>Editar transação</DialogTitle>
         </DialogHeader>
-        <EditTransactionForm id={id} />
+        <CreateAndEditTransactionForm id={id} />
       </DialogContent>
     </Dialog>
   )
