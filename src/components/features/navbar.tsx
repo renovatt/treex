@@ -1,9 +1,12 @@
 'use client'
 import useSideBarStore from '@/store'
-import { TbTransfer } from 'react-icons/tb'
-import { FaRegNoteSticky, FaBitcoin } from 'react-icons/fa6'
-import { AiOutlineDashboard } from 'react-icons/ai'
 import RouterLink from './router-link'
+import {
+  LayoutDashboard,
+  ArrowRightLeft,
+  StickyNote,
+  Bitcoin,
+} from 'lucide-react'
 
 export default function Navbar() {
   const { status } = useSideBarStore()
@@ -13,27 +16,27 @@ export default function Navbar() {
       <ul className="flex w-full items-center justify-start gap-2 px-4 md:mt-14 md:flex-col">
         <RouterLink
           href="/dashboard"
-          icon={AiOutlineDashboard}
+          icon={LayoutDashboard}
           isOpen={status.isSelected}
           name="Dashboard"
         />
         <RouterLink
           href="/transactions"
-          icon={TbTransfer}
+          icon={ArrowRightLeft}
           isOpen={status.isSelected}
           name="Transações"
         />
         <RouterLink
           href="/notes"
-          icon={FaRegNoteSticky}
+          icon={StickyNote}
           isOpen={status.isSelected}
           name="Anotações"
         />
         <RouterLink
           href="/cripto"
-          icon={FaBitcoin}
+          icon={Bitcoin}
           isOpen={status.isSelected}
-          name="Mundo Cripto"
+          name="Cripto"
         />
       </ul>
     </nav>

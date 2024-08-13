@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import CreateAndEditPriorityForm from './forms/create-and-edit-priority-form'
+import { Badge } from '@/components/ui/badge'
 
 type PriorityItemListProps = {
   id: string
@@ -35,32 +36,11 @@ export default function PriorityListItem({
           </span>
 
           {level === 'Importante' ? (
-            <>
-              <div className="flex items-center justify-center gap-4">
-                <span className="flex text-xs text-muted-foreground">
-                  Importante
-                </span>
-                {/* <GiBoltShield className="text-secondary-800 h-6 w-6 shadow-sm" /> */}
-              </div>
-            </>
+            <Badge>Importante</Badge>
           ) : level === 'Menos importante' ? (
-            <>
-              <div className="flex items-center justify-center gap-4">
-                <span className="flex text-xs text-muted-foreground">
-                  Menos importante
-                </span>
-                {/* <GiEdgedShield className="text-secondary-900 h-6 w-6 shadow-sm" /> */}
-              </div>
-            </>
+            <Badge>Menos Importante</Badge>
           ) : (
-            <>
-              <div className="flex items-center justify-center gap-4">
-                <span className="flex text-xs text-muted-foreground">
-                  Muito importante
-                </span>
-                {/* <GiBorderedShield className="text-secondary-750 h-6 w-6 shadow-sm" /> */}
-              </div>
-            </>
+            <Badge>Muito Importante</Badge>
           )}
         </motion.li>
       </DialogTrigger>

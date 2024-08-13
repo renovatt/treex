@@ -3,11 +3,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { IconType } from 'react-icons'
+import { ComponentType, SVGProps } from 'react'
 
 type LinkRouteProps = {
   href: string
   name: string
-  icon: IconType
+  icon: IconType | ComponentType<SVGProps<SVGSVGElement>>
   isOpen: boolean
 }
 
@@ -28,7 +29,7 @@ export default function RouterLink({
       >
         <Icon className="size-4" />
         <span
-          className={`w-26 whitespace-nowrap text-xs ${isOpen ? 'flex' : 'hidden'}`}
+          className={`w-28 items-center whitespace-nowrap text-xs ${isOpen ? 'flex' : 'hidden'}`}
         >
           {name}
         </span>

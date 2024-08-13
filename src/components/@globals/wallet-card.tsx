@@ -5,10 +5,11 @@ import {
   // CardDescription,
   Card,
 } from '@/components/ui/card'
+import { ComponentType, SVGProps } from 'react'
 import { IconType } from 'react-icons'
 
 type Props = {
-  icon: IconType
+  icon: IconType | ComponentType<SVGProps<SVGSVGElement>>
   value: string
   title: string
   description: string
