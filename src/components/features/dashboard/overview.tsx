@@ -16,9 +16,9 @@ export default function Overview() {
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
       <Card className="col-span-4">
         <CardHeader>
-          <CardTitle>Últimos 7 meses</CardTitle>
+          <CardTitle>Últimos meses</CardTitle>
           <CardDescription>
-            Análise do seu faturamento nos últimos 7 meses
+            Análise do seu faturamento nos últimos meses
           </CardDescription>
         </CardHeader>
         <CardContent>

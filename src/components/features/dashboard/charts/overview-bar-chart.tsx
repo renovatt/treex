@@ -10,18 +10,18 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
+  LabelList,
   ResponsiveContainer,
-  XAxis,
-  YAxis,
 } from 'recharts'
-import { calculateLast7MonthsRevenue } from '../utils/calculate-last-7months-revenue '
+import { calculateLastMonthsRevenue } from '../utils/calculate-last-months-revenue '
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export function OverviewBarChart({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
-  const calculateTransactions = calculateLast7MonthsRevenue(transactionData)
+  const calculateTransactions = calculateLastMonthsRevenue(transactionData)
 
-  const data = calculateTransactions.map((item) => ({
+  const chartData = calculateTransactions.map((item) => ({
     name: item.month,
     total: item.revenue,
   }))
@@ -36,37 +36,23 @@ export function OverviewBarChart({ user }: { user: UserData }) {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <ChartContainer config={chartConfig}>
-        <BarChart accessibilityLayer data={data}>
+        <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
-          <XAxis
-            dataKey="month"
-            tickLine={false}
-            tickMargin={10}
-            axisLine={false}
-            tickFormatter={(value) => value.slice(0, 3)}
-          />
-          <YAxis
-            stroke="#888888"
-            fontSize={9}
-            tickLine={false}
-            axisLine={false}
-            tickFormatter={(value) =>
-              `${value.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}`
-            }
-          />
           <ChartTooltip
             cursor={false}
-            content={<ChartTooltipContent hideLabel />}
+            content={<ChartTooltipContent hideLabel hideIndicator />}
           />
-          <Bar
-            dataKey="total"
-            fill="hsl(var(--chart-2))"
-            radius={[8, 8, 0, 0]}
-            className="hsl(var(--chart-2))"
-          />
+          <Bar dataKey="total">
+            <LabelList position="top" dataKey="name" fillOpacity={1} />
+            {chartData.map((item) => (
+              <Cell
+                key={item.name}
+                fill={
+                  item.total > 0 ? 'hsl(var(--chart-1))' : 'hsl(var(--chart-2))'
+                }
+              />
+            ))}
+          </Bar>
         </BarChart>
       </ChartContainer>
     </ResponsiveContainer>

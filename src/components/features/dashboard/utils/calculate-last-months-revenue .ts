@@ -1,10 +1,13 @@
 import { TransactionFormProps } from '@/schemas'
 
-export const calculateLast7MonthsRevenue = (data: TransactionFormProps[]) => {
+export const calculateLastMonthsRevenue = (
+  data: TransactionFormProps[],
+  qnt: number = 11,
+) => {
   const currentDate = new Date()
   const last7Months = []
 
-  for (let i = 6; i >= 0; i--) {
+  for (let i = qnt; i >= 0; i--) {
     const month = new Date(currentDate)
     month.setMonth(currentDate.getMonth() - i)
     last7Months.push(month)
