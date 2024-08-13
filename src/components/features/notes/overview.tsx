@@ -1,3 +1,4 @@
+'use client'
 import {
   CardHeader,
   CardTitle,
@@ -5,29 +6,76 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import PreviewMonthyCard from './preview-monthy-card'
-import PreviewPriorityCard from './preview-priority-card'
+import MonthyList from './monthy-list'
+import PriorityList from './priority-list'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import CreateAndEditMonthlyForm from './forms/create-and-edit-monthly-form'
+import { MdOutlineAddBox } from 'react-icons/md'
+import CreateAndEditPriorityForm from './forms/create-and-edit-priority-form'
 
 export default function Overview() {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
       <Card className="col-span-4">
-        <CardHeader>
-          <CardTitle>Despesas previstas</CardTitle>
-          <CardDescription>Anote suas despesas futuras</CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div className="space-y-1">
+            <CardTitle>Despesas previstas</CardTitle>
+            <CardDescription>Anote suas despesas futuras</CardDescription>
+          </div>
+          <div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost" className="space-x-2">
+                  <MdOutlineAddBox />
+                  <span>Adicionar</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader className="items-start">
+                  <DialogTitle>Adicionar despesa</DialogTitle>
+                </DialogHeader>
+                <CreateAndEditMonthlyForm />
+              </DialogContent>
+            </Dialog>
+          </div>
         </CardHeader>
         <CardContent>
-          <PreviewMonthyCard />
+          <MonthyList />
         </CardContent>
       </Card>
 
       <Card className="col-span-4 lg:col-span-3">
-        <CardHeader>
-          <CardTitle>Lista de prioridades</CardTitle>
-          <CardDescription>Crie sua lista de prioridades</CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div className="space-y-1">
+            <CardTitle>Lista de prioridades</CardTitle>
+            <CardDescription>Crie sua lista de prioridades</CardDescription>
+          </div>
+          <div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost" className="space-x-2">
+                  <MdOutlineAddBox />
+                  <span>Adicionar</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader className="items-start">
+                  <DialogTitle>Adicionar prioridade</DialogTitle>
+                </DialogHeader>
+                <CreateAndEditPriorityForm />
+              </DialogContent>
+            </Dialog>
+          </div>
         </CardHeader>
         <CardContent>
-          <PreviewPriorityCard />
+          <PriorityList />
         </CardContent>
       </Card>
     </div>

@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
+// import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
 import {
   Dialog,
   DialogContent,
@@ -28,7 +28,7 @@ export default function PriorityListItem({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="my-1 flex w-full items-center justify-between rounded-xl px-6 py-4 transition-all ease-in-out hover:cursor-pointer hover:bg-muted"
+          className="my-1 flex w-full items-center justify-between rounded-xl px-4 py-2 transition-all ease-in-out hover:cursor-pointer hover:bg-muted"
         >
           <span className="flex items-center justify-center text-xs capitalize text-muted-foreground md:text-base">
             {title}
@@ -37,28 +37,28 @@ export default function PriorityListItem({
           {level === 'Importante' ? (
             <>
               <div className="flex items-center justify-center gap-4">
-                <span className="hidden text-xs text-muted-foreground md:flex">
+                <span className="flex text-xs text-muted-foreground">
                   Importante
                 </span>
-                <GiBoltShield className="text-secondary-800 h-6 w-6 shadow-sm" />
+                {/* <GiBoltShield className="text-secondary-800 h-6 w-6 shadow-sm" /> */}
               </div>
             </>
           ) : level === 'Menos importante' ? (
             <>
               <div className="flex items-center justify-center gap-4">
-                <span className="hidden text-xs text-muted-foreground md:flex">
+                <span className="flex text-xs text-muted-foreground">
                   Menos importante
                 </span>
-                <GiEdgedShield className="text-secondary-900 h-6 w-6 shadow-sm" />
+                {/* <GiEdgedShield className="text-secondary-900 h-6 w-6 shadow-sm" /> */}
               </div>
             </>
           ) : (
             <>
               <div className="flex items-center justify-center gap-4">
-                <span className="hidden text-xs text-muted-foreground md:flex">
+                <span className="flex text-xs text-muted-foreground">
                   Muito importante
                 </span>
-                <GiBorderedShield className="text-secondary-750 h-6 w-6 shadow-sm" />
+                {/* <GiBorderedShield className="text-secondary-750 h-6 w-6 shadow-sm" /> */}
               </div>
             </>
           )}

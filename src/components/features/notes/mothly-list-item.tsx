@@ -23,12 +23,12 @@ export default function MothlyListItem({ title, value, id }: Props) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="my-1 flex w-full items-center justify-between rounded-xl px-6 py-4 transition-all ease-in-out hover:cursor-pointer hover:bg-muted"
+          className="my-1 flex w-full items-center justify-between rounded-xl px-4 py-2 transition-all ease-in-out hover:cursor-pointer hover:bg-muted"
         >
           <span className="flex items-center justify-center text-xs capitalize text-muted-foreground md:text-base">
             {title}
           </span>
-          <span className="flex h-6 w-20 items-center justify-center text-xs text-muted-foreground md:w-24 md:text-base">
+          <span className="flex h-6 items-center justify-end text-xs text-muted-foreground md:text-base">
             {value}
           </span>
         </motion.li>
