@@ -1,8 +1,3 @@
-import {
-  handleCombinedMonthlyBalance,
-  handleMostSpentCategoryByMonth,
-  shortNumber,
-} from '@/utils'
 import { UserData } from '@/lib/types'
 import { useDateStore } from '@/store'
 import { BiTransfer } from 'react-icons/bi'
@@ -10,6 +5,9 @@ import { MdOutlineCategory } from 'react-icons/md'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import WalletCard from '../../@globals/wallet-card'
+import { handleCombinedMonthlyBalance } from '@/utils/combined-monthly-balance'
+import { handleMostSpentCategoryByMonth } from '@/utils/most-spent-category-by-month'
+import { shortNumber } from '@/utils/short-number'
 
 export default function TransactionsCards({ user }: { user: UserData }) {
   const { date } = useDateStore()

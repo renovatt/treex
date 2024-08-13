@@ -2,23 +2,21 @@
 import { UserData } from '@/lib/types'
 import { TbMoneybag } from 'react-icons/tb'
 import { IoWalletOutline } from 'react-icons/io5'
-import {
-  handleCurrentMonthlyBalance,
-  handleMostSpentCategory,
-  handleWalletBalance,
-  monthlyExpensesCalculator,
-  shortNumber,
-} from '@/utils'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
 import { useGetMonthly } from '@/hooks/useGetMonthly'
 import WalletCard from '../../@globals/wallet-card'
+import { handleCurrentMonthlyBalance } from '@/utils/combined-monthly-balance'
+import { shortNumber } from '@/utils/short-number'
+import { handleMonthlyExpensesCalculator } from '@/utils/monthly-expenses-calculator'
+import { handleMostSpentCategory } from '@/utils/most-spent-category'
+import { handleWalletBalance } from '@/utils/wallet-balance'
 
 export default function DashCards({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
   const { monthlyData } = useGetMonthly(user)
 
-  const monthlyPreview = monthlyExpensesCalculator(monthlyData)
+  const monthlyPreview = handleMonthlyExpensesCalculator(monthlyData)
   const allResult = handleWalletBalance(transactionData)
   const monthlyResult = handleCurrentMonthlyBalance(transactionData)
   const categoryResultAll = handleMostSpentCategory(transactionData)

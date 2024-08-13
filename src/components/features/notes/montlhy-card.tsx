@@ -1,12 +1,13 @@
 import { UserData } from '@/lib/types'
 import { TbReportMoney } from 'react-icons/tb'
-import { monthlyExpensesCalculator, shortNumber } from '@/utils'
 import { useGetMonthly } from '@/hooks/useGetMonthly'
 import WalletCard from '../../@globals/wallet-card'
+import { handleMonthlyExpensesCalculator } from '@/utils/monthly-expenses-calculator'
+import { shortNumber } from '@/utils/short-number'
 
 export default function MontlhyCard({ user }: { user: UserData }) {
   const { monthlyData } = useGetMonthly(user)
-  const result = monthlyExpensesCalculator(monthlyData)
+  const result = handleMonthlyExpensesCalculator(monthlyData)
   const shortResult = shortNumber(result)
   return (
     <WalletCard

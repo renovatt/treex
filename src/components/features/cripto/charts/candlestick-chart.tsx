@@ -1,11 +1,11 @@
 'use client'
-import createCandle from '@/utils'
 import Chart from 'react-apexcharts'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { useGetCandles } from '@/hooks/useGetCandles'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { ApexOptions } from 'apexcharts'
+import createCandle from '@/utils/create-candle'
 
 export type ChartState = {
   options: ApexOptions

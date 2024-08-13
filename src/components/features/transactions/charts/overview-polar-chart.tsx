@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/chart'
 import { UserData } from '@/lib/types'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
-import { getCategoryTotals } from '@/utils/get-category-totals'
+import { getCategoryTotals } from '@/utils/category-totals'
 
 export function OverviewPolarChart({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
