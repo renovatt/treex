@@ -63,9 +63,9 @@ export function OverviewBarChart({ user }: { user: UserData }) {
           />
           <Bar
             dataKey="total"
-            fill="currentColor"
+            fill="hsl(var(--chart-2))"
             radius={[8, 8, 0, 0]}
-            className="fill-primary"
+            className="hsl(var(--chart-2))"
           />
         </BarChart>
       </ChartContainer>
