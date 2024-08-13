@@ -1,6 +1,5 @@
 'use client'
 import { motion } from 'framer-motion'
-import EditMonthlyForm from '@/components/features/notes/forms/edit-monthly-form'
 import {
   Dialog,
   DialogContent,
@@ -8,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import CreateAndEditMonthlyForm from './forms/create-and-edit-monthly-form'
 
 type Props = {
   id: string
@@ -34,10 +34,10 @@ export default function MothlyListItem({ title, value, id }: Props) {
         </motion.li>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="items-start">
           <DialogTitle>Editar despesa</DialogTitle>
         </DialogHeader>
-        <EditMonthlyForm id={id} />
+        <CreateAndEditMonthlyForm id={id} />
       </DialogContent>
     </Dialog>
   )

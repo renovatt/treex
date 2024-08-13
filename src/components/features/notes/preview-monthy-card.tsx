@@ -4,7 +4,6 @@ import { UserData } from '@/lib/types'
 import { useUser } from '@/hooks/useUser'
 import { MdOutlineAddBox } from 'react-icons/md'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import MonthlyForm from '@/components/features/notes/forms/monthly-form'
 import {
   Dialog,
   DialogContent,
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import MonthlyListContent from './monthly-list-content'
+import CreateAndEditMonthlyForm from './forms/create-and-edit-monthly-form'
 
 export default function PreviewMonthyCard() {
   const [user, loading] = useAuthState(auth)
@@ -32,10 +32,10 @@ export default function PreviewMonthyCard() {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <DialogHeader>
+            <DialogHeader className="items-start">
               <DialogTitle>Adicionar despesa</DialogTitle>
             </DialogHeader>
-            <MonthlyForm />
+            <CreateAndEditMonthlyForm />
           </DialogContent>
         </Dialog>
       </section>

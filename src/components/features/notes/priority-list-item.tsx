@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
 import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
-import EditPriorityForm from '@/components/features/notes/forms/edit-priority-form'
 import {
   Dialog,
   DialogContent,
@@ -9,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import CreateAndEditPriorityForm from './forms/create-and-edit-priority-form'
 
 type PriorityItemListProps = {
   id: string
@@ -65,10 +65,10 @@ export default function PriorityListItem({
         </motion.li>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="items-start">
           <DialogTitle>Editar prioridade</DialogTitle>
         </DialogHeader>
-        <EditPriorityForm id={id} />
+        <CreateAndEditPriorityForm id={id} />
       </DialogContent>
     </Dialog>
   )

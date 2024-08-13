@@ -15,8 +15,8 @@ export default function Page() {
     <ViewContainer>
       <Header title="Anotações" description="Despesas e metas" />
       <section className="flex w-full flex-col items-start justify-start gap-4 overflow-y-auto">
-        <GridNotes />
         <section className="w-full space-y-5">
+          <GridNotes />
           <Overview />
         </section>
       </section>

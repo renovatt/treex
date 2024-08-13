@@ -14,17 +14,17 @@ export default function Overview() {
       <Card className="col-span-4">
         <CardHeader>
           <CardTitle>Despesas previstas</CardTitle>
-          <CardDescription>Deixe sua anotação</CardDescription>
+          <CardDescription>Anote suas despesas futuras</CardDescription>
         </CardHeader>
         <CardContent>
           <PreviewMonthyCard />
         </CardContent>
       </Card>
 
-      <Card className="col-span-3">
+      <Card className="col-span-4 lg:col-span-3">
         <CardHeader>
           <CardTitle>Lista de prioridades</CardTitle>
-          <CardDescription>Você fez 265 transações neste mês.</CardDescription>
+          <CardDescription>Crie sua lista de prioridades</CardDescription>
         </CardHeader>
         <CardContent>
           <PreviewPriorityCard />

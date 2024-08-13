@@ -2,7 +2,6 @@
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
 import { useUser } from '@/hooks/useUser'
-import PriorityForm from '@/components/features/notes/forms/priority-form'
 import { MdOutlineAddBox } from 'react-icons/md'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import PriorityListContent from './priority-list-content'
@@ -14,6 +13,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
+import CreateAndEditPriorityForm from './forms/create-and-edit-priority-form'
 
 export default function PreviewPriorityCard() {
   const [user, loading] = useAuthState(auth)
@@ -32,10 +32,10 @@ export default function PreviewPriorityCard() {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <DialogHeader>
+            <DialogHeader className="items-start">
               <DialogTitle>Adicionar prioridade</DialogTitle>
             </DialogHeader>
-            <PriorityForm />
+            <CreateAndEditPriorityForm />
           </DialogContent>
         </Dialog>
       </section>

@@ -1,7 +1,11 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
 import { UserData } from '@/lib/types'
-import { savingUserPriorityList } from '@/lib/db'
+import {
+  deletePriorityDoc,
+  savingUserPriorityList,
+  updatingUserPriorityList,
+} from '@/lib/db'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -23,10 +27,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useEffect, useState } from 'react'
+import { getPriorityDoc } from '@/lib/gets'
+import { LoaderCircle } from 'lucide-react'
 
 const level = ['Importante', 'Menos importante', 'Muito importante'] as const
 
-export default function PriorityForm() {
+export default function CreateAndEditPriorityForm({ id }: { id?: string }) {
+  const [isLoading, setIsLoading] = useState(false)
+
   const form = useForm<PriorityFormProps>({
     mode: 'all',
     reValidateMode: 'onChange',
@@ -36,17 +45,68 @@ export default function PriorityForm() {
   const [user] = useAuthState(auth)
 
   const handleFormSubmit = async (data: PriorityFormProps) => {
-    const { status, message } = await savingUserPriorityList(
-      data,
+    setIsLoading(true)
+    try {
+      if (id) {
+        const newData = { ...data }
+        newData.id = id
+
+        const { status, message } = await updatingUserPriorityList(
+          newData,
+          user as UserData,
+        )
+
+        if (!status) {
+          toast.error(message)
+          return
+        }
+        toast.success(message)
+        return
+      }
+
+      const { status, message } = await savingUserPriorityList(
+        data,
+        user as UserData,
+      )
+      if (!status) {
+        toast.error(message)
+        return
+      }
+      toast.success(message)
+      form.reset()
+    } catch (error) {
+      toast.error('Erro desconhecido')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDelete = async () => {
+    const { status, message } = await deletePriorityDoc(
       user as UserData,
+      id as string,
     )
     if (!status) {
       toast.error(message)
       return
     }
     toast.success(message)
-    form.reset()
   }
+
+  useEffect(() => {
+    if (id) {
+      const handleGetPriorityDoc = async () => {
+        const data = await getPriorityDoc(user as UserData, id)
+        const defaultValues = {
+          name: data?.name,
+          level: data?.level,
+        }
+
+        form.reset(defaultValues)
+      }
+      handleGetPriorityDoc()
+    }
+  }, [id, form, user])
 
   return (
     <Form {...form}>
@@ -75,7 +135,11 @@ export default function PriorityForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nível</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Escolhar nível" />
@@ -93,9 +157,27 @@ export default function PriorityForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Salvar
-        </Button>
+        <div className="space-y-2">
+          {isLoading ? (
+            <Button type="submit" className="w-full">
+              <LoaderCircle className="animate-spin" />
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full">
+              {id ? 'Editar' : 'Salvar'}
+            </Button>
+          )}
+          {id && (
+            <Button
+              variant="outline"
+              type="button"
+              className="w-full"
+              onClick={handleDelete}
+            >
+              Excluir
+            </Button>
+          )}
+        </div>
       </form>
     </Form>
   )
