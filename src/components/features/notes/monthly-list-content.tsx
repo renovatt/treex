@@ -19,17 +19,24 @@ export default function MonthlyListContent({ user }: { user: UserData }) {
       ref={tableRef}
       className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
     >
-      {monthlyData.map((monthly) => (
-        <MothlyListItem
-          id={monthly.id ?? ''}
-          key={monthly.id}
-          title={monthly.name}
-          value={Number(monthly.value).toLocaleString('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          })}
-        />
-      ))}
+    
+      {!monthlyData.length ? (
+        <div className="flex w-full h-80 items-center justify-center">
+          <p className="text-sm text-muted-foreground font-semibold">Sem despesas mensais</p>
+        </div>
+      ) : (
+        monthlyData.map((monthly) => (
+          <MothlyListItem
+            id={monthly.id ?? ''}
+            key={monthly.id}
+            title={monthly.name}
+            value={Number(monthly.value).toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          />
+        ))
+      )}
     </ul>
   )
 }

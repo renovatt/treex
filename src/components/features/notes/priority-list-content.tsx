@@ -19,14 +19,20 @@ export default function PriorityListContent({ user }: { user: UserData }) {
       ref={tableRef}
       className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
     >
-      {priorityData.map((priority) => (
-        <PriorityListItem
-          id={priority.id ?? ''}
-          key={priority.id}
-          title={priority.name}
-          level={priority.level}
-        />
-      ))}
+      {!priorityData.length ? (
+        <div className="flex w-full h-80 items-center justify-center">
+        <p className="text-sm text-muted-foreground font-semibold">Ainda não há itens</p>
+      </div>
+      ) : (
+        priorityData.map((priority) => (
+          <PriorityListItem
+            id={priority.id ?? ''}
+            key={priority.id}
+            title={priority.name}
+            level={priority.level}
+          />
+        ))
+      )}
     </ul>
   )
 }

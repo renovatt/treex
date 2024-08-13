@@ -43,28 +43,34 @@ export default function ListContent({ user }: { user: UserData }) {
   return (
     <ul
       ref={tableRef}
-      className="flex h-52 w-full flex-col-reverse items-start justify-center space-y-2 overflow-scroll overflow-x-hidden md:h-80"
+      className="flex h-96 w-full flex-col-reverse items-start justify-start space-y-2 overflow-scroll overflow-x-hidden"
     >
-      {filteredData?.map((transaction) => (
-        <ListItem
-          key={transaction.id}
-          id={transaction.id ?? ''}
-          type={transaction.transaction ? 'expense' : 'income'}
-          date={new Date(transaction.date ?? '').toLocaleDateString('pt-br', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-          })}
-          icon={
-            transaction.transaction ? HiArrowTrendingDown : HiArrowTrendingUp
-          }
-          title={transaction.name}
-          value={Number(transaction.value).toLocaleString('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          })}
-        />
-      ))}
+      {!filteredData?.length ?(
+        <div className="flex w-full h-80 items-center justify-center">
+        <p className="text-sm text-muted-foreground font-semibold">Ainda não há transações</p>
+      </div>
+      ):(
+        filteredData?.map((transaction) => (
+          <ListItem
+            key={transaction.id}
+            id={transaction.id ?? ''}
+            type={transaction.transaction ? 'expense' : 'income'}
+            date={new Date(transaction.date ?? '').toLocaleDateString('pt-br', {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            })}
+            icon={
+              transaction.transaction ? HiArrowTrendingDown : HiArrowTrendingUp
+            }
+            title={transaction.name}
+            value={Number(transaction.value).toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          />
+        ))
+      )}
     </ul>
   )
 }
