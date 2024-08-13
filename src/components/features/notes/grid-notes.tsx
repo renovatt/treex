@@ -9,12 +9,12 @@ export default function GridNotes() {
   const [user, loading] = useAuthState(auth)
   const { userLoaded } = useUser(user as UserData)
   return (
-    <section className="min-w-96">
+    <>
       {userLoaded && !loading ? (
         <MontlhyCard user={userLoaded} />
       ) : (
         <p>Carregando..</p>
       )}
-    </section>
+    </>
   )
 }

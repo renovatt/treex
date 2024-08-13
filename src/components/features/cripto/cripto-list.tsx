@@ -9,7 +9,7 @@ export default function CriptoList() {
   )
   return (
     <section className="size-full md:mb-4">
-      <ul className="flex h-52 max-h-[30rem] w-full flex-col items-center justify-start gap-2 overflow-scroll overflow-x-hidden lg:h-full">
+      <ul className="flex h-96 max-h-[30rem] w-full flex-col items-center justify-start gap-2 overflow-scroll overflow-x-hidden lg:h-full">
         {isError && (
           <h1 className="text-xs text-white">Dados não podem ser carregados</h1>
         )}

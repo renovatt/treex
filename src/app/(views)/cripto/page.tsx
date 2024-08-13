@@ -16,8 +16,8 @@ export default function Page() {
       <Header title="Cripto" description="Mundo cripto" />
       <section className="flex w-full flex-col justify-between gap-10 overflow-y-auto overflow-x-hidden xl:flex-row">
         <section className="flex w-full flex-col items-center justify-start gap-5">
-          <CriptoCards />
           <section className="w-full space-y-5">
+            <CriptoCards />
             <Overview />
           </section>
         </section>
