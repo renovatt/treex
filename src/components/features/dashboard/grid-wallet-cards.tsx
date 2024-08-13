@@ -1,9 +1,9 @@
 'use client'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
-import { useUser } from '@/hooks/useUser'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import DashCards from './dash-cards'
+import { useUser } from '@/hooks/use-user'
 
 export default function GridWalletCards() {
   const [user, loading] = useAuthState(auth)

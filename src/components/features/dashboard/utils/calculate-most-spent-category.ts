@@ -4,7 +4,7 @@ interface CategoryTotals {
   [category: string]: number
 }
 
-export const handleMostSpentCategory = (
+export const calculateMostSpentCategory = (
   data: TransactionFormProps[],
   currentMonthOnly = false,
 ) => {

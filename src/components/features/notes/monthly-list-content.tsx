@@ -1,8 +1,8 @@
 'use client'
 import { UserData } from '@/lib/types'
 import { useEffect, useRef } from 'react'
-import { useGetMonthly } from '@/hooks/useGetMonthly'
 import MothlyListItem from '@/components/features/notes/mothly-list-item'
+import { useGetMonthly } from '@/hooks/use-get-monthly'
 
 export default function MonthlyListContent({ user }: { user: UserData }) {
   const { monthlyData } = useGetMonthly(user)

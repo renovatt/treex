@@ -1,5 +1,5 @@
 'use client'
-import { useGetCrypto } from '@/hooks/useGetCrypto'
+import { useGetCrypto } from '@/hooks/use-get-crypto'
 import ListItem, { CriptoCoinTypeProps } from './list-item'
 
 export default function CriptoList() {

@@ -1,7 +1,7 @@
 'use client'
-import { useGetDolar } from '@/hooks/useGetDolar'
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia'
 import WalletCard from '../../@globals/wallet-card'
+import { useGetDolar } from '@/hooks/use-get-dolar'
 
 export default function CriptoCards() {
   const { data: dolar } = useGetDolar()

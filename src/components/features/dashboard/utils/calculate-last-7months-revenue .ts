@@ -1,6 +1,6 @@
 import { TransactionFormProps } from '@/schemas'
 
-export const calculateRevenueByMonth = (data: TransactionFormProps[]) => {
+export const calculateLast7MonthsRevenue = (data: TransactionFormProps[]) => {
   const currentDate = new Date()
   const last7Months = []
 

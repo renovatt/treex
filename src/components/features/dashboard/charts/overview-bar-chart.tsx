@@ -5,9 +5,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { UserData } from '@/lib/types'
-import { calculateRevenueByMonth } from '@/utils/calculate-revenue-by-month'
 import {
   Bar,
   BarChart,
@@ -16,10 +14,12 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { calculateLast7MonthsRevenue } from '../utils/calculate-last-7months-revenue '
+import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export function OverviewBarChart({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
-  const calculateTransactions = calculateRevenueByMonth(transactionData)
+  const calculateTransactions = calculateLast7MonthsRevenue(transactionData)
 
   const data = calculateTransactions.map((item) => ({
     name: item.month,

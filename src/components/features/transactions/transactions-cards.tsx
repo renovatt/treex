@@ -1,20 +1,23 @@
 import { UserData } from '@/lib/types'
 import { useDateStore } from '@/store'
 import { MdOutlineCategory } from 'react-icons/md'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import WalletCard from '../../@globals/wallet-card'
-import { handleCombinedMonthlyBalance } from '@/utils/combined-monthly-balance'
-import { handleMostSpentCategoryByMonth } from '@/utils/most-spent-category-by-month'
 import { shortNumber } from '@/utils/short-number'
 import { CircleDollarSign } from 'lucide-react'
+import { calculateCombinedMonthlyWithDateRevenue } from './utils/calculate-combined-monthly-balance'
+import { calculateMostSpentCategoryByMonth } from './utils/calculate-most-spent-category-by-month'
+import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export default function TransactionsCards({ user }: { user: UserData }) {
   const { date } = useDateStore()
   const { transactionData } = useGetTransactions(user)
 
-  const monthlyResult = handleCombinedMonthlyBalance(transactionData, date)
-  const categoryResultMonthly = handleMostSpentCategoryByMonth(
+  const monthlyResult = calculateCombinedMonthlyWithDateRevenue(
+    transactionData,
+    date,
+  )
+  const categoryResultMonthly = calculateMostSpentCategoryByMonth(
     transactionData,
     date,
   )

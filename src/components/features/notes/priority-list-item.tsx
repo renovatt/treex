@@ -1,6 +1,5 @@
 'use client'
 import { motion } from 'framer-motion'
-// import { GiBoltShield, GiEdgedShield, GiBorderedShield } from 'react-icons/gi'
 import {
   Dialog,
   DialogContent,

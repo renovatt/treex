@@ -2,27 +2,27 @@
 import { UserData } from '@/lib/types'
 import { TbMoneybag } from 'react-icons/tb'
 import { IoWalletOutline } from 'react-icons/io5'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
-import { useGetMonthly } from '@/hooks/useGetMonthly'
 import WalletCard from '../../@globals/wallet-card'
-import { handleCurrentMonthlyBalance } from '@/utils/combined-monthly-balance'
 import { shortNumber } from '@/utils/short-number'
-import { handleMonthlyExpensesCalculator } from '@/utils/monthly-expenses-calculator'
-import { handleMostSpentCategory } from '@/utils/most-spent-category'
-import { handleWalletBalance } from '@/utils/wallet-balance'
+import { calculateWallet } from './utils/calculate-wallet'
+import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'
+import { calculateMostSpentCategory } from './utils/calculate-most-spent-category'
+import { calculateCurrentMonthlyRevenue } from './utils/calculate-current-monthly-revenue'
+import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetMonthly } from '@/hooks/use-get-monthly'
 
 export default function DashCards({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
   const { monthlyData } = useGetMonthly(user)
 
-  const monthlyPreview = handleMonthlyExpensesCalculator(monthlyData)
-  const allResult = handleWalletBalance(transactionData)
-  const monthlyResult = handleCurrentMonthlyBalance(transactionData)
-  const categoryResultAll = handleMostSpentCategory(transactionData)
+  const expensesForecast = calculateExpensesForecast(monthlyData)
+  const calculatedWallet = calculateWallet(transactionData)
+  const monthlyRevenue = calculateCurrentMonthlyRevenue(transactionData)
+  const categoryResultAll = calculateMostSpentCategory(transactionData)
 
-  const wallet = shortNumber(allResult.total)
-  const monthlyBalance = shortNumber(monthlyResult.total)
+  const wallet = shortNumber(calculatedWallet.total)
+  const monthlyBalance = shortNumber(monthlyRevenue.total)
   const categoryResult = shortNumber(categoryResultAll.total)
   return (
     <>
@@ -42,7 +42,7 @@ export default function DashCards({ user }: { user: UserData }) {
         title="Previsão de gastos"
         description="Previsão de gastos"
         icon={MdOutlineMoneyOff}
-        value={monthlyPreview.toLocaleString('pt-br', {
+        value={expensesForecast.toLocaleString('pt-br', {
           style: 'currency',
           currency: 'BRL',
         })}

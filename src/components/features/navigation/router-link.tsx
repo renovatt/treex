@@ -27,7 +27,7 @@ export default function RouterLink({
         variant={isActive ? 'default' : 'ghost'}
         className="w-full space-x-4"
       >
-        <Icon className="size-4" />
+        <Icon className="size-4 flex-shrink-0" />
         <span
           className={`w-28 items-center whitespace-nowrap text-xs ${isOpen ? 'flex' : 'hidden'}`}
         >

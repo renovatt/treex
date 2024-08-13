@@ -1,9 +1,9 @@
 'use client'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
-import { useUser } from '@/hooks/useUser'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import MonthlyListContent from './monthly-list-content'
+import { useUser } from '@/hooks/use-user'
 
 export default function MonthyList() {
   const [user, loading] = useAuthState(auth)

@@ -1,8 +1,8 @@
 'use client'
 import { UserData } from '@/lib/types'
 import { useEffect, useRef } from 'react'
-import { useGetPriority } from '@/hooks/useGetPriority'
 import PriorityListItem from './priority-list-item'
+import { useGetPriority } from '@/hooks/use-get-priority'
 
 export default function PriorityListContent({ user }: { user: UserData }) {
   const { priorityData } = useGetPriority(user)

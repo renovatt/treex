@@ -1,6 +1,6 @@
 import { TransactionFormProps } from '@/schemas'
 
-export const handleWalletBalance = (data: TransactionFormProps[]) => {
+export const calculateWallet = (data: TransactionFormProps[]) => {
   const income = data
     .filter((item) => !item.transaction)
     .map((transactions) => parseFloat(transactions.value))

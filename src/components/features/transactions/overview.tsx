@@ -6,7 +6,7 @@ import {
   Card,
 } from '@/components/ui/card'
 import ListTransactions from '../../@globals/list-transactions'
-import PolarChartPreloader from './charts/polar-chart-preloader'
+import PolarChartPreloader from './charts/preloaders/polar-chart-preloader'
 
 export default function Overview() {
   return (

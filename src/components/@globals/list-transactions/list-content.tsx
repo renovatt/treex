@@ -1,10 +1,10 @@
 'use client'
 import { UserData } from '@/lib/types'
 import { useEffect, useRef } from 'react'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import { useDateStore } from '@/store'
 import ListItem from './list-item'
+import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export default function ListContent({ user }: { user: UserData }) {
   const { date, setDate } = useDateStore()

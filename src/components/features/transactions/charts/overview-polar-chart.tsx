@@ -10,12 +10,12 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart'
 import { UserData } from '@/lib/types'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
-import { getCategoryTotals } from '@/utils/category-totals'
+import { calculateTotalByCategory } from '@/utils/calculate-total-by-category'
+import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export function OverviewPolarChart({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
-  const categoryTotals = getCategoryTotals(transactionData)
+  const categoryTotals = calculateTotalByCategory(transactionData)
 
   const sortedCategory = categoryTotals
     .filter((item) => item.category !== 'Bônus/Entrada/Salário')

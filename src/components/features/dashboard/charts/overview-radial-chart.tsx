@@ -8,8 +8,8 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart'
 import { UserData } from '@/lib/types'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { calculateBalanceTransactions } from '../utils/calculate-balance-transactions'
+import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export function OverviewRadialChart({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)

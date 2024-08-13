@@ -1,13 +1,13 @@
 import { UserData } from '@/lib/types'
-import { useGetMonthly } from '@/hooks/useGetMonthly'
 import WalletCard from '../../@globals/wallet-card'
-import { handleMonthlyExpensesCalculator } from '@/utils/monthly-expenses-calculator'
 import { shortNumber } from '@/utils/short-number'
 import { CircleDollarSign } from 'lucide-react'
+import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'
+import { useGetMonthly } from '@/hooks/use-get-monthly'
 
 export default function MontlhyCard({ user }: { user: UserData }) {
   const { monthlyData } = useGetMonthly(user)
-  const result = handleMonthlyExpensesCalculator(monthlyData)
+  const result = calculateExpensesForecast(monthlyData)
   const shortResult = shortNumber(result)
   return (
     <WalletCard

@@ -1,15 +1,15 @@
 import { UserData } from '@/lib/types'
-import { useGetDolar } from '@/hooks/useGetDolar'
-import { RiMoneyDollarCircleLine } from 'react-icons/ri'
-import { useGetTransactions } from '@/hooks/useGetTransactions'
 import WalletCard from '../../@globals/wallet-card'
+import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { shortNumber } from '@/utils/short-number'
-import { handleWalletBalance } from '@/utils/wallet-balance'
+import { calculateWallet } from '../dashboard/utils/calculate-wallet'
+import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetDolar } from '@/hooks/use-get-dolar'
 
 export default function CardDolar({ user }: { user: UserData }) {
   const { data: dolar } = useGetDolar()
   const { transactionData } = useGetTransactions(user)
-  const allResult = handleWalletBalance(transactionData)
+  const allResult = calculateWallet(transactionData)
 
   const handleWalletToDolar = (walletValue: number) => {
     const rate = dolar?.data.USDBRL.bid
@@ -19,6 +19,7 @@ export default function CardDolar({ user }: { user: UserData }) {
 
   const dolarResult = handleWalletToDolar(allResult.total).toFixed(2)
   const shortConvertedNumber = shortNumber(Number(dolarResult))
+
   return (
     <WalletCard
       title="Dolar saldo"

@@ -1,9 +1,9 @@
 'use client'
 import { auth } from '@/firebase'
 import { UserData } from '@/lib/types.js'
-import { useUser } from '@/hooks/useUser'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import ListContentIncome from './list-content-incone'
+import { useUser } from '@/hooks/use-user'
 
 export default function ListTransactionsIncome() {
   const [user, loading] = useAuthState(auth)

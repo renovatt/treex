@@ -4,7 +4,7 @@ import {
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
 } from 'react-icons/md'
-import Navbar from '../navbar'
+import Navbar from '../navigation/navbar'
 import SidebarContainer from './sidebar-container'
 import { ReactNode } from 'react'
 
@@ -14,7 +14,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
     <SidebarContainer>
       <aside
         className={`fixed bottom-0 left-0 z-50 flex h-20 w-full border border-x-transparent border-r-muted border-t-muted transition-all ease-in-out md:relative md:h-full md:border-y-transparent md:border-r-muted ${
-          status.isSelected ? 'md:w-60' : 'md:w-20'
+          status.isSelected ? 'md:w-60' : 'md:w-14'
         }`}
       >
         {status.isSelected ? (

@@ -28,10 +28,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { categories } from '@/mocks'
 import { useEffect, useState } from 'react'
 import { getTransactionDoc } from '@/lib/gets'
 import { LoaderCircle } from 'lucide-react'
+import { categories } from '@/static/categories'
 
 export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
