@@ -3,6 +3,8 @@ import { FcGoogle } from 'react-icons/fc'
 import { signInWithGoogle } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 
 export default function GoogleButton() {
   const router = useRouter()
@@ -18,7 +20,7 @@ export default function GoogleButton() {
   }
   return (
     <>
-      <button
+      <Button
         onClick={handleGoogleLogin}
         className="flex items-center justify-center gap-4 rounded-full border bg-secondary py-3 focus-within:opacity-70 hover:cursor-pointer"
       >
@@ -26,15 +28,14 @@ export default function GoogleButton() {
         <span className="text-xs font-bold text-muted-foreground">
           Login com o Google
         </span>
-      </button>
+      </Button>
 
-      <section className="flex items-center justify-around opacity-50">
-        <div className="h-[1px] w-20"></div>
+      <section className="flex flex-col items-center justify-around gap-2 py-2">
         <span className="text-xs text-muted-foreground">
-          ou Login com E-mail
+          Entrar com uma conta
         </span>
-        <div className="h-[1px] w-20"></div>
       </section>
+      <Separator className="my-4" />
     </>
   )
 }
