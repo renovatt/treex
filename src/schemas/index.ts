@@ -3,11 +3,11 @@ import { z } from 'zod'
 export const TransactionSchema = z.object({
   id: z.string().optional(),
   name: z
-    .string({ required_error: 'Nome obrigatório' })
+    .string({ required_error: 'Campo obrigatório' })
     .min(3, 'Nome obrigatório')
     .max(24, 'Nome é muito longo'),
   value: z
-    .string({ required_error: 'Valor obrigatório' })
+    .string({ required_error: 'Campo obrigatório' })
     .min(1, 'Valor obrigatório')
     .refine(
       (value: string) => {
@@ -27,7 +27,7 @@ export const TransactionSchema = z.object({
 export const PrioritySchema = z.object({
   id: z.string().optional(),
   name: z
-    .string({ required_error: 'Nome obrigatório' })
+    .string({ required_error: 'Campo obrigatório' })
     .min(3, 'Nome obrigatório')
     .max(24, 'Nome é muito longo'),
   level: z.enum(['Importante', 'Menos importante', 'Muito importante']),
@@ -37,11 +37,11 @@ export const PrioritySchema = z.object({
 export const MonthyPreviewSchema = z.object({
   id: z.string().optional(),
   name: z
-    .string({ required_error: 'Nome obrigatório' })
+    .string({ required_error: 'Campo obrigatório' })
     .min(3, 'Nome obrigatório')
     .max(24, 'Nome é muito longo'),
   value: z
-    .string({ required_error: 'Valor obrigatório' })
+    .string({ required_error: 'Campo obrigatório' })
     .min(1, 'Valor obrigatório')
     .refine(
       (value: string) => {

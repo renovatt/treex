@@ -3,10 +3,11 @@ import ThumbSlider from '../swiper-thumb'
 import { LiaCopyright } from 'react-icons/lia'
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
+import Link from 'next/link'
 
 export default function AuthContainer({ children }: { children: ReactNode }) {
   return (
-    <section className="dark: container relative flex h-[95%] w-[90%] items-center justify-center gap-2 overflow-hidden rounded-3xl p-4 lg:justify-between">
+    <section className="relative flex size-full items-center justify-center gap-2 overflow-hidden border p-4 lg:justify-between">
       <ThumbSlider />
       <aside className="flex h-full w-full items-center justify-center rounded-3xl lg:w-1/2">
         <motion.section
@@ -25,7 +26,14 @@ export default function AuthContainer({ children }: { children: ReactNode }) {
       <span className="absolute bottom-2 flex items-center justify-center gap-1 lg:right-5">
         <LiaCopyright className="text-xs text-muted-foreground" />
         <span className="text-xs text-muted-foreground">
-          2023 Desenvolvido por renovatt
+          2023 Desenvolvido por{' '}
+          <Link
+            className="hover:text-primary"
+            href="https://www.linkedin.com/in/renovatt/"
+            target="_blank"
+          >
+            @renovatt
+          </Link>
         </span>
       </span>
     </section>

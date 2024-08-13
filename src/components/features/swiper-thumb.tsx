@@ -15,13 +15,13 @@ export default function SwiperThumb() {
   ]
   return (
     <Fragment>
-      <section className="hidden h-full w-1/2 items-center justify-center rounded-3xl lg:flex">
+      <section className="hidden h-full w-1/2 items-center justify-center rounded-3xl bg-primary lg:flex">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
           loop={true}
           autoplay={{
-            delay: 8000,
+            delay: 3000,
             disableOnInteraction: false,
           }}
           modules={[EffectCoverflow, Autoplay]}

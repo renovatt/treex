@@ -15,7 +15,7 @@ export default function FooterForm({
     <>
       <span className="self-center text-xs text-muted-foreground">
         {label}
-        <Link className="text-secondary-800 px-1 text-xs" href={href}>
+        <Link className="px-1 text-xs text-primary hover:underline" href={href}>
           {link}
         </Link>
       </span>

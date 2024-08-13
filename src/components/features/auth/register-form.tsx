@@ -15,8 +15,12 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+import { LoaderCircle } from 'lucide-react'
 
 export default function RegisterForm() {
+  const [isLoading, setIsLoading] = useState(false)
+
   const form = useForm<RegisterFormProps>({
     mode: 'all',
     reValidateMode: 'onChange',
@@ -26,6 +30,8 @@ export default function RegisterForm() {
   const router = useRouter()
 
   const handleFormSubmit = async (data: RegisterFormProps) => {
+    setIsLoading(true)
+  try{
     const { status, message } = await createCredential(data)
     if (!status) {
       toast.error(message)
@@ -33,6 +39,11 @@ export default function RegisterForm() {
     }
     router.push('/login')
     toast.success(message)
+  } catch (error) {
+    toast.error('Erro desconhecido')
+  } finally{
+    setIsLoading(false)
+  }
   }
 
   return (
@@ -89,9 +100,15 @@ export default function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Cadastrar
-        </Button>
+        {isLoading ? (
+            <Button disabled className="w-full">
+              <LoaderCircle className="animate-spin" />
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full">
+              Cadastrar
+            </Button>
+          )}
       </form>
     </Form>
   )

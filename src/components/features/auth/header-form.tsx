@@ -21,7 +21,7 @@ export default function HeaderForm({ description, title }: HeaderFormProps) {
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
-          <TbLetterX className="h-10 w-10 p-1" />
+          <TbLetterX className="size-10 rounded bg-primary p-1 text-muted" />
         </motion.div>
       </span>
 

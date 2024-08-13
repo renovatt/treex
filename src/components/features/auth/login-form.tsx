@@ -16,8 +16,12 @@ import {
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useState } from 'react'
+import { LoaderCircle } from 'lucide-react'
 
 export default function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false)
+
   const form = useForm<LoginFormProps>({
     mode: 'all',
     reValidateMode: 'onChange',
@@ -27,13 +31,20 @@ export default function LoginForm() {
   const router = useRouter()
 
   const handleFormSubmit = async (data: LoginFormProps) => {
-    const { status, message } = await signInWithCredential(data)
+    setIsLoading(true)
+    try {
+      const { status, message } = await signInWithCredential(data)
     if (!status) {
       toast.error(message)
       return
     }
     router.push('/dashboard')
     toast.success(message)
+    } catch (error) {
+      toast.error('Erro desconhecido')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -78,13 +89,19 @@ export default function LoginForm() {
         />
         <Link
           href={'/recovery'}
-          className="text-secondary-800 self-end text-xs"
+          className="self-end text-xs text-primary hover:underline"
         >
           Esqueceu sua senha?
         </Link>
-        <Button type="submit" className="w-full">
-          Fazer login
-        </Button>
+        {isLoading ? (
+            <Button disabled className="w-full">
+              <LoaderCircle className="animate-spin" />
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full">
+              Fazer login
+            </Button>
+          )}
       </form>
     </Form>
   )

@@ -204,7 +204,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
 
         <div className="space-y-2">
           {isLoading ? (
-            <Button type="submit" className="w-full">
+            <Button disabled className="w-full">
               <LoaderCircle className="animate-spin" />
             </Button>
           ) : (
