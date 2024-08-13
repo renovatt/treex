@@ -3,11 +3,15 @@ import { auth } from '@/firebase'
 import { UserData } from '@/lib/types'
 import { useUser } from '@/hooks/useUser'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import PolarChart from './polar-chart'
+import { OverviewPolarChart } from './overview-polar-chart'
 
 export default function PolarChartPreloader() {
   const [user, loading] = useAuthState(auth)
   const { userLoaded } = useUser(user as UserData)
 
-  return <>{userLoaded && !loading ? <PolarChart user={userLoaded} /> : ''}</>
+  return (
+    <>
+      {userLoaded && !loading ? <OverviewPolarChart user={userLoaded} /> : ''}
+    </>
+  )
 }

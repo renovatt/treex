@@ -4,11 +4,9 @@ import {
   CardContent,
   CardDescription,
   Card,
-  CardFooter,
 } from '@/components/ui/card'
 import ListTransactions from '../../@globals/list-transactions'
-import { OverviewPolarChart } from './charts/overview-polar-chart'
-import { TrendingUp } from 'lucide-react'
+import PolarChartPreloader from './charts/polar-chart-preloader'
 
 export default function Overview() {
   return (
@@ -24,21 +22,13 @@ export default function Overview() {
       </Card>
 
       <Card className="col-span-4 flex flex-col lg:col-span-2">
-        <CardHeader className="items-center pb-0">
+        <CardHeader className="items-start pb-0">
           <CardTitle>Gastos por categorias</CardTitle>
-          <CardDescription>January - June 2024</CardDescription>
+          <CardDescription>Suas 5 categorias mais gastas</CardDescription>
         </CardHeader>
         <CardContent className="flex-1 pb-0">
-          <OverviewPolarChart />
+          <PolarChartPreloader />
         </CardContent>
-        <CardFooter className="flex-col gap-2 text-sm">
-          <div className="flex items-center gap-2 font-medium leading-none">
-            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Showing total visitors for the last 6 months
-          </div>
-        </CardFooter>
       </Card>
     </div>
   )

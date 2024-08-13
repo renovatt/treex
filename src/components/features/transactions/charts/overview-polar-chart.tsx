@@ -1,100 +1,55 @@
 'use client'
-
 import * as React from 'react'
-import { Label, Pie, PieChart } from 'recharts'
-
+import { Pie, PieChart } from 'recharts'
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-const chartData = [
-  { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-  { browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
-  { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-  { browser: 'other', visitors: 190, fill: 'var(--color-other)' },
-]
+import { UserData } from '@/lib/types'
+import { useGetTransactions } from '@/hooks/useGetTransactions'
+import { getCategoryTotals } from '@/utils/get-category-totals'
 
-const chartConfig = {
-  visitors: {
-    label: 'Visitors',
-  },
-  chrome: {
-    label: 'Chrome',
-    color: 'hsl(var(--chart-1))',
-  },
-  safari: {
-    label: 'Safari',
-    color: 'hsl(var(--chart-2))',
-  },
-  firefox: {
-    label: 'Firefox',
-    color: 'hsl(var(--chart-3))',
-  },
-  edge: {
-    label: 'Edge',
-    color: 'hsl(var(--chart-4))',
-  },
-  other: {
-    label: 'Other',
-    color: 'hsl(var(--chart-5))',
-  },
-} satisfies ChartConfig
+export function OverviewPolarChart({ user }: { user: UserData }) {
+  const { transactionData } = useGetTransactions(user)
+  const categoryTotals = getCategoryTotals(transactionData)
 
-export function OverviewPolarChart() {
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-  }, [])
+  const sortedCategory = categoryTotals
+    .filter((item) => item.category !== 'Bônus/Entrada/Salário')
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 5)
+
+  const data = sortedCategory.map((item, index) => ({
+    category: item.category,
+    revenue: item.total,
+    fill: `hsl(var(--chart-${index + 1}))`,
+  }))
+
+  const chartConfig = sortedCategory
+    .map((item, index) => ({
+      [item.category]: {
+        label: item.category,
+        color: `hsl(var(--chart-${index + 1}))`,
+      },
+    }))
+    .reduce((acc, item) => ({ ...acc, ...item }), {}) satisfies ChartConfig
 
   return (
     <ChartContainer
       config={chartConfig}
-      className="mx-auto aspect-square max-h-[250px]"
+      className="mx-auto aspect-square max-h-[400px]"
     >
       <PieChart>
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent hideLabel />}
+        <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+        <Pie data={data} dataKey="revenue" nameKey="category" />
+        <ChartLegend
+          align="center"
+          content={<ChartLegendContent nameKey="category" />}
+          className="-translate-y-2 flex-wrap gap-2 whitespace-nowrap [&>*]:basis-1/4 [&>*]:justify-center"
         />
-        <Pie
-          data={chartData}
-          dataKey="visitors"
-          nameKey="browser"
-          innerRadius={60}
-          strokeWidth={5}
-        >
-          <Label
-            content={({ viewBox }) => {
-              if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                return (
-                  <text
-                    x={viewBox.cx}
-                    y={viewBox.cy}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                  >
-                    <tspan
-                      x={viewBox.cx}
-                      y={viewBox.cy}
-                      className="fill-foreground text-3xl font-bold"
-                    >
-                      {totalVisitors.toLocaleString()}
-                    </tspan>
-                    <tspan
-                      x={viewBox.cx}
-                      y={(viewBox.cy || 0) + 24}
-                      className="fill-muted-foreground"
-                    >
-                      Visitors
-                    </tspan>
-                  </text>
-                )
-              }
-            }}
-          />
-        </Pie>
       </PieChart>
     </ChartContainer>
   )

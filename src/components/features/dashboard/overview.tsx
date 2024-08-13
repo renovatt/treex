@@ -5,8 +5,8 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import { OverviewBarChart } from './charts/overview-bar-chart'
 import ListTransactions from '../../@globals/list-transactions'
+import BarChartPreloader from './charts/bar-chart-preloader'
 
 export default function Overview() {
   return (
@@ -14,9 +14,12 @@ export default function Overview() {
       <Card className="col-span-4">
         <CardHeader>
           <CardTitle>Últimos 7 meses</CardTitle>
+          <CardDescription>
+            Veja seus ganhos dos últimos 7 meses
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <OverviewBarChart />
+          <BarChartPreloader />
         </CardContent>
       </Card>
 

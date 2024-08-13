@@ -267,58 +267,41 @@ export const shortNumber = (numero: number) => {
   }
 }
 
-export const calculateRevenueByMonth = (data: TransactionFormProps[]) => {
-  const currentDate = new Date()
-  const last7Months = []
-
-  for (let i = 6; i >= 0; i--) {
-    const month = new Date(currentDate)
-    month.setMonth(currentDate.getMonth() - i)
-    last7Months.push(month)
+// once
+export function getMonthlyTotals(transactions: TransactionFormProps[]) {
+  const formatMonth = (timestamp: number) => {
+    const date = new Date(timestamp)
+    return date.toLocaleString('en-US', { month: 'short' })
   }
 
-  const revenueByMonth = last7Months.map((month) => {
-    const firstDay = new Date(month.getFullYear(), month.getMonth(), 1)
-    const lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 0)
+  const getYear = (timestamp: number) => {
+    const date = new Date(timestamp)
+    return date.getFullYear()
+  }
 
-    const monthName = new Intl.DateTimeFormat('pt-BR', {
-      month: 'short',
-    }).format(month)
+  const monthlyTotals: { [key: string]: number } = {}
 
-    const capitalizedMonthName =
-      monthName.charAt(0).toUpperCase() + monthName.slice(1).toLowerCase()
+  const currentYear = new Date().getFullYear()
 
-    const income = data
-      .filter((transaction) => {
-        const transactionDate = new Date(transaction.date ?? '')
-        return (
-          transactionDate >= firstDay &&
-          transactionDate <= lastDay &&
-          !transaction.transaction
-        )
-      })
-      .reduce((total, transaction) => total + parseFloat(transaction.value), 0)
+  transactions.forEach((item) => {
+    const month = formatMonth(Number(item.date))
+    const year = getYear(Number(item.date))
 
-    const expenses = data
-      .filter((transaction) => {
-        const transactionDate = new Date(transaction.date ?? '')
-        return (
-          transactionDate >= firstDay &&
-          transactionDate <= lastDay &&
-          transaction.transaction
-        )
-      })
-      .reduce((total, transaction) => total + parseFloat(transaction.value), 0)
+    if (year === currentYear) {
+      const value = parseFloat(item.value)
 
-    const revenue = income - expenses
-
-    return {
-      month: capitalizedMonthName,
-      revenue,
+      if (monthlyTotals[month]) {
+        monthlyTotals[month] += value
+      } else {
+        monthlyTotals[month] = value
+      }
     }
   })
 
-  return revenueByMonth
+  return Object.keys(monthlyTotals).map((month) => ({
+    name: month,
+    total: monthlyTotals[month],
+  }))
 }
 
 // export const calculateCategoryByMonth = (data: TransactionFormProps[]) => {
