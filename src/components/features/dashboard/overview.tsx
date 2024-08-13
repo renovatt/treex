@@ -6,7 +6,10 @@ import {
   Card,
 } from '@/components/ui/card'
 import ListTransactions from '../../@globals/list-transactions'
-import BarChartPreloader from './charts/bar-chart-preloader'
+import BarChartPreloader from './charts/preloaders/bar-chart-preloader'
+import ListTransactionsIncome from '@/components/@globals/list-transactions/list-transactions-income'
+import DonutChartPreloader from './charts/preloaders/donut-chart-preloader'
+import RadialChartPreloader from './charts/preloaders/radial-chart-preloader'
 
 export default function Overview() {
   return (
@@ -15,7 +18,7 @@ export default function Overview() {
         <CardHeader>
           <CardTitle>Últimos 7 meses</CardTitle>
           <CardDescription>
-            Veja seus ganhos dos últimos 7 meses
+            Análise do seu faturamento nos últimos 7 meses
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -26,10 +29,40 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-3">
         <CardHeader>
           <CardTitle>Últimas transações</CardTitle>
-          <CardDescription>Você fez 265 transações neste mês.</CardDescription>
+          <CardDescription>Você fez 265 transações neste mês</CardDescription>
         </CardHeader>
         <CardContent>
           <ListTransactions />
+        </CardContent>
+      </Card>
+
+      <Card className="col-span-4 lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Balanço</CardTitle>
+          <CardDescription>Análise entre entradas e saídas</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <RadialChartPreloader />
+        </CardContent>
+      </Card>
+
+      <Card className="col-span-4 lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Categoria</CardTitle>
+          <CardDescription>Análise por categoria</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <DonutChartPreloader />
+        </CardContent>
+      </Card>
+
+      <Card className="col-span-4 lg:col-span-3">
+        <CardHeader>
+          <CardTitle>Entradas recentes</CardTitle>
+          <CardDescription>Você fez 56 entradas neste mês</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ListTransactionsIncome />
         </CardContent>
       </Card>
     </div>
