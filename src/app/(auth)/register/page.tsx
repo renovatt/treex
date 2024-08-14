@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import RegisterForm from '@/components/features/auth/register-form'
 import FooterForm from '@/components/features/auth/footer-form'
 import HeaderForm from '@/components/features/auth/header-form'
-import AuthContainer from '@/components/features/layout/auth-container'
+import AuthContainer from '@/components/features/layout/_components/auth-container'
 import GoogleButton from '@/components/features/auth/google-button'
 
 export const metadata: Metadata = {

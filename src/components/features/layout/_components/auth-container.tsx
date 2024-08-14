@@ -1,5 +1,5 @@
 'use client'
-import ThumbSlider from '../swiper-thumb'
+import ThumbSlider from '../../../@globals/swiper-thumb'
 import { LiaCopyright } from 'react-icons/lia'
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'

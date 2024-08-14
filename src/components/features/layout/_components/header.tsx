@@ -1,8 +1,7 @@
 'use client'
 import { MdOutlineAddBox } from 'react-icons/md'
-import UserDropdown from '@/components/features/user-dropdown'
-import CreateAndEditTransactionForm from '../transactions/create-and-edit-transaction-form'
-import { ModeToggle } from '../../@globals/dark-mode'
+import CreateAndEditTransactionForm from '../../transactions/_components/create-and-edit-transaction-form'
+import { ModeToggle } from '../../../@globals/dark-mode'
 import {
   Dialog,
   DialogContent,
@@ -23,6 +22,7 @@ import {
 } from '@/components/ui/popover'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import UserDropdown from '@/components/@globals/user-dropdown'
 
 type HeaderProps = {
   title: string

@@ -1,7 +1,7 @@
 'use client'
 import { UserData } from '@/lib/types'
 import { useEffect, useRef } from 'react'
-import MothlyListItem from '@/components/features/notes/mothly-list-item'
+import MothlyListItem from '@/components/features/notes/_components/mothly-list-item'
 import { useGetMonthly } from '@/hooks/use-get-monthly'
 
 export default function MonthlyListContent({ user }: { user: UserData }) {
@@ -22,7 +22,7 @@ export default function MonthlyListContent({ user }: { user: UserData }) {
       {!monthlyData.length ? (
         <div className="flex h-80 w-full items-center justify-center">
           <p className="text-sm font-semibold text-muted-foreground">
-            Sem despesas mensais
+            Ainda não hã despesas
           </p>
         </div>
       ) : (

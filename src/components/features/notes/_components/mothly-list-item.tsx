@@ -7,20 +7,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import CreateAndEditPriorityForm from './forms/create-and-edit-priority-form'
-import { Badge } from '@/components/ui/badge'
+import CreateAndEditMonthlyForm from './create-and-edit-monthly-form'
 
-type PriorityItemListProps = {
+type Props = {
   id: string
   title: string
-  level: 'Importante' | 'Menos importante' | 'Muito importante'
+  value: string
 }
 
-export default function PriorityListItem({
-  title,
-  level,
-  id,
-}: PriorityItemListProps) {
+export default function MothlyListItem({ title, value, id }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild className="w-full">
@@ -33,21 +28,16 @@ export default function PriorityListItem({
           <span className="flex items-center justify-center text-xs capitalize text-muted-foreground md:text-base">
             {title}
           </span>
-
-          {level === 'Importante' ? (
-            <Badge>Importante</Badge>
-          ) : level === 'Menos importante' ? (
-            <Badge>Menos Importante</Badge>
-          ) : (
-            <Badge>Muito Importante</Badge>
-          )}
+          <span className="flex h-6 items-center justify-end text-xs text-muted-foreground md:text-base">
+            {value}
+          </span>
         </motion.li>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="items-start">
-          <DialogTitle>Editar prioridade</DialogTitle>
+          <DialogTitle>Editar despesa</DialogTitle>
         </DialogHeader>
-        <CreateAndEditPriorityForm id={id} />
+        <CreateAndEditMonthlyForm id={id} />
       </DialogContent>
     </Dialog>
   )

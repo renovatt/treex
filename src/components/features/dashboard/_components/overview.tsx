@@ -5,7 +5,7 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import ListTransactions from '../../@globals/list-transactions'
+import ListTransactions from '../../../@globals/list-transactions'
 import BarChartPreloader from './charts/preloaders/bar-chart-preloader'
 import ListTransactionsIncome from '@/components/@globals/list-transactions/list-transactions-income'
 import DonutChartPreloader from './charts/preloaders/donut-chart-preloader'

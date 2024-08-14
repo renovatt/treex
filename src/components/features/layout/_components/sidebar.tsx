@@ -4,7 +4,7 @@ import {
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
 } from 'react-icons/md'
-import Navbar from '../navigation/navbar'
+import Navbar from '../../navigation/navbar'
 import SidebarContainer from './sidebar-container'
 import { ReactNode } from 'react'
 

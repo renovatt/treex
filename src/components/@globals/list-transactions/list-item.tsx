@@ -1,4 +1,4 @@
-import CreateAndEditTransactionForm from '@/components/features/transactions/create-and-edit-transaction-form'
+import CreateAndEditTransactionForm from '@/components/features/transactions/_components/create-and-edit-transaction-form'
 import {
   DialogHeader,
   Dialog,

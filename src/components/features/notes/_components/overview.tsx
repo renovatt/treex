@@ -16,9 +16,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import CreateAndEditMonthlyForm from './forms/create-and-edit-monthly-form'
+import CreateAndEditMonthlyForm from './create-and-edit-monthly-form'
 import { MdOutlineAddBox } from 'react-icons/md'
-import CreateAndEditPriorityForm from './forms/create-and-edit-priority-form'
+import CreateAndEditPriorityForm from './create-and-edit-priority-form'
 
 export default function Overview() {
   return (

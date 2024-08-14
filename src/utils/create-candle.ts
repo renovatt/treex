@@ -1,4 +1,4 @@
-import { CandleTypeProps } from '@/components/features/cripto/charts/candlestick-chart'
+import { CandleTypeProps } from '@/components/features/cripto/_components/charts/candlestick-chart'
 
 export default function createCandle(
   openTime: string | number | Date,

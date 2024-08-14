@@ -1,5 +1,5 @@
 import { UserData } from '@/lib/types'
-import WalletCard from '../../@globals/wallet-card'
+import WalletCard from '../../../@globals/wallet-card'
 import { shortNumber } from '@/utils/short-number'
 import { CircleDollarSign } from 'lucide-react'
 import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'

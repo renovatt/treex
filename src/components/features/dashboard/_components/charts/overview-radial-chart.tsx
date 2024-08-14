@@ -8,7 +8,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart'
 import { UserData } from '@/lib/types'
-import { calculateBalanceTransactions } from '../utils/calculate-balance-transactions'
+import { calculateBalanceTransactions } from '../../utils/calculate-balance-transactions'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export function OverviewRadialChart({ user }: { user: UserData }) {
@@ -63,14 +63,15 @@ export function OverviewRadialChart({ user }: { user: UserData }) {
                       y={(viewBox.cy || 0) - 16}
                       className="fill-foreground text-2xl font-bold"
                     >
-                      {incomePercentage.toFixed(2)}%
+                      {transactionData.length > 0 &&
+                        incomePercentage.toFixed(2) + '%'}
                     </tspan>
                     <tspan
                       x={viewBox.cx}
                       y={(viewBox.cy || 0) + 4}
                       className="fill-muted-foreground"
                     >
-                      Entrada
+                      {transactionData.length > 0 && 'Entrada'}
                     </tspan>
                   </text>
                 )

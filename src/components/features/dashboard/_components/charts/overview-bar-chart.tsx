@@ -14,7 +14,7 @@ import {
   LabelList,
   ResponsiveContainer,
 } from 'recharts'
-import { calculateLastMonthsRevenue } from '../utils/calculate-last-months-revenue '
+import { calculateLastMonthsRevenue } from '../../utils/calculate-last-months-revenue '
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export function OverviewBarChart({ user }: { user: UserData }) {

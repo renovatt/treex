@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import ViewContainer from '@/components/features/layout/view-container'
-import Header from '@/components/features/layout/header'
-import CriptoCards from '@/components/features/cripto/cripto-cards'
-import Overview from '@/components/features/cripto/overview'
+import ViewContainer from '@/components/features/layout/_components/view-container'
+import Header from '@/components/features/layout/_components/header'
+import CriptoCards from '@/components/features/cripto/_components/cripto-cards'
+import Overview from '@/components/features/cripto/_components/overview'
 
 export const metadata: Metadata = {
   title: 'TreeX | Cripto',

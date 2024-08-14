@@ -1,4 +1,4 @@
-import { USDBRLResponse } from '@/components/features/cripto/types'
+import { USDBRLResponse } from '@/components/features/cripto/@types/types'
 import { getDolar } from '@/services'
 import { useQuery } from '@tanstack/react-query'
 

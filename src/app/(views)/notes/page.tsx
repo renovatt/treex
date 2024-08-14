@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import ViewContainer from '@/components/features/layout/view-container'
-import Header from '@/components/features/layout/header'
-import GridNotes from '@/components/features/notes/grid-notes'
-import Overview from '@/components/features/notes/overview'
+import ViewContainer from '@/components/features/layout/_components/view-container'
+import Header from '@/components/features/layout/_components/header'
+import GridNotes from '@/components/features/notes/_components/grid-notes'
+import Overview from '@/components/features/notes/_components/overview'
 
 export const metadata: Metadata = {
   title: 'TreeX | Anotações',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <ViewContainer>
-      <Header title="Anotações" description="Despesas e metas" />
+      <Header title="Anotações" description="Despesas e prioridades" />
       <section className="flex w-full flex-col items-start justify-start gap-4 overflow-y-auto">
         <section className="w-full space-y-5">
           <GridNotes />
