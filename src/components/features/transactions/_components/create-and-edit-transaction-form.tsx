@@ -83,7 +83,13 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
       }
 
       toast.success(message)
-      form.reset()
+      form.reset({
+        name: '',
+        value: '',
+        category: '',
+        transaction: false,
+        date: '',
+      })
     } catch (e) {
       toast.error('Erro desconhecido')
     } finally {
@@ -119,6 +125,14 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
       handleGetTransactionDoc()
     }
   }, [id, form, user])
+
+  useEffect(() => {
+    if (category === categories[0]) {
+      form.setValue('transaction', false)
+    } else {
+      form.setValue('transaction', true)
+    }
+  }, [category, form])
 
   return (
     <Form {...form}>
@@ -156,7 +170,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
         <FormField
           control={form.control}
           name="category"
-          defaultValue={categories[1]}
+          defaultValue={categories[0]}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Categoria</FormLabel>

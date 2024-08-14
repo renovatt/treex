@@ -64,7 +64,10 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
         return
       }
       toast.success(message)
-      form.reset()
+      form.reset({
+        name: '',
+        value: '',
+      })
     } catch (error) {
       toast.error('Erro desconhecido')
     } finally {

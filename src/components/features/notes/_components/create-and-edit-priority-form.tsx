@@ -73,7 +73,10 @@ export default function CreateAndEditPriorityForm({ id }: { id?: string }) {
         return
       }
       toast.success(message)
-      form.reset()
+      form.reset({
+        name: '',
+        level: level[0],
+      })
     } catch (error) {
       toast.error('Erro desconhecido')
     } finally {
