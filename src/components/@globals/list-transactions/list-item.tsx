@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/components/ui/dialog'
+import useHideStore from '@/store/use-hide-store'
 import { motion } from 'framer-motion'
 import { IconType } from 'react-icons'
 
@@ -26,6 +27,7 @@ export default function ListItem({
   type,
   value,
 }: Props) {
+  const { status } = useHideStore()
   return (
     <Dialog>
       <DialogTrigger asChild className="w-full">
@@ -46,7 +48,18 @@ export default function ListItem({
             </p>
             <p className="text-xs text-muted-foreground">{date}</p>
           </div>
-          <div className="ml-auto font-medium">{value}</div>
+          {status.hidden ? (
+            <div className="ml-auto flex items-center gap-1">
+              {Array.from({ length: 4 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="size-[7px] rounded-full bg-primary"
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="ml-auto font-medium">{value}</div>
+          )}
         </motion.div>
       </DialogTrigger>
       <DialogContent>

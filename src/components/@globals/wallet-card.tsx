@@ -5,6 +5,7 @@ import {
   // CardDescription,
   Card,
 } from '@/components/ui/card'
+import useHideStore from '@/store/use-hide-store'
 import { ComponentType, SVGProps } from 'react'
 import { IconType } from 'react-icons'
 
@@ -21,6 +22,7 @@ export default function WalletCard({
   icon: Icon,
   value,
 }: Props) {
+  const { status } = useHideStore()
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -28,7 +30,15 @@ export default function WalletCard({
         <Icon className="size-5 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
+        {status.hidden ? (
+          <div className="my-3 flex items-center gap-1">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <div key={index} className="size-[7px] rounded-full bg-primary" />
+            ))}
+          </div>
+        ) : (
+          <div className="text-2xl font-bold">{value}</div>
+        )}
         <p className="text-xs text-muted-foreground">+20.1% from last month</p>
       </CardContent>
     </Card>

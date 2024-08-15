@@ -14,7 +14,7 @@ import { Calendar } from '@/components/ui/calendar'
 import { useEffect, useState } from 'react'
 import { useDateStore } from '@/store'
 import { cn } from '@/lib/utils'
-import { CalendarIcon } from 'lucide-react'
+import { CalendarIcon, Eye, EyeOff } from 'lucide-react'
 import {
   Popover,
   PopoverContent,
@@ -23,6 +23,7 @@ import {
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import UserDropdown from '@/components/@globals/user-dropdown'
+import useHideStore from '@/store/use-hide-store'
 
 type HeaderProps = {
   title: string
@@ -32,6 +33,7 @@ type HeaderProps = {
 export default function Header({ title, description }: HeaderProps) {
   const [date, setSelectedDate] = useState<Date | undefined>(new Date())
   const { setDate } = useDateStore()
+  const { status, setIsHidden } = useHideStore()
 
   useEffect(() => {
     if (date) {
@@ -43,9 +45,28 @@ export default function Header({ title, description }: HeaderProps) {
 
   return (
     <header className="my-5 mb-10 flex w-full items-center justify-between">
-      <section className="flex flex-col items-start justify-center">
-        <h1 className="text-xl font-bold text-primary md:text-2xl">{title}</h1>
-        <span className="text-xs text-muted-foreground">{description}</span>
+      <section className="flex items-start justify-center gap-2">
+        <div className="flex flex-col">
+          <h1 className="text-xl font-bold text-primary md:text-2xl">
+            {title}
+          </h1>
+          <span className="text-xs text-muted-foreground">{description}</span>
+        </div>
+        {status.hidden ? (
+          <EyeOff
+            onClick={() => {
+              setIsHidden()
+            }}
+            className="ml-3 mt-1 size-6 cursor-pointer"
+          />
+        ) : (
+          <Eye
+            onClick={() => {
+              setIsHidden()
+            }}
+            className="ml-3 mt-1 size-6 cursor-pointer"
+          />
+        )}
       </section>
 
       <section className="flex items-center justify-between gap-4">
@@ -83,8 +104,8 @@ export default function Header({ title, description }: HeaderProps) {
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost" className="space-x-2">
-              <MdOutlineAddBox />
-              <span>Adicionar</span>
+              <MdOutlineAddBox className="size-6 sm:size-4" />
+              <span className="hidden sm:block">Adicionar</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
