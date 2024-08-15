@@ -12,23 +12,33 @@ export default function ListContent({ user }: { user: UserData }) {
   const tableRef = useRef<HTMLUListElement | null>(null)
 
   const filteredData = date
-    ? transactionData?.filter((transaction) => {
-        const brlDate = date.split('T')[0]
-        const dateParts = brlDate.split('/')
-        const selectedDate = new Date(
-          `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
-        ).getTime()
+    ? transactionData
+        ?.filter((transaction) => {
+          const brlDate = date.split('T')[0]
+          const dateParts = brlDate.split('/')
+          const selectedDate = new Date(
+            `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
+          ).getTime()
 
-        const transactionDate = new Date(transaction.date || '')
+          const transactionDate = new Date(transaction.date || '')
 
+          return (
+            transactionDate.getFullYear() ===
+              new Date(selectedDate).getFullYear() &&
+            transactionDate.getMonth() === new Date(selectedDate).getMonth() &&
+            transactionDate.getDate() === new Date(selectedDate).getDate()
+          )
+        })
+        .sort((a, b) => {
+          return (
+            new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime()
+          )
+        })
+    : transactionData.sort((a, b) => {
         return (
-          transactionDate.getFullYear() ===
-            new Date(selectedDate).getFullYear() &&
-          transactionDate.getMonth() === new Date(selectedDate).getMonth() &&
-          transactionDate.getDate() === new Date(selectedDate).getDate()
+          new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime()
         )
       })
-    : transactionData
 
   useEffect(() => {
     if (tableRef.current) {
