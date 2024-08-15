@@ -17,10 +17,11 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
-import { LoaderCircle } from 'lucide-react'
+import { Eye, EyeOff, LoaderCircle } from 'lucide-react'
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const [isOpenEye, setIsOpenEye] = useState(false)
 
   const form = useForm<LoginFormProps>({
     mode: 'all',
@@ -77,11 +78,24 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>Senha</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Digite a sua senha"
-                  {...field}
-                />
+                <div className="relative flex">
+                  <Input
+                    placeholder="Digite sua senha"
+                    type={isOpenEye ? 'text' : 'password'}
+                    {...field}
+                  />
+                  {isOpenEye ? (
+                    <Eye
+                      onClick={() => setIsOpenEye(!isOpenEye)}
+                      className="absolute right-4 top-1/2 size-5 -translate-y-1/2 cursor-pointer text-muted-foreground"
+                    />
+                  ) : (
+                    <EyeOff
+                      onClick={() => setIsOpenEye(!isOpenEye)}
+                      className="absolute right-4 top-1/2 size-5 -translate-y-1/2 cursor-pointer text-muted-foreground"
+                    />
+                  )}
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
