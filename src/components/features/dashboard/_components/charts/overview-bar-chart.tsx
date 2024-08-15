@@ -48,7 +48,7 @@ export function OverviewBarChart({ user }: { user: UserData }) {
               <Cell
                 key={item.name}
                 fill={
-                  item.total > 0 ? 'hsl(var(--chart-1))' : 'hsl(var(--chart-2))'
+                  item.total > 0 ? 'hsl(var(--chart-2))' : 'hsl(var(--chart-5))'
                 }
               />
             ))}
