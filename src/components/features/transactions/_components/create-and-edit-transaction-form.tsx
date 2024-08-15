@@ -13,6 +13,7 @@ import { TransactionFormProps, TransactionSchema } from '@/schemas'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -30,11 +31,26 @@ import {
 } from '@/components/ui/select'
 import { useEffect, useState } from 'react'
 import { getTransactionDoc } from '@/lib/gets'
-import { LoaderCircle } from 'lucide-react'
+import {
+  CalendarIcon,
+  LoaderCircle,
+  LockKeyhole,
+  LockKeyholeOpen,
+} from 'lucide-react'
 import { categories } from '@/static/categories'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Calendar } from '@/components/ui/calendar'
+import { cn } from '@/lib/utils'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
+  const [isActiveDate, setIsActiveDate] = useState(true)
 
   const form = useForm<TransactionFormProps>({
     mode: 'all',
@@ -88,7 +104,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
         value: '',
         category: '',
         transaction: false,
-        date: '',
+        date: new Date(),
       })
     } catch (e) {
       toast.error('Erro desconhecido')
@@ -118,8 +134,8 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
           value: data?.value,
           category: data?.category,
           transaction: data?.transaction,
+          date: data?.date ? new Date(data.date) : new Date(),
         }
-
         form.reset(defaultValues)
       }
       handleGetTransactionDoc()
@@ -192,6 +208,69 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
                   ))}
                 </SelectContent>
               </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="date"
+          defaultValue={new Date()}
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Data</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      disabled={isActiveDate}
+                      variant={'outline'}
+                      className={cn(
+                        'w-full pl-3 text-left font-normal',
+                        !field.value && 'text-muted-foreground',
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, 'PPP', { locale: ptBR })
+                      ) : (
+                        <span>Selecione uma data</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    locale={ptBR}
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date('1900-01-01')
+                    }
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormDescription
+                className="w-28"
+                onClick={() => setIsActiveDate(!isActiveDate)}
+              >
+                <div className="group flex cursor-pointer items-start justify-start gap-2">
+                  {isActiveDate ? (
+                    <>
+                      <LockKeyhole className="size-4" />
+                      <span className="group-hover:underline">Editar</span>
+                    </>
+                  ) : (
+                    <>
+                      <LockKeyholeOpen className="size-4" />
+                      <span className="group-hover:underline">Não editar</span>
+                    </>
+                  )}
+                </div>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

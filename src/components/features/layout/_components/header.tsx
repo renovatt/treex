@@ -55,7 +55,7 @@ export default function Header({ title, description }: HeaderProps) {
               <Button
                 variant={'outline'}
                 className={cn(
-                  'hidden justify-start text-left font-normal lg:flex lg:w-[240px]',
+                  'hidden justify-start text-left font-normal md:flex lg:w-[240px]',
                   !date && 'text-muted-foreground',
                 )}
               >

@@ -21,7 +21,7 @@ export const TransactionSchema = z.object({
     ),
   transaction: z.boolean(),
   category: z.string(),
-  date: z.string().optional(),
+  date: z.date({ required_error: 'Campo obrigatório' }).optional(),
 })
 
 export const PrioritySchema = z.object({
