@@ -4,7 +4,7 @@ export function calculateTotalByCategory(transactions: TransactionFormProps[]) {
   const totals = transactions.reduce(
     (acc, item) => {
       const { category, value } = item
-      const numericValue = parseFloat(value)
+      const numericValue = parseFloat(String(value))
 
       if (acc[category]) {
         acc[category] += numericValue

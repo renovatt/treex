@@ -23,6 +23,7 @@ import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 import { getMonthlyDoc } from '@/lib/gets'
 import { LoaderCircle } from 'lucide-react'
+import MoneyInput from '@/components/@globals/ui/input-money'
 
 export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -66,7 +67,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
       toast.success(message)
       form.reset({
         name: '',
-        value: '',
+        value: 0,
       })
     } catch (error) {
       toast.error('Erro desconhecido')
@@ -121,18 +122,11 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
+        <MoneyInput
+          form={form}
+          label="Valor"
           name="value"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Valor</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="R$ 120,00" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="R$ 120,00"
         />
         <div className="space-y-2">
           {isLoading ? (

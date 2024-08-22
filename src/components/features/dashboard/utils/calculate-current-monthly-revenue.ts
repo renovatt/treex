@@ -17,11 +17,11 @@ export const calculateCurrentMonthlyRevenue = (
 
   const income = filteredTransactions
     .filter((transaction) => !transaction.transaction)
-    .map((transaction) => parseFloat(transaction.value) || 0)
+    .map((transaction) => parseFloat(String(transaction.value)) || 0)
 
   const expense = filteredTransactions
     .filter((transaction) => transaction.transaction)
-    .map((transaction) => parseFloat(transaction.value) || 0)
+    .map((transaction) => parseFloat(String(transaction.value)) || 0)
 
   const incomeTotal = income.reduce((acc, cur) => acc + cur, 0)
   const expenseTotal = expense.reduce((acc, cur) => acc + cur, 0)

@@ -16,7 +16,7 @@ export const calculateMostSpentCategory = (
 
   data.forEach((transaction) => {
     const category = transaction.category
-    const value = parseFloat(transaction.value) || 0
+    const value = parseFloat(String(transaction.value)) || 0
     const transactionDate = new Date(transaction.date ?? '')
 
     if (

@@ -33,7 +33,10 @@ export const calculateLastMonthsRevenue = (
           !transaction.transaction
         )
       })
-      .reduce((total, transaction) => total + parseFloat(transaction.value), 0)
+      .reduce(
+        (total, transaction) => total + parseFloat(String(transaction.value)),
+        0,
+      )
 
     const expenses = data
       .filter((transaction) => {
@@ -44,7 +47,10 @@ export const calculateLastMonthsRevenue = (
           transaction.transaction
         )
       })
-      .reduce((total, transaction) => total + parseFloat(transaction.value), 0)
+      .reduce(
+        (total, transaction) => total + parseFloat(String(transaction.value)),
+        0,
+      )
 
     const revenue = income - expenses
 

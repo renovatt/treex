@@ -47,13 +47,14 @@ import { Calendar } from '@/components/ui/calendar'
 import { cn } from '@/lib/utils'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import MoneyInput from '@/components/@globals/ui/input-money'
 
 export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
   const [isActiveDate, setIsActiveDate] = useState(true)
 
   const form = useForm<TransactionFormProps>({
-    mode: 'all',
+    mode: 'onTouched',
     reValidateMode: 'onChange',
     resolver: zodResolver(TransactionSchema),
   })
@@ -101,7 +102,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
       toast.success(message)
       form.reset({
         name: '',
-        value: '',
+        value: 0,
         category: '',
         transaction: false,
         date: new Date(),
@@ -169,18 +170,12 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
+
+        <MoneyInput
+          form={form}
+          label="Valor"
           name="value"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Valor</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="R$ 120,00" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="R$ 120,00"
         />
 
         <FormField
@@ -257,7 +252,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
                 className="w-28"
                 onClick={() => setIsActiveDate(!isActiveDate)}
               >
-                <div className="group flex cursor-pointer items-start justify-start gap-2">
+                <span className="group flex cursor-pointer items-start justify-start gap-2">
                   {isActiveDate ? (
                     <>
                       <LockKeyhole className="size-4" />
@@ -269,7 +264,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
                       <span className="group-hover:underline">Não editar</span>
                     </>
                   )}
-                </div>
+                </span>
               </FormDescription>
               <FormMessage />
             </FormItem>
