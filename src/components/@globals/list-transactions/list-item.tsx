@@ -17,6 +17,7 @@ type Props = {
   value: string
   date: string
   type: 'expense' | 'income'
+  catelory?: string
 }
 
 export default function ListItem({
@@ -26,6 +27,7 @@ export default function ListItem({
   title,
   type,
   value,
+  catelory,
 }: Props) {
   const { status } = useHideStore()
   return (
@@ -46,7 +48,12 @@ export default function ListItem({
             <p className="text-sm font-medium capitalize leading-none">
               {title}
             </p>
-            <p className="text-xs text-muted-foreground">{date}</p>
+            <p className="text-xs text-muted-foreground">
+              {date}{' '}
+              {catelory && catelory !== 'Bônus/Entrada/Salário' && (
+                <span className="text-[9px]">- {catelory}</span>
+              )}
+            </p>
           </div>
           {status.hidden ? (
             <div className="ml-auto flex items-center gap-1">

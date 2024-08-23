@@ -11,6 +11,10 @@ import { calculateCurrentMonthlyRevenue } from '../utils/calculate-current-month
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { useGetMonthly } from '@/hooks/use-get-monthly'
 import { formatteCurrency } from '@/utils/format-currency-brl'
+import {
+  calculateBalances,
+  calculateCategoryPercentages,
+} from '@/utils/calculate-balance-to-cards'
 
 export default function DashCards({ user }: { user: UserData }) {
   const { transactionData } = useGetTransactions(user)
@@ -21,29 +25,51 @@ export default function DashCards({ user }: { user: UserData }) {
   const expensesForecast = calculateExpensesForecast(monthlyData)
   const categoryRevenue = calculateMostSpentCategory(transactionData)
 
+  const { general, currentMonth } = calculateBalances(transactionData || [])
+  const categoryPercentages = calculateCategoryPercentages(
+    transactionData || [],
+  )
+
+  const generalBal = general.income + general.expenses
+  const monthyBal = currentMonth.income + currentMonth.expenses
+
+  const incomePercentage = (general.income / generalBal) * 100
+  const monthPercentage = (currentMonth.income / monthyBal) * 100
+
+  const walletDesc = `+${
+    transactionData.length > 0 && incomePercentage.toFixed(2) + '%'
+  } em relação ao saldo.`
+
+  const monthlyDesc = `${
+    transactionData.length > 0 && monthPercentage.toFixed(2) + '%'
+  } nesse mês`
+
+  const mostSpentCategoryDesc = `${categoryPercentages.find((category) => category.category === categoryRevenue.category)?.percentage || '0.00'}% 
+  com ${categoryRevenue.category}`
+
   return (
     <>
       <WalletCard
         title="Carteira"
-        description="Carteira"
+        description={walletDesc}
         icon={IoWalletOutline}
         value={formatteCurrency(wallet.total)}
       />
       <WalletCard
         title="Faturamento mensal"
-        description="Faturamento mensal"
+        description={monthlyDesc}
         icon={TbMoneybag}
         value={formatteCurrency(monthlyRevenue.total)}
       />
       <WalletCard
         title="Previsão de gastos"
-        description="Previsão de gastos"
+        description="Estimativa de gastos para o mês"
         icon={MdOutlineMoneyOff}
         value={formatteCurrency(expensesForecast)}
       />
       <WalletCard
         title="Categoria mais gasta"
-        description="Categoria mais gasta"
+        description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
         value={formatteCurrency(categoryRevenue.total)}
       />

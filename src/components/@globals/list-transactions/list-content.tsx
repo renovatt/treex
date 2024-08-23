@@ -75,6 +75,7 @@ export default function ListContent({ user }: { user: UserData }) {
             }
             title={transaction.name}
             value={formatteCurrency(transaction.value)}
+            catelory={transaction.category}
           />
         ))
       )}

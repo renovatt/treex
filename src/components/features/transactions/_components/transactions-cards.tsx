@@ -8,6 +8,8 @@ import { calculateCombinedMonthlyWithDateRevenue } from '../utils/calculate-comb
 import { calculateMostSpentCategoryByMonth } from '../utils/calculate-most-spent-category-by-month'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { formatteCurrency } from '@/utils/format-currency-brl'
+import { calculateCategoryPercentages } from '@/utils/calculate-balance-to-cards'
+import { calculateMostSpentCategory } from '../../dashboard/utils/calculate-most-spent-category'
 
 export default function TransactionsCards({ user }: { user: UserData }) {
   const { date } = useDateStore()
@@ -22,29 +24,38 @@ export default function TransactionsCards({ user }: { user: UserData }) {
     date,
   )
 
+  const categoryRevenue = calculateMostSpentCategory(transactionData)
+
+  const categoryPercentages = calculateCategoryPercentages(
+    transactionData || [],
+  )
+
+    const mostSpentCategoryDesc = `${categoryPercentages.find((category) => category.category === categoryRevenue.category)?.percentage || '0.00'}% 
+  com ${categoryRevenue.category}`
+
   return (
     <>
       <WalletCard
-        title="Total"
-        description="Total"
+       title="Faturamento mensal"
+        description="Valor total de entradas e saídas"
         icon={CircleDollarSign}
         value={formatteCurrency(monthlyResult.total)}
       />
       <WalletCard
         title="Entradas"
-        description="Entradas"
+        description="Valor total de entradas"
         icon={HiArrowTrendingUp}
         value={formatteCurrency(monthlyResult.income)}
       />
       <WalletCard
         title="Saídas"
-        description="Saídas"
+        description="Valor total de saídas"
         icon={HiArrowTrendingDown}
         value={formatteCurrency(monthlyResult.expense)}
       />
       <WalletCard
         title="Categoria mais gasta"
-        description="Categoria mais gasta"
+        description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
         value={formatteCurrency(categoryResultMonthly.total)}
       />

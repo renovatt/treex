@@ -12,7 +12,7 @@ export default function MontlhyCard({ user }: { user: UserData }) {
   return (
     <WalletCard
       title="Total"
-      description="Total"
+      description="Estimativa de gastos para o mês"
       icon={CircleDollarSign}
       value={formatteCurrency(result)}
     />
