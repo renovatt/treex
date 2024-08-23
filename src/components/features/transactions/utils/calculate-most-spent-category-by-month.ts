@@ -1,7 +1,8 @@
+import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
 
 interface CategoryTotals {
-  [category: string]: number
+  [category: string]: Decimal
 }
 
 export const calculateMostSpentCategoryByMonth = (
@@ -27,7 +28,7 @@ export const calculateMostSpentCategoryByMonth = (
 
   data.forEach((transaction) => {
     const category = transaction.category
-    const value = parseFloat(String(transaction.value)) || 0
+    const value = new Decimal(transaction.value || 0)
     const transactionDate = new Date(transaction.date || '')
 
     if (
@@ -36,18 +37,18 @@ export const calculateMostSpentCategoryByMonth = (
       transactionDate.getFullYear() === currentYear
     ) {
       if (!categoryTotals[category]) {
-        categoryTotals[category] = 0
+        categoryTotals[category] = new Decimal(0)
       }
 
-      categoryTotals[category] += value
+      categoryTotals[category] = categoryTotals[category].plus(value)
     }
   })
 
-  let mostSpentCategory = null
-  let mostSpentTotal = 0
+  let mostSpentCategory: string | null = null
+  let mostSpentTotal = new Decimal(0)
 
   for (const category in categoryTotals) {
-    if (categoryTotals[category] > mostSpentTotal) {
+    if (categoryTotals[category].greaterThan(mostSpentTotal)) {
       mostSpentCategory = category
       mostSpentTotal = categoryTotals[category]
     }
@@ -55,6 +56,6 @@ export const calculateMostSpentCategoryByMonth = (
 
   return {
     category: mostSpentCategory,
-    total: mostSpentTotal,
+    total: mostSpentTotal.toNumber(),
   }
 }

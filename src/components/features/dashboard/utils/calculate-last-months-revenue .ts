@@ -1,3 +1,4 @@
+import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
 
 export const calculateLastMonthsRevenue = (
@@ -5,15 +6,15 @@ export const calculateLastMonthsRevenue = (
   qnt: number = 11,
 ) => {
   const currentDate = new Date()
-  const last7Months = []
+  const lastMonths = []
 
   for (let i = qnt; i >= 0; i--) {
     const month = new Date(currentDate)
     month.setMonth(currentDate.getMonth() - i)
-    last7Months.push(month)
+    lastMonths.push(month)
   }
 
-  const revenueByMonth = last7Months.map((month) => {
+  const revenueByMonth = lastMonths.map((month) => {
     const firstDay = new Date(month.getFullYear(), month.getMonth(), 1)
     const lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 0)
 
@@ -34,8 +35,8 @@ export const calculateLastMonthsRevenue = (
         )
       })
       .reduce(
-        (total, transaction) => total + parseFloat(String(transaction.value)),
-        0,
+        (total, transaction) => total.plus(new Decimal(transaction.value || 0)),
+        new Decimal(0),
       )
 
     const expenses = data
@@ -48,15 +49,15 @@ export const calculateLastMonthsRevenue = (
         )
       })
       .reduce(
-        (total, transaction) => total + parseFloat(String(transaction.value)),
-        0,
+        (total, transaction) => total.plus(new Decimal(transaction.value || 0)),
+        new Decimal(0),
       )
 
-    const revenue = income - expenses
+    const revenue = income.minus(expenses)
 
     return {
       month: capitalizedMonthName,
-      revenue,
+      revenue: revenue.toNumber(),
     }
   })
 

@@ -1,3 +1,4 @@
+import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
 
 export const calculateCurrentMonthlyRevenue = (
@@ -17,19 +18,22 @@ export const calculateCurrentMonthlyRevenue = (
 
   const income = filteredTransactions
     .filter((transaction) => !transaction.transaction)
-    .map((transaction) => parseFloat(String(transaction.value)) || 0)
+    .map((transaction) => new Decimal(transaction.value || 0))
 
   const expense = filteredTransactions
     .filter((transaction) => transaction.transaction)
-    .map((transaction) => parseFloat(String(transaction.value)) || 0)
+    .map((transaction) => new Decimal(transaction.value || 0))
 
-  const incomeTotal = income.reduce((acc, cur) => acc + cur, 0)
-  const expenseTotal = expense.reduce((acc, cur) => acc + cur, 0)
-  const total = incomeTotal - expenseTotal
+  const incomeTotal = income.reduce((acc, cur) => acc.plus(cur), new Decimal(0))
+  const expenseTotal = expense.reduce(
+    (acc, cur) => acc.plus(cur),
+    new Decimal(0),
+  )
+  const total = incomeTotal.minus(expenseTotal)
 
   return {
-    income: incomeTotal,
-    expense: expenseTotal,
-    total,
+    income: incomeTotal.toNumber(),
+    expense: expenseTotal.toNumber(),
+    total: total.toNumber(),
   }
 }

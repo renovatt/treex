@@ -5,6 +5,8 @@ import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import { useDateStore } from '@/store'
 import ListItem from './list-item'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { formatteCurrency } from '@/utils/format-currency-brl'
+import { formattedDate } from '@/utils/format-date'
 
 export default function ListContent({ user }: { user: UserData }) {
   const { date, setDate } = useDateStore()
@@ -67,19 +69,12 @@ export default function ListContent({ user }: { user: UserData }) {
             key={transaction.id}
             id={transaction.id ?? ''}
             type={transaction.transaction ? 'expense' : 'income'}
-            date={new Date(transaction.date ?? '').toLocaleDateString('pt-br', {
-              year: 'numeric',
-              month: 'numeric',
-              day: 'numeric',
-            })}
+            date={formattedDate(transaction.date?.toString() ?? '')}
             icon={
               transaction.transaction ? HiArrowTrendingDown : HiArrowTrendingUp
             }
             title={transaction.name}
-            value={Number(transaction.value).toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
+            value={formatteCurrency(transaction.value)}
           />
         ))
       )}
