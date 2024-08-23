@@ -30,13 +30,22 @@ export default function TransactionsCards({ user }: { user: UserData }) {
     transactionData || [],
   )
 
-    const mostSpentCategoryDesc = `${categoryPercentages.find((category) => category.category === categoryRevenue.category)?.percentage || '0.00'}% 
-  com ${categoryRevenue.category}`
+  const percentage =
+    categoryPercentages.find(
+      (category) => category.category === categoryRevenue.category,
+    )?.percentage || '0.00'
+  const category = categoryRevenue.category
+    ? categoryRevenue.category
+    : 'sem categorias'
+
+  const mostSpentCategoryDesc = categoryRevenue.category
+    ? `${percentage}% com ${category}`
+    : `${percentage}% ${category}`
 
   return (
     <>
       <WalletCard
-       title="Faturamento mensal"
+        title="Faturamento mensal"
         description="Valor total de entradas e saídas"
         icon={CircleDollarSign}
         value={formatteCurrency(monthlyResult.total)}

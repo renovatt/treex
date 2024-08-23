@@ -33,19 +33,30 @@ export default function DashCards({ user }: { user: UserData }) {
   const generalBal = general.income + general.expenses
   const monthyBal = currentMonth.income + currentMonth.expenses
 
-  const incomePercentage = (general.income / generalBal) * 100
-  const monthPercentage = (currentMonth.income / monthyBal) * 100
+  const incomePercentage =
+    ((general.income - general.expenses) / generalBal) * 100
+  const monthPercentage =
+    ((currentMonth.income - currentMonth.expenses) / monthyBal) * 100
 
-  const walletDesc = `+${
-    transactionData.length > 0 && incomePercentage.toFixed(2) + '%'
+  const walletDesc = `${
+    transactionData.length > 0 ? `${incomePercentage.toFixed(2)}%` : '0%'
   } em relação ao saldo.`
 
   const monthlyDesc = `${
-    transactionData.length > 0 && monthPercentage.toFixed(2) + '%'
+    transactionData.length > 0 ? `${monthPercentage.toFixed(2)}%` : '0%'
   } nesse mês`
 
-  const mostSpentCategoryDesc = `${categoryPercentages.find((category) => category.category === categoryRevenue.category)?.percentage || '0.00'}% 
-  com ${categoryRevenue.category}`
+  const percentage =
+    categoryPercentages.find(
+      (category) => category.category === categoryRevenue.category,
+    )?.percentage || '0.00'
+  const category = categoryRevenue.category
+    ? categoryRevenue.category
+    : 'sem categorias'
+
+  const mostSpentCategoryDesc = categoryRevenue.category
+    ? `${percentage}% com ${category}`
+    : `${percentage}% ${category}`
 
   return (
     <>
