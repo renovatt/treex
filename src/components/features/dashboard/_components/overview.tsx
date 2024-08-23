@@ -1,3 +1,4 @@
+'use client'
 import {
   CardHeader,
   CardTitle,
@@ -10,8 +11,34 @@ import BarChartPreloader from './charts/preloaders/bar-chart-preloader'
 import ListTransactionsIncome from '@/components/@globals/list-transactions/list-transactions-income'
 import DonutChartPreloader from './charts/preloaders/donut-chart-preloader'
 import RadialChartPreloader from './charts/preloaders/radial-chart-preloader'
+import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { UserData } from '@/lib/types'
+import {
+  getCurrentMonthTransactionCount,
+  getIncomeTransactionCount,
+} from '../../transactions/utils/calculate-qtd-transaction'
+import { auth } from '@/firebase'
+import { useUser } from '@/hooks/use-user'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+const TransactionCount = ({ user }: { user: UserData }) => {
+  const { transactionData } = useGetTransactions(user)
+  const qtd = getCurrentMonthTransactionCount(transactionData)
+
+  return <CardDescription>Você fez {qtd} transações neste mês.</CardDescription>
+}
+
+const TransactionIncomeCount = ({ user }: { user: UserData }) => {
+  const { transactionData } = useGetTransactions(user)
+  const qtd = getIncomeTransactionCount(transactionData)
+
+  return <CardDescription>Você fez {qtd} entradas neste mês.</CardDescription>
+}
 
 export default function Overview() {
+  const [user, loading] = useAuthState(auth)
+  const { userLoaded } = useUser(user as UserData)
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
       <Card className="col-span-4">
@@ -29,7 +56,11 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-3">
         <CardHeader>
           <CardTitle>Últimas transações</CardTitle>
-          <CardDescription>Você fez 265 transações neste mês</CardDescription>
+          {userLoaded && !loading ? (
+            <TransactionCount user={userLoaded} />
+          ) : (
+            <p className="animate-pulse text-xs">...</p>
+          )}
         </CardHeader>
         <CardContent>
           <ListTransactions />
@@ -59,7 +90,11 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-3">
         <CardHeader>
           <CardTitle>Entradas recentes</CardTitle>
-          <CardDescription>Você fez 56 entradas neste mês</CardDescription>
+          {userLoaded && !loading ? (
+            <TransactionIncomeCount user={userLoaded} />
+          ) : (
+            <p className="animate-pulse text-xs">...</p>
+          )}
         </CardHeader>
         <CardContent>
           <ListTransactionsIncome />
