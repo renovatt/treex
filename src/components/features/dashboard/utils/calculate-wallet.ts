@@ -15,7 +15,7 @@ export const calculateWallet = (data: TransactionFormProps[]) => {
     (acc, cur) => acc.plus(cur),
     new Decimal(0),
   )
-  const total = incomeTotal.minus(expenseTotal).abs()
+  const total = incomeTotal.minus(expenseTotal)
 
   return {
     income: parseFloat(incomeTotal.toFixed(2)),
