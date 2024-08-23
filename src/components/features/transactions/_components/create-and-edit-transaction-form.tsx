@@ -71,6 +71,11 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
         return
       }
 
+      if (category !== categories[0] && !transactionValue) {
+        toast.error('Categoria não pode ser uma entrada')
+        return
+      }
+
       if (id) {
         const newData = { ...data }
         newData.id = id
