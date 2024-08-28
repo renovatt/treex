@@ -23,10 +23,11 @@ export const config = {
   matcher: [
     '/',
     '/login/:path*',
-    '/notes/:path*',
     '/register/:path*',
     '/recovery/:path*',
     '/dashboard/:path*',
     '/transactions/:path*',
+    '/cripto-&-invest/:path*',
+    '/notes/:path*',
   ],
 }

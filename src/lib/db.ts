@@ -29,7 +29,7 @@ export const savingUserTransaction = async (
   user: UserData,
 ) => {
   try {
-    const { name, value, category, transaction } = data
+    const { name, value, category, transaction, date } = data
     const { uid } = user
 
     const transactionsCollection = collection(
@@ -44,7 +44,7 @@ export const savingUserTransaction = async (
       value,
       transaction,
       category,
-      date: Date.now(),
+      date: date?.toISOString() ?? Date.now(),
     }
 
     await addDoc(transactionsCollection, userTransaction)
@@ -142,7 +142,7 @@ export const updatingUserTransaction = async (
   user: UserData,
 ) => {
   try {
-    const { id, name, value, category, transaction } = data
+    const { id, name, value, category, transaction, date } = data
     const { uid } = user
 
     const transactionsCollection = collection(
@@ -159,6 +159,7 @@ export const updatingUserTransaction = async (
         value,
         transaction,
         category,
+        date: date?.toISOString(),
       }
 
       await updateDoc(transactionRef, userTransactionUpdated)

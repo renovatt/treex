@@ -15,7 +15,7 @@ export default function Home() {
   }, [router, user])
 
   return (
-    <section className="flex h-screen w-screen items-center justify-center bg-primary-650 dark:bg-primary-900">
+    <section className="flex h-screen w-screen items-center justify-center">
       <motion.div
         animate={{
           scale: [1, 2, 2, 1, 1],
@@ -29,7 +29,7 @@ export default function Home() {
           repeatDelay: 1,
         }}
       >
-        <TbLetterX className="h-10 w-10 border border-white bg-primary-900 p-1 text-primary-750" />
+        <TbLetterX className="h-10 w-10 border border-white p-1 text-primary" />
       </motion.div>
     </section>
   )

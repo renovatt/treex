@@ -2,48 +2,37 @@ import { z } from 'zod'
 
 export const TransactionSchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(3, 'Nome obrigatório').max(24, 'Nome é muito longo'),
+  name: z
+    .string({ required_error: 'Campo obrigatório' })
+    .min(3, 'Nome obrigatório')
+    .max(24, 'Nome é muito longo'),
   value: z
-    .string()
-    .min(1, 'Valor obrigatório')
-    .refine(
-      (value: string) => {
-        const numericValue = parseFloat(value)
-        return !isNaN(numericValue) && numericValue >= 0
-      },
-      {
-        message: 'O valor deve ser positivo',
-        path: ['value'],
-      },
-    ),
+    .number({ required_error: 'Campo obrigatório' })
+    .min(0.01, 'Valor obrigatório'),
   transaction: z.boolean(),
   category: z.string(),
-  date: z.string().optional(),
+  date: z.date({ required_error: 'Campo obrigatório' }).optional(),
 })
 
 export const PrioritySchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(3, 'Nome obrigatório').max(24, 'Nome é muito longo'),
+  name: z
+    .string({ required_error: 'Campo obrigatório' })
+    .min(3, 'Nome obrigatório')
+    .max(24, 'Nome é muito longo'),
   level: z.enum(['Importante', 'Menos importante', 'Muito importante']),
   date: z.string().optional(),
 })
 
 export const MonthyPreviewSchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(3, 'Nome obrigatório').max(24, 'Nome é muito longo'),
+  name: z
+    .string({ required_error: 'Campo obrigatório' })
+    .min(3, 'Nome obrigatório')
+    .max(24, 'Nome é muito longo'),
   value: z
-    .string()
-    .min(1, 'Valor obrigatório')
-    .refine(
-      (value: string) => {
-        const numericValue = parseFloat(value)
-        return !isNaN(numericValue) && numericValue >= 0
-      },
-      {
-        message: 'O valor deve ser positivo',
-        path: ['value'],
-      },
-    ),
+    .number({ required_error: 'Campo obrigatório' })
+    .min(0.01, 'Valor obrigatório'),
   date: z.string().optional(),
 })
 

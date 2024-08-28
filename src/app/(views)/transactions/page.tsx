@@ -1,9 +1,8 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
-import Header from '@modules/Layout/Header'
-import TransactionTable from '@modules/TransactionTable'
-import ViewContainer from '@modules/Layout/ViewContainer'
-import GridTransaction from '@modules/Grids/GridTransaction'
+import ViewContainer from '@/components/features/layout/_components/view-container'
+import Header from '@/components/features/layout/_components/header'
+import GridTransactions from '@/components/features/transactions/_components/grid-transactions'
+import Overview from '@/components/features/transactions/_components/overview'
 
 export const metadata: Metadata = {
   title: 'TreeX | Transações',
@@ -11,24 +10,17 @@ export const metadata: Metadata = {
     'Obtenha uma visão dos seus faturamentos mensais ou diários, com a capacidade de filtrar por categorias e visualizar essas informações através de gráficos.',
 }
 
-export default function Transactions() {
-  const PolarChartPreloader = dynamic(
-    () => import('@elements/ChartJS/PolarChartPreloader'),
-    {
-      ssr: false,
-    },
-  )
+export default function Page() {
   return (
     <ViewContainer>
-      <Header title="Transações" description="Gastos recentes" />
+      <Header title="Transações" description="Analise suas transações" />
       <section className="flex w-full flex-col justify-between gap-4 overflow-y-auto xl:flex-row xl:gap-10">
-        <section className="flex w-full flex-col items-center justify-between gap-10 xl:w-8/12">
-          <GridTransaction />
-          <TransactionTable />
+        <section className="flex w-full flex-col items-center justify-between gap-5">
+          <section className="w-full space-y-5">
+            <Overview />
+          </section>
+          <GridTransactions />
         </section>
-        <aside className="flex w-full items-center justify-center rounded-3xl xl:w-1/3">
-          <PolarChartPreloader />
-        </aside>
       </section>
     </ViewContainer>
   )

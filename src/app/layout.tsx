@@ -1,9 +1,9 @@
 import 'swiper/css'
 import './globals.css'
-import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
+import { ThemeProvider } from '@/components/features/providers/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -43,13 +43,10 @@ export const metadata: Metadata = {
     'Jornada Financeira',
     'renovatt',
   ],
-  themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#fff' }],
   authors: [
     { name: 'renovatt' },
     { name: 'renovatt', url: 'https://www.linkedin.com/in/renovatt/' },
   ],
-  viewport:
-    'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
 
   openGraph: {
     type: 'website',
@@ -75,15 +72,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const NextThemeProvider = dynamic(
-    () => import('@modules/Providers/ThemeProvider'),
-    { ssr: false },
-  )
   return (
-    <html lang="pt-br">
+    <html lang="pt-br" suppressHydrationWarning>
       <body className={inter.className}>
         <Toaster />
-        <NextThemeProvider>{children}</NextThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
