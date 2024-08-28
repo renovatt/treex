@@ -27,7 +27,7 @@ export const config = {
     '/recovery/:path*',
     '/dashboard/:path*',
     '/transactions/:path*',
-    '/cripto/:path*',
+    '/cripto-&-invest/:path*',
     '/notes/:path*',
   ],
 }
