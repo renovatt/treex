@@ -16,10 +16,10 @@ export default function Page() {
       <Header title="Transações" description="Analise suas transações" />
       <section className="flex w-full flex-col justify-between gap-4 overflow-y-auto xl:flex-row xl:gap-10">
         <section className="flex w-full flex-col items-center justify-between gap-5">
-          <GridTransactions />
           <section className="w-full space-y-5">
             <Overview />
           </section>
+          <GridTransactions />
         </section>
       </section>
     </ViewContainer>
