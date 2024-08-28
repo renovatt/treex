@@ -22,7 +22,7 @@ export const getIncomeTransactionCount = (
   transactions: TransactionFormProps[],
 ): number => {
   const incomeTransactions = transactions.filter(
-    (transaction) => transaction.transaction,
+    (transaction) => !transaction.transaction,
   )
   return incomeTransactions.length
 }
