@@ -27,10 +27,10 @@ export default function Navbar() {
           name="Transações"
         />
         <RouterLink
-          href="/cripto"
+          href="/cripto-&-invest"
           icon={Bitcoin}
           isOpen={status.isSelected}
-          name="Cripto"
+          name="Cripto & Invest"
         />
         <RouterLink
           href="/notes"

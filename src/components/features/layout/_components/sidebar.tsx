@@ -13,7 +13,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
   return (
     <SidebarContainer>
       <aside
-        className={`fixed bottom-0 left-0 z-50 flex h-20 w-full border border-x-transparent border-r-muted border-t-muted transition-all ease-in-out md:relative md:h-full md:border-y-transparent md:border-r-muted ${
+        className={`fixed bottom-0 left-0 z-50 flex h-20 w-full border border-x-transparent border-r-muted border-t-muted bg-primary-foreground transition-all ease-in-out md:relative md:h-full md:border-y-transparent md:border-r-muted md:bg-transparent ${
           status.isSelected ? 'md:w-60' : 'md:w-14'
         }`}
       >

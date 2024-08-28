@@ -14,6 +14,7 @@ import { UserData } from '@/lib/types'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { getCurrentMonthTransactionCount } from '../utils/calculate-qtd-transaction'
+// import LineChartPreloader from './charts/preloaders/line-chart-preloader'
 
 const TransactionCount = ({ user }: { user: UserData }) => {
   const { transactionData } = useGetTransactions(user)
@@ -51,6 +52,10 @@ export default function Overview() {
           <PolarChartPreloader />
         </CardContent>
       </Card>
+
+      {/* <div className="col-span-4 flex flex-col lg:col-span-2">
+        <LineChartPreloader />
+      </div> */}
     </div>
   )
 }
