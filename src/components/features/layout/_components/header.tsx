@@ -1,7 +1,6 @@
 'use client'
 import { MdOutlineAddBox } from 'react-icons/md'
 import CreateAndEditTransactionForm from '../../transactions/_components/create-and-edit-transaction-form'
-import { ModeToggle } from '../../../@globals/dark-mode'
 import {
   Dialog,
   DialogContent,
@@ -22,8 +21,8 @@ import {
 } from '@/components/ui/popover'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import UserDropdown from '@/components/@globals/user-dropdown'
 import useHideStore from '@/store/use-hide-store'
+import { SettingsSheet } from '@/components/@globals/settings-sheet'
 
 type HeaderProps = {
   title: string
@@ -103,8 +102,11 @@ export default function Header({ title, description }: HeaderProps) {
         )}
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="ghost" className="space-x-2">
-              <MdOutlineAddBox className="size-6 sm:size-4" />
+            <Button
+              variant="ghost"
+              className="space-x-2 md:size-auto md:rounded-md"
+            >
+              <MdOutlineAddBox className="size-6 shrink-0" />
               <span className="hidden sm:block">Adicionar</span>
             </Button>
           </DialogTrigger>
@@ -115,8 +117,7 @@ export default function Header({ title, description }: HeaderProps) {
             <CreateAndEditTransactionForm />
           </DialogContent>
         </Dialog>
-        <UserDropdown />
-        <ModeToggle />
+        <SettingsSheet />
       </section>
     </header>
   )
