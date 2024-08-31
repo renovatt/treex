@@ -68,23 +68,25 @@ export default function Header({ title, description }: HeaderProps) {
         )}
       </section>
 
-      <section className="flex items-center justify-between gap-4">
+      <section className="flex items-center justify-between gap-2">
         {title === 'Transações' ? (
           <Popover>
             <PopoverTrigger asChild>
               <Button
-                variant={'outline'}
+                variant="ghost"
                 className={cn(
-                  'hidden justify-start text-left font-normal md:flex lg:w-[240px]',
+                  'justify-start text-left font-normal md:flex lg:w-[240px]',
                   !date && 'text-muted-foreground',
                 )}
               >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {date ? (
-                  format(date, 'PPP', { locale: ptBR })
-                ) : (
-                  <span>Selecione uma data</span>
-                )}
+                <CalendarIcon className="size-5 shrink-0 sm:mr-2" />
+                <span className="hidden sm:block">
+                  {date ? (
+                    format(date, 'PPP', { locale: ptBR })
+                  ) : (
+                    <span>Selecione uma data</span>
+                  )}
+                </span>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
