@@ -72,7 +72,7 @@ export default function DashCards({ user }: { user: UserData }) {
         value={monthlyRevenue.total}
       />
       <WalletCard
-        title="Previsão de gastos"
+        title="Despesas fixas"
         description="Estimativa de gastos para o mês"
         icon={MdOutlineMoneyOff}
         value={expensesForecast}
