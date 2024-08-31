@@ -19,10 +19,9 @@ import {
 } from '@/components/ui/chart'
 import { calculateLastMonthsRevenue } from '@/components/features/dashboard/utils/calculate-last-months-revenue '
 import { useGetTransactions } from '@/hooks/use-get-transactions'
-import { UserData } from '@/lib/types'
 
-export function OverviewLineChart({ user }: { user: UserData }) {
-  const { transactionData } = useGetTransactions(user)
+export function OverviewLineChart() {
+  const { transactionData } = useGetTransactions()
   const calculateTransactions = calculateLastMonthsRevenue(transactionData)
 
   const chartData = calculateTransactions.map((item) => ({

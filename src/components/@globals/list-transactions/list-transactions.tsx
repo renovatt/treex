@@ -1,17 +1,17 @@
 'use client'
-import { UserData } from '@/lib/types'
 import { useEffect, useRef } from 'react'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import { useDateStore } from '@/store'
 import ListItem from './list-item'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
-import { formattedDate } from '@/utils/format-date'
 import { formatteCurrency } from '@/utils/format-currency-brl'
+import { formattedDate } from '@/utils/format-date'
 
-export default function ListContentIncome({ user }: { user: UserData }) {
-  const { date, setDate } = useDateStore()
-  const { transactionData } = useGetTransactions(user)
+export default function ListTransactions() {
   const tableRef = useRef<HTMLUListElement | null>(null)
+
+  const { date, setDate } = useDateStore()
+  const { transactionData } = useGetTransactions()
 
   const filteredData = date
     ? transactionData
@@ -36,13 +36,11 @@ export default function ListContentIncome({ user }: { user: UserData }) {
             new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime()
           )
         })
-    : transactionData
-        .filter((transaction) => transaction.transaction === false)
-        .sort((a, b) => {
-          return (
-            new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime()
-          )
-        })
+    : transactionData.sort((a, b) => {
+        return (
+          new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime()
+        )
+      })
 
   useEffect(() => {
     if (tableRef.current) {
@@ -57,12 +55,12 @@ export default function ListContentIncome({ user }: { user: UserData }) {
   return (
     <ul
       ref={tableRef}
-      className="flex h-60 w-full flex-col-reverse items-start justify-start space-y-2 overflow-scroll overflow-x-hidden"
+      className="flex h-96 w-full flex-col-reverse items-start justify-start space-y-2 overflow-scroll overflow-x-hidden"
     >
       {!filteredData?.length ? (
         <div className="flex h-80 w-full items-center justify-center">
           <p className="text-sm font-semibold text-muted-foreground">
-            Ainda não há entradas
+            Ainda não há transações
           </p>
         </div>
       ) : (
@@ -77,6 +75,7 @@ export default function ListContentIncome({ user }: { user: UserData }) {
             }
             title={transaction.name}
             value={formatteCurrency(transaction.value)}
+            catelory={transaction.category}
           />
         ))
       )}

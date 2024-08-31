@@ -1,4 +1,3 @@
-import { UserData } from '@/lib/types'
 import WalletCard from '../../../@globals/wallet-card'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { shortNumber } from '@/utils/short-number'
@@ -6,9 +5,9 @@ import { calculateWallet } from '../../dashboard/utils/calculate-wallet'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { useGetDolar } from '@/hooks/use-get-dolar'
 
-export default function CardDolar({ user }: { user: UserData }) {
+export default function CardDolar() {
   const { data: dolar } = useGetDolar()
-  const { transactionData } = useGetTransactions(user)
+  const { transactionData } = useGetTransactions()
   const allResult = calculateWallet(transactionData)
 
   const handleWalletToDolar = (walletValue: number) => {

@@ -5,7 +5,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { UserData } from '@/lib/types'
 import {
   Bar,
   BarChart,
@@ -17,12 +16,12 @@ import {
 import { calculateLastMonthsRevenue } from '../../utils/calculate-last-months-revenue '
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 
-export function OverviewBarChart({ user }: { user: UserData }) {
-  const { transactionData } = useGetTransactions(user)
+export function OverviewBarChart() {
+  const { transactionData } = useGetTransactions()
   const calculateTransactions = calculateLastMonthsRevenue(transactionData)
 
   const chartData = calculateTransactions.map((item) => ({
-    name: item.month,
+    month: item.month,
     total: item.revenue,
   }))
 
@@ -43,10 +42,10 @@ export function OverviewBarChart({ user }: { user: UserData }) {
             content={<ChartTooltipContent hideLabel hideIndicator />}
           />
           <Bar dataKey="total">
-            <LabelList position="top" dataKey="name" fillOpacity={1} />
+            <LabelList position="top" dataKey="month" fillOpacity={1} />
             {chartData.map((item) => (
               <Cell
-                key={item.name}
+                key={item.month}
                 fill={
                   item.total > 0 ? 'hsl(var(--chart-2))' : 'hsl(var(--chart-5))'
                 }

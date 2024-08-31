@@ -1,5 +1,7 @@
 import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
+import { subMonths, startOfMonth, endOfMonth, format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 export const calculateLastMonthsRevenue = (
   data: TransactionFormProps[],
@@ -9,19 +11,15 @@ export const calculateLastMonthsRevenue = (
   const lastMonths = []
 
   for (let i = qnt; i >= 0; i--) {
-    const month = new Date(currentDate)
-    month.setMonth(currentDate.getMonth() - i)
+    const month = subMonths(currentDate, i)
     lastMonths.push(month)
   }
 
   const revenueByMonth = lastMonths.map((month) => {
-    const firstDay = new Date(month.getFullYear(), month.getMonth(), 1)
-    const lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 0)
+    const firstDay = startOfMonth(month)
+    const lastDay = endOfMonth(month)
 
-    const monthName = new Intl.DateTimeFormat('pt-BR', {
-      month: 'short',
-    }).format(month)
-
+    const monthName = format(month, 'MMM', { locale: ptBR })
     const capitalizedMonthName =
       monthName.charAt(0).toUpperCase() + monthName.slice(1).toLowerCase()
 
