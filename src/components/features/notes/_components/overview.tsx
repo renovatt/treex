@@ -26,7 +26,7 @@ export default function Overview() {
       <Card className="col-span-4">
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="space-y-1">
-            <CardTitle>Despesas previstas</CardTitle>
+            <CardTitle>Despesas fixas</CardTitle>
             <CardDescription>Anote suas despesas futuras</CardDescription>
           </div>
           <div>

@@ -7,7 +7,6 @@ import { CircleDollarSign } from 'lucide-react'
 import { calculateCombinedMonthlyWithDateRevenue } from '../utils/calculate-combined-monthly-balance'
 import { calculateMostSpentCategoryByMonth } from '../utils/calculate-most-spent-category-by-month'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
-import { formatteCurrency } from '@/utils/format-currency-brl'
 import { calculateCategoryPercentages } from '@/utils/calculate-balance-to-cards'
 import { calculateMostSpentCategory } from '../../dashboard/utils/calculate-most-spent-category'
 
@@ -48,25 +47,25 @@ export default function TransactionsCards({ user }: { user: UserData }) {
         title="Faturamento mensal"
         description="Valor total de entradas e saídas"
         icon={CircleDollarSign}
-        value={formatteCurrency(monthlyResult.total)}
+        value={monthlyResult.total}
       />
       <WalletCard
         title="Entradas"
         description="Valor total de entradas"
         icon={HiArrowTrendingUp}
-        value={formatteCurrency(monthlyResult.income)}
+        value={monthlyResult.income}
       />
       <WalletCard
         title="Saídas"
         description="Valor total de saídas"
         icon={HiArrowTrendingDown}
-        value={formatteCurrency(monthlyResult.expense)}
+        value={monthlyResult.expense}
       />
       <WalletCard
         title="Categoria mais gasta"
         description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
-        value={formatteCurrency(categoryResultMonthly.total)}
+        value={categoryResultMonthly.total}
       />
     </>
   )

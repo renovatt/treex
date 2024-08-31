@@ -3,7 +3,6 @@ import WalletCard from '../../../@globals/wallet-card'
 import { CircleDollarSign } from 'lucide-react'
 import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'
 import { useGetMonthly } from '@/hooks/use-get-monthly'
-import { formatteCurrency } from '@/utils/format-currency-brl'
 
 export default function MontlhyCard({ user }: { user: UserData }) {
   const { monthlyData } = useGetMonthly(user)
@@ -11,10 +10,10 @@ export default function MontlhyCard({ user }: { user: UserData }) {
 
   return (
     <WalletCard
-      title="Total"
+      title="Despesas"
       description="Estimativa de gastos para o mês"
       icon={CircleDollarSign}
-      value={formatteCurrency(result)}
+      value={result}
     />
   )
 }

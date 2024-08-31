@@ -1,7 +1,6 @@
 'use client'
 import { MdOutlineAddBox } from 'react-icons/md'
 import CreateAndEditTransactionForm from '../../transactions/_components/create-and-edit-transaction-form'
-import { ModeToggle } from '../../../@globals/dark-mode'
 import {
   Dialog,
   DialogContent,
@@ -22,8 +21,8 @@ import {
 } from '@/components/ui/popover'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import UserDropdown from '@/components/@globals/user-dropdown'
 import useHideStore from '@/store/use-hide-store'
+import { SettingsSheet } from '@/components/@globals/settings-sheet'
 
 type HeaderProps = {
   title: string
@@ -69,23 +68,25 @@ export default function Header({ title, description }: HeaderProps) {
         )}
       </section>
 
-      <section className="flex items-center justify-between gap-4">
+      <section className="flex items-center justify-between gap-2">
         {title === 'Transações' ? (
           <Popover>
             <PopoverTrigger asChild>
               <Button
-                variant={'outline'}
+                variant="ghost"
                 className={cn(
-                  'hidden justify-start text-left font-normal md:flex lg:w-[240px]',
+                  'justify-start text-left font-normal md:flex lg:w-[240px]',
                   !date && 'text-muted-foreground',
                 )}
               >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {date ? (
-                  format(date, 'PPP', { locale: ptBR })
-                ) : (
-                  <span>Selecione uma data</span>
-                )}
+                <CalendarIcon className="size-5 shrink-0 sm:mr-2" />
+                <span className="hidden sm:block">
+                  {date ? (
+                    format(date, 'PPP', { locale: ptBR })
+                  ) : (
+                    <span>Selecione uma data</span>
+                  )}
+                </span>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -103,8 +104,11 @@ export default function Header({ title, description }: HeaderProps) {
         )}
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="ghost" className="space-x-2">
-              <MdOutlineAddBox className="size-6 sm:size-4" />
+            <Button
+              variant="ghost"
+              className="space-x-2 md:size-auto md:rounded-md"
+            >
+              <MdOutlineAddBox className="size-6 shrink-0" />
               <span className="hidden sm:block">Adicionar</span>
             </Button>
           </DialogTrigger>
@@ -115,8 +119,7 @@ export default function Header({ title, description }: HeaderProps) {
             <CreateAndEditTransactionForm />
           </DialogContent>
         </Dialog>
-        <UserDropdown />
-        <ModeToggle />
+        <SettingsSheet />
       </section>
     </header>
   )
