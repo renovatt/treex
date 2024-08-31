@@ -45,6 +45,7 @@
     "postcss": "8.4.41",
     "react": "18.3.1",
     "react-apexcharts": "^1.4.1",
+    "react-countup": "^6.5.3",
     "react-day-picker": "^8.10.1",
     "react-dom": "18.3.1",
     "react-firebase-hooks": "^5.1.1",

@@ -1,17 +1,12 @@
-import {
-  CardHeader,
-  CardTitle,
-  CardContent,
-  // CardDescription,
-  Card,
-} from '@/components/ui/card'
+import { CardHeader, CardTitle, CardContent, Card } from '@/components/ui/card'
 import useHideStore from '@/store/use-hide-store'
 import { ComponentType, SVGProps } from 'react'
 import { IconType } from 'react-icons'
+import AnimatedValueCount from './animated-value-count'
 
 type Props = {
   icon: IconType | ComponentType<SVGProps<SVGSVGElement>>
-  value: string
+  value: string | number
   title: string
   description: string
 }
@@ -37,7 +32,9 @@ export default function WalletCard({
             ))}
           </div>
         ) : (
-          <div className="text-2xl font-bold">{value}</div>
+          <div className="text-2xl font-bold">
+            <AnimatedValueCount value={Number(value)} />
+          </div>
         )}
         <p className="text-xs text-muted-foreground">{description}</p>
       </CardContent>

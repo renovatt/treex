@@ -10,7 +10,6 @@ import { calculateMostSpentCategory } from '../utils/calculate-most-spent-catego
 import { calculateCurrentMonthlyRevenue } from '../utils/calculate-current-monthly-revenue'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { useGetMonthly } from '@/hooks/use-get-monthly'
-import { formatteCurrency } from '@/utils/format-currency-brl'
 import {
   calculateBalances,
   calculateCategoryPercentages,
@@ -64,25 +63,25 @@ export default function DashCards({ user }: { user: UserData }) {
         title="Carteira"
         description={walletDesc}
         icon={IoWalletOutline}
-        value={formatteCurrency(wallet.total)}
+        value={wallet.total}
       />
       <WalletCard
         title="Faturamento mensal"
         description={monthlyDesc}
         icon={TbMoneybag}
-        value={formatteCurrency(monthlyRevenue.total)}
+        value={monthlyRevenue.total}
       />
       <WalletCard
         title="Previsão de gastos"
         description="Estimativa de gastos para o mês"
         icon={MdOutlineMoneyOff}
-        value={formatteCurrency(expensesForecast)}
+        value={expensesForecast}
       />
       <WalletCard
         title="Categoria mais gasta"
         description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
-        value={formatteCurrency(categoryRevenue.total)}
+        value={categoryRevenue.total}
       />
     </>
   )
