@@ -50,23 +50,26 @@ export default function Header({ title, description }: HeaderProps) {
 
       <section className="flex items-center justify-between gap-2">
         {title === 'Transações' && <DatePickerRange />}
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              variant="ghost"
-              className="space-x-2 md:size-auto md:rounded-md"
-            >
-              <MdOutlineAddBox className="size-6 shrink-0" />
-              <span className="hidden sm:block">Adicionar</span>
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader className="items-start">
-              <DialogTitle>Adicionar transação</DialogTitle>
-            </DialogHeader>
-            <CreateAndEditTransactionForm />
-          </DialogContent>
-        </Dialog>
+        <div className="hidden md:block">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                variant="ghost"
+                className="space-x-2 md:size-auto md:rounded-md"
+              >
+                <MdOutlineAddBox className="size-6 shrink-0" />
+                <span className="hidden md:block">Adicionar</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="items-start">
+                <DialogTitle>Adicionar transação</DialogTitle>
+              </DialogHeader>
+              <CreateAndEditTransactionForm />
+            </DialogContent>
+          </Dialog>
+        </div>
+
         <SettingsSheet />
       </section>
     </header>

@@ -7,6 +7,7 @@ import {
   StickyNote,
   Bitcoin,
 } from 'lucide-react'
+import AddButton from '../../@globals/add-button'
 
 export default function Navbar() {
   const { status } = useSideBarStore()
@@ -26,6 +27,9 @@ export default function Navbar() {
           isOpen={status.isSelected}
           name="Transações"
         />
+        <div className="block md:hidden">
+          <AddButton />
+        </div>
         <RouterLink
           href="/cripto-&-invest"
           icon={Bitcoin}
