@@ -6,7 +6,7 @@ export default function AnimatedValueCount({ value }: { value: number }) {
     <CountUp
       start={0}
       end={value}
-      duration={2.75}
+      duration={1}
       separator="."
       decimals={4}
       decimal=","
