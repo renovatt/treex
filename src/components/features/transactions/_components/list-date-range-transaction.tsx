@@ -56,7 +56,7 @@ export default function ListDateRangeTransactions() {
                   ? HiArrowTrendingDown
                   : HiArrowTrendingUp
               }
-              catelory={transaction.category}
+              category={transaction.category}
               title={transaction.name}
               value={formatteCurrency(transaction.value)}
             />

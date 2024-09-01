@@ -37,7 +37,7 @@ import {
   LockKeyhole,
   LockKeyholeOpen,
 } from 'lucide-react'
-import { categories } from '@/static/categories'
+import { categories, incomeCategories } from '@/static/categories'
 import {
   Popover,
   PopoverContent,
@@ -66,12 +66,12 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const handleFormSubmit = async (data: TransactionFormProps) => {
     setIsLoading(true)
     try {
-      if (category === categories[0] && transactionValue) {
+      if (incomeCategories.includes(category) && transactionValue) {
         toast.error('Salário não pode ser uma saída')
         return
       }
 
-      if (category !== categories[0] && !transactionValue) {
+      if (!incomeCategories.includes(category) && !transactionValue) {
         toast.error('Categoria não pode ser uma entrada')
         return
       }

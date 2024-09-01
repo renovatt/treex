@@ -16,3 +16,5 @@ export const categories = [
   'Animais de Estimação',
   'Economias/Investimentos',
 ]
+
+export const incomeCategories = ['Bônus/Entrada/Salário', 'Investimentos']

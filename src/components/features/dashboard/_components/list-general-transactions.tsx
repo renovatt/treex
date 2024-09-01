@@ -57,7 +57,7 @@ export default function ListGeneralTransactions() {
                   ? HiArrowTrendingDown
                   : HiArrowTrendingUp
               }
-              catelory={transaction.category}
+              category={transaction.category}
               title={transaction.name}
               value={formatteCurrency(transaction.value)}
             />

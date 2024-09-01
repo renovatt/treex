@@ -12,6 +12,7 @@ import {
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { useDateStore } from '@/store/use-date-picker-store'
 import { calculateTotalCategoryWithinDateRange } from '../../utils/calculate-total-category-within-date-range'
+import { incomeCategories } from '@/static/categories'
 
 export function OverviewPolarChart() {
   const { dateRange } = useDateStore()
@@ -26,7 +27,7 @@ export function OverviewPolarChart() {
   )
 
   const sortedCategory = categoryTotals
-    .filter((item) => item.category !== 'Bônus/Entrada/Salário')
+    .filter((item) => !incomeCategories.includes(item.category))
     .sort((a, b) => b.total - a.total)
     .slice(0, 5)
 
