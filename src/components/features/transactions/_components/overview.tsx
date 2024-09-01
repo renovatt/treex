@@ -12,7 +12,7 @@ import { getCurrentMonthTransactionCount } from '@/utils/calculate-qtd-transacti
 import ListDateRangeTransactions from './list-date-range-transaction'
 
 export default function Overview() {
-  const { transactionData, isLoading } = useGetTransactions()
+  const { transactionData } = useGetTransactions()
   const resumeQtd = getCurrentMonthTransactionCount(transactionData)
 
   return (
@@ -20,13 +20,9 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-5">
         <CardHeader>
           <CardTitle>Últimas transações</CardTitle>
-          {isLoading ? (
-            <p className="animate-pulse text-xs">...</p>
-          ) : (
-            <CardDescription>
-              Você fez {resumeQtd} transações neste mês.
-            </CardDescription>
-          )}
+          <CardDescription>
+            Você fez {resumeQtd} transações neste mês.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ListDateRangeTransactions />

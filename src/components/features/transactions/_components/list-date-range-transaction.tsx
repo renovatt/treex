@@ -12,7 +12,7 @@ export default function ListDateRangeTransactions() {
   const tableRef = useRef<HTMLUListElement | null>(null)
 
   const { dateRange } = useDateStore()
-  const { transactionData } = useGetTransactions()
+  const { transactionData, isLoading } = useGetTransactions()
 
   const filteredData = filterTransactionsWithinDateRange(transactionData, {
     from: dateRange.from || new Date(),
@@ -23,21 +23,27 @@ export default function ListDateRangeTransactions() {
     if (tableRef.current) {
       tableRef.current.scrollTo(0, -tableRef.current.scrollHeight)
     }
-  }, [transactionData])
+  }, [filteredData])
 
   return (
     <ul
       ref={tableRef}
-      className="flex h-60 w-full flex-col-reverse items-start justify-start space-y-2 overflow-scroll overflow-x-hidden"
+      className="flex h-80 w-full flex-col-reverse items-start justify-start space-y-2 overflow-scroll overflow-x-hidden"
     >
-      {!filteredData?.length ? (
+      {isLoading ? (
+        <div className="flex h-80 w-full items-center justify-center">
+          <p className="animate-pulse text-sm font-semibold text-muted-foreground">
+            Carregando transações...
+          </p>
+        </div>
+      ) : !filteredData?.length ? (
         <div className="flex h-80 w-full items-center justify-center">
           <p className="text-sm font-semibold text-muted-foreground">
             Ainda não há entradas
           </p>
         </div>
       ) : (
-        filteredData?.map((transaction) => (
+        filteredData.map((transaction) => (
           <ListItem
             key={transaction.id}
             id={transaction.id ?? ''}
