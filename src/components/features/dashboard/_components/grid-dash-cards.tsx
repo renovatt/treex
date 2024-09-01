@@ -33,9 +33,14 @@ export default function GridDashCards() {
   const monthyBal = currentMonth.income + currentMonth.expenses
 
   const incomePercentage =
-    ((general.income - general.expenses) / generalBal) * 100
+    generalBal !== 0
+      ? ((general.income - general.expenses) / generalBal) * 100
+      : 0
+
   const monthPercentage =
-    ((currentMonth.income - currentMonth.expenses) / monthyBal) * 100
+    monthyBal !== 0
+      ? ((currentMonth.income - currentMonth.expenses) / monthyBal) * 100
+      : 0
 
   const walletDesc = `${
     transactionData.length > 0 ? `${incomePercentage.toFixed(2)}%` : '0%'
