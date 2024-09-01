@@ -44,20 +44,24 @@ export default function ListGeneralTransactions() {
           </p>
         </div>
       ) : (
-        transactionData?.map((transaction) => (
-          <ListItem
-            key={transaction.id}
-            id={transaction.id ?? ''}
-            type={transaction.transaction ? 'expense' : 'income'}
-            date={formattedDate(transaction.date?.toString() ?? '')}
-            icon={
-              transaction.transaction ? HiArrowTrendingDown : HiArrowTrendingUp
-            }
-            catelory={transaction.category}
-            title={transaction.name}
-            value={formatteCurrency(transaction.value)}
-          />
-        ))
+        transactionData
+          ?.slice(0, 30)
+          ?.map((transaction) => (
+            <ListItem
+              key={transaction.id}
+              id={transaction.id ?? ''}
+              type={transaction.transaction ? 'expense' : 'income'}
+              date={formattedDate(transaction.date?.toString() ?? '')}
+              icon={
+                transaction.transaction
+                  ? HiArrowTrendingDown
+                  : HiArrowTrendingUp
+              }
+              catelory={transaction.category}
+              title={transaction.name}
+              value={formatteCurrency(transaction.value)}
+            />
+          ))
       )}
     </ul>
   )
