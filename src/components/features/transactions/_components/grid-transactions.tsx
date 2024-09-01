@@ -23,6 +23,7 @@ export default function GridTransactions() {
     date,
   )
 
+  // esa funcao nao vai ser usada, vamos usar a funcao acima para trazar dados pela data
   const categoryRevenue = calculateMostSpentCategory(transactionData)
 
   const categoryPercentages = calculateCategoryPercentages(
@@ -45,24 +46,24 @@ export default function GridTransactions() {
     <section className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
       <WalletCard
         title="Faturamento mensal"
-        description="Valor total de entradas e saídas"
+        description="Valor total do faturamento do mês"
         icon={CircleDollarSign}
         value={monthlyResult.total}
       />
       <WalletCard
         title="Entradas"
-        description="Valor total de entradas"
+        description="Valor total de entradas do mês"
         icon={HiArrowTrendingUp}
         value={monthlyResult.income}
       />
       <WalletCard
         title="Saídas"
-        description="Valor total de saídas"
+        description="Valor total de saídas do mês"
         icon={HiArrowTrendingDown}
         value={monthlyResult.expense}
       />
       <WalletCard
-        title="Categoria mais gasta"
+        title="Categoria mais gasta do mês"
         description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
         value={categoryResultMonthly.total}
