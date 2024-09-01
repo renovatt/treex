@@ -1,32 +1,31 @@
 'use client'
-import { UserData } from '@/lib/types'
 import { TbMoneybag } from 'react-icons/tb'
 import { IoWalletOutline } from 'react-icons/io5'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
-import WalletCard from '../../../@globals/wallet-card'
 import { calculateWallet } from '../utils/calculate-wallet'
 import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'
 import { calculateMostSpentCategory } from '../utils/calculate-most-spent-category'
 import { calculateCurrentMonthlyRevenue } from '../utils/calculate-current-monthly-revenue'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { useGetMonthly } from '@/hooks/use-get-monthly'
-import { formatteCurrency } from '@/utils/format-currency-brl'
-import {
-  calculateBalances,
-  calculateCategoryPercentages,
-} from '@/utils/calculate-balance-to-cards'
+import WalletCard from '@/components/@globals/wallet-card'
+import { calculateGeneralCategoryPercentages } from '../utils/calculate-general-category-percentages'
+import { calculateBalancesToCards } from '../utils/calculate-balance-to-cards'
 
-export default function DashCards({ user }: { user: UserData }) {
-  const { transactionData } = useGetTransactions(user)
-  const { monthlyData } = useGetMonthly(user)
+export default function GridDashCards() {
+  const { transactionData } = useGetTransactions()
+  const { monthlyData } = useGetMonthly()
 
   const wallet = calculateWallet(transactionData)
   const monthlyRevenue = calculateCurrentMonthlyRevenue(transactionData)
   const expensesForecast = calculateExpensesForecast(monthlyData)
   const categoryRevenue = calculateMostSpentCategory(transactionData)
 
-  const { general, currentMonth } = calculateBalances(transactionData || [])
-  const categoryPercentages = calculateCategoryPercentages(
+  const { general, currentMonth } = calculateBalancesToCards(
+    transactionData || [],
+  )
+
+  const categoryPercentages = calculateGeneralCategoryPercentages(
     transactionData || [],
   )
 
@@ -59,31 +58,31 @@ export default function DashCards({ user }: { user: UserData }) {
     : `${percentage}% ${category}`
 
   return (
-    <>
+    <section className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
       <WalletCard
         title="Carteira"
         description={walletDesc}
         icon={IoWalletOutline}
-        value={formatteCurrency(wallet.total)}
+        value={wallet.total}
       />
       <WalletCard
         title="Faturamento mensal"
         description={monthlyDesc}
         icon={TbMoneybag}
-        value={formatteCurrency(monthlyRevenue.total)}
+        value={monthlyRevenue.total}
       />
       <WalletCard
-        title="Previsão de gastos"
+        title="Despesas fixas"
         description="Estimativa de gastos para o mês"
         icon={MdOutlineMoneyOff}
-        value={formatteCurrency(expensesForecast)}
+        value={expensesForecast}
       />
       <WalletCard
         title="Categoria mais gasta"
         description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
-        value={formatteCurrency(categoryRevenue.total)}
+        value={categoryRevenue.total}
       />
-    </>
+    </section>
   )
 }

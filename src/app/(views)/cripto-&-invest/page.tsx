@@ -20,7 +20,7 @@ export default async function Page() {
     <ViewContainer>
       <Header
         title="Cripto & Invest"
-        description="Fique por dentro do mundo cripto e bolsas de valores"
+        description="Cripto e bolsas de valores"
       />
       <section className="flex w-full flex-col justify-between gap-10 overflow-y-auto overflow-x-hidden xl:flex-row">
         <section className="flex w-full flex-col items-center justify-start gap-5">

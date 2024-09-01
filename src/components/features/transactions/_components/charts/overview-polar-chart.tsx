@@ -9,13 +9,21 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { UserData } from '@/lib/types'
-import { calculateTotalByCategory } from '@/utils/calculate-total-by-category'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useDateStore } from '@/store/use-date-picker-store'
+import { calculateTotalCategoryWithinDateRange } from '../../utils/calculate-total-category-within-date-range'
 
-export function OverviewPolarChart({ user }: { user: UserData }) {
-  const { transactionData } = useGetTransactions(user)
-  const categoryTotals = calculateTotalByCategory(transactionData)
+export function OverviewPolarChart() {
+  const { dateRange } = useDateStore()
+  const { transactionData } = useGetTransactions()
+
+  const categoryTotals = calculateTotalCategoryWithinDateRange(
+    transactionData,
+    {
+      from: dateRange.from || new Date(),
+      to: dateRange.to || new Date(),
+    },
+  )
 
   const sortedCategory = categoryTotals
     .filter((item) => item.category !== 'Bônus/Entrada/Salário')

@@ -1,25 +1,22 @@
 import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
-import { parse, getMonth, getYear } from 'date-fns'
+import { isWithinInterval, parseISO, startOfDay, endOfDay } from 'date-fns'
 
-export const calculateCurrentMonthlyRevenue = (
+export const calculateBalanceWithinDateRange = (
   data: TransactionFormProps[],
+  dateRange: { from: Date; to: Date },
 ) => {
-  const currentDate = new Date()
-  const currentMonth = getMonth(currentDate)
-  const currentYear = getYear(currentDate)
+  let filteredTransactions = data
 
-  const filteredTransactions = data.filter((transaction) => {
-    const transactionDate = parse(
-      transaction.date ? transaction.date.toString() : '',
-      "yyyy-MM-dd'T'HH:mm:ss.SSSX",
-      new Date(),
-    )
-    return (
-      getMonth(transactionDate) === currentMonth &&
-      getYear(transactionDate) === currentYear
-    )
-  })
+  if (dateRange && dateRange.from && dateRange.to) {
+    filteredTransactions = data.filter((transaction) => {
+      const transactionDate = parseISO(transaction.date?.toString() || '')
+      return isWithinInterval(transactionDate, {
+        start: startOfDay(dateRange.from),
+        end: endOfDay(dateRange.to),
+      })
+    })
+  }
 
   const income = filteredTransactions
     .filter((transaction) => !transaction.transaction)

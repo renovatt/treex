@@ -6,40 +6,30 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import ListTransactions from '../../../@globals/list-transactions'
-import PolarChartPreloader from './charts/preloaders/polar-chart-preloader'
-import { auth } from '@/firebase'
-import { useUser } from '@/hooks/use-user'
-import { UserData } from '@/lib/types'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
-import { getCurrentMonthTransactionCount } from '../utils/calculate-qtd-transaction'
-// import LineChartPreloader from './charts/preloaders/line-chart-preloader'
-
-const TransactionCount = ({ user }: { user: UserData }) => {
-  const { transactionData } = useGetTransactions(user)
-  const qtd = getCurrentMonthTransactionCount(transactionData)
-
-  return <CardDescription>Você fez {qtd} transações neste mês.</CardDescription>
-}
+import { OverviewPolarChart } from './charts/overview-polar-chart'
+import { getCurrentMonthTransactionCount } from '@/utils/calculate-qtd-transaction'
+import ListDateRangeTransactions from './list-date-range-transaction'
 
 export default function Overview() {
-  const [user, loading] = useAuthState(auth)
-  const { userLoaded } = useUser(user as UserData)
+  const { transactionData, isLoading } = useGetTransactions()
+  const resumeQtd = getCurrentMonthTransactionCount(transactionData)
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
       <Card className="col-span-4 lg:col-span-5">
         <CardHeader>
           <CardTitle>Últimas transações</CardTitle>
-          {userLoaded && !loading ? (
-            <TransactionCount user={userLoaded} />
-          ) : (
+          {isLoading ? (
             <p className="animate-pulse text-xs">...</p>
+          ) : (
+            <CardDescription>
+              Você fez {resumeQtd} transações neste mês.
+            </CardDescription>
           )}
         </CardHeader>
         <CardContent>
-          <ListTransactions />
+          <ListDateRangeTransactions />
         </CardContent>
       </Card>
 
@@ -49,13 +39,9 @@ export default function Overview() {
           <CardDescription>Suas 5 categorias mais gastas</CardDescription>
         </CardHeader>
         <CardContent className="flex-1 pb-0">
-          <PolarChartPreloader />
+          <OverviewPolarChart />
         </CardContent>
       </Card>
-
-      {/* <div className="col-span-4 flex flex-col lg:col-span-2">
-        <LineChartPreloader />
-      </div> */}
     </div>
   )
 }

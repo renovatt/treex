@@ -1,5 +1,16 @@
 import { create } from 'zustand'
-import { DateStore, UseStoreProps } from './types'
+
+type UseStoreActions = {
+  setStatus: () => void
+}
+
+type UseStoreState = {
+  status: {
+    isSelected: boolean
+  }
+}
+
+export type UseStoreProps = UseStoreState & UseStoreActions
 
 const useSideBarStore = create<UseStoreProps>((set) => ({
   status: {
@@ -18,8 +29,3 @@ const useSideBarStore = create<UseStoreProps>((set) => ({
 }))
 
 export default useSideBarStore
-
-export const useDateStore = create<DateStore>((set) => ({
-  date: '',
-  setDate: (newDate: string) => set({ date: newDate }),
-}))

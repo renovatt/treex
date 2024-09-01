@@ -1,18 +1,23 @@
-import { UserData } from '@/lib/types'
+import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
 import { PriorityFormProps } from '@/schemas'
 import { listenForPriority } from '@/lib/observers'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
-export const useGetPriority = (user: UserData) => {
+export const useGetPriority = () => {
   const [priorityData, setPriorityData] = useState<PriorityFormProps[]>([])
 
-  useEffect(() => {
-    const unsubscribe = listenForPriority(user, (newData) => {
-      setPriorityData(newData)
-    })
+  const [user, isLoading] = useAuthState(auth)
 
-    return () => unsubscribe()
+  useEffect(() => {
+    if (user) {
+      const unsubscribe = listenForPriority(user, (newData) => {
+        setPriorityData(newData)
+      })
+
+      return () => unsubscribe()
+    }
   }, [user])
 
-  return { priorityData }
+  return { priorityData, isLoading }
 }

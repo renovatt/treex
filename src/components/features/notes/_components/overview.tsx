@@ -6,8 +6,6 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import MonthyList from './monthy-list'
-import PriorityList from './priority-list'
 import {
   Dialog,
   DialogContent,
@@ -19,6 +17,8 @@ import { Button } from '@/components/ui/button'
 import CreateAndEditMonthlyForm from './create-and-edit-monthly-form'
 import { MdOutlineAddBox } from 'react-icons/md'
 import CreateAndEditPriorityForm from './create-and-edit-priority-form'
+import MonthyList from './monthly-list'
+import PriorityList from './priority-list'
 
 export default function Overview() {
   return (
@@ -26,7 +26,7 @@ export default function Overview() {
       <Card className="col-span-4">
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="space-y-1">
-            <CardTitle>Despesas previstas</CardTitle>
+            <CardTitle>Despesas fixas</CardTitle>
             <CardDescription>Anote suas despesas futuras</CardDescription>
           </div>
           <div>

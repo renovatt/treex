@@ -1,20 +1,19 @@
 'use client'
-import { auth } from '@/firebase'
-import { UserData } from '@/lib/types'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import MontlhyCard from './montlhy-card'
-import { useUser } from '@/hooks/use-user'
+import { CircleDollarSign } from 'lucide-react'
+import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'
+import { useGetMonthly } from '@/hooks/use-get-monthly'
+import WalletCard from '@/components/@globals/wallet-card'
 
 export default function GridNotes() {
-  const [user, loading] = useAuthState(auth)
-  const { userLoaded } = useUser(user as UserData)
+  const { monthlyData } = useGetMonthly()
+  const result = calculateExpensesForecast(monthlyData)
+
   return (
-    <>
-      {userLoaded && !loading ? (
-        <MontlhyCard user={userLoaded} />
-      ) : (
-        <p>Carregando..</p>
-      )}
-    </>
+    <WalletCard
+      title="Despesas"
+      description="Estimativa de gastos para o mês"
+      icon={CircleDollarSign}
+      value={result}
+    />
   )
 }
