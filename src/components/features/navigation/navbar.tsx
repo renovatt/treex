@@ -1,5 +1,5 @@
 'use client'
-import useSideBarStore from '@/store'
+import useSideBarStore from '@/store/use-sidebar-store'
 import RouterLink from './router-link'
 import {
   LayoutDashboard,
