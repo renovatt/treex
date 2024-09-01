@@ -1,5 +1,6 @@
 import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
+import { incomeCategories } from '@/static/categories'
 
 interface CategoryTotals {
   [category: string]: Decimal
@@ -12,7 +13,7 @@ export const calculateMostSpentCategory = (data: TransactionFormProps[]) => {
     const category = transaction.category
     const value = new Decimal(transaction.value || 0)
 
-    if (category !== 'Bônus/Entrada/Salário') {
+    if (!incomeCategories.includes(category)) {
       if (!categoryTotals[category]) {
         categoryTotals[category] = new Decimal(0)
       }

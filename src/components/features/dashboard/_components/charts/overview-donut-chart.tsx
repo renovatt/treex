@@ -11,13 +11,14 @@ import {
 } from '@/components/ui/chart'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { calculateTotalByCategory } from '../../utils/calculate-total-by-category'
+import { incomeCategories } from '@/static/categories'
 
 export function OverviewDonutChart() {
   const { transactionData } = useGetTransactions()
   const categoryTotals = calculateTotalByCategory(transactionData)
 
   const sortedCategory = categoryTotals
-    .filter((item) => item.category !== 'Bônus/Entrada/Salário')
+    .filter((item) => !incomeCategories.includes(item.category))
     .sort((a, b) => b.total - a.total)
     .slice(0, 5)
 

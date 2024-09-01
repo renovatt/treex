@@ -18,7 +18,7 @@ export default function Home() {
     <section className="flex h-screen w-screen items-center justify-center">
       <motion.div
         animate={{
-          scale: [1, 2, 2, 1, 1],
+          scale: [1, 1, 0.9, 1, 1],
           rotate: [0, 0, 180, 180, 0],
         }}
         transition={{
@@ -29,7 +29,7 @@ export default function Home() {
           repeatDelay: 1,
         }}
       >
-        <TbLetterX className="h-10 w-10 border border-white p-1 text-primary" />
+        <TbLetterX className="size-10 rounded bg-primary p-1 text-muted" />
       </motion.div>
     </section>
   )
