@@ -6,7 +6,6 @@ export const calculateBalancesToCards = (data: TransactionFormProps[]) => {
   const currentMonth = currentDate.getMonth()
   const currentYear = currentDate.getFullYear()
 
-  // Função auxiliar para filtrar transações do mês atual
   const filterCurrentMonthTransactions = (
     transactions: TransactionFormProps[],
   ) =>
@@ -18,7 +17,6 @@ export const calculateBalancesToCards = (data: TransactionFormProps[]) => {
       )
     })
 
-  // Calcula o balanço geral
   const income = data
     .filter((transaction) => !transaction.transaction)
     .reduce(
@@ -35,7 +33,6 @@ export const calculateBalancesToCards = (data: TransactionFormProps[]) => {
 
   const total = income.minus(expenses)
 
-  // Calcula o balanço do mês atual
   const currentMonthData = filterCurrentMonthTransactions(data)
   const currentMonthIncome = currentMonthData
     .filter((transaction) => !transaction.transaction)

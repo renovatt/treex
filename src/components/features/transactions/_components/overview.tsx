@@ -7,10 +7,9 @@ import {
   Card,
 } from '@/components/ui/card'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
-import ListTransactions from '@/components/@globals/list-transactions/list-transactions'
 import { OverviewPolarChart } from './charts/overview-polar-chart'
 import { getCurrentMonthTransactionCount } from '@/utils/calculate-qtd-transaction'
-// import LineChartPreloader from './charts/preloaders/line-chart-preloader'
+import ListDateRangeTransactions from './list-date-range-transaction'
 
 export default function Overview() {
   const { transactionData, isLoading } = useGetTransactions()
@@ -30,7 +29,7 @@ export default function Overview() {
           )}
         </CardHeader>
         <CardContent>
-          <ListTransactions />
+          <ListDateRangeTransactions />
         </CardContent>
       </Card>
 
@@ -43,10 +42,6 @@ export default function Overview() {
           <OverviewPolarChart />
         </CardContent>
       </Card>
-
-      {/* <div className="col-span-4 flex flex-col lg:col-span-2">
-        <LineChartPreloader />
-      </div> */}
     </div>
   )
 }

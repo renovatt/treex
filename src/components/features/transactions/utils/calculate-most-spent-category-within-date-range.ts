@@ -1,28 +1,24 @@
 import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
+import { isWithinInterval, startOfDay, endOfDay } from 'date-fns'
 
 interface CategoryTotals {
   [category: string]: Decimal
 }
 
-export const calculateMostSpentCategoryByMonth = (
+interface DateRange {
+  from: Date
+  to: Date
+}
+
+export const calculateMostSpentCategoryWithinDateRange = (
   data: TransactionFormProps[],
-  selectedDateString?: string,
+  dateRange: DateRange,
 ) => {
-  const currentDate = new Date()
-  let currentMonth = currentDate.getMonth()
-  let currentYear = currentDate.getFullYear()
+  const { from, to } = dateRange
 
-  if (selectedDateString) {
-    const brlDate = selectedDateString.split('T')[0]
-    const dateParts = brlDate.split('/')
-    const selectedDate = new Date(
-      `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
-    )
-
-    currentMonth = selectedDate.getMonth()
-    currentYear = selectedDate.getFullYear()
-  }
+  const normalizedFrom = startOfDay(from)
+  const normalizedTo = endOfDay(to)
 
   const categoryTotals: CategoryTotals = {}
 
@@ -33,8 +29,10 @@ export const calculateMostSpentCategoryByMonth = (
 
     if (
       category !== 'Bônus/Entrada/Salário' &&
-      transactionDate.getMonth() === currentMonth &&
-      transactionDate.getFullYear() === currentYear
+      isWithinInterval(transactionDate, {
+        start: normalizedFrom,
+        end: normalizedTo,
+      })
     ) {
       if (!categoryTotals[category]) {
         categoryTotals[category] = new Decimal(0)

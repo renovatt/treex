@@ -2,7 +2,8 @@
 
 import * as React from 'react'
 import { CalendarIcon } from '@radix-ui/react-icons'
-import { addDays, format } from 'date-fns'
+import { format, subDays } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { DateRange } from 'react-day-picker'
 
 import { cn } from '@/lib/utils'
@@ -13,16 +14,23 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useDateStore } from '@/store/use-date-picker-store'
 
 export function DatePickerRange({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
+    from: subDays(new Date(), 30),
+    to: new Date(),
   })
 
-  console.log(date)
+  const { setDateRange } = useDateStore()
+
+  React.useEffect(() => {
+    if (date?.from && date?.to) {
+      setDateRange({ from: date.from, to: date.to })
+    }
+  }, [date, setDateRange])
 
   return (
     <div className={cn('grid gap-2', className)}>
@@ -36,18 +44,18 @@ export function DatePickerRange({
               !date && 'text-muted-foreground',
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, 'LLL dd, y')} -{' '}
-                  {format(date.to, 'LLL dd, y')}
+                  {format(date.from, 'dd MMM, yyyy', { locale: ptBR })} -{' '}
+                  {format(date.to, 'dd MMM, yyyy', { locale: ptBR })}
                 </>
               ) : (
-                format(date.from, 'LLL dd, y')
+                format(date.from, 'dd MMM, yyyy', { locale: ptBR })
               )
             ) : (
-              <span>Pick a date</span>
+              <span>Selecionar data</span>
             )}
           </Button>
         </PopoverTrigger>
@@ -59,6 +67,7 @@ export function DatePickerRange({
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
+            locale={ptBR}
           />
         </PopoverContent>
       </Popover>

@@ -1,68 +1,76 @@
 'use client'
-import { useDateStore } from '@/store'
 import { MdOutlineCategory } from 'react-icons/md'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import { CircleDollarSign } from 'lucide-react'
-import { calculateCombinedMonthlyWithDateRevenue } from '../utils/calculate-combined-monthly-balance'
-import { calculateMostSpentCategoryByMonth } from '../utils/calculate-most-spent-category-by-month'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import WalletCard from '@/components/@globals/wallet-card'
-import { calculateCategoryPercentagesByDate } from '../utils/calculate-categories-percentage-by-date'
+import { useDateStore } from '@/store/use-date-picker-store'
+import { calculateBalanceWithinDateRange } from '../utils/calculate-balance-within-date-range'
+import { calculateMostSpentCategoryWithinDateRange } from '../utils/calculate-most-spent-category-within-date-range'
+import { calculateCategoryPercentagesWithinDateRange } from '../utils/calculate-categories-percentage-within-date-range'
 
 export default function GridTransactions() {
-  const { date } = useDateStore()
+  const { dateRange } = useDateStore()
   const { transactionData } = useGetTransactions()
 
-  const monthlyResult = calculateCombinedMonthlyWithDateRevenue(
+  const balanceDateRange = calculateBalanceWithinDateRange(transactionData, {
+    from: dateRange.from || new Date(),
+    to: dateRange.to || new Date(),
+  })
+
+  const categoryDateRange = calculateMostSpentCategoryWithinDateRange(
     transactionData,
-    date,
-  )
-  const categoryResultMonthly = calculateMostSpentCategoryByMonth(
-    transactionData,
-    date,
+    {
+      from: dateRange.from || new Date(),
+      to: dateRange.to || new Date(),
+    },
   )
 
-  const categoryPercentages = calculateCategoryPercentagesByDate(
-    transactionData || [],
+  const categoryPercentages = calculateCategoryPercentagesWithinDateRange(
+    transactionData,
+    {
+      from: dateRange.from || new Date(),
+      to: dateRange.to || new Date(),
+    },
   )
 
   const percentage =
     categoryPercentages.find(
-      (category) => category.category === categoryResultMonthly.category,
+      (category) => category.category === categoryDateRange.category,
     )?.percentage || '0.00'
-  const category = categoryResultMonthly.category
-    ? categoryResultMonthly.category
+  const category = categoryDateRange.category
+    ? categoryDateRange.category
     : 'sem categorias'
 
-  const mostSpentCategoryDesc = categoryResultMonthly.category
+  const mostSpentCategoryDesc = categoryDateRange.category
     ? `${percentage}% com ${category}`
     : `${percentage}% ${category}`
 
   return (
     <section className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
       <WalletCard
-        title="Faturamento mensal"
-        description="Valor total do faturamento do mês"
+        title="Faturamento"
+        description="Valor total do faturamento"
         icon={CircleDollarSign}
-        value={monthlyResult.total}
+        value={balanceDateRange.total}
       />
       <WalletCard
         title="Entradas"
-        description="Valor total de entradas do mês"
+        description="Valor total de entradas"
         icon={HiArrowTrendingUp}
-        value={monthlyResult.income}
+        value={balanceDateRange.income}
       />
       <WalletCard
         title="Saídas"
-        description="Valor total de saídas do mês"
+        description="Valor total de saídas"
         icon={HiArrowTrendingDown}
-        value={monthlyResult.expense}
+        value={balanceDateRange.expense}
       />
       <WalletCard
-        title="Categoria mais gasta do mês"
+        title="Categoria mais gasta"
         description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
-        value={categoryResultMonthly.total}
+        value={categoryDateRange.total}
       />
     </section>
   )
