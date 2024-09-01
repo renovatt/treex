@@ -9,20 +9,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
-import { useEffect, useState } from 'react'
-import { useDateStore } from '@/store'
-import { cn } from '@/lib/utils'
-import { CalendarIcon, Eye, EyeOff } from 'lucide-react'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { Eye, EyeOff } from 'lucide-react'
 import useHideStore from '@/store/use-hide-store'
 import { SettingsSheet } from '@/components/@globals/settings-sheet'
+import { DatePickerRange } from '@/components/@globals/date-picker-range'
 
 type HeaderProps = {
   title: string
@@ -30,17 +20,7 @@ type HeaderProps = {
 }
 
 export default function Header({ title, description }: HeaderProps) {
-  const [date, setSelectedDate] = useState<Date | undefined>(new Date())
-  const { setDate } = useDateStore()
   const { status, setIsHidden } = useHideStore()
-
-  useEffect(() => {
-    if (date) {
-      setDate(date.toISOString().slice(0, 10))
-    } else {
-      setDate('')
-    }
-  }, [date, setDate])
 
   return (
     <header className="my-5 mb-10 flex w-full items-center justify-between">
@@ -69,56 +49,27 @@ export default function Header({ title, description }: HeaderProps) {
       </section>
 
       <section className="flex items-center justify-between gap-2">
-        {title === 'Transações' ? (
-          <Popover>
-            <PopoverTrigger asChild>
+        {title === 'Transações' && <DatePickerRange />}
+        <div className="hidden md:block">
+          <Dialog>
+            <DialogTrigger asChild>
               <Button
                 variant="ghost"
-                className={cn(
-                  'justify-start text-left font-normal md:flex lg:w-[240px]',
-                  !date && 'text-muted-foreground',
-                )}
+                className="space-x-2 md:size-auto md:rounded-md"
               >
-                <CalendarIcon className="size-5 shrink-0 sm:mr-2" />
-                <span className="hidden sm:block">
-                  {date ? (
-                    format(date, 'PPP', { locale: ptBR })
-                  ) : (
-                    <span>Selecione uma data</span>
-                  )}
-                </span>
+                <MdOutlineAddBox className="size-6 shrink-0" />
+                <span className="hidden md:block">Adicionar</span>
               </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <Calendar
-                locale={ptBR}
-                mode="single"
-                selected={date}
-                onSelect={setSelectedDate}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
-        ) : (
-          ''
-        )}
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              variant="ghost"
-              className="space-x-2 md:size-auto md:rounded-md"
-            >
-              <MdOutlineAddBox className="size-6 shrink-0" />
-              <span className="hidden sm:block">Adicionar</span>
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader className="items-start">
-              <DialogTitle>Adicionar transação</DialogTitle>
-            </DialogHeader>
-            <CreateAndEditTransactionForm />
-          </DialogContent>
-        </Dialog>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="items-start">
+                <DialogTitle>Adicionar transação</DialogTitle>
+              </DialogHeader>
+              <CreateAndEditTransactionForm />
+            </DialogContent>
+          </Dialog>
+        </div>
+
         <SettingsSheet />
       </section>
     </header>

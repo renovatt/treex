@@ -1,5 +1,4 @@
 'use client'
-import useSideBarStore from '@/store'
 import {
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
@@ -7,6 +6,7 @@ import {
 import Navbar from '../../navigation/navbar'
 import SidebarContainer from './sidebar-container'
 import { ReactNode } from 'react'
+import useSideBarStore from '@/store/use-sidebar-store'
 
 export default function Sidebar({ children }: { children: ReactNode }) {
   const { status, setStatus } = useSideBarStore()

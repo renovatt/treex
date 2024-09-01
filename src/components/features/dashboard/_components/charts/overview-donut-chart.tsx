@@ -9,8 +9,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { calculateTotalByCategory } from '@/utils/calculate-total-by-category'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { calculateTotalByCategory } from '../../utils/calculate-total-by-category'
 
 export function OverviewDonutChart() {
   const { transactionData } = useGetTransactions()
