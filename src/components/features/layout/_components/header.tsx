@@ -49,7 +49,7 @@ export default function Header({ title, description }: HeaderProps) {
       </section>
 
       <section className="flex items-center justify-between gap-2">
-        {title === 'Transações' ? <DatePickerRange /> : ''}
+        {title === 'Transações' && <DatePickerRange />}
         <Dialog>
           <DialogTrigger asChild>
             <Button
