@@ -9,6 +9,7 @@ import {
 import { incomeCategories } from '@/static/categories'
 import useHideStore from '@/store/use-hide-store'
 import { motion } from 'framer-motion'
+import { PiggyBank } from 'lucide-react'
 import { IconType } from 'react-icons'
 
 type Props = {
@@ -49,10 +50,17 @@ export default function ListItem({
             <p className="text-sm font-medium capitalize leading-none">
               {title}
             </p>
-            <p className="text-xs text-muted-foreground">
-              {date}{' '}
-              {category && !incomeCategories.includes(category) && (
+            <p className="flex items-center gap-1 text-xs text-muted-foreground">
+              <span>{date}</span>
+              {!incomeCategories.includes(category) && (
                 <span className="text-[9px]">- {category}</span>
+              )}
+
+              {incomeCategories[1].includes(category) && (
+                <>
+                  {'-'}
+                  <PiggyBank className="size-4 shrink-0" />
+                </>
               )}
             </p>
           </div>
