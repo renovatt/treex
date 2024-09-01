@@ -45,7 +45,7 @@ export default function ListGeneralTransactions() {
         </div>
       ) : (
         transactionData
-          ?.slice(0, 30)
+          ?.slice(-30)
           ?.map((transaction) => (
             <ListItem
               key={transaction.id}
