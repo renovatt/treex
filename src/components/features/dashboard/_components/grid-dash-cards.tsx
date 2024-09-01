@@ -8,11 +8,9 @@ import { calculateMostSpentCategory } from '../utils/calculate-most-spent-catego
 import { calculateCurrentMonthlyRevenue } from '../utils/calculate-current-monthly-revenue'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { useGetMonthly } from '@/hooks/use-get-monthly'
-import {
-  calculateBalances,
-  calculateCategoryPercentages,
-} from '@/utils/calculate-balance-to-cards'
+import { calculateBalances } from '@/utils/calculate-balance-to-cards'
 import WalletCard from '@/components/@globals/wallet-card'
+import { calculateGeneralCategoryPercentages } from '../utils/calculate-general-category-percentages'
 
 export default function GridDashCards() {
   const { transactionData } = useGetTransactions()
@@ -24,7 +22,8 @@ export default function GridDashCards() {
   const categoryRevenue = calculateMostSpentCategory(transactionData)
 
   const { general, currentMonth } = calculateBalances(transactionData || [])
-  const categoryPercentages = calculateCategoryPercentages(
+
+  const categoryPercentages = calculateGeneralCategoryPercentages(
     transactionData || [],
   )
 
