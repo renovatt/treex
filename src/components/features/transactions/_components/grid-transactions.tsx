@@ -6,9 +6,8 @@ import { CircleDollarSign } from 'lucide-react'
 import { calculateCombinedMonthlyWithDateRevenue } from '../utils/calculate-combined-monthly-balance'
 import { calculateMostSpentCategoryByMonth } from '../utils/calculate-most-spent-category-by-month'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
-import { calculateCategoryPercentages } from '@/utils/calculate-balance-to-cards'
-import { calculateMostSpentCategory } from '../../dashboard/utils/calculate-most-spent-category'
 import WalletCard from '@/components/@globals/wallet-card'
+import { calculateCategoryPercentagesByDate } from '../utils/calculate-categories-percentage-by-date'
 
 export default function GridTransactions() {
   const { date } = useDateStore()
@@ -23,22 +22,19 @@ export default function GridTransactions() {
     date,
   )
 
-  // esa funcao nao vai ser usada, vamos usar a funcao acima para trazar dados pela data
-  const categoryRevenue = calculateMostSpentCategory(transactionData)
-
-  const categoryPercentages = calculateCategoryPercentages(
+  const categoryPercentages = calculateCategoryPercentagesByDate(
     transactionData || [],
   )
 
   const percentage =
     categoryPercentages.find(
-      (category) => category.category === categoryRevenue.category,
+      (category) => category.category === categoryResultMonthly.category,
     )?.percentage || '0.00'
-  const category = categoryRevenue.category
-    ? categoryRevenue.category
+  const category = categoryResultMonthly.category
+    ? categoryResultMonthly.category
     : 'sem categorias'
 
-  const mostSpentCategoryDesc = categoryRevenue.category
+  const mostSpentCategoryDesc = categoryResultMonthly.category
     ? `${percentage}% com ${category}`
     : `${percentage}% ${category}`
 

@@ -7,15 +7,15 @@ import {
   Card,
 } from '@/components/ui/card'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
-import {
-  getCurrentMonthTransactionCount,
-  getIncomeTransactionCount,
-} from '../../transactions/utils/calculate-qtd-transaction'
 import ListTransactions from '@/components/@globals/list-transactions/list-transactions'
 import ListTransactionsIncome from '@/components/@globals/list-transactions/list-transactions-incone'
 import { OverviewBarChart } from './charts/overview-bar-chart'
 import { OverviewDonutChart } from './charts/overview-donut-chart'
 import { OverviewRadialChart } from './charts/overview-radial-chart'
+import {
+  getCurrentMonthTransactionCount,
+  getIncomeTransactionCount,
+} from '@/utils/calculate-qtd-transaction'
 
 export default function Overview() {
   const { transactionData, isLoading } = useGetTransactions()
