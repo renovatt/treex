@@ -108,7 +108,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
       form.reset({
         name: '',
         value: 0,
-        category: '',
+        category: categories[0],
         transaction: false,
         date: new Date(),
       })
