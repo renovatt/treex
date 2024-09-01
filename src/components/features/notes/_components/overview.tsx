@@ -6,8 +6,6 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import MonthyList from './monthy-list'
-import PriorityList from './priority-list'
 import {
   Dialog,
   DialogContent,
@@ -19,6 +17,8 @@ import { Button } from '@/components/ui/button'
 import CreateAndEditMonthlyForm from './create-and-edit-monthly-form'
 import { MdOutlineAddBox } from 'react-icons/md'
 import CreateAndEditPriorityForm from './create-and-edit-priority-form'
+import MonthyList from './monthly-list'
+import PriorityList from './priority-list'
 
 export default function Overview() {
   return (

@@ -1,9 +1,7 @@
 'use client'
-import { UserData } from '@/lib/types'
 import { TbMoneybag } from 'react-icons/tb'
 import { IoWalletOutline } from 'react-icons/io5'
 import { MdOutlineMoneyOff, MdOutlineCategory } from 'react-icons/md'
-import WalletCard from '../../../@globals/wallet-card'
 import { calculateWallet } from '../utils/calculate-wallet'
 import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'
 import { calculateMostSpentCategory } from '../utils/calculate-most-spent-category'
@@ -14,10 +12,11 @@ import {
   calculateBalances,
   calculateCategoryPercentages,
 } from '@/utils/calculate-balance-to-cards'
+import WalletCard from '@/components/@globals/wallet-card'
 
-export default function DashCards({ user }: { user: UserData }) {
-  const { transactionData } = useGetTransactions(user)
-  const { monthlyData } = useGetMonthly(user)
+export default function GridDashCards() {
+  const { transactionData } = useGetTransactions()
+  const { monthlyData } = useGetMonthly()
 
   const wallet = calculateWallet(transactionData)
   const monthlyRevenue = calculateCurrentMonthlyRevenue(transactionData)
@@ -58,7 +57,7 @@ export default function DashCards({ user }: { user: UserData }) {
     : `${percentage}% ${category}`
 
   return (
-    <>
+    <section className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
       <WalletCard
         title="Carteira"
         description={walletDesc}
@@ -83,6 +82,6 @@ export default function DashCards({ user }: { user: UserData }) {
         icon={MdOutlineCategory}
         value={categoryRevenue.total}
       />
-    </>
+    </section>
   )
 }

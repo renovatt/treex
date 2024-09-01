@@ -1,18 +1,23 @@
 import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
+import { parse, getMonth, getYear } from 'date-fns'
 
 export const calculateCurrentMonthlyRevenue = (
   data: TransactionFormProps[],
 ) => {
   const currentDate = new Date()
-  const currentMonth = currentDate.getMonth()
-  const currentYear = currentDate.getFullYear()
+  const currentMonth = getMonth(currentDate)
+  const currentYear = getYear(currentDate)
 
   const filteredTransactions = data.filter((transaction) => {
-    const transactionDate = new Date(transaction.date ?? '')
+    const transactionDate = parse(
+      transaction.date ? transaction.date.toString() : '',
+      "yyyy-MM-dd'T'HH:mm:ss.SSSX",
+      new Date(),
+    )
     return (
-      transactionDate.getMonth() === currentMonth &&
-      transactionDate.getFullYear() === currentYear
+      getMonth(transactionDate) === currentMonth &&
+      getYear(transactionDate) === currentYear
     )
   })
 

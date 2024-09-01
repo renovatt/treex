@@ -9,12 +9,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { UserData } from '@/lib/types'
 import { calculateTotalByCategory } from '@/utils/calculate-total-by-category'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 
-export function OverviewPolarChart({ user }: { user: UserData }) {
-  const { transactionData } = useGetTransactions(user)
+export function OverviewPolarChart() {
+  const { transactionData } = useGetTransactions()
   const categoryTotals = calculateTotalByCategory(transactionData)
 
   const sortedCategory = categoryTotals

@@ -1,20 +1,39 @@
 'use client'
-import { auth } from '@/firebase'
-import { UserData } from '@/lib/types'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import PriorityListContent from './priority-list-content'
-import { useUser } from '@/hooks/use-user'
+import { useEffect, useRef } from 'react'
+import PriorityListItem from './priority-list-item'
+import { useGetPriority } from '@/hooks/use-get-priority'
 
 export default function PriorityList() {
-  const [user, loading] = useAuthState(auth)
-  const { userLoaded } = useUser(user as UserData)
+  const { priorityData } = useGetPriority()
+  const tableRef = useRef<HTMLUListElement | null>(null)
+
+  useEffect(() => {
+    if (tableRef.current) {
+      tableRef.current.scrollTo(0, -tableRef.current.scrollHeight)
+    }
+  }, [priorityData])
+
   return (
-    <section className="flex h-96 w-full flex-col items-center justify-start gap-4">
-      {userLoaded && !loading ? (
-        <PriorityListContent user={userLoaded} />
+    <ul
+      ref={tableRef}
+      className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
+    >
+      {!priorityData.length ? (
+        <div className="flex h-80 w-full items-center justify-center">
+          <p className="text-sm font-semibold text-muted-foreground">
+            Ainda não há itens
+          </p>
+        </div>
       ) : (
-        <p className="text-xs font-bold text-muted-foreground">Aguardando...</p>
+        priorityData.map((priority) => (
+          <PriorityListItem
+            id={priority.id ?? ''}
+            key={priority.id}
+            title={priority.name}
+            level={priority.level}
+          />
+        ))
       )}
-    </section>
+    </ul>
   )
 }
