@@ -37,7 +37,7 @@ import {
   LockKeyhole,
   LockKeyholeOpen,
 } from 'lucide-react'
-import { categories } from '@/static/categories'
+import { categories, incomeCategories } from '@/static/categories'
 import {
   Popover,
   PopoverContent,
@@ -66,12 +66,12 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const handleFormSubmit = async (data: TransactionFormProps) => {
     setIsLoading(true)
     try {
-      if (category === categories[0] && transactionValue) {
+      if (incomeCategories.includes(category) && transactionValue) {
         toast.error('Salário não pode ser uma saída')
         return
       }
 
-      if (category !== categories[0] && !transactionValue) {
+      if (!incomeCategories.includes(category) && !transactionValue) {
         toast.error('Categoria não pode ser uma entrada')
         return
       }
@@ -108,7 +108,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
       form.reset({
         name: '',
         value: 0,
-        category: '',
+        category: categories[0].name,
         transaction: false,
         date: new Date(),
       })
@@ -149,7 +149,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   }, [id, form, user])
 
   useEffect(() => {
-    if (category === categories[0]) {
+    if (incomeCategories.includes(category)) {
       form.setValue('transaction', false)
     } else {
       form.setValue('transaction', true)
@@ -186,7 +186,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
         <FormField
           control={form.control}
           name="category"
-          defaultValue={categories[0]}
+          defaultValue={categories[0].name}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Categoria</FormLabel>
@@ -201,9 +201,14 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {categories.map((category, index) => (
-                    <SelectItem key={index} value={category}>
-                      {category}
+                  {categories.map(({ name, icon: Icon }, index) => (
+                    <SelectItem key={index} value={name}>
+                      <div className="flex items-center gap-2">
+                        <div className="flex size-[24px] items-center justify-center rounded-full bg-secondary">
+                          <Icon className="size-4 shrink-0 text-muted-foreground" />
+                        </div>
+                        <span>{name}</span>
+                      </div>
                     </SelectItem>
                   ))}
                 </SelectContent>

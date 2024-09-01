@@ -1,6 +1,7 @@
 import Decimal from 'decimal.js'
 import { TransactionFormProps } from '@/schemas'
 import { isWithinInterval, startOfDay, endOfDay } from 'date-fns'
+import { incomeCategories } from '@/static/categories'
 
 interface CategoryTotals {
   [category: string]: Decimal
@@ -28,7 +29,7 @@ export const calculateMostSpentCategoryWithinDateRange = (
     const transactionDate = new Date(transaction.date || '')
 
     if (
-      category !== 'Bônus/Entrada/Salário' &&
+      !incomeCategories.includes(category) &&
       isWithinInterval(transactionDate, {
         start: normalizedFrom,
         end: normalizedTo,
