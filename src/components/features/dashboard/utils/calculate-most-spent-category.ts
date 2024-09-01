@@ -5,27 +5,14 @@ interface CategoryTotals {
   [category: string]: Decimal
 }
 
-export const calculateMostSpentCategory = (
-  data: TransactionFormProps[],
-  currentMonthOnly = false,
-) => {
-  const currentDate = new Date()
-  const currentMonth = currentDate.getMonth()
-  const currentYear = currentDate.getFullYear()
-
+export const calculateMostSpentCategory = (data: TransactionFormProps[]) => {
   const categoryTotals: CategoryTotals = {}
 
   data.forEach((transaction) => {
     const category = transaction.category
     const value = new Decimal(transaction.value || 0)
-    const transactionDate = new Date(transaction.date ?? '')
 
-    if (
-      category !== 'Bônus/Entrada/Salário' &&
-      (!currentMonthOnly ||
-        (transactionDate.getMonth() === currentMonth &&
-          transactionDate.getFullYear() === currentYear))
-    ) {
+    if (category !== 'Bônus/Entrada/Salário') {
       if (!categoryTotals[category]) {
         categoryTotals[category] = new Decimal(0)
       }

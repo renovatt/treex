@@ -1,17 +1,16 @@
 import { TransactionFormProps } from '@/schemas'
+import { isSameMonth, isSameYear, parseISO } from 'date-fns'
 
 export const getCurrentMonthTransactionCount = (
   transactions: TransactionFormProps[],
 ): number => {
   const currentDate = new Date()
-  const currentMonth = currentDate.getMonth()
-  const currentYear = currentDate.getFullYear()
 
   const transactionsThisMonth = transactions.filter((transaction) => {
-    const transactionDate = new Date(transaction.date || '')
+    const transactionDate = parseISO(transaction.date?.toString() || '')
     return (
-      transactionDate.getMonth() === currentMonth &&
-      transactionDate.getFullYear() === currentYear
+      isSameMonth(transactionDate, currentDate) &&
+      isSameYear(transactionDate, currentDate)
     )
   })
 
@@ -21,8 +20,16 @@ export const getCurrentMonthTransactionCount = (
 export const getIncomeTransactionCount = (
   transactions: TransactionFormProps[],
 ): number => {
-  const incomeTransactions = transactions.filter(
-    (transaction) => !transaction.transaction,
-  )
+  const currentDate = new Date()
+
+  const incomeTransactions = transactions.filter((transaction) => {
+    const transactionDate = parseISO(transaction.date?.toString() || '')
+    return (
+      !transaction.transaction &&
+      isSameMonth(transactionDate, currentDate) &&
+      isSameYear(transactionDate, currentDate)
+    )
+  })
+
   return incomeTransactions.length
 }
