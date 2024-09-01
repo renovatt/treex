@@ -51,7 +51,7 @@ export default function ListIncomeTransactions() {
         </div>
       ) : (
         filteredData
-          ?.slice(0, 30)
+          ?.slice(-30)
           ?.map((transaction) => (
             <ListItem
               key={transaction.id}
