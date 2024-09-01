@@ -18,7 +18,7 @@ import ListGeneralTransactions from './list-general-transactions'
 import ListIncomeTransactions from './list-income-transactions'
 
 export default function Overview() {
-  const { transactionData, isLoading } = useGetTransactions()
+  const { transactionData } = useGetTransactions()
 
   const resumeQtd = getCurrentMonthTransactionCount(transactionData)
   const incomeQtd = getIncomeTransactionCount(transactionData)
@@ -40,13 +40,9 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-3">
         <CardHeader>
           <CardTitle>Últimas transações</CardTitle>
-          {isLoading ? (
-            <p className="animate-pulse text-xs">...</p>
-          ) : (
-            <CardDescription>
-              Você fez {resumeQtd} transações neste mês.
-            </CardDescription>
-          )}
+          <CardDescription>
+            Você fez {resumeQtd} transações neste mês.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ListGeneralTransactions />
@@ -76,13 +72,9 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-3">
         <CardHeader>
           <CardTitle>Entradas recentes</CardTitle>
-          {isLoading ? (
-            <p className="animate-pulse text-xs">...</p>
-          ) : (
-            <CardDescription>
-              Você fez {incomeQtd} entradas neste mês.
-            </CardDescription>
-          )}
+          <CardDescription>
+            Você fez {incomeQtd} entradas neste mês.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ListIncomeTransactions />

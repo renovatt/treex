@@ -21,7 +21,9 @@ export default function Overview() {
         <CardHeader>
           <CardTitle>Últimas transações</CardTitle>
           {isLoading ? (
-            <p className="animate-pulse text-xs">...</p>
+            <CardDescription className="animate-pulse text-xs">
+              ...
+            </CardDescription>
           ) : (
             <CardDescription>
               Você fez {resumeQtd} transações neste mês.
