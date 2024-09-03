@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { auth } from '@/firebase'
-import { LogOut, Settings } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { logout } from '@/lib/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -32,7 +32,10 @@ export function SettingsSheet() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" className="size-10 rounded-full">
-          <Settings className="shrink-0" />
+          <Avatar>
+            <AvatarImage src={avatar} alt="@avatar" />
+            <AvatarFallback>WL</AvatarFallback>
+          </Avatar>
         </Button>
       </SheetTrigger>
       <SheetContent>
@@ -40,7 +43,7 @@ export function SettingsSheet() {
           <SheetTitle>Configurações</SheetTitle>
         </SheetHeader>
 
-        <section className="my-5 flex flex-col items-end justify-between space-y-4">
+        <section className="my-5 flex flex-col items-end justify-between space-y-8">
           <section className="flex items-center gap-2">
             <section className="flex flex-col items-end">
               <p className="text-sm font-medium leading-none">
@@ -58,16 +61,16 @@ export function SettingsSheet() {
 
           <section className="flex w-full flex-col items-center space-y-20">
             <div className="flex w-full items-center justify-end gap-2">
-              <span className="text-muted-foreground">Tema</span>
+              <span className="text-muted-foreground">Aletar tema</span>
               <ModeToggle />
             </div>
           </section>
         </section>
-        <SheetFooter>
+        <SheetFooter className="absolute bottom-5 right-4 w-[90%]">
           <SheetClose asChild>
             <Button
               onClick={handleLogout}
-              className="bottom-5 flex w-full items-center gap-2 border"
+              className="bottom-5 flex w-full items-center gap-2"
             >
               Sair
               <LogOut className="size-4" />
