@@ -61,7 +61,7 @@ export function SettingsSheet() {
 
           <section className="flex w-full flex-col items-center space-y-20">
             <div className="flex w-full items-center justify-end gap-2">
-              <span className="text-muted-foreground">Aletar tema</span>
+              <span className="text-muted-foreground">Alterar tema</span>
               <ModeToggle />
             </div>
           </section>
