@@ -24,8 +24,8 @@ export default function RouterLink({
   return (
     <Link href={href} className="w-full">
       <Button
-        variant={isActive ? 'default' : 'ghost'}
-        className="w-full space-x-4"
+        variant={isActive ? 'secondary' : 'ghost'}
+        className={`w-full space-x-4`}
       >
         <Icon className="size-4 flex-shrink-0" />
         <span
