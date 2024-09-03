@@ -22,6 +22,11 @@ type Props = {
   category: string
 }
 
+const typeOptions = {
+  expense: 'expense',
+  income: 'income',
+} as const
+
 export default function ListItem({
   date,
   icon: Icon,
@@ -43,7 +48,7 @@ export default function ListItem({
         >
           <Icon
             className={`size-6 ${
-              type === 'income' ? 'text-green-500' : 'text-red-500'
+              type === typeOptions.income ? 'text-green-500' : 'text-red-500'
             }`}
           />
           <div className="ml-4 space-y-1">
@@ -74,7 +79,13 @@ export default function ListItem({
               ))}
             </div>
           ) : (
-            <div className="ml-auto font-medium">{value}</div>
+            <div
+              className={`ml-auto text-sm font-medium ${
+                type === typeOptions.income ? 'text-green-500' : 'text-red-500'
+              }`}
+            >
+              {value}
+            </div>
           )}
         </motion.div>
       </DialogTrigger>
