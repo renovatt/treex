@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import { useGetMonthly } from '@/hooks/use-get-monthly'
-import MothlyListItem from '@/components/features/notes/_components/mothly-list-item'
+import MothlyListItem from '@/features/notes/_components/mothly-list-item'
 
 export default function MonthyList() {
   const { monthlyData } = useGetMonthly()

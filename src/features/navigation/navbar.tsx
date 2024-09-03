@@ -7,7 +7,7 @@ import {
   StickyNote,
   Bitcoin,
 } from 'lucide-react'
-import AddButton from '../../@globals/add-button'
+import AddButton from '@/components/@globals/add-button'
 
 export default function Navbar() {
   const { status } = useSideBarStore()

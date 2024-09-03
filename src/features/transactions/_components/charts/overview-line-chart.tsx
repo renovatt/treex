@@ -17,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { calculateLastMonthsRevenue } from '@/components/features/dashboard/utils/calculate-last-months-revenue '
+import { calculateLastMonthsRevenue } from '@/features/dashboard/utils/calculate-last-months-revenue '
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 
 export function OverviewLineChart() {

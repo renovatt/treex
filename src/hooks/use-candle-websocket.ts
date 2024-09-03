@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
-import { CandleTypeProps } from '@/components/features/cripto/_components/charts/candlestick-chart'
 import createCandle from '@/utils/create-candle'
+import { CandleTypeProps } from '@/features/cripto/_components/charts/candlestick-chart'
 
 interface LastJsonMessage {
   k: {

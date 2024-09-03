@@ -1,14 +1,14 @@
 'use client'
-import ThumbSlider from '../../../@globals/swiper-thumb'
 import { LiaCopyright } from 'react-icons/lia'
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import SwiperThumb from '@/components/@globals/swiper-thumb'
 
 export default function AuthContainer({ children }: { children: ReactNode }) {
   return (
     <section className="relative flex size-full items-center justify-center gap-2 overflow-hidden border p-4 lg:justify-between">
-      <ThumbSlider />
+      <SwiperThumb />
       <aside className="flex h-full w-full items-center justify-center rounded-3xl lg:w-1/2">
         <motion.section
           initial={{ opacity: 0, x: 100 }}

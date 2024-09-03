@@ -1,9 +1,9 @@
-import WalletCard from '../../../@globals/wallet-card'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { shortNumber } from '@/utils/short-number'
 import { calculateWallet } from '../../dashboard/utils/calculate-wallet'
 import { useGetTransactions } from '@/hooks/use-get-transactions'
 import { useGetDolar } from '@/hooks/use-get-dolar'
+import WalletCard from '@/components/@globals/wallet-card'
 
 export default function CardDolar() {
   const { data: dolar } = useGetDolar()
