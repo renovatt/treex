@@ -4,7 +4,7 @@ import {
   PriorityFormProps,
 } from '@/schemas'
 import { db } from '@/firebase'
-import { UserData } from './types'
+import { UserData } from './@types'
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
 
 const userCollectionRef = collection(db, 'users')

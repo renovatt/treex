@@ -8,7 +8,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart'
 import { calculateBalanceTransactions } from '../../utils/calculate-balance-transactions'
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 
 export function OverviewRadialChart() {
   const { transactionData } = useGetTransactions()

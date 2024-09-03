@@ -1,7 +1,7 @@
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
 import { PriorityFormProps } from '@/schemas'
-import { listenForPriority } from '@/lib/observers'
+import { listenForPriority } from '@/firebase/database/observers'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 export const useGetPriority = () => {

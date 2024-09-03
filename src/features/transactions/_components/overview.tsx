@@ -6,7 +6,7 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import { OverviewPolarChart } from './charts/overview-polar-chart'
 import { getCurrentMonthTransactionCount } from '@/utils/calculate-qtd-transaction'
 import ListDateRangeTransactions from './list-date-range-transaction'

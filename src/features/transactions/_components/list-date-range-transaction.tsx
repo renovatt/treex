@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react'
 import { formattedDate } from '@/utils/format-date'
 import { formatteCurrency } from '@/utils/format-currency-brl'
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import ListItem from '@/components/@globals/list-item'
 import { filterTransactionsWithinDateRange } from '../utils/filter-transaction-withini-data-range'

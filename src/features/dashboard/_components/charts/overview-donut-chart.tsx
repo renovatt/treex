@@ -9,7 +9,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import { calculateTotalByCategory } from '../../utils/calculate-total-by-category'
 import { incomeCategories } from '@/static/categories'
 

@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { calculateLastMonthsRevenue } from '../../utils/calculate-last-months-revenue '
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 
 export function OverviewBarChart() {
   const { transactionData } = useGetTransactions()

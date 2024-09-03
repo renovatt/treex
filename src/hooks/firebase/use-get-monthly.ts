@@ -1,7 +1,7 @@
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
 import { MonthyPreviewFormProps } from '@/schemas'
-import { listenForMonthly } from '@/lib/observers'
+import { listenForMonthly } from '@/firebase/database/observers'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 export const useGetMonthly = () => {

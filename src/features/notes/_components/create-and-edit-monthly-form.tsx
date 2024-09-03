@@ -1,11 +1,11 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
-import { UserData } from '@/lib/types'
+import { UserData } from '@/firebase/database/@types'
 import {
   deleteMonthlyDoc,
   savingUserMonthlyExpense,
   updatingUserMonthlyExpense,
-} from '@/lib/db'
+} from '@/firebase/database/db'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
-import { getMonthlyDoc } from '@/lib/gets'
+import { getMonthlyDoc } from '@/firebase/database/gets'
 import { LoaderCircle } from 'lucide-react'
 import MoneyInput from '@/components/@globals/ui/input-money'
 

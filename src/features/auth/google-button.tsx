@@ -1,6 +1,6 @@
 'use client'
 import { FcGoogle } from 'react-icons/fc'
-import { signInWithGoogle } from '@/lib/auth'
+import { signInWithGoogle } from '@/firebase/database/auth'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/button'

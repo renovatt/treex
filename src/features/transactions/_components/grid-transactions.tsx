@@ -2,7 +2,7 @@
 import { MdOutlineCategory } from 'react-icons/md'
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2'
 import { CircleDollarSign } from 'lucide-react'
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import WalletCard from '@/components/@globals/wallet-card'
 import { useDateStore } from '@/store/use-date-picker-store'
 import { calculateBalanceWithinDateRange } from '../utils/calculate-balance-within-date-range'

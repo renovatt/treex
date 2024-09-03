@@ -6,7 +6,7 @@ import {
   CardDescription,
   Card,
 } from '@/components/ui/card'
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import { OverviewBarChart } from './charts/overview-bar-chart'
 import { OverviewDonutChart } from './charts/overview-donut-chart'
 import { OverviewRadialChart } from './charts/overview-radial-chart'

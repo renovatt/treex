@@ -12,7 +12,7 @@ import {
 import { auth } from '@/firebase'
 import { LogOut } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { logout } from '@/lib/auth'
+import { logout } from '@/firebase/database/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/navigation'
 import { ModeToggle } from './dark-mode'

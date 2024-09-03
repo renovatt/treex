@@ -1,5 +1,5 @@
 import { db } from '@/firebase'
-import { UserData } from './types'
+import { UserData } from './@types'
 import { collection, doc, getDoc } from 'firebase/firestore'
 import {
   MonthyPreviewFormProps,

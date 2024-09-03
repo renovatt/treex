@@ -14,7 +14,7 @@ import { FirebaseError } from 'firebase/app'
 import { auth, googleProvider } from '@/firebase'
 import { setCookie, destroyCookie } from 'nookies'
 import { savingUserDataIntoFirestore } from './db'
-import { ErrorMessageResponse, UserData } from './types'
+import { ErrorMessageResponse, UserData } from './@types'
 
 export const signInWithGoogle = async () => {
   try {

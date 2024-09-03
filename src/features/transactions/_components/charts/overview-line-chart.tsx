@@ -18,7 +18,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart'
 import { calculateLastMonthsRevenue } from '@/features/dashboard/utils/calculate-last-months-revenue '
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 
 export function OverviewLineChart() {
   const { transactionData } = useGetTransactions()

@@ -1,11 +1,11 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
-import { UserData } from '@/lib/types'
+import { UserData } from '@/firebase/database/@types'
 import {
   deletePriorityDoc,
   savingUserPriorityList,
   updatingUserPriorityList,
-} from '@/lib/db'
+} from '@/firebase/database/db'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -28,7 +28,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useEffect, useState } from 'react'
-import { getPriorityDoc } from '@/lib/gets'
+import { getPriorityDoc } from '@/firebase/database/gets'
 import { LoaderCircle } from 'lucide-react'
 
 const level = ['Importante', 'Menos importante', 'Muito importante'] as const

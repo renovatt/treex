@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import PriorityListItem from './priority-list-item'
-import { useGetPriority } from '@/hooks/use-get-priority'
+import { useGetPriority } from '@/hooks/firebase/use-get-priority'
 
 export default function PriorityList() {
   const { priorityData } = useGetPriority()

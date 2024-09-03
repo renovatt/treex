@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { createCredential } from '@/lib/auth'
+import { createCredential } from '@/firebase/database/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { RegisterSchema, RegisterFormProps } from '@/schemas/auth'

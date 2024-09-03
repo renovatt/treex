@@ -1,5 +1,5 @@
 import { db } from '@/firebase'
-import { ErrorMessageResponse, UserData } from './types'
+import { ErrorMessageResponse, UserData } from './@types'
 import {
   addDoc,
   collection,

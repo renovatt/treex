@@ -1,7 +1,7 @@
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
 import { TransactionFormProps } from '@/schemas'
-import { listenForTransactions } from '@/lib/observers'
+import { listenForTransactions } from '@/firebase/database/observers'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 export const useGetTransactions = () => {

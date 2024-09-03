@@ -1,11 +1,11 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
-import { UserData } from '@/lib/types'
+import { UserData } from '@/firebase/database/@types'
 import {
   deleteTransactionDoc,
   savingUserTransaction,
   updatingUserTransaction,
-} from '@/lib/db'
+} from '@/firebase/database/db'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -30,7 +30,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useEffect, useState } from 'react'
-import { getTransactionDoc } from '@/lib/gets'
+import { getTransactionDoc } from '@/firebase/database/gets'
 import {
   CalendarIcon,
   LoaderCircle,

@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { signInWithCredential } from '@/lib/auth'
+import { signInWithCredential } from '@/firebase/database/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { LoginFormProps, LoginSchema } from '@/schemas/auth'

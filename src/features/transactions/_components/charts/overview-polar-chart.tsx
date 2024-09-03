@@ -9,7 +9,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { useGetTransactions } from '@/hooks/use-get-transactions'
+import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import { useDateStore } from '@/store/use-date-picker-store'
 import { calculateTotalCategoryWithinDateRange } from '../../utils/calculate-total-category-within-date-range'
 import { incomeCategories } from '@/static/categories'
