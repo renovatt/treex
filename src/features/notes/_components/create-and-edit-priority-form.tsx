@@ -1,11 +1,10 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
 import { UserData } from '@/firebase/database/@types'
-import {
-  deletePriorityDoc,
-  savingUserPriorityList,
-  updatingUserPriorityList,
-} from '@/firebase/database/db'
+import { getPriority } from '@/firebase/database/priority/get-priority-doc'
+import { createPriority } from '@/firebase/database/priority/create-priority-doc'
+import { deletePriority } from '@/firebase/database/priority/delete-priority-doc'
+import { updatePriority } from '@/firebase/database/priority/update-priority-doc'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -28,7 +27,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useEffect, useState } from 'react'
-import { getPriorityDoc } from '@/firebase/database/gets'
 import { LoaderCircle } from 'lucide-react'
 
 const level = ['Importante', 'Menos importante', 'Muito importante'] as const
@@ -51,7 +49,7 @@ export default function CreateAndEditPriorityForm({ id }: { id?: string }) {
         const newData = { ...data }
         newData.id = id
 
-        const { status, message } = await updatingUserPriorityList(
+        const { status, message } = await updatePriority(
           newData,
           user as UserData,
         )
@@ -64,10 +62,7 @@ export default function CreateAndEditPriorityForm({ id }: { id?: string }) {
         return
       }
 
-      const { status, message } = await savingUserPriorityList(
-        data,
-        user as UserData,
-      )
+      const { status, message } = await createPriority(data, user as UserData)
       if (!status) {
         toast.error(message)
         return
@@ -85,7 +80,7 @@ export default function CreateAndEditPriorityForm({ id }: { id?: string }) {
   }
 
   const handleDelete = async () => {
-    const { status, message } = await deletePriorityDoc(
+    const { status, message } = await deletePriority(
       user as UserData,
       id as string,
     )
@@ -99,7 +94,7 @@ export default function CreateAndEditPriorityForm({ id }: { id?: string }) {
   useEffect(() => {
     if (id) {
       const handleGetPriorityDoc = async () => {
-        const data = await getPriorityDoc(user as UserData, id)
+        const data = await getPriority(user as UserData, id)
         const defaultValues = {
           name: data?.name,
           level: data?.level,

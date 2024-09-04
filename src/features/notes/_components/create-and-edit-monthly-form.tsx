@@ -1,11 +1,10 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
 import { UserData } from '@/firebase/database/@types'
-import {
-  deleteMonthlyDoc,
-  savingUserMonthlyExpense,
-  updatingUserMonthlyExpense,
-} from '@/firebase/database/db'
+import { getMonthlyExpense } from '@/firebase/database/monthy-expenses/get-monthly-expense-doc'
+import { createMonthlyExpense } from '@/firebase/database/monthy-expenses/create-monthly-expense-doc'
+import { deleteMonthlyExpense } from '@/firebase/database/monthy-expenses/delete-monthly-expense-doc'
+import { updateMonthlyExpense } from '@/firebase/database/monthy-expenses/update-monthly-expense-doc'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -21,7 +20,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
-import { getMonthlyDoc } from '@/firebase/database/gets'
 import { LoaderCircle } from 'lucide-react'
 import MoneyInput from '@/components/@globals/ui/input-money'
 
@@ -43,7 +41,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
         const newData = { ...data }
         newData.id = id
 
-        const { status, message } = await updatingUserMonthlyExpense(
+        const { status, message } = await updateMonthlyExpense(
           newData,
           user as UserData,
         )
@@ -56,7 +54,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
         return
       }
 
-      const { status, message } = await savingUserMonthlyExpense(
+      const { status, message } = await createMonthlyExpense(
         data,
         user as UserData,
       )
@@ -77,7 +75,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   }
 
   const handleDelete = async () => {
-    const { status, message } = await deleteMonthlyDoc(
+    const { status, message } = await deleteMonthlyExpense(
       user as UserData,
       id as string,
     )
@@ -91,7 +89,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   useEffect(() => {
     if (id) {
       const handleGetMonthlyDoc = async () => {
-        const data = await getMonthlyDoc(user as UserData, id)
+        const data = await getMonthlyExpense(user as UserData, id)
         const defaultValues = {
           name: data?.name,
           value: data?.value,

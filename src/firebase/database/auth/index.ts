@@ -13,8 +13,8 @@ import {
 import { FirebaseError } from 'firebase/app'
 import { auth, googleProvider } from '@/firebase'
 import { setCookie, destroyCookie } from 'nookies'
-import { savingUserDataIntoFirestore } from './db'
-import { ErrorMessageResponse, UserData } from './@types'
+import { createUserDataIntoFirestore } from '../user/create-user-doc'
+import { ErrorMessageResponse, UserData } from '../@types'
 
 export const signInWithGoogle = async () => {
   try {
@@ -40,7 +40,7 @@ export const signInWithGoogle = async () => {
       providerId: user.providerId,
     }
 
-    await savingUserDataIntoFirestore(newUser)
+    await createUserDataIntoFirestore(newUser)
 
     return { message: `Seja bem vindo, ${newUser.displayName}`, status: true }
   } catch (error) {
@@ -74,7 +74,7 @@ export const createCredential = async (data: RegisterFormProps) => {
       providerId: user.providerId,
     }
 
-    await savingUserDataIntoFirestore(newUser)
+    await createUserDataIntoFirestore(newUser)
 
     return { message: 'Usuário criado com sucesso', status: true }
   } catch (error) {

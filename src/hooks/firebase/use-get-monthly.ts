@@ -1,8 +1,8 @@
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
 import { MonthyPreviewFormProps } from '@/schemas'
-import { listenForMonthly } from '@/firebase/database/observers'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { observerMonthlyExpenseService } from '@/firebase/database/monthy-expenses/observer-monthly-expense-collection.service'
 
 export const useGetMonthly = () => {
   const [monthlyData, setMonthlyData] = useState<MonthyPreviewFormProps[]>([])
@@ -11,7 +11,7 @@ export const useGetMonthly = () => {
 
   useEffect(() => {
     if (user) {
-      const unsubscribe = listenForMonthly(user, (newData) => {
+      const unsubscribe = observerMonthlyExpenseService(user, (newData) => {
         setMonthlyData(newData)
       })
 

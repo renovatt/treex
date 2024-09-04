@@ -1,11 +1,10 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
 import { UserData } from '@/firebase/database/@types'
-import {
-  deleteTransactionDoc,
-  savingUserTransaction,
-  updatingUserTransaction,
-} from '@/firebase/database/db'
+import { createTransaction } from '@/firebase/database/transactions/create-transaction-doc'
+import { deleteTransaction } from '@/firebase/database/transactions/delete-transaction-doc'
+import { updateTransaction } from '@/firebase/database/transactions/update-transaction-doc'
+import { getTransaction } from '@/firebase/database/transactions/get-transaction-doc'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -30,7 +29,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useEffect, useState } from 'react'
-import { getTransactionDoc } from '@/firebase/database/gets'
 import {
   CalendarIcon,
   LoaderCircle,
@@ -80,7 +78,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
         const newData = { ...data }
         newData.id = id
 
-        const { status, message } = await updatingUserTransaction(
+        const { status, message } = await updateTransaction(
           newData,
           user as UserData,
         )
@@ -94,7 +92,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
         return
       }
 
-      const { status, message } = await savingUserTransaction(
+      const { status, message } = await createTransaction(
         data,
         user as UserData,
       )
@@ -120,7 +118,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   }
 
   const handleDelete = async () => {
-    const { status, message } = await deleteTransactionDoc(
+    const { status, message } = await deleteTransaction(
       user as UserData,
       id as string,
     )
@@ -134,7 +132,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   useEffect(() => {
     if (id) {
       const handleGetTransactionDoc = async () => {
-        const data = await getTransactionDoc(user as UserData, id)
+        const data = await getTransaction(user as UserData, id)
         const defaultValues = {
           name: data?.name,
           value: data?.value,

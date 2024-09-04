@@ -1,8 +1,8 @@
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
 import { TransactionFormProps } from '@/schemas'
-import { listenForTransactions } from '@/firebase/database/observers'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { observerTransactionsService } from '@/firebase/database/transactions/observer-transactions-collection.service'
 
 export const useGetTransactions = () => {
   const [transactionData, setTransactionData] = useState<
@@ -13,7 +13,7 @@ export const useGetTransactions = () => {
 
   useEffect(() => {
     if (user) {
-      const unsubscribe = listenForTransactions(user, (newData) => {
+      const unsubscribe = observerTransactionsService(user, (newData) => {
         setTransactionData(newData)
       })
 
