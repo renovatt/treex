@@ -1,8 +1,8 @@
-import { CardHeader, CardTitle, CardContent, Card } from '@/components/ui/card'
-import { QuoteList } from '@/entities/brapi-type-stock'
-import { formatteCurrency } from '@/utils/format-currency-brl'
-import { Triangle } from 'lucide-react'
 import Image from 'next/image'
+import { Triangle } from 'lucide-react'
+import { QuoteList } from '../entities/type-brapi-stock'
+import { formatteCurrency } from '@/utils/format-currency-brl'
+import { CardHeader, CardTitle, CardContent, Card } from '@/components/ui/card'
 
 export default function QuoteCard({
   change,

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { ApexOptions } from 'apexcharts'
 import createCandle from '@/utils/create-candle'
-import { useGetCandles } from '@/hooks/use-get-candles'
+import { useGetCandles } from '@/features/cripto/hooks/use-get-candles'
 
 export type ChartState = {
   options: ApexOptions

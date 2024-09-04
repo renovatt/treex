@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { BRAPI_API_KEY, BRAPI_BASE_URL } from '@/static/env'
-import { QuoteList, RootStock } from '@/entities/brapi-type-stock'
+import { RootStock, QuoteList } from '../entities/type-brapi-stock'
 
 export const getBrapiStock = async (
   symbol: string = 'AMER3',

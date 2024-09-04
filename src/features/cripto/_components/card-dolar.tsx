@@ -2,7 +2,7 @@ import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { shortNumber } from '@/utils/short-number'
 import { calculateWallet } from '../../dashboard/utils/calculate-wallet'
 import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
-import { useGetDolar } from '@/hooks/use-get-dolar'
+import { useGetDolar } from '@/features/cripto/hooks/use-get-dolar'
 import WalletCard from '@/components/@globals/wallet-card'
 
 export default function CardDolar() {

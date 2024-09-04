@@ -18,10 +18,10 @@ import {
 // import dynamic from 'next/dynamic'
 import TradingTickerTape from './trading-view/trading-ticker-tape'
 import TradingViewScreener from './trading-view/trading-view-screener'
-import QuoteCard from '@/components/@globals/quote-card'
-import { QuoteList } from '@/entities/brapi-type-stock'
-import { useGetQuotes } from '@/hooks/use-get-quotes'
+import { useGetQuotes } from '@/features/cripto/hooks/use-get-quotes'
 import { useCallback, useEffect, useState } from 'react'
+import QuoteCard from './quote-card'
+import { QuoteList } from '../entities/type-brapi-stock'
 
 const options = [
   { value: 'Finance', label: 'Finanças' },

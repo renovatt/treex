@@ -1,6 +1,6 @@
 import { USDBRLResponse } from '@/features/cripto/@types/types'
-import { getDolar } from '@/services'
 import { useQuery } from '@tanstack/react-query'
+import { getDolar } from '../services/cripto.service'
 
 export const useGetDolar = () => {
   const { data, isLoading, error, isError } = useQuery<USDBRLResponse>({
