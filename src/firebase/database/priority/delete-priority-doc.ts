@@ -1,18 +1,20 @@
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
 import { FirebaseError } from 'firebase/app'
 import { collection, deleteDoc, doc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
+import { PRIORITY_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const deletePriority = async (user: UserData, id: string) => {
   try {
     const { uid } = user
-    const priorityListCollection = collection(
+
+    const priorityCollection = collection(
       userCollectionRef,
       uid as string,
-      'priorityList',
+      PRIORITY_COLLECTION,
     )
 
-    await deleteDoc(doc(priorityListCollection, id))
+    await deleteDoc(doc(priorityCollection, id))
     return { message: 'Deletado com sucesso!', status: true }
   } catch (error) {
     if (error instanceof FirebaseError) {

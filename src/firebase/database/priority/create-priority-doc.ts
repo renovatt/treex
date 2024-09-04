@@ -1,9 +1,10 @@
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
+import { v4 as uuidv4 } from 'uuid'
 import { FirebaseError } from 'firebase/app'
+import { PriorityFormProps } from '@/schemas'
 import { collection, addDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
-import { PriorityFormProps } from '@/schemas'
-import { v4 as uuidv4 } from 'uuid'
+import { PRIORITY_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const createPriority = async (
   data: PriorityFormProps,
@@ -13,20 +14,20 @@ export const createPriority = async (
     const { name, level } = data
     const { uid } = user
 
-    const priorityListCollection = collection(
+    const priorityCollection = collection(
       userCollectionRef,
       uid as string,
-      'priorityList',
+      PRIORITY_COLLECTION,
     )
 
-    const userPriorityItem = {
+    const priorityItem = {
       id: uuidv4(),
       name,
       level,
       date: Date.now(),
     }
 
-    await addDoc(priorityListCollection, userPriorityItem)
+    await addDoc(priorityCollection, priorityItem)
 
     return { message: 'Salvo com sucesso!', status: true }
   } catch (error) {

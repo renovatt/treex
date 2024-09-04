@@ -1,8 +1,9 @@
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
 import { PriorityFormProps } from '@/schemas'
 import { FirebaseError } from 'firebase/app'
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
+import { PRIORITY_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const updatePriority = async (
   data: PriorityFormProps,
@@ -12,21 +13,22 @@ export const updatePriority = async (
     const { id, name, level } = data
     const { uid } = user
 
-    const priorityListCollection = collection(
+    const priorityCollection = collection(
       userCollectionRef,
       uid as string,
-      'priorityList',
+      PRIORITY_COLLECTION,
     )
-    const priorityListRef = doc(priorityListCollection, id)
-    const priorityDoc = await getDoc(priorityListRef)
+
+    const prioritytRef = doc(priorityCollection, id)
+    const priorityDoc = await getDoc(prioritytRef)
 
     if (priorityDoc.exists()) {
-      const userPriorityItemUpdated = {
+      const priorityItemUpdated = {
         name,
         level,
       }
 
-      await updateDoc(priorityListRef, userPriorityItemUpdated)
+      await updateDoc(prioritytRef, priorityItemUpdated)
 
       return { message: 'Atualizado com sucesso!', status: true }
     } else {

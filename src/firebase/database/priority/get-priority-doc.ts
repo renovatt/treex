@@ -1,23 +1,24 @@
 import { UserData } from '../@types'
 import { PriorityFormProps } from '@/schemas'
 import { collection, doc, getDoc } from 'firebase/firestore'
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
+import { PRIORITY_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const getPriority = async (user: UserData, priorityId: string) => {
   const { uid } = user
 
-  const priorityListCollection = collection(
+  const priorityCollection = collection(
     userCollectionRef,
     uid as string,
-    'priorityList',
+    PRIORITY_COLLECTION,
   )
 
-  const priorityListRef = doc(priorityListCollection, priorityId)
-  const userPriorityDoc = await getDoc(priorityListRef)
+  const priorityRef = doc(priorityCollection, priorityId)
+  const priorityDoc = await getDoc(priorityRef)
 
-  if (userPriorityDoc.exists()) {
-    const userPriorityData = userPriorityDoc.data()
-    return userPriorityData as PriorityFormProps
+  if (priorityDoc.exists()) {
+    const priorityData = priorityDoc.data()
+    return priorityData as PriorityFormProps
   } else {
     console.log('Documento não encontrado')
     return null

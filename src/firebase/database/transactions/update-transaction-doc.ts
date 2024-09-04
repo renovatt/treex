@@ -1,8 +1,9 @@
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
 import { TransactionFormProps } from '@/schemas'
 import { FirebaseError } from 'firebase/app'
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
+import { TRANSACTIONS_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const updateTransaction = async (
   data: TransactionFormProps,
@@ -15,13 +16,14 @@ export const updateTransaction = async (
     const transactionsCollection = collection(
       userCollectionRef,
       uid as string,
-      'transactions',
+      TRANSACTIONS_COLLECTION,
     )
+
     const transactionRef = doc(transactionsCollection, id)
     const transactionDoc = await getDoc(transactionRef)
 
     if (transactionDoc.exists()) {
-      const userTransactionUpdated = {
+      const transactionUpdated = {
         name,
         value,
         transaction,
@@ -29,7 +31,7 @@ export const updateTransaction = async (
         date: date?.toISOString(),
       }
 
-      await updateDoc(transactionRef, userTransactionUpdated)
+      await updateDoc(transactionRef, transactionUpdated)
 
       return { message: 'Atualizado com sucesso!', status: true }
     } else {

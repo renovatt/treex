@@ -1,7 +1,8 @@
 import { UserData } from '../@types'
 import { collection, doc, getDoc } from 'firebase/firestore'
 import { TransactionFormProps } from '@/schemas'
-import { userCollectionRef } from '../../user-db-collection-ref'
+import { userCollectionRef } from '../user-db-collection-ref'
+import { TRANSACTIONS_COLLECTION } from '../../static/collections'
 
 export const getTransaction = async (user: UserData, transactionId: string) => {
   const { uid } = user
@@ -9,15 +10,15 @@ export const getTransaction = async (user: UserData, transactionId: string) => {
   const transactionsCollection = collection(
     userCollectionRef,
     uid as string,
-    'transactions',
+    TRANSACTIONS_COLLECTION,
   )
 
   const transactionRef = doc(transactionsCollection, transactionId)
-  const userTransactionDoc = await getDoc(transactionRef)
+  const transactionDoc = await getDoc(transactionRef)
 
-  if (userTransactionDoc.exists()) {
-    const userTransactionData = userTransactionDoc.data()
-    return userTransactionData as TransactionFormProps
+  if (transactionDoc.exists()) {
+    const transactionData = transactionDoc.data()
+    return transactionData as TransactionFormProps
   } else {
     console.log('Documento não encontrado')
     return null

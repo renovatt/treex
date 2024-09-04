@@ -1,9 +1,10 @@
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
-import { TransactionFormProps } from '@/schemas'
+import { v4 as uuidv4 } from 'uuid'
 import { FirebaseError } from 'firebase/app'
+import { TransactionFormProps } from '@/schemas'
 import { collection, addDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
-import { v4 as uuidv4 } from 'uuid'
+import { TRANSACTIONS_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const createTransaction = async (
   data: TransactionFormProps,
@@ -16,10 +17,10 @@ export const createTransaction = async (
     const transactionsCollection = collection(
       userCollectionRef,
       uid as string,
-      'transactions',
+      TRANSACTIONS_COLLECTION,
     )
 
-    const userTransaction = {
+    const newTransaction = {
       id: uuidv4(),
       name,
       value,
@@ -28,7 +29,7 @@ export const createTransaction = async (
       date: date?.toISOString() ?? Date.now(),
     }
 
-    await addDoc(transactionsCollection, userTransaction)
+    await addDoc(transactionsCollection, newTransaction)
 
     return { message: 'Transação salva com sucesso!', status: true }
   } catch (error) {

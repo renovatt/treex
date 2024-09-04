@@ -1,15 +1,17 @@
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
 import { FirebaseError } from 'firebase/app'
 import { collection, deleteDoc, doc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
+import { MONTHLY_EXPENSES_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const deleteMonthlyExpense = async (user: UserData, id: string) => {
   try {
     const { uid } = user
+
     const monthlyExpenseCollection = collection(
       userCollectionRef,
       uid as string,
-      'monthlyExpenses',
+      MONTHLY_EXPENSES_COLLECTION,
     )
 
     await deleteDoc(doc(monthlyExpenseCollection, id))

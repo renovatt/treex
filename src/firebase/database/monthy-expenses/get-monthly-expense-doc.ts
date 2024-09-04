@@ -1,7 +1,8 @@
 import { UserData } from '../@types'
 import { MonthyPreviewFormProps } from '@/schemas'
-import { userCollectionRef } from '@/firebase/user-db-collection-ref'
 import { collection, doc, getDoc } from 'firebase/firestore'
+import { MONTHLY_EXPENSES_COLLECTION } from '../../static/collections'
+import { userCollectionRef } from '../user-db-collection-ref'
 
 export const getMonthlyExpense = async (user: UserData, monthlyId: string) => {
   const { uid } = user
@@ -9,7 +10,7 @@ export const getMonthlyExpense = async (user: UserData, monthlyId: string) => {
   const monthlyExpenseCollection = collection(
     userCollectionRef,
     uid as string,
-    'monthlyExpenses',
+    MONTHLY_EXPENSES_COLLECTION,
   )
 
   const monthlyExpenseRef = doc(monthlyExpenseCollection, monthlyId)
