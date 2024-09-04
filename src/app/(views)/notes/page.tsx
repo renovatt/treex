@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import ViewContainer from '@/components/features/layout/_components/view-container'
-import Header from '@/components/features/layout/_components/header'
-import Overview from '@/components/features/notes/_components/overview'
-import GridNotes from '@/components/features/notes/_components/grid-notes'
+import ViewContainer from '@/features/layout/_components/view-container'
+import Header from '@/features/layout/_components/header'
+import Overview from '@/features/notes/_components/overview'
+import GridNotes from '@/features/notes/_components/grid-notes'
 
 export const metadata: Metadata = {
   title: 'TreeX | Anotações',

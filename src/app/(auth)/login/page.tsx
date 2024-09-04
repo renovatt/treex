@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
-import FooterForm from '@/components/features/auth/footer-form'
-import HeaderForm from '@/components/features/auth/header-form'
-import LoginForm from '@/components/features/auth/login-form'
-import AuthContainer from '@/components/features/layout/_components/auth-container'
-import GoogleButton from '@/components/features/auth/google-button'
+import FooterForm from '@/features/auth/footer-form'
+import HeaderForm from '@/features/auth/header-form'
+import LoginForm from '@/features/auth/login-form'
+import AuthContainer from '@/features/layout/_components/auth-container'
+import GoogleButton from '@/features/auth/google-button'
 
 export const metadata: Metadata = {
   title: 'TreeX | Login',

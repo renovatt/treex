@@ -1,6 +1,6 @@
 'use client'
 import { auth } from '@/firebase'
-import { logout } from '@/lib/auth'
+import { logout } from '@/firebase/database/auth'
 // import { useTheme } from 'next-themes'
 import { useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'

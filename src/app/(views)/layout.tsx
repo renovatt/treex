@@ -1,5 +1,5 @@
-import Sidebar from '@/components/features/layout/_components/sidebar'
-import ReactQueryProvider from '@/components/features/providers/react-query-provider'
+import Sidebar from '@/features/layout/_components/sidebar'
+import ReactQueryProvider from '@/features/providers/react-query-provider'
 
 export default function MainLayout({
   children,

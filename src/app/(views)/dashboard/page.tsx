@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import ViewContainer from '@/components/features/layout/_components/view-container'
-import Header from '@/components/features/layout/_components/header'
-import Overview from '@/components/features/dashboard/_components/overview'
-import GridDashCards from '@/components/features/dashboard/_components/grid-dash-cards'
+import ViewContainer from '@/features/layout/_components/view-container'
+import Header from '@/features/layout/_components/header'
+import Overview from '@/features/dashboard/_components/overview'
+import GridDashCards from '@/features/dashboard/_components/grid-dash-cards'
 
 export const metadata: Metadata = {
   title: 'TreeX | Dashboard',

@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import ViewContainer from '@/components/features/layout/_components/view-container'
-import Header from '@/components/features/layout/_components/header'
-import Overview from '@/components/features/transactions/_components/overview'
-import GridTransactions from '@/components/features/transactions/_components/grid-transactions'
+import ViewContainer from '@/features/layout/_components/view-container'
+import Header from '@/features/layout/_components/header'
+import Overview from '@/features/transactions/_components/overview'
+import GridTransactions from '@/features/transactions/_components/grid-transactions'
 
 export const metadata: Metadata = {
   title: 'TreeX | Transações',

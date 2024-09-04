@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import CreateAndEditTransactionForm from '../features/transactions/_components/create-and-edit-transaction-form'
+import CreateAndEditTransactionForm from '../../features/transactions/_components/create-and-edit-transaction-form'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 
