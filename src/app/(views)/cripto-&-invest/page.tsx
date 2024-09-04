@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { Suspense } from 'react'
 import ViewContainer from '@/features/layout/_components/view-container'
 import Header from '@/features/layout/_components/header'
-import Overview from '@/features/dashboard/_components/overview'
+import Overview from '@/features/cripto/_components/overview'
 // import { getBrapiStockList } from '@/services/brapi.service'
 
 export const metadata: Metadata = {
