@@ -18,7 +18,7 @@ import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 
 export function OverviewBarChart() {
   const { transactionData } = useGetTransactions()
-  const calculateTransactions = calculateLastMonthsRevenue(transactionData)
+  const calculateTransactions = calculateLastMonthsRevenue(transactionData, 5)
 
   const chartData = calculateTransactions.map((item) => ({
     month: item.month,

@@ -7,55 +7,28 @@ import {
   Card,
 } from '@/components/ui/card'
 import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
-import { OverviewBarChart } from './charts/overview-bar-chart'
 import { OverviewDonutChart } from './charts/overview-donut-chart'
 import { OverviewRadialChart } from './charts/overview-radial-chart'
-import {
-  getCurrentMonthTransactionCount,
-  getIncomeTransactionCount,
-} from '@/utils/calculate-qtd-transaction'
-import ListGeneralTransactions from './list-general-transactions'
+import { getIncomeTransactionCount } from '@/utils/calculate-qtd-transaction'
 import ListIncomeTransactions from './list-income-transactions'
+import { OverviewBarMultipleChart } from './charts/overview-bar-multiple-chart'
+import { OverviewAreaChart } from './charts/overview-area-chart'
+// import { OverviewBarChart } from './charts/overview-bar-chart'
 
 export default function Overview() {
   const { transactionData } = useGetTransactions()
 
-  const resumeQtd = getCurrentMonthTransactionCount(transactionData)
   const incomeQtd = getIncomeTransactionCount(transactionData)
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
       <Card className="col-span-4">
         <CardHeader>
-          <CardTitle>Últimos meses</CardTitle>
-          <CardDescription>
-            Análise do seu faturamento nos últimos meses
-          </CardDescription>
+          <CardTitle>Comparativo</CardTitle>
+          <CardDescription>Comparativo dos últimos meses</CardDescription>
         </CardHeader>
         <CardContent>
-          <OverviewBarChart />
-        </CardContent>
-      </Card>
-
-      <Card className="col-span-4 lg:col-span-3">
-        <CardHeader>
-          <CardTitle>Últimas transações</CardTitle>
-          <CardDescription>
-            Você fez {resumeQtd} transações neste mês.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ListGeneralTransactions />
-        </CardContent>
-      </Card>
-
-      <Card className="col-span-4 lg:col-span-2">
-        <CardHeader>
-          <CardTitle>Balanço</CardTitle>
-          <CardDescription>Análise entre entradas e saídas</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <OverviewRadialChart />
+          <OverviewBarMultipleChart />
         </CardContent>
       </Card>
 
@@ -69,7 +42,37 @@ export default function Overview() {
         </CardContent>
       </Card>
 
-      <Card className="col-span-4 lg:col-span-3">
+      <Card className="col-span-4 lg:col-span-6">
+        <CardHeader>
+          <CardTitle>Evolução</CardTitle>
+          <CardDescription>Evolução nos últimos meses </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <OverviewAreaChart />
+        </CardContent>
+      </Card>
+
+      <Card className="col-span-4 lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Balanço</CardTitle>
+          <CardDescription>Análise entre entradas e saídas</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <OverviewRadialChart />
+        </CardContent>
+      </Card>
+
+      {/* <Card className="col-span-4 lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Comparativo</CardTitle>
+          <CardDescription>Comparativo dos últimos meses</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <OverviewBarChart />
+        </CardContent>
+      </Card> */}
+
+      <Card className="col-span-4">
         <CardHeader>
           <CardTitle>Entradas recentes</CardTitle>
           <CardDescription>
