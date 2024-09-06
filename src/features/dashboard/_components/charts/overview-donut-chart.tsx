@@ -12,6 +12,7 @@ import {
 import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import { calculateTotalByCategory } from '../../utils/calculate-total-by-category'
 import { incomeCategories } from '@/static/categories'
+import { CardContent } from '@/components/ui/card'
 
 export function OverviewDonutChart() {
   const { transactionData } = useGetTransactions()
@@ -38,32 +39,34 @@ export function OverviewDonutChart() {
     .reduce((acc, item) => ({ ...acc, ...item }), {}) satisfies ChartConfig
 
   return (
-    <ChartContainer
-      config={chartConfig}
-      className="mx-auto aspect-square max-h-[250px]"
-    >
-      <PieChart>
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent hideLabel />}
-        />
-        <Pie
-          data={data}
-          dataKey="revenue"
-          nameKey="category"
-          innerRadius={60}
-          strokeWidth={5}
-          activeIndex={0}
-          activeShape={({ outerRadius = 0, ...props }: PieSectorDataItem) => (
-            <Sector {...props} outerRadius={outerRadius + 10} />
-          )}
-        />
-        <ChartLegend
-          align="center"
-          content={<ChartLegendContent nameKey="category" />}
-          className="-translate-y-2 flex-wrap gap-2 whitespace-nowrap [&>*]:basis-1/4 [&>*]:justify-center"
-        />
-      </PieChart>
-    </ChartContainer>
+    <CardContent className="flex-1 pb-0">
+      <ChartContainer
+        config={chartConfig}
+        className="mx-auto aspect-square max-h-[250px]"
+      >
+        <PieChart>
+          <ChartTooltip
+            cursor={false}
+            content={<ChartTooltipContent hideLabel />}
+          />
+          <Pie
+            data={data}
+            dataKey="revenue"
+            nameKey="category"
+            innerRadius={60}
+            strokeWidth={5}
+            activeIndex={0}
+            activeShape={({ outerRadius = 0, ...props }: PieSectorDataItem) => (
+              <Sector {...props} outerRadius={outerRadius + 10} />
+            )}
+          />
+          <ChartLegend
+            align="center"
+            content={<ChartLegendContent nameKey="category" />}
+            className="-translate-y-2 flex-wrap gap-2 whitespace-nowrap [&>*]:basis-1/4 [&>*]:justify-center"
+          />
+        </PieChart>
+      </ChartContainer>
+    </CardContent>
   )
 }
