@@ -46,6 +46,7 @@ import { cn } from '@/lib/utils'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import MoneyInput from '@/components/@globals/ui/input-money'
+import { DeleteModalAlert } from '../../../components/@globals/delele-modal-alert'
 
 export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -308,16 +309,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
               {id ? 'Editar' : 'Salvar'}
             </Button>
           )}
-          {id && (
-            <Button
-              variant="outline"
-              type="button"
-              className="w-full"
-              onClick={handleDelete}
-            >
-              Excluir
-            </Button>
-          )}
+          {id && <DeleteModalAlert onClick={handleDelete} />}
         </div>
       </form>
     </Form>

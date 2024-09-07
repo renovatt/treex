@@ -22,6 +22,7 @@ import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
 import MoneyInput from '@/components/@globals/ui/input-money'
+import { DeleteModalAlert } from '@/components/@globals/delele-modal-alert'
 
 export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -136,16 +137,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
               {id ? 'Editar' : 'Salvar'}
             </Button>
           )}
-          {id && (
-            <Button
-              variant="outline"
-              type="button"
-              className="w-full"
-              onClick={handleDelete}
-            >
-              Excluir
-            </Button>
-          )}
+          {id && <DeleteModalAlert onClick={handleDelete} />}
         </div>
       </form>
     </Form>

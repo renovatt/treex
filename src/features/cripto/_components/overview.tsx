@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 // import dynamic from 'next/dynamic'
-import TradingTickerTape from './trading-view/trading-ticker-tape'
+// import TradingTickerTape from './trading-view/trading-ticker-tape'
 import TradingViewScreener from './trading-view/trading-view-screener'
 import { useGetQuotes } from '@/features/cripto/hooks/use-get-quotes'
 import { useCallback, useEffect, useState } from 'react'
@@ -62,11 +62,11 @@ export default function Overview() {
 
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      {/* <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <div className="col-span-7">
           <TradingTickerTape />
         </div>
-      </div>
+      </div> */}
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         {/* <Card className="col-span-4 lg:col-span-2">
