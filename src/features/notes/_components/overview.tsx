@@ -22,7 +22,7 @@ import PriorityList from './priority-list'
 
 export default function Overview() {
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
       <Card className="col-span-4">
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="space-y-1">
@@ -51,7 +51,7 @@ export default function Overview() {
         </CardContent>
       </Card>
 
-      <Card className="col-span-4 lg:col-span-3">
+      <Card className="col-span-4">
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="space-y-1">
             <CardTitle>Lista de prioridades</CardTitle>
