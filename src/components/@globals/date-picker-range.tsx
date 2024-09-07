@@ -9,6 +9,7 @@ import {
   endOfDay,
   startOfMonth,
   endOfMonth,
+  subMonths,
 } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { DateRange } from 'react-day-picker'
@@ -34,8 +35,8 @@ const quickRanges = [
   { label: 'Últimos 15 dias', from: subDays(new Date(), 15), to: new Date() },
   {
     label: 'Último mês',
-    from: startOfMonth(subDays(new Date(), 1)),
-    to: endOfMonth(subDays(new Date(), 1)),
+    from: startOfMonth(subMonths(new Date(), 1)),
+    to: endOfMonth(subMonths(new Date(), 1)),
   },
   {
     label: 'Este mês',
