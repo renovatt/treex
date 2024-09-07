@@ -31,16 +31,16 @@ export default function Navbar() {
           <AddButton />
         </div>
         <RouterLink
-          href="/cripto-&-invest"
-          icon={Bitcoin}
-          isOpen={status.isSelected}
-          name="Cripto & Invest"
-        />
-        <RouterLink
           href="/notes"
           icon={StickyNote}
           isOpen={status.isSelected}
           name="Anotações"
+        />
+        <RouterLink
+          href="/cripto-&-invest"
+          icon={Bitcoin}
+          isOpen={status.isSelected}
+          name="Cripto & Invest"
         />
       </ul>
     </nav>
