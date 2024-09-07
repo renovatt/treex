@@ -10,6 +10,7 @@ import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
 import { OverviewPolarChart } from './charts/overview-polar-chart'
 import { getCurrentMonthTransactionCount } from '@/utils/calculate-qtd-transaction'
 import ListDateRangeTransactions from './list-date-range-transaction'
+// import { OverviewLineChart } from './charts/overview-line-chart'
 
 export default function Overview() {
   const { transactionData } = useGetTransactions()
@@ -38,6 +39,16 @@ export default function Overview() {
           <OverviewPolarChart />
         </CardContent>
       </Card>
+
+      {/* <Card className="col-span-4 lg:col-span-7">
+        <CardHeader>
+          <CardTitle>Linha temporal</CardTitle>
+          <CardDescription>Sua receita total</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <OverviewLineChart />
+        </CardContent>
+      </Card> */}
     </div>
   )
 }
