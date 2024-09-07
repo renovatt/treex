@@ -21,10 +21,9 @@ export const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider)
     const user = result.user
 
-    let accessToken = ''
+    const accessToken = await user.getIdToken()
 
-    if (user && 'accessToken' in user) {
-      accessToken = user.accessToken as string
+    if (accessToken) {
       setCookie(null, '@auth_accessToken', accessToken, {
         maxAge: 60 * 60 * 8, // 8 hours
         path: '/',
@@ -37,7 +36,7 @@ export const signInWithGoogle = async () => {
       uid: user.uid,
       displayName: user.displayName,
       email: user.email,
-      providerId: user.providerId,
+      providerId: user.providerData[0].providerId,
     }
 
     await createUserDataIntoFirestore(newUser)
@@ -95,11 +94,13 @@ export const signInWithCredential = async (data: LoginFormProps) => {
     const { email, password } = data
     const { user } = await signInWithEmailAndPassword(auth, email, password)
 
-    let accessToken = ''
+    const accessToken = await user.getIdToken()
 
-    if (user && 'accessToken' in user) {
-      accessToken = user.accessToken as string
-      setCookie(null, '@auth_accessToken', accessToken)
+    if (accessToken) {
+      setCookie(null, '@auth_accessToken', accessToken, {
+        maxAge: 60 * 60 * 8, // 8 hours
+        path: '/',
+      })
     } else {
       console.log('accessToken não está presente no objeto user.')
     }
