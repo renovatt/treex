@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from 'uuid'
 import { FirebaseError } from 'firebase/app'
-import { PriorityFormProps } from '@/schemas'
 import { collection, addDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
 import { PRIORITY_COLLECTION } from '../../static/collections'
 import { userCollectionRef } from '../user-db-collection-ref'
+import { PriorityFormProps } from '@/features/notes/schemas/priority-schema'
 
 export const createPriority = async (
   data: PriorityFormProps,

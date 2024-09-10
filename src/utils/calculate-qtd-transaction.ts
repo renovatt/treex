@@ -1,4 +1,4 @@
-import { TransactionFormProps } from '@/schemas'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 import { isSameMonth, isSameYear, parseISO } from 'date-fns'
 
 export const getCurrentMonthTransactionCount = (

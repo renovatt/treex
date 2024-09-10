@@ -1,9 +1,9 @@
-import { TransactionFormProps } from '@/schemas'
 import { FirebaseError } from 'firebase/app'
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
 import { TRANSACTIONS_COLLECTION } from '../../static/collections'
 import { userCollectionRef } from '../user-db-collection-ref'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 
 export const updateTransaction = async (
   data: TransactionFormProps,

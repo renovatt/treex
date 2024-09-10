@@ -8,10 +8,10 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { formatDate } from 'date-fns'
-import { TransactionFormProps } from '@/schemas'
 import { ColumnDef } from '@tanstack/react-table'
 import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { HiArrowTrendingDown, HiArrowTrendingUp } from 'react-icons/hi2'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 
 export const columns: ColumnDef<TransactionFormProps>[] = [
   {

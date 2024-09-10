@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js'
-import { MonthyPreviewFormProps } from '@/schemas'
+import { MonthyPreviewFormProps } from '@/features/notes/schemas/expenses-monthly-schema'
 
 export const calculateExpensesForecast = (data: MonthyPreviewFormProps[]) => {
   const total = data

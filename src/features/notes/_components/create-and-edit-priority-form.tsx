@@ -8,7 +8,6 @@ import { updatePriority } from '@/firebase/database/priority/update-priority-doc
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { PriorityFormProps, PrioritySchema } from '@/schemas'
 import {
   Form,
   FormControl,
@@ -29,6 +28,7 @@ import {
 import { useEffect, useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
 import { DeleteModalAlert } from '@/components/@globals/delele-modal-alert'
+import { PriorityFormProps, prioritySchema } from '../schemas/priority-schema'
 
 const level = ['Importante', 'Menos importante', 'Muito importante'] as const
 
@@ -38,7 +38,7 @@ export default function CreateAndEditPriorityForm({ id }: { id?: string }) {
   const form = useForm<PriorityFormProps>({
     mode: 'all',
     reValidateMode: 'onChange',
-    resolver: zodResolver(PrioritySchema),
+    resolver: zodResolver(prioritySchema),
   })
 
   const [user] = useAuthState(auth)

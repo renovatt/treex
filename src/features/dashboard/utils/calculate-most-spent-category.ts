@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js'
-import { TransactionFormProps } from '@/schemas'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 import { incomeCategories } from '@/static/categories'
 
 interface CategoryTotals {
