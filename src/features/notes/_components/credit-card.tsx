@@ -1,0 +1,148 @@
+'use client'
+import Image from 'next/image'
+import AnimatedValueCount from '@/components/@globals/animated-value-count'
+import { Progress } from '@/components/ui/progress'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { AlertDialogHeader } from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+
+type Expense = {
+  name: string
+  value: number
+  category: string
+}
+
+type Card = {
+  name: string
+  image: string
+  limit: number
+  partial_value: number
+  closing_date: number
+  due_date: number
+  flag: string
+  expenses: Expense[]
+}
+
+type Props = {
+  card: Card
+}
+
+export default function CreditCard({ card }: Props) {
+  const totalExpenses = card.expenses.reduce(
+    (acc, expense) => acc + expense.value,
+    0,
+  )
+
+  const isCloseDate = new Date().getDate() >= card.closing_date
+  const limitPercentage = (totalExpenses / card.limit) * 100
+
+  return (
+    <div key={card.name} className="space-y-2 rounded-lg p-4">
+      <div className="flex flex-col items-start justify-between space-y-4 sm:flex-row sm:space-y-0 md:items-center">
+        <div className="flex flex-row items-center space-x-2">
+          <Image
+            src={`/images/${card.image}`}
+            alt={card.name}
+            className="h-12 w-12 rounded-full"
+            width={48}
+            height={48}
+          />
+          <div>
+            <h3 className="text-lg font-semibold">{card.name}</h3>
+            <p className="text-sm capitalize text-muted-foreground">
+              {card.flag}
+            </p>
+          </div>
+        </div>
+        <div>
+          <p className="text-sm text-muted-foreground">
+            Fatura:{' '}
+            <AnimatedValueCount
+              value={totalExpenses}
+              className="text-red-500"
+            />
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Limite Disponível:{' '}
+            <AnimatedValueCount
+              value={card.partial_value}
+              className="text-green-500"
+            />
+          </p>
+          {isCloseDate ? (
+            <p className="text-sm text-muted-foreground">
+              Vence dia: {isCloseDate ? card.due_date : card.closing_date} de
+              {new Date().toLocaleString('pt-BR', { month: 'long' })}
+            </p>
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              Fechamento dia: {card.closing_date} de{' '}
+              {new Date().toLocaleString('pt-BR', { month: 'long' })}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-col items-end justify-end">
+        <span className="text-sm text-muted-foreground">
+          {limitPercentage}%
+        </span>
+        <Progress value={limitPercentage} />
+      </div>
+
+      <div className="flex items-center justify-end py-0">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="link" className="space-x-2">
+              <span>Adicionar</span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <AlertDialogHeader className="items-start">
+              <DialogTitle>Adicionar despesa</DialogTitle>
+            </AlertDialogHeader>
+            {/* <CreateCreditCardForm /> */}
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Despesas</AccordionTrigger>
+          <AccordionContent>
+            <div>
+              <ul className="mt-2 space-y-2">
+                {card.expenses.map((expense) => (
+                  <li key={expense.name}>
+                    <div className="flex flex-row items-center justify-between">
+                      <div>
+                        <p className="text-sm font-semibold">{expense.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {expense.category}
+                        </p>
+                      </div>
+                      <p className="text-sm font-semibold">
+                        <AnimatedValueCount value={expense.value} />
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  )
+}

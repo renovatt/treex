@@ -19,6 +19,8 @@ import { MdOutlineAddBox } from 'react-icons/md'
 import CreateAndEditPriorityForm from './create-and-edit-priority-form'
 import MonthyList from './monthly-list'
 import PriorityList from './priority-list'
+import { creditCard } from '../static/credit-card'
+import CreditCard from './credit-card'
 
 export default function Overview() {
   return (
@@ -26,25 +28,52 @@ export default function Overview() {
       <Card className="col-span-4">
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="space-y-1">
-            <CardTitle>Despesas fixas</CardTitle>
+            <CardTitle>Meus Cartões</CardTitle>
+            <CardDescription>Sua lista de cartões de crédito</CardDescription>
+          </div>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" className="space-x-2">
+                <MdOutlineAddBox />
+                <span>Adicionar</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="items-start">
+                <DialogTitle>Adicionar cartão</DialogTitle>
+              </DialogHeader>
+              {/* <CreateCreditCardForm /> */}
+            </DialogContent>
+          </Dialog>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          {creditCard.map((card) => (
+            <CreditCard key={card.name} card={card} />
+          ))}
+        </CardContent>
+      </Card>
+
+      <Card className="col-span-4">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div className="space-y-1">
+            <CardTitle>Próximas faturas</CardTitle>
             <CardDescription>Anote suas despesas futuras</CardDescription>
           </div>
-          <div>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="ghost" className="space-x-2">
-                  <MdOutlineAddBox />
-                  <span>Adicionar</span>
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader className="items-start">
-                  <DialogTitle>Adicionar despesa</DialogTitle>
-                </DialogHeader>
-                <CreateAndEditMonthlyForm />
-              </DialogContent>
-            </Dialog>
-          </div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" className="space-x-2">
+                <MdOutlineAddBox />
+                <span>Adicionar</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="items-start">
+                <DialogTitle>Adicionar despesa</DialogTitle>
+              </DialogHeader>
+              <CreateAndEditMonthlyForm />
+            </DialogContent>
+          </Dialog>
         </CardHeader>
         <CardContent>
           <MonthyList />
@@ -57,22 +86,20 @@ export default function Overview() {
             <CardTitle>Lista de prioridades</CardTitle>
             <CardDescription>Crie sua lista de prioridades</CardDescription>
           </div>
-          <div>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="ghost" className="space-x-2">
-                  <MdOutlineAddBox />
-                  <span>Adicionar</span>
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader className="items-start">
-                  <DialogTitle>Adicionar prioridade</DialogTitle>
-                </DialogHeader>
-                <CreateAndEditPriorityForm />
-              </DialogContent>
-            </Dialog>
-          </div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" className="space-x-2">
+                <MdOutlineAddBox />
+                <span>Adicionar</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="items-start">
+                <DialogTitle>Adicionar prioridade</DialogTitle>
+              </DialogHeader>
+              <CreateAndEditPriorityForm />
+            </DialogContent>
+          </Dialog>
         </CardHeader>
         <CardContent>
           <PriorityList />
