@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { createCredential } from '@/firebase/database/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { RegisterSchema, RegisterFormProps } from '@/schemas/auth'
+import { RegisterSchema, RegisterFormProps } from './schemas/auth'
 import toast from 'react-hot-toast'
 import { Input } from '@/components/ui/input'
 import {

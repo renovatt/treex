@@ -2,7 +2,7 @@ import {
   LoginFormProps,
   RegisterFormProps,
   RecoverySchemaProps,
-} from '@/schemas/auth'
+} from '@/features/auth/schemas/auth'
 import {
   signOut,
   signInWithPopup,

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { signInWithCredential } from '@/firebase/database/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { LoginFormProps, LoginSchema } from '@/schemas/auth'
+import { LoginFormProps, LoginSchema } from './schemas/auth'
 import {
   Form,
   FormField,
