@@ -1,16 +1,16 @@
 import { FirebaseError } from 'firebase/app'
-import { MonthyPreviewFormProps } from '@/schemas'
 import { ErrorMessageResponse, UserData } from '../@types'
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { MONTHLY_EXPENSES_COLLECTION } from '../../static/collections'
 import { userCollectionRef } from '../user-db-collection-ref'
+import { MonthyPreviewFormProps } from '@/features/notes/schemas/expenses-monthly-schema'
 
 export const updateMonthlyExpense = async (
   data: MonthyPreviewFormProps,
   user: UserData,
 ) => {
   try {
-    const { id, name, value } = data
+    const { id, name, value, category } = data
     const { uid } = user
 
     const monthlyExpenseCollection = collection(
@@ -26,6 +26,7 @@ export const updateMonthlyExpense = async (
       const userMonthlyExpenseUpdated = {
         name,
         value,
+        category,
       }
 
       await updateDoc(monthlyExpenseRef, userMonthlyExpenseUpdated)

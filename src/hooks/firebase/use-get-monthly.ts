@@ -1,6 +1,6 @@
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
-import { MonthyPreviewFormProps } from '@/schemas'
+import { MonthyPreviewFormProps } from '@/features/notes/schemas/expenses-monthly-schema'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { observerMonthlyExpenseService } from '@/firebase/database/monthy-expenses/observer-monthly-expense-collection.service'
 
