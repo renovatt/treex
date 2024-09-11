@@ -16,35 +16,20 @@ import {
 } from '@/components/ui/dialog'
 import { AlertDialogHeader } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-
-type Expense = {
-  name: string
-  value: number
-  category: string
-}
-
-type Card = {
-  name: string
-  image: string
-  limit: number
-  partial_value: number
-  closing_date: number
-  due_date: number
-  flag: string
-  expenses: Expense[]
-}
+import CreateAndEditCreditCardExpensesForm from './credit-card/create-and-edit-credit-card-expenses-form'
+import { CreditCardSchemaProps } from '../schemas/credit-card-schema'
+import { Edit } from 'lucide-react'
+import CreateAndEditCreditCardForm from './credit-card/create-and-edit-credit-card-form'
 
 type Props = {
-  card: Card
+  card: CreditCardSchemaProps
 }
 
 export default function CreditCard({ card }: Props) {
-  const totalExpenses = card.expenses.reduce(
-    (acc, expense) => acc + expense.value,
-    0,
-  )
+  const totalExpenses =
+    card?.expenses?.reduce((acc, expense) => acc + expense.value, 0) ?? 0
 
-  const isCloseDate = new Date().getDate() >= card.closing_date
+  const isCloseDate = new Date().getDate() >= Number(card.closing_date)
   const limitPercentage = (totalExpenses / card.limit) * 100
 
   return (
@@ -59,7 +44,22 @@ export default function CreditCard({ card }: Props) {
             height={48}
           />
           <div>
-            <h3 className="text-lg font-semibold">{card.name}</h3>
+            <span className="flex items-center gap-2">
+              <h3 className="text-lg font-semibold capitalize">{card.name}</h3>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="link" className="space-x-2">
+                    <Edit className="size-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <AlertDialogHeader className="items-start">
+                    <DialogTitle>Editar cartão</DialogTitle>
+                  </AlertDialogHeader>
+                  <CreateAndEditCreditCardForm id={card.id} />
+                </DialogContent>
+              </Dialog>
+            </span>
             <p className="text-sm capitalize text-muted-foreground">
               {card.flag}
             </p>
@@ -76,7 +76,7 @@ export default function CreditCard({ card }: Props) {
           <p className="text-sm text-muted-foreground">
             Limite Disponível:{' '}
             <AnimatedValueCount
-              value={card.partial_value}
+              value={card.partial_value as number}
               className="text-green-500"
             />
           </p>
@@ -94,7 +94,7 @@ export default function CreditCard({ card }: Props) {
         </div>
       </div>
 
-      <div className="flex flex-col items-end justify-end">
+      <div className="flex flex-col items-end justify-end space-y-1">
         <span className="text-sm text-muted-foreground">
           {limitPercentage}%
         </span>
@@ -105,14 +105,14 @@ export default function CreditCard({ card }: Props) {
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="link" className="space-x-2">
-              <span>Adicionar</span>
+              <span>Adicionar despesa</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <AlertDialogHeader className="items-start">
               <DialogTitle>Adicionar despesa</DialogTitle>
             </AlertDialogHeader>
-            {/* <CreateCreditCardForm /> */}
+            <CreateAndEditCreditCardExpensesForm />
           </DialogContent>
         </Dialog>
       </div>
@@ -123,7 +123,7 @@ export default function CreditCard({ card }: Props) {
           <AccordionContent>
             <div>
               <ul className="mt-2 space-y-2">
-                {card.expenses.map((expense) => (
+                {card?.expenses?.map((expense) => (
                   <li key={expense.name}>
                     <div className="flex flex-row items-center justify-between">
                       <div>

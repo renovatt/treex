@@ -19,10 +19,13 @@ import { MdOutlineAddBox } from 'react-icons/md'
 import CreateAndEditPriorityForm from './create-and-edit-priority-form'
 import MonthyList from './monthly-list'
 import PriorityList from './priority-list'
-import { creditCard } from '../static/credit-card'
 import CreditCard from './credit-card'
+import CreateAndEditCreditCardForm from './credit-card/create-and-edit-credit-card-form'
+import { useGetCreditCards } from '@/hooks/firebase/use-get-credit-card'
 
 export default function Overview() {
+  const { creditCardsData, isLoading } = useGetCreditCards()
+  console.log(creditCardsData)
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
       <Card className="col-span-4">
@@ -43,14 +46,18 @@ export default function Overview() {
               <DialogHeader className="items-start">
                 <DialogTitle>Adicionar cartão</DialogTitle>
               </DialogHeader>
-              {/* <CreateCreditCardForm /> */}
+              <CreateAndEditCreditCardForm />
             </DialogContent>
           </Dialog>
         </CardHeader>
         <CardContent className="space-y-5">
-          {creditCard.map((card) => (
-            <CreditCard key={card.name} card={card} />
-          ))}
+          {isLoading ? (
+            <p>Carregando...</p>
+          ) : (
+            creditCardsData?.map((card) => (
+              <CreditCard key={card.id} card={card} />
+            ))
+          )}
         </CardContent>
       </Card>
 
