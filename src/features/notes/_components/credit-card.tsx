@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import AnimatedValueCount from '@/components/@globals/animated-value-count'
 import { Progress } from '@/components/ui/progress'
 import {
@@ -18,7 +17,7 @@ import { AlertDialogHeader } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import CreateAndEditCreditCardExpensesForm from './credit-card/create-and-edit-credit-card-expenses-form'
 import { CreditCardSchemaProps } from '../schemas/credit-card-schema'
-import { Edit } from 'lucide-react'
+import { CreditCardIcon, Edit } from 'lucide-react'
 import CreateAndEditCreditCardForm from './credit-card/create-and-edit-credit-card-form'
 import Decimal from 'decimal.js'
 
@@ -41,13 +40,16 @@ export default function CreditCard({ card }: Props) {
     <div key={card.name} className="space-y-2 rounded-lg p-4">
       <div className="flex flex-col items-start justify-between space-y-4 sm:flex-row sm:space-y-0 md:items-center">
         <div className="flex flex-row items-center space-x-2">
-          <Image
+          {/* <Image
             src={`/images/${card.image}`}
             alt={card.name}
-            className="h-12 w-12 rounded-full"
+            className="size-12 rounded-full"
             width={48}
             height={48}
-          />
+          /> */}
+          <div className="flex size-12 items-center justify-center rounded-full border bg-muted p-2">
+            <CreditCardIcon className="size-7 shrink-0" />
+          </div>
           <div>
             <span className="flex items-center gap-2">
               <h3 className="text-lg font-semibold capitalize">{card.name}</h3>
