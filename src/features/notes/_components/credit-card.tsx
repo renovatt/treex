@@ -17,9 +17,10 @@ import { AlertDialogHeader } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import CreateAndEditCreditCardExpensesForm from './credit-card/create-and-edit-credit-card-expenses-form'
 import { CreditCardSchemaProps } from '../schemas/credit-card-schema'
-import { CreditCardIcon, Edit } from 'lucide-react'
+import { Edit } from 'lucide-react'
 import CreateAndEditCreditCardForm from './credit-card/create-and-edit-credit-card-form'
 import Decimal from 'decimal.js'
+import { IoCardOutline } from 'react-icons/io5'
 
 type Props = {
   card: CreditCardSchemaProps
@@ -51,7 +52,7 @@ export default function CreditCard({ card }: Props) {
             height={48}
           /> */}
           <div className="flex size-12 items-center justify-center rounded-full border bg-muted p-2">
-            <CreditCardIcon className="size-7 shrink-0" />
+            <IoCardOutline className="size-7 shrink-0" />
           </div>
           <div>
             <span className="flex items-center gap-2">
