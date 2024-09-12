@@ -36,6 +36,7 @@ import { getCreditCard } from '@/firebase/database/credit-cards/get-credit-card-
 import { createCreditCardExpense } from '@/firebase/database/credit-cards/expenses/create-expense-credit-card-doc'
 import { updateCreditCardExpense } from '@/firebase/database/credit-cards/expenses/update-credit-card-expense-doc'
 import { deleteCreditCardExpense } from '@/firebase/database/credit-cards/expenses/delete-credit-card-expense-doc'
+import Decimal from 'decimal.js'
 
 export default function CreateAndEditCreditCardExpensesForm({
   id,
@@ -59,9 +60,31 @@ export default function CreateAndEditCreditCardExpensesForm({
 
   const foundCard = creditCardsData?.find((card) => card.id === cardId)
 
+  const totalExpenses =
+    foundCard?.expenses?.reduce(
+      (acc, expense) => acc.plus(expense.value),
+      new Decimal(0),
+    ) ?? 0
+
+  const partialValue = new Decimal(foundCard?.limit || 0)
+    .minus(totalExpenses)
+    .toFixed(2)
+
+  const isCloseDate = new Date().getDate() >= Number(foundCard?.closing_date)
+
   const handleFormSubmit = async (data: CreditCardExpensesSchemaProps) => {
     setIsLoading(true)
     try {
+      if (isCloseDate) {
+        toast.error('Cartão fechado')
+        return
+      }
+
+      if (Number(data.value) > Number(partialValue)) {
+        toast.error('Valor maior que o limite disponível')
+        return
+      }
+
       if (id) {
         const newData = { ...data }
         newData.id = id
