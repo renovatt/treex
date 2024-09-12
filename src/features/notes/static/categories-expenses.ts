@@ -13,6 +13,7 @@ import {
   Home,
   PawPrint,
   // Store,
+  Globe,
   FileText,
   Plane,
   FileSliders,
@@ -20,14 +21,15 @@ import {
 } from 'lucide-react'
 
 export const categoriesExpenses = [
+  { name: 'Pagamentos', icon: CreditCard },
   { name: 'Despesas Diversas', icon: ShoppingBag },
   { name: 'Educação', icon: Book },
   { name: 'Farmácia', icon: Pill },
   { name: 'Alimentação', icon: Utensils },
   { name: 'Combustível', icon: Fuel },
   { name: 'Transporte', icon: Car },
-  { name: 'Pagamentos', icon: CreditCard },
   { name: 'Lazer e hobbies', icon: Gamepad2 },
+  { name: 'Internet', icon: Globe },
 
   { name: 'Compras', icon: ShoppingBag },
   { name: 'Dívidas e Empréstimos', icon: FileSliders },

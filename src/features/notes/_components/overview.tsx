@@ -25,7 +25,7 @@ import { useGetCreditCards } from '@/hooks/firebase/use-get-credit-card'
 
 export default function Overview() {
   const { creditCardsData, isLoading } = useGetCreditCards()
-  console.log(creditCardsData)
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
       <Card className="col-span-4">
