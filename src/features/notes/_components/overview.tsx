@@ -65,7 +65,7 @@ export default function Overview() {
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="space-y-1">
             <CardTitle>Desepas fixas</CardTitle>
-            <CardDescription>Anote suas despesas futuras</CardDescription>
+            <CardDescription>Sua lista de despesas fixas</CardDescription>
           </div>
           <Dialog>
             <DialogTrigger asChild>
@@ -91,7 +91,7 @@ export default function Overview() {
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="space-y-1">
             <CardTitle>Lista de prioridades</CardTitle>
-            <CardDescription>Crie sua lista de prioridades</CardDescription>
+            <CardDescription>Sua lista de prioridades</CardDescription>
           </div>
           <Dialog>
             <DialogTrigger asChild>
