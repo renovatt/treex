@@ -24,10 +24,7 @@ export const signInWithGoogle = async () => {
     const accessToken = await user.getIdToken()
 
     if (accessToken) {
-      setCookie(null, '@auth_accessToken', accessToken, {
-        maxAge: 60 * 60 * 8, // 8 hours
-        path: '/',
-      })
+      setCookie(null, '@auth_accessToken', accessToken)
     } else {
       console.log('accessToken não está presente no objeto user.')
     }
@@ -97,10 +94,11 @@ export const signInWithCredential = async (data: LoginFormProps) => {
     const accessToken = await user.getIdToken()
 
     if (accessToken) {
-      setCookie(null, '@auth_accessToken', accessToken, {
-        maxAge: 60 * 60 * 8, // 8 hours
-        path: '/',
-      })
+      setCookie(null, '@auth_accessToken', accessToken)
+      // setCookie(null, '@auth_accessToken', accessToken, {
+      //   maxAge: 60 * 60 * 8, // 8 hours
+      //   path: '/',
+      // })
     } else {
       console.log('accessToken não está presente no objeto user.')
     }
