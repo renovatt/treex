@@ -8,7 +8,6 @@ import { getTransaction } from '@/firebase/database/transactions/get-transaction
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { TransactionFormProps, TransactionSchema } from '@/schemas'
 import {
   Form,
   FormControl,
@@ -47,6 +46,10 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import MoneyInput from '@/components/@globals/ui/input-money'
 import { DeleteModalAlert } from '../../../components/@globals/delele-modal-alert'
+import {
+  TransactionFormProps,
+  transactionSchema,
+} from '../schemas/transaction-schema'
 
 export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -55,7 +58,7 @@ export default function CreateAndEditTransactionForm({ id }: { id?: string }) {
   const form = useForm<TransactionFormProps>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
-    resolver: zodResolver(TransactionSchema),
+    resolver: zodResolver(transactionSchema),
   })
 
   const [user] = useAuthState(auth)

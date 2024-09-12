@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js'
-import { TransactionFormProps } from '@/schemas'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 
 export const calculateGeneralCategoryPercentages = (
   data: TransactionFormProps[],

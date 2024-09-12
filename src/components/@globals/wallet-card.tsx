@@ -3,12 +3,14 @@ import useHideStore from '@/store/use-hide-store'
 import { ComponentType, SVGProps } from 'react'
 import { IconType } from 'react-icons'
 import AnimatedValueCount from './animated-value-count'
+import { cn } from '@/lib/utils'
 
 type Props = {
   icon: IconType | ComponentType<SVGProps<SVGSVGElement>>
   value: string | number
   title: string
   description: string
+  className?: string
 }
 
 export default function WalletCard({
@@ -16,10 +18,11 @@ export default function WalletCard({
   description,
   icon: Icon,
   value,
+  className,
 }: Props) {
   const { status } = useHideStore()
   return (
-    <Card>
+    <Card className={cn(className)}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         <Icon className="size-5 text-muted-foreground" />

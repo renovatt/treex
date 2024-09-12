@@ -2,7 +2,7 @@
 import { passwordReset } from '@/firebase/database/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { RecoverySchema, RecoverySchemaProps } from '@/schemas/auth'
+import { RecoverySchema, RecoverySchemaProps } from './schemas/auth'
 import toast from 'react-hot-toast'
 import {
   Form,

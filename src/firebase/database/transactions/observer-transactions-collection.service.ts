@@ -1,8 +1,8 @@
 import { UserData } from '../@types'
-import { TransactionFormProps } from '@/schemas'
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
 import { TRANSACTIONS_COLLECTION } from '../../static/collections'
 import { userCollectionRef } from '../user-db-collection-ref'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 
 export const observerTransactionsService = (
   user: UserData,

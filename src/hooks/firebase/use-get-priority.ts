@@ -1,6 +1,6 @@
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
-import { PriorityFormProps } from '@/schemas'
+import { PriorityFormProps } from '@/features/notes/schemas/priority-schema'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { observerPriorityService } from '@/firebase/database/priority/observer-priority-collection.service'
 

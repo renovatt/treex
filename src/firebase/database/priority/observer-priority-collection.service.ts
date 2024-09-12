@@ -1,8 +1,8 @@
 import { UserData } from '../@types'
-import { PriorityFormProps } from '@/schemas'
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
 import { PRIORITY_COLLECTION } from '../../static/collections'
 import { userCollectionRef } from '../user-db-collection-ref'
+import { PriorityFormProps } from '@/features/notes/schemas/priority-schema'
 
 export const observerPriorityService = (
   user: UserData,

@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js'
-import { TransactionFormProps } from '@/schemas'
+import { TransactionFormProps } from '../schemas/transaction-schema'
 import { format, eachMonthOfInterval, startOfMonth, endOfMonth } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 

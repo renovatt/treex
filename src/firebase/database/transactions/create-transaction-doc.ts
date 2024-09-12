@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from 'uuid'
 import { FirebaseError } from 'firebase/app'
-import { TransactionFormProps } from '@/schemas'
 import { collection, addDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
 import { TRANSACTIONS_COLLECTION } from '../../static/collections'
 import { userCollectionRef } from '../user-db-collection-ref'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 
 export const createTransaction = async (
   data: TransactionFormProps,

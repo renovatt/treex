@@ -1,13 +1,9 @@
 'use client'
 import useSideBarStore from '@/store/use-sidebar-store'
 import RouterLink from './router-link'
-import {
-  LayoutDashboard,
-  ArrowRightLeft,
-  StickyNote,
-  Bitcoin,
-} from 'lucide-react'
+import { LayoutDashboard, ArrowRightLeft, Bitcoin } from 'lucide-react'
 import AddButton from '@/components/@globals/add-button'
+import { IoCardOutline } from 'react-icons/io5'
 
 export default function Navbar() {
   const { status } = useSideBarStore()
@@ -32,9 +28,9 @@ export default function Navbar() {
         </div>
         <RouterLink
           href="/notes"
-          icon={StickyNote}
+          icon={IoCardOutline}
           isOpen={status.isSelected}
-          name="Anotações"
+          name="Despesas"
         />
         <RouterLink
           href="/cripto-&-invest"
