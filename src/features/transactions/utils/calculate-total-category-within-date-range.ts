@@ -1,5 +1,5 @@
-import { TransactionFormProps } from '@/schemas'
 import { isWithinInterval, startOfDay, endOfDay } from 'date-fns'
+import { TransactionFormProps } from '../schemas/transaction-schema'
 
 interface DateRange {
   from: Date

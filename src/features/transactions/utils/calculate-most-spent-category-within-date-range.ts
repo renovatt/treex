@@ -1,7 +1,7 @@
 import Decimal from 'decimal.js'
-import { TransactionFormProps } from '@/schemas'
 import { isWithinInterval, startOfDay, endOfDay } from 'date-fns'
 import { incomeCategories } from '@/static/categories'
+import { TransactionFormProps } from '../schemas/transaction-schema'
 
 interface CategoryTotals {
   [category: string]: Decimal

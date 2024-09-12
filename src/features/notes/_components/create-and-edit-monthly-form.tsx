@@ -8,7 +8,6 @@ import { updateMonthlyExpense } from '@/firebase/database/monthy-expenses/update
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { MonthyPreviewFormProps, MonthyPreviewSchema } from '@/schemas'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -23,6 +22,18 @@ import { useEffect, useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
 import MoneyInput from '@/components/@globals/ui/input-money'
 import { DeleteModalAlert } from '@/components/@globals/delele-modal-alert'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { categoriesExpenses } from '../static/categories-expenses'
+import {
+  MonthyPreviewFormProps,
+  expensesMonthyPreviewSchema,
+} from '../schemas/expenses-monthly-schema'
 
 export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -30,7 +41,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const form = useForm<MonthyPreviewFormProps>({
     mode: 'all',
     reValidateMode: 'onChange',
-    resolver: zodResolver(MonthyPreviewSchema),
+    resolver: zodResolver(expensesMonthyPreviewSchema),
   })
 
   const [user] = useAuthState(auth)
@@ -67,6 +78,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
       form.reset({
         name: '',
         value: 0,
+        category: categoriesExpenses[0].name,
       })
     } catch (error) {
       toast.error('Erro desconhecido')
@@ -94,6 +106,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
         const defaultValues = {
           name: data?.name,
           value: data?.value,
+          category: data?.category,
         }
 
         form.reset(defaultValues)
@@ -121,12 +134,49 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
             </FormItem>
           )}
         />
+
         <MoneyInput
           form={form}
           label="Valor"
           name="value"
           placeholder="R$ 120,00"
         />
+
+        <FormField
+          control={form.control}
+          name="category"
+          defaultValue={categoriesExpenses[0].name}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Categoria</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                value={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione uma categoria" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {categoriesExpenses.map(({ name, icon: Icon }, index) => (
+                    <SelectItem key={index} value={name}>
+                      <div className="flex items-center gap-2">
+                        <div className="flex size-[24px] items-center justify-center rounded-full bg-secondary">
+                          <Icon className="size-4 shrink-0 text-muted-foreground" />
+                        </div>
+                        <span>{name}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <div className="space-y-2">
           {isLoading ? (
             <Button disabled className="w-full">

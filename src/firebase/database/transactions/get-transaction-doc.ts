@@ -1,8 +1,8 @@
 import { UserData } from '../@types'
 import { collection, doc, getDoc } from 'firebase/firestore'
-import { TransactionFormProps } from '@/schemas'
 import { userCollectionRef } from '../user-db-collection-ref'
 import { TRANSACTIONS_COLLECTION } from '../../static/collections'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
 
 export const getTransaction = async (user: UserData, transactionId: string) => {
   const { uid } = user

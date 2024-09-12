@@ -1,7 +1,13 @@
 'use client'
+import { cn } from '@/lib/utils'
 import CountUp from 'react-countup'
 
-export default function AnimatedValueCount({ value }: { value: number }) {
+type Props = {
+  value: number
+  className?: string
+}
+
+export default function AnimatedValueCount({ value, className }: Props) {
   return (
     <CountUp
       start={0}
@@ -11,6 +17,7 @@ export default function AnimatedValueCount({ value }: { value: number }) {
       decimals={4}
       decimal=","
       prefix="R$ "
+      className={cn(className)}
       formattingFn={(val) =>
         val.toLocaleString('pt-BR', {
           style: 'currency',

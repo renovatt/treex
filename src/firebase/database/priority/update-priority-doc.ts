@@ -1,9 +1,9 @@
-import { PriorityFormProps } from '@/schemas'
 import { FirebaseError } from 'firebase/app'
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { ErrorMessageResponse, UserData } from '../@types'
 import { PRIORITY_COLLECTION } from '../../static/collections'
 import { userCollectionRef } from '../user-db-collection-ref'
+import { PriorityFormProps } from '@/features/notes/schemas/priority-schema'
 
 export const updatePriority = async (
   data: PriorityFormProps,
