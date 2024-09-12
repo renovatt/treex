@@ -27,14 +27,17 @@ type Props = {
 
 export default function CreditCard({ card }: Props) {
   const totalExpenses =
-    card?.expenses?.reduce((acc, expense) => acc + expense.value, 0) ?? 0
+    card?.expenses?.reduce(
+      (acc, expense) => acc.plus(expense.value),
+      new Decimal(0),
+    ) ?? 0
 
   const partialValue = new Decimal(card?.limit || 0)
     .minus(totalExpenses)
     .toFixed(2)
 
   const isCloseDate = new Date().getDate() >= Number(card.closing_date)
-  const limitPercentage = (totalExpenses / card.limit) * 100
+  const limitPercentage = (Number(totalExpenses.toFixed(2)) / card.limit) * 100
 
   return (
     <div key={card.name} className="space-y-2 rounded-lg p-4">
@@ -76,7 +79,7 @@ export default function CreditCard({ card }: Props) {
           <p className="text-sm text-muted-foreground">
             Fatura:{' '}
             <AnimatedValueCount
-              value={totalExpenses}
+              value={Number(totalExpenses.toFixed(2))}
               className="text-red-500"
             />
           </p>
