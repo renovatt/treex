@@ -20,6 +20,7 @@ import CreateAndEditCreditCardExpensesForm from './credit-card/create-and-edit-c
 import { CreditCardSchemaProps } from '../schemas/credit-card-schema'
 import { Edit } from 'lucide-react'
 import CreateAndEditCreditCardForm from './credit-card/create-and-edit-credit-card-form'
+import Decimal from 'decimal.js'
 
 type Props = {
   card: CreditCardSchemaProps
@@ -28,6 +29,10 @@ type Props = {
 export default function CreditCard({ card }: Props) {
   const totalExpenses =
     card?.expenses?.reduce((acc, expense) => acc + expense.value, 0) ?? 0
+
+  const partialValue = new Decimal(card?.limit || 0)
+    .minus(totalExpenses)
+    .toFixed(2)
 
   const isCloseDate = new Date().getDate() >= Number(card.closing_date)
   const limitPercentage = (totalExpenses / card.limit) * 100
@@ -76,13 +81,13 @@ export default function CreditCard({ card }: Props) {
           <p className="text-sm text-muted-foreground">
             Limite Disponível:{' '}
             <AnimatedValueCount
-              value={card.partial_value as number}
+              value={Number(partialValue)}
               className="text-green-500"
             />
           </p>
           {isCloseDate ? (
             <p className="text-sm text-muted-foreground">
-              Vence dia: {isCloseDate ? card.due_date : card.closing_date} de
+              Vence dia: {isCloseDate ? card.due_date : card.closing_date} de{' '}
               {new Date().toLocaleString('pt-BR', { month: 'long' })}
             </p>
           ) : (
@@ -96,7 +101,7 @@ export default function CreditCard({ card }: Props) {
 
       <div className="flex flex-col items-end justify-end space-y-1">
         <span className="text-sm text-muted-foreground">
-          {limitPercentage}%
+          {limitPercentage.toFixed(2)}%
         </span>
         <Progress value={limitPercentage} />
       </div>
@@ -105,14 +110,14 @@ export default function CreditCard({ card }: Props) {
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="link" className="space-x-2">
-              <span>Adicionar despesa</span>
+              <span>Adicionar</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <AlertDialogHeader className="items-start">
               <DialogTitle>Adicionar despesa</DialogTitle>
             </AlertDialogHeader>
-            <CreateAndEditCreditCardExpensesForm />
+            <CreateAndEditCreditCardExpensesForm cardId={card.id} />
           </DialogContent>
         </Dialog>
       </div>
@@ -124,19 +129,32 @@ export default function CreditCard({ card }: Props) {
             <div>
               <ul className="mt-2 space-y-2">
                 {card?.expenses?.map((expense) => (
-                  <li key={expense.name}>
-                    <div className="flex flex-row items-center justify-between">
-                      <div>
-                        <p className="text-sm font-semibold">{expense.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {expense.category}
+                  <Dialog key={expense.name}>
+                    <DialogTrigger asChild>
+                      <div className="flex cursor-pointer flex-row items-center justify-between rounded-xl p-2 transition-all hover:bg-muted">
+                        <div>
+                          <p className="text-sm font-semibold capitalize">
+                            {expense.name}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {expense.category}
+                          </p>
+                        </div>
+                        <p className="text-sm font-semibold">
+                          <AnimatedValueCount value={expense.value} />
                         </p>
                       </div>
-                      <p className="text-sm font-semibold">
-                        <AnimatedValueCount value={expense.value} />
-                      </p>
-                    </div>
-                  </li>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <AlertDialogHeader className="items-start">
+                        <DialogTitle>Editar despesa</DialogTitle>
+                      </AlertDialogHeader>
+                      <CreateAndEditCreditCardExpensesForm
+                        cardId={card.id}
+                        id={expense.id}
+                      />
+                    </DialogContent>
+                  </Dialog>
                 ))}
               </ul>
             </div>

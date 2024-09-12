@@ -24,23 +24,14 @@ export const observeCreditCardsService = (
   return onSnapshot(creditCardTransactionsQuery, (snapshot) => {
     const creditCards: CreditCardSchemaProps[] = []
     snapshot.forEach((doc) => {
-      const {
-        name,
-        limit,
-        image,
-        partialValue,
-        closingDate,
-        dueDate,
-        flag,
-        expenses,
-      } = doc.data()
+      const { name, limit, image, closingDate, dueDate, flag, expenses } =
+        doc.data()
 
       const creditCardData = {
         id: doc.id,
         name,
         limit,
         image,
-        partialValue,
         closing_date: closingDate,
         due_date: dueDate,
         flag,

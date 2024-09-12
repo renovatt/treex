@@ -24,7 +24,6 @@ export const creditCardSchema = z.object({
   limit: z
     .number({ required_error: 'Campo obrigatório' })
     .min(0.01, 'Valor obrigatório'),
-  partial_value: z.number().optional(),
   due_date: z.string({ required_error: 'Campo obrigatório' }),
   closing_date: z.string({ required_error: 'Campo obrigatório' }),
   flag: z.string({ required_error: 'Campo obrigatório' }),

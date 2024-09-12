@@ -18,7 +18,6 @@ export const createCreditCard = async (
       due_date: dueDate,
       flag,
       image,
-      partial_value: partialValue,
     } = data
 
     const { uid } = user
@@ -34,7 +33,6 @@ export const createCreditCard = async (
       name,
       limit,
       image,
-      partialValue,
       closingDate,
       dueDate,
       flag,

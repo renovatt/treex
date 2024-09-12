@@ -18,7 +18,6 @@ export const updateCreditCard = async (
       due_date: dueDate,
       flag,
       image,
-      partial_value: partialValue,
     } = data
     const { uid } = user
 
@@ -36,13 +35,10 @@ export const updateCreditCard = async (
         name,
         limit,
         image,
-        partialValue,
         closingDate,
         dueDate,
         flag,
       }
-
-      console.log(creditCardUpdated)
 
       await updateDoc(creditCardsRef, creditCardUpdated)
 

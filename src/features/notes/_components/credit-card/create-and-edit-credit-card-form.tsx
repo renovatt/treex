@@ -35,7 +35,6 @@ import { createCreditCard } from '@/firebase/database/credit-cards/create-credit
 import { updateCreditCard } from '@/firebase/database/credit-cards/update-credit-card-doc'
 import { deleteCreditCard } from '@/firebase/database/credit-cards/delete-credit-card-doc'
 import { getCreditCard } from '@/firebase/database/credit-cards/get-credit-card-doc'
-import Decimal from 'decimal.js'
 
 export default function CreateAndEditCreditCardForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -51,19 +50,9 @@ export default function CreateAndEditCreditCardForm({ id }: { id?: string }) {
   const handleFormSubmit = async (data: CreditCardSchemaProps) => {
     setIsLoading(true)
 
-    const totalExpenses =
-      data?.expenses?.reduce(
-        (acc, expense) => acc.plus(expense.value || 0),
-        new Decimal(0),
-      ) || new Decimal(0)
-
-    const partialValue = new Decimal(data?.limit || 0)
-      .minus(totalExpenses)
-      .toFixed(2)
-
     const formatedData: CreditCardSchemaProps = {
       ...data,
-      partial_value: Number(partialValue),
+      image: data.image || 'none',
     }
 
     try {
@@ -98,13 +87,11 @@ export default function CreateAndEditCreditCardForm({ id }: { id?: string }) {
 
       form.reset({
         name: '',
-        image: '',
+        image: 'none',
         limit: 0,
-        partial_value: 0,
         closing_date: '',
         due_date: '',
-        flag: '',
-        expenses: [],
+        flag: flags[0],
       })
     } catch (error) {
       toast.error('Erro desconhecido')
@@ -133,12 +120,10 @@ export default function CreateAndEditCreditCardForm({ id }: { id?: string }) {
         const defaultValues = {
           name: data?.name,
           limit: data?.limit,
-          image: data?.image || '',
-          partial_value: data?.partial_value,
+          image: data?.image || 'none',
           closing_date: data?.closing_date,
           due_date: data?.due_date,
           flag: data?.flag,
-          expenses: data?.expenses,
         }
         form.reset(defaultValues)
       }

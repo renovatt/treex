@@ -1,10 +1,6 @@
 import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
 import { UserData } from '@/firebase/database/@types'
-import { getMonthlyExpense } from '@/firebase/database/monthy-expenses/get-monthly-expense-doc'
-import { createMonthlyExpense } from '@/firebase/database/monthy-expenses/create-monthly-expense-doc'
-import { deleteMonthlyExpense } from '@/firebase/database/monthy-expenses/delete-monthly-expense-doc'
-import { updateMonthlyExpense } from '@/firebase/database/monthy-expenses/update-monthly-expense-doc'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -31,16 +27,22 @@ import {
 } from '@/components/ui/select'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { categoriesExpenses } from '../../static/categories-expenses'
-import { creditCard } from '../../static/credit-card'
 import {
   CreditCardExpensesSchemaProps,
   creditCardExpensesSchema,
 } from '../../schemas/credit-card-schema'
+import { useGetCreditCards } from '@/hooks/firebase/use-get-credit-card'
+import { getCreditCard } from '@/firebase/database/credit-cards/get-credit-card-doc'
+import { createCreditCardExpense } from '@/firebase/database/credit-cards/expenses/create-expense-credit-card-doc'
+import { updateCreditCardExpense } from '@/firebase/database/credit-cards/expenses/update-credit-card-expense-doc'
+import { deleteCreditCardExpense } from '@/firebase/database/credit-cards/expenses/delete-credit-card-expense-doc'
 
 export default function CreateAndEditCreditCardExpensesForm({
   id,
+  cardId,
 }: {
   id?: string
+  cardId?: string
 }) {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -50,41 +52,55 @@ export default function CreateAndEditCreditCardExpensesForm({
     resolver: zodResolver(creditCardExpensesSchema),
   })
 
+  const account = form.watch('account')
+
   const [user] = useAuthState(auth)
+  const { creditCardsData } = useGetCreditCards()
+
+  const foundCard = creditCardsData?.find((card) => card.id === cardId)
 
   const handleFormSubmit = async (data: CreditCardExpensesSchemaProps) => {
-    console.log(data)
     setIsLoading(true)
     try {
       if (id) {
         const newData = { ...data }
         newData.id = id
 
-        const { status, message } = await updateMonthlyExpense(
+        const { status, message } = await updateCreditCardExpense(
           newData,
           user as UserData,
+          cardId as string,
         )
 
         if (!status) {
           toast.error(message)
           return
         }
+
         toast.success(message)
         return
       }
 
-      const { status, message } = await createMonthlyExpense(
-        data,
+      const newData = { ...data }
+      newData.id = cardId
+
+      const { status, message } = await createCreditCardExpense(
+        newData,
         user as UserData,
       )
+
       if (!status) {
         toast.error(message)
         return
       }
+
       toast.success(message)
+
       form.reset({
         name: '',
         value: 0,
+        account: foundCard?.name as string,
+        category: categoriesExpenses[0].name,
       })
     } catch (error) {
       toast.error('Erro desconhecido')
@@ -94,8 +110,9 @@ export default function CreateAndEditCreditCardExpensesForm({
   }
 
   const handleDelete = async () => {
-    const { status, message } = await deleteMonthlyExpense(
+    const { status, message } = await deleteCreditCardExpense(
       user as UserData,
+      cardId as string,
       id as string,
     )
     if (!status) {
@@ -106,19 +123,29 @@ export default function CreateAndEditCreditCardExpensesForm({
   }
 
   useEffect(() => {
-    if (id) {
-      const handleGetMonthlyDoc = async () => {
-        const data = await getMonthlyExpense(user as UserData, id)
+    if (id && cardId) {
+      const handleGetCreditCardDoc = async () => {
+        const data = await getCreditCard(user as UserData, cardId)
+        const expense = data?.expenses?.find((expense) => expense.id === id)
+
         const defaultValues = {
-          name: data?.name,
-          value: data?.value,
+          name: expense?.name,
+          value: expense?.value,
+          account: expense?.account,
+          category: expense?.category,
         }
 
         form.reset(defaultValues)
       }
-      handleGetMonthlyDoc()
+      handleGetCreditCardDoc()
     }
-  }, [id, form, user])
+  }, [id, cardId, form, user])
+
+  useEffect(() => {
+    if (!account) {
+      form.setValue('account', foundCard?.name as string)
+    }
+  }, [foundCard, form, account])
 
   return (
     <Form {...form}>
@@ -150,7 +177,7 @@ export default function CreateAndEditCreditCardExpensesForm({
         <FormField
           control={form.control}
           name="account"
-          defaultValue={creditCard[0].name}
+          defaultValue={creditCardsData[0]?.name}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Cartão</FormLabel>
@@ -158,6 +185,7 @@ export default function CreateAndEditCreditCardExpensesForm({
                 onValueChange={field.onChange}
                 defaultValue={field.value}
                 value={field.value}
+                disabled
               >
                 <FormControl>
                   <SelectTrigger>
@@ -165,12 +193,14 @@ export default function CreateAndEditCreditCardExpensesForm({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {creditCard.map(({ name, image }, index) => (
+                  {creditCardsData.map(({ name, image }, index) => (
                     <SelectItem key={index} value={name}>
                       <div className="flex items-center gap-2">
                         <Avatar className="size-[24px]">
                           <AvatarImage src={image} alt="@avatar" />
-                          <AvatarFallback>W</AvatarFallback>
+                          <AvatarFallback>
+                            {name.charAt(0).toUpperCase()}
+                          </AvatarFallback>
                         </Avatar>
                         <span>{name}</span>
                       </div>
