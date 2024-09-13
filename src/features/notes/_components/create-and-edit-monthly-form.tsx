@@ -39,7 +39,10 @@ import { TransactionFormProps } from '@/features/transactions/schemas/transactio
 import { createTransaction } from '@/firebase/database/transactions/create-transaction-doc'
 
 export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState({
+    createAndUpdate: false,
+    pay: false,
+  })
 
   const form = useForm<MonthyPreviewFormProps>({
     mode: 'all',
@@ -50,7 +53,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [user] = useAuthState(auth)
 
   const handleFormSubmit = async (data: MonthyPreviewFormProps) => {
-    setIsLoading(true)
+    setIsLoading({ pay: false, createAndUpdate: true })
     try {
       if (id) {
         const newData = { ...data }
@@ -86,7 +89,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
     } catch (error) {
       toast.error('Erro desconhecido')
     } finally {
-      setIsLoading(false)
+      setIsLoading({ pay: false, createAndUpdate: false })
     }
   }
 
@@ -103,7 +106,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   }
 
   const handlePayExpense = async () => {
-    setIsLoading(true)
+    setIsLoading({ pay: true, createAndUpdate: false })
     try {
       const data = form.getValues()
 
@@ -137,7 +140,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
     } catch (error) {
       toast.error('Erro ao pagar despesa')
     } finally {
-      setIsLoading(false)
+      setIsLoading({ pay: false, createAndUpdate: false })
     }
   }
 
@@ -220,7 +223,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
         />
 
         <div className="space-y-2">
-          {isLoading ? (
+          {isLoading.createAndUpdate ? (
             <Button disabled className="w-full">
               <LoaderCircle className="animate-spin" />
             </Button>
