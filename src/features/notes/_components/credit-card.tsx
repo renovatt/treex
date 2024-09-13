@@ -17,16 +17,72 @@ import { AlertDialogHeader } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import CreateAndEditCreditCardExpensesForm from './credit-card/create-and-edit-credit-card-expenses-form'
 import { CreditCardSchemaProps } from '../schemas/credit-card-schema'
-import { Edit } from 'lucide-react'
+import { Edit, LoaderCircle } from 'lucide-react'
 import CreateAndEditCreditCardForm from './credit-card/create-and-edit-credit-card-form'
 import Decimal from 'decimal.js'
 import { IoCardOutline } from 'react-icons/io5'
+import { createTransaction } from '@/firebase/database/transactions/create-transaction-doc'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
+import { UserData } from '@/firebase/database/@types'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '@/firebase'
+import toast from 'react-hot-toast'
+import { useState } from 'react'
+import { deleteAllCreditCardExpenses } from '@/firebase/database/credit-cards/expenses/delete-all-credit-card-expenses-doc'
 
 type Props = {
   card: CreditCardSchemaProps
 }
 
 export default function CreditCard({ card }: Props) {
+  const [user] = useAuthState(auth)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const hasExpenses = (card?.expenses ?? []).length > 0
+
+  const handlePayExpenses = async () => {
+    setIsLoading(true)
+    try {
+      const promises = card?.expenses?.map(async (expense) => {
+        const data: TransactionFormProps = {
+          name: expense.name,
+          value: expense.value,
+          category: expense.category,
+          transaction: true,
+          date: new Date(),
+        }
+
+        const createTransactionResult = await createTransaction(
+          data,
+          user as UserData,
+        )
+
+        if (!createTransactionResult.status) {
+          throw new Error(createTransactionResult.message)
+        }
+      })
+
+      if (promises) {
+        await Promise.all(promises)
+      }
+
+      const deleteAllExpensesResult = await deleteAllCreditCardExpenses(
+        user as UserData,
+        card.id as string,
+      )
+
+      if (!deleteAllExpensesResult.status) {
+        throw new Error(deleteAllExpensesResult.message)
+      }
+
+      toast.success('Despesas pagas e movidas para transações')
+    } catch (error) {
+      toast.error('Erro ao pagar despesas')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const totalExpenses =
     card?.expenses?.reduce(
       (acc, expense) => acc.plus(expense.value),
@@ -42,7 +98,7 @@ export default function CreditCard({ card }: Props) {
 
   return (
     <div key={card.name} className="space-y-2 rounded-lg p-4">
-      <div className="flex flex-col items-start justify-between space-y-4 sm:flex-row sm:space-y-0 md:items-center">
+      <div className="flex flex-col items-start justify-between space-y-5 sm:flex-row sm:space-y-0 md:items-center">
         <div className="flex flex-row items-center space-x-2">
           {/* <Image
             src={`/images/${card.image}`}
@@ -112,7 +168,23 @@ export default function CreditCard({ card }: Props) {
         <Progress value={limitPercentage} />
       </div>
 
-      <div className="flex items-center justify-end py-0">
+      <div className="flex w-full items-center justify-between py-2">
+        {isLoading ? (
+          <Button disabled variant="destructive" className="w-32">
+            <LoaderCircle className="animate-spin" />
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            className="w-32"
+            onClick={handlePayExpenses}
+            disabled={!isCloseDate || !hasExpenses}
+            variant={`${isCloseDate && hasExpenses ? 'destructive' : 'outline'}`}
+          >
+            Pagar despesas
+          </Button>
+        )}
+
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="link" className="space-x-2">

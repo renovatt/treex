@@ -39,7 +39,7 @@ export function OverviewRadialChart() {
   return (
     <ChartContainer
       config={chartConfig}
-      className="mx-auto aspect-square w-full max-w-[250px]"
+      className="mx-auto aspect-square w-full max-w-[400px]"
     >
       <RadialBarChart
         data={chartData}
