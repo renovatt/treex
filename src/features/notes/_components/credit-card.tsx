@@ -45,7 +45,6 @@ export default function CreditCard({ card }: Props) {
     try {
       const promises = card?.expenses?.map(async (expense) => {
         const data: TransactionFormProps = {
-          id: expense.id,
           name: expense.name,
           value: expense.value,
           category: expense.category,

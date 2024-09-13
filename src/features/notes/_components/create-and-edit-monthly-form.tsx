@@ -34,6 +34,9 @@ import {
   MonthyPreviewFormProps,
   expensesMonthyPreviewSchema,
 } from '../schemas/expenses-monthly-schema'
+import { ConfirmModalAlert } from '@/components/@globals/confirm-modal-alert'
+import { TransactionFormProps } from '@/features/transactions/schemas/transaction-schema'
+import { createTransaction } from '@/firebase/database/transactions/create-transaction-doc'
 
 export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -97,6 +100,45 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
       return
     }
     toast.success(message)
+  }
+
+  const handlePayExpense = async () => {
+    setIsLoading(true)
+    try {
+      const data = form.getValues()
+
+      const expense: TransactionFormProps = {
+        name: data.name,
+        value: data.value,
+        category: data.category,
+        transaction: true,
+        date: new Date(),
+      }
+
+      const createTransactionResult = await createTransaction(
+        expense,
+        user as UserData,
+      )
+
+      if (!createTransactionResult.status) {
+        throw new Error(createTransactionResult.message)
+      }
+
+      const { status, message } = await deleteMonthlyExpense(
+        user as UserData,
+        id as string,
+      )
+      if (!status) {
+        toast.error(message)
+        return
+      }
+
+      toast.success('Despesa paga e movida para transação')
+    } catch (error) {
+      toast.error('Erro ao pagar despesa')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -188,6 +230,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
             </Button>
           )}
           {id && <DeleteModalAlert onClick={handleDelete} />}
+          <ConfirmModalAlert onClick={handlePayExpense} />
         </div>
       </form>
     </Form>
