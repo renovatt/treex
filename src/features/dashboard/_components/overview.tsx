@@ -34,8 +34,8 @@ export default function Overview() {
 
       <Card className="col-span-4 lg:col-span-2">
         <CardHeader>
-          <CardTitle>Categoria</CardTitle>
-          <CardDescription>Análise por categoria</CardDescription>
+          <CardTitle>Categorias</CardTitle>
+          <CardDescription>Análise por categorias</CardDescription>
         </CardHeader>
         <CardContent>
           <OverviewDonutChart />

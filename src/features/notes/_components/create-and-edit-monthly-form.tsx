@@ -39,7 +39,10 @@ import { TransactionFormProps } from '@/features/transactions/schemas/transactio
 import { createTransaction } from '@/firebase/database/transactions/create-transaction-doc'
 
 export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState({
+    createAndUpdate: false,
+    makePayment: false,
+  })
 
   const form = useForm<MonthyPreviewFormProps>({
     mode: 'all',
@@ -50,7 +53,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [user] = useAuthState(auth)
 
   const handleFormSubmit = async (data: MonthyPreviewFormProps) => {
-    setIsLoading(true)
+    setIsLoading({ makePayment: false, createAndUpdate: true })
     try {
       if (id) {
         const newData = { ...data }
@@ -86,7 +89,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
     } catch (error) {
       toast.error('Erro desconhecido')
     } finally {
-      setIsLoading(false)
+      setIsLoading({ makePayment: false, createAndUpdate: false })
     }
   }
 
@@ -103,7 +106,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   }
 
   const handlePayExpense = async () => {
-    setIsLoading(true)
+    setIsLoading({ makePayment: true, createAndUpdate: false })
     try {
       const data = form.getValues()
 
@@ -137,7 +140,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
     } catch (error) {
       toast.error('Erro ao pagar despesa')
     } finally {
-      setIsLoading(false)
+      setIsLoading({ makePayment: false, createAndUpdate: false })
     }
   }
 
@@ -220,7 +223,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
         />
 
         <div className="space-y-2">
-          {isLoading ? (
+          {isLoading.createAndUpdate ? (
             <Button disabled className="w-full">
               <LoaderCircle className="animate-spin" />
             </Button>
@@ -230,7 +233,14 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
             </Button>
           )}
           {id && <DeleteModalAlert onClick={handleDelete} />}
-          <ConfirmModalAlert onClick={handlePayExpense} />
+          {id && (
+            <ConfirmModalAlert
+              text="Pagar"
+              subText="Esta ação não pode ser desfeita. Esta ação irá mover a despesa para transações e excluir permanentemente."
+              isLoading={isLoading.makePayment}
+              onClick={handlePayExpense}
+            />
+          )}
         </div>
       </form>
     </Form>

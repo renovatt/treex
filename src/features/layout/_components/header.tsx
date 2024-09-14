@@ -23,7 +23,7 @@ export default function Header({ title, description }: HeaderProps) {
   const { status, setIsHidden } = useHideStore()
 
   return (
-    <header className="my-5 mb-10 flex w-full items-center justify-between">
+    <header className="my-3 mb-5 flex w-full items-center justify-between">
       <section className="flex items-start justify-center gap-2">
         <div className="flex flex-col">
           <h1 className="text-xl font-bold text-primary md:text-2xl">

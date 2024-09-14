@@ -15,10 +15,7 @@ import {
 } from '@/components/ui/dialog'
 import { AlertDialogHeader } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import CreateAndEditCreditCardExpensesForm from './credit-card/create-and-edit-credit-card-expenses-form'
-import { CreditCardSchemaProps } from '../schemas/credit-card-schema'
-import { Edit, LoaderCircle } from 'lucide-react'
-import CreateAndEditCreditCardForm from './credit-card/create-and-edit-credit-card-form'
+import { Edit } from 'lucide-react'
 import Decimal from 'decimal.js'
 import { IoCardOutline } from 'react-icons/io5'
 import { createTransaction } from '@/firebase/database/transactions/create-transaction-doc'
@@ -29,6 +26,11 @@ import { auth } from '@/firebase'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
 import { deleteAllCreditCardExpenses } from '@/firebase/database/credit-cards/expenses/delete-all-credit-card-expenses-doc'
+import { CreditCardSchemaProps } from '../../schemas/credit-card-schema'
+import CreateAndEditCreditCardExpensesForm from './create-and-edit-credit-card-expenses-form'
+import CreateAndEditCreditCardForm from './create-and-edit-credit-card-form'
+import { CustomConfirmModalAlert } from './custom-alert-confirm'
+import { DeleteDueDateModalAlert } from './delete-duedate-modal-alert'
 
 type Props = {
   card: CreditCardSchemaProps
@@ -83,6 +85,26 @@ export default function CreditCard({ card }: Props) {
     }
   }
 
+  const handleDeleteAllExpenses = async () => {
+    setIsLoading(true)
+    try {
+      const deleteAllExpensesResult = await deleteAllCreditCardExpenses(
+        user as UserData,
+        card.id as string,
+      )
+
+      if (!deleteAllExpensesResult.status) {
+        throw new Error(deleteAllExpensesResult.message)
+      }
+
+      toast.success('Despesas removidas no final do mês')
+    } catch (error) {
+      toast.error('Erro ao apagar despesas')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const totalExpenses =
     card?.expenses?.reduce(
       (acc, expense) => acc.plus(expense.value),
@@ -94,6 +116,7 @@ export default function CreditCard({ card }: Props) {
     .toFixed(2)
 
   const isCloseDate = new Date().getDate() >= Number(card.closing_date)
+  const isDueDate = new Date().getDate() >= Number(card.due_date)
   const limitPercentage = (Number(totalExpenses.toFixed(2)) / card.limit) * 100
 
   return (
@@ -126,6 +149,10 @@ export default function CreditCard({ card }: Props) {
                   <CreateAndEditCreditCardForm id={card.id} />
                 </DialogContent>
               </Dialog>
+
+              {isDueDate && hasExpenses && (
+                <DeleteDueDateModalAlert onClick={handleDeleteAllExpenses} />
+              )}
             </span>
             <p className="text-sm capitalize text-muted-foreground">
               {card.flag}
@@ -169,25 +196,16 @@ export default function CreditCard({ card }: Props) {
       </div>
 
       <div className="flex w-full items-center justify-between py-2">
-        {isLoading ? (
-          <Button disabled variant="destructive" className="w-32">
-            <LoaderCircle className="animate-spin" />
-          </Button>
-        ) : (
-          <Button
-            type="submit"
-            className="w-32"
-            onClick={handlePayExpenses}
-            disabled={!isCloseDate || !hasExpenses}
-            variant={`${isCloseDate && hasExpenses ? 'destructive' : 'outline'}`}
-          >
-            Pagar despesas
-          </Button>
-        )}
+        <CustomConfirmModalAlert
+          isLoading={isLoading}
+          hasExpenses={hasExpenses}
+          isCloseDate={isCloseDate}
+          onClick={handlePayExpenses}
+        />
 
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="link" className="space-x-2">
+            <Button disabled={isCloseDate} variant="link" className="space-x-2">
               <span>Adicionar</span>
             </Button>
           </DialogTrigger>

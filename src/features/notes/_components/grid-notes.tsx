@@ -1,10 +1,11 @@
 'use client'
 import Decimal from 'decimal.js'
-import { CircleDollarSign } from 'lucide-react'
+import { CircleDollarSign, CreditCard } from 'lucide-react'
 import { calculateExpensesForecast } from '@/utils/calculate-expenses-forecast'
 import { useGetMonthly } from '@/hooks/firebase/use-get-monthly'
 import WalletCard from '@/components/@globals/wallet-card'
 import { useGetCreditCards } from '@/hooks/firebase/use-get-credit-card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function GridNotes() {
   const { monthlyData } = useGetMonthly()
@@ -46,6 +47,17 @@ export default function GridNotes() {
         icon={CircleDollarSign}
         value={Number(creditCardTotalExpenses.toFixed(2))}
       />
+
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Cartões</CardTitle>
+          <CreditCard className="size-5 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{creditCardsData.length}</div>
+          <p className="text-xs text-muted-foreground">Cartões cadastrados</p>
+        </CardContent>
+      </Card>
     </section>
   )
 }
