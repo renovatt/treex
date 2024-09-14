@@ -205,7 +205,7 @@ export default function CreditCard({ card }: Props) {
 
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="link" className="space-x-2">
+            <Button disabled={isCloseDate} variant="link" className="space-x-2">
               <span>Adicionar</span>
             </Button>
           </DialogTrigger>
