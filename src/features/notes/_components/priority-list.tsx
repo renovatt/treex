@@ -1,39 +1,39 @@
 'use client'
-import { useEffect, useRef } from 'react'
 import PriorityListItem from './priority-list-item'
 import { useGetPriority } from '@/hooks/firebase/use-get-priority'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
 
 export default function PriorityList() {
-  const { priorityData } = useGetPriority()
-  const tableRef = useRef<HTMLUListElement | null>(null)
-
-  useEffect(() => {
-    if (tableRef.current) {
-      tableRef.current.scrollTo(0, -tableRef.current.scrollHeight)
-    }
-  }, [priorityData])
+  const { priorityData, isLoading } = useGetPriority()
 
   return (
-    <ul
-      ref={tableRef}
-      className="flex max-h-full w-full flex-col-reverse items-start justify-start overflow-scroll overflow-x-hidden"
-    >
-      {!priorityData.length ? (
+    <ScrollArea className="flex h-80 w-full">
+      {isLoading ? (
+        <div className="flex h-80 w-full items-center justify-center">
+          <p className="animate-pulse text-sm font-semibold text-muted-foreground">
+            Carregando transações...
+          </p>
+        </div>
+      ) : !priorityData?.length && !isLoading ? (
         <div className="flex h-80 w-full items-center justify-center">
           <p className="text-sm font-semibold text-muted-foreground">
-            Ainda não há itens
+            Ainda não há entradas
           </p>
         </div>
       ) : (
-        priorityData.map((priority) => (
-          <PriorityListItem
-            id={priority.id ?? ''}
-            key={priority.id}
-            title={priority.name}
-            level={priority.level}
-          />
+        priorityData?.map((priority) => (
+          <>
+            <PriorityListItem
+              id={priority.id ?? ''}
+              key={priority.id}
+              title={priority.name}
+              level={priority.level}
+            />
+            <Separator className="my-2" />
+          </>
         ))
       )}
-    </ul>
+    </ScrollArea>
   )
 }
