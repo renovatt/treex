@@ -30,6 +30,7 @@ import { CreditCardSchemaProps } from '../../schemas/credit-card-schema'
 import CreateAndEditCreditCardExpensesForm from './create-and-edit-credit-card-expenses-form'
 import CreateAndEditCreditCardForm from './create-and-edit-credit-card-form'
 import { CustomConfirmModalAlert } from './custom-alert-confirm'
+import { DeleteDueDateModalAlert } from './delete-duedate-modal-alert'
 
 type Props = {
   card: CreditCardSchemaProps
@@ -84,6 +85,26 @@ export default function CreditCard({ card }: Props) {
     }
   }
 
+  const handleDeleteAllExpenses = async () => {
+    setIsLoading(true)
+    try {
+      const deleteAllExpensesResult = await deleteAllCreditCardExpenses(
+        user as UserData,
+        card.id as string,
+      )
+
+      if (!deleteAllExpensesResult.status) {
+        throw new Error(deleteAllExpensesResult.message)
+      }
+
+      toast.success('Despesas removidas no final do mês')
+    } catch (error) {
+      toast.error('Erro ao apagar despesas')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const totalExpenses =
     card?.expenses?.reduce(
       (acc, expense) => acc.plus(expense.value),
@@ -95,6 +116,7 @@ export default function CreditCard({ card }: Props) {
     .toFixed(2)
 
   const isCloseDate = new Date().getDate() >= Number(card.closing_date)
+  const isDueDate = new Date().getDate() >= Number(card.due_date)
   const limitPercentage = (Number(totalExpenses.toFixed(2)) / card.limit) * 100
 
   return (
@@ -127,6 +149,10 @@ export default function CreditCard({ card }: Props) {
                   <CreateAndEditCreditCardForm id={card.id} />
                 </DialogContent>
               </Dialog>
+
+              {isDueDate && hasExpenses && (
+                <DeleteDueDateModalAlert onClick={handleDeleteAllExpenses} />
+              )}
             </span>
             <p className="text-sm capitalize text-muted-foreground">
               {card.flag}

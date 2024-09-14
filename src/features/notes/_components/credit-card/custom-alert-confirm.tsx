@@ -39,7 +39,7 @@ export function CustomConfirmModalAlert({
             disabled={!isCloseDate || !hasExpenses}
             variant={`${isCloseDate && hasExpenses ? 'destructive' : 'outline'}`}
           >
-            Pagar despesas
+            Pagar
           </Button>
         )}
       </AlertDialogTrigger>
