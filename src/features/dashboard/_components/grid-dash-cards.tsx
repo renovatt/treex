@@ -11,10 +11,13 @@ import { useGetMonthly } from '@/hooks/firebase/use-get-monthly'
 import WalletCard from '@/components/@globals/wallet-card'
 import { calculateGeneralCategoryPercentages } from '../utils/calculate-general-category-percentages'
 import { calculateBalancesToCards } from '../utils/calculate-balance-to-cards'
+import { useGetCreditCards } from '@/hooks/firebase/use-get-credit-card'
+import Decimal from 'decimal.js'
 
 export default function GridDashCards() {
   const { transactionData } = useGetTransactions()
   const { monthlyData } = useGetMonthly()
+  const { creditCardsData } = useGetCreditCards()
 
   const wallet = calculateWallet(transactionData)
   const monthlyRevenue = calculateCurrentMonthlyRevenue(transactionData)
@@ -62,6 +65,20 @@ export default function GridDashCards() {
     ? `${percentage}% com ${category}`
     : `${percentage}% ${category}`
 
+  const creditCardTotalExpenses = creditCardsData?.reduce((acc, card) => {
+    const totalExpenses =
+      card?.expenses?.reduce(
+        (acc, expense) => acc.plus(expense.value),
+        new Decimal(0),
+      ) ?? 0
+
+    return acc.plus(totalExpenses)
+  }, new Decimal(0))
+
+  const totalExpenses = new Decimal(expensesForecast).plus(
+    creditCardTotalExpenses,
+  )
+
   return (
     <section className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
       <WalletCard
@@ -77,13 +94,13 @@ export default function GridDashCards() {
         value={monthlyRevenue.total}
       />
       <WalletCard
-        title="Despesas fixas"
+        title="Despesas"
         description="Estimativa de gastos para o mês"
         icon={MdOutlineMoneyOff}
-        value={expensesForecast}
+        value={Number(totalExpenses.toFixed(2))}
       />
       <WalletCard
-        title="Categoria mais gasta"
+        title="Categoria"
         description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
         value={categoryRevenue.total}

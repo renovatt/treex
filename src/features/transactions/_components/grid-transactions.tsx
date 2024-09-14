@@ -67,7 +67,7 @@ export default function GridTransactions() {
         value={balanceDateRange.expense}
       />
       <WalletCard
-        title="Categoria mais gasta"
+        title="Categoria"
         description={mostSpentCategoryDesc}
         icon={MdOutlineCategory}
         value={categoryDateRange.total}
