@@ -235,7 +235,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
           {id && <DeleteModalAlert onClick={handleDelete} />}
           {id && (
             <ConfirmModalAlert
-              text="Pagar despesa"
+              text="Pagar"
               subText="Esta ação não pode ser desfeita. Esta ação irá mover a despesa para transações e excluir permanentemente."
               isLoading={isLoading.makePayment}
               onClick={handlePayExpense}
