@@ -27,7 +27,7 @@ export function DeleteDueDateModalAlert({ onClick }: Props) {
         <AlertDialogHeader>
           <AlertDialogTitle>Fatura vencida!</AlertDialogTitle>
           <AlertDialogDescription>
-            Pague sua fatura ou apague as despesas no cartão. Esta ação não pode
+            Pague sua fatura ou apague as despesas do cartão. Esta ação não pode
             ser desfeita.
           </AlertDialogDescription>
         </AlertDialogHeader>

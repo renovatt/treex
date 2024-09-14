@@ -47,8 +47,8 @@ export function CustomConfirmModalAlert({
         <AlertDialogHeader>
           <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
           <AlertDialogDescription>
-            Esta ação não pode ser desfeita. Esta ação irá mover a despesa para
-            transações e excluir permanentemente.
+            Esta ação não pode ser desfeita. Esta ação irá mover as despesas
+            para transações e excluir permanentemente.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
