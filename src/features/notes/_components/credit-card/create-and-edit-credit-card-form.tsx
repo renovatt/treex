@@ -45,6 +45,9 @@ export default function CreateAndEditCreditCardForm({ id }: { id?: string }) {
     resolver: zodResolver(creditCardSchema),
   })
 
+  const closingDate = form.watch('closing_date')
+  const dueDate = form.watch('due_date')
+
   const [user] = useAuthState(auth)
 
   const handleFormSubmit = async (data: CreditCardSchemaProps) => {
@@ -56,6 +59,18 @@ export default function CreateAndEditCreditCardForm({ id }: { id?: string }) {
     }
 
     try {
+      if (closingDate && dueDate) {
+        const closingDateInt = parseInt(closingDate)
+        const dueDateInt = parseInt(dueDate)
+
+        if (closingDateInt > dueDateInt) {
+          toast.error(
+            'A data de fechamento não pode ser maior que a data de vencimento',
+          )
+          return
+        }
+      }
+
       if (id) {
         const updatedData = { ...formatedData }
         updatedData.id = id
