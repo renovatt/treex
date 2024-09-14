@@ -41,7 +41,7 @@ import { createTransaction } from '@/firebase/database/transactions/create-trans
 export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [isLoading, setIsLoading] = useState({
     createAndUpdate: false,
-    pay: false,
+    makePayment: false,
   })
 
   const form = useForm<MonthyPreviewFormProps>({
@@ -53,7 +53,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   const [user] = useAuthState(auth)
 
   const handleFormSubmit = async (data: MonthyPreviewFormProps) => {
-    setIsLoading({ pay: false, createAndUpdate: true })
+    setIsLoading({ makePayment: false, createAndUpdate: true })
     try {
       if (id) {
         const newData = { ...data }
@@ -89,7 +89,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
     } catch (error) {
       toast.error('Erro desconhecido')
     } finally {
-      setIsLoading({ pay: false, createAndUpdate: false })
+      setIsLoading({ makePayment: false, createAndUpdate: false })
     }
   }
 
@@ -106,7 +106,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
   }
 
   const handlePayExpense = async () => {
-    setIsLoading({ pay: true, createAndUpdate: false })
+    setIsLoading({ makePayment: true, createAndUpdate: false })
     try {
       const data = form.getValues()
 
@@ -140,7 +140,7 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
     } catch (error) {
       toast.error('Erro ao pagar despesa')
     } finally {
-      setIsLoading({ pay: false, createAndUpdate: false })
+      setIsLoading({ makePayment: false, createAndUpdate: false })
     }
   }
 
@@ -233,7 +233,14 @@ export default function CreateAndEditMonthlyForm({ id }: { id?: string }) {
             </Button>
           )}
           {id && <DeleteModalAlert onClick={handleDelete} />}
-          <ConfirmModalAlert onClick={handlePayExpense} />
+          {id && (
+            <ConfirmModalAlert
+              text="Pagar despesa"
+              subText="Esta ação não pode ser desfeita. Esta ação irá mover a despesa para transações e excluir permanentemente."
+              isLoading={isLoading.makePayment}
+              onClick={handlePayExpense}
+            />
+          )}
         </div>
       </form>
     </Form>

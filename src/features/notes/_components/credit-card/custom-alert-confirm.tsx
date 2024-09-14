@@ -15,42 +15,51 @@ import { LoaderCircle } from 'lucide-react'
 type Props = {
   onClick: () => void
   isLoading?: boolean
-  text: string
-  subText: string
+  isCloseDate: boolean
+  hasExpenses: boolean
 }
 
-export function ConfirmModalAlert({
+export function CustomConfirmModalAlert({
   onClick,
   isLoading,
-  text,
-  subText,
+  hasExpenses,
+  isCloseDate,
 }: Props) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         {isLoading ? (
-          <Button disabled variant="destructive" className="w-full">
+          <Button disabled variant="destructive" className="w-32">
             <LoaderCircle className="animate-spin" />
           </Button>
         ) : (
           <Button
             type="button"
-            className="w-full"
-            disabled={isLoading}
-            variant="destructive"
+            className="w-32"
+            disabled={!isCloseDate || !hasExpenses}
+            variant={`${isCloseDate && hasExpenses ? 'destructive' : 'outline'}`}
           >
-            {text}
+            Pagar despesas
           </Button>
         )}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
-          <AlertDialogDescription>{subText}</AlertDialogDescription>
+          <AlertDialogDescription>
+            Esta ação não pode ser desfeita. Esta ação irá mover a despesa para
+            transações e excluir permanentemente.
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={onClick}>Sim</AlertDialogAction>
+          {isLoading ? (
+            <Button disabled variant="destructive" className="w-32">
+              <LoaderCircle className="animate-spin" />
+            </Button>
+          ) : (
+            <AlertDialogAction onClick={onClick}>Sim</AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
