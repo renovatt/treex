@@ -11,11 +11,12 @@ import useHideStore from '@/store/use-hide-store'
 import { motion } from 'framer-motion'
 import { PiggyBank } from 'lucide-react'
 import { IconType } from 'react-icons'
+import { ComponentType, SVGProps } from 'react'
 
 type Props = {
   id: string
   title: string
-  icon: IconType
+  icon: IconType | ComponentType<SVGProps<SVGSVGElement>>
   value: string
   date: string
   type: 'expense' | 'income'

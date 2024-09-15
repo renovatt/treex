@@ -6,7 +6,7 @@ import Overview from '@/features/cripto/_components/overview'
 // import { getBrapiStockList } from '@/services/brapi.service'
 
 export const metadata: Metadata = {
-  title: 'TreeX | Cripto & Inest',
+  title: 'TreeX | Invest',
   description:
     'Obtenha uma visão abrangente de sua situação financeira, acompanhada por gráficos personalizados que representam seus rendimentos.',
 }
@@ -18,10 +18,7 @@ export default async function Page() {
 
   return (
     <ViewContainer>
-      <Header
-        title="Cripto & Invest"
-        description="Cripto e bolsas de valores"
-      />
+      <Header title="Invest" description="Cripto e bolsas de valores" />
       <section className="flex w-full flex-col justify-between gap-10 overflow-y-auto overflow-x-hidden xl:flex-row">
         <section className="flex w-full flex-col items-center justify-start gap-5">
           <section className="w-full space-y-5">

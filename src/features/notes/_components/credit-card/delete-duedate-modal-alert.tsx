@@ -19,9 +19,11 @@ export function DeleteDueDateModalAlert({ onClick }: Props) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Badge className="cursor-pointer" variant="destructive">
-          Fatura vencida
-        </Badge>
+        <div>
+          <Badge className="cursor-pointer" variant="destructive">
+            Fatura vencida
+          </Badge>
+        </div>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

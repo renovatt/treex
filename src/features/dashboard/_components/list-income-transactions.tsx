@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { formattedDate } from '@/utils/format-date'
 import { formatteCurrency } from '@/utils/format-currency-brl'
 import { useGetTransactions } from '@/hooks/firebase/use-get-transactions'
@@ -46,10 +46,9 @@ export default function ListIncomeTransactions() {
           ?.slice(-30)
           ?.reverse()
           .map((transaction) => (
-            <>
+            <Fragment key={transaction.id}>
               <ListItem
-                key={transaction.id}
-                id={transaction.id ?? ''}
+                id={transaction.id as string}
                 type={transaction.transaction ? 'expense' : 'income'}
                 date={formattedDate(transaction.date?.toString() ?? '')}
                 icon={
@@ -62,7 +61,7 @@ export default function ListIncomeTransactions() {
                 value={formatteCurrency(transaction.value)}
               />
               <Separator className="my-2" />
-            </>
+            </Fragment>
           ))
       )}
     </ScrollArea>
