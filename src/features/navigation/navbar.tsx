@@ -1,7 +1,7 @@
 'use client'
 import useSideBarStore from '@/store/use-sidebar-store'
 import RouterLink from './router-link'
-import { House, ArrowRightLeft, Bitcoin } from 'lucide-react'
+import { House, ArrowRightLeft, TrendingUp } from 'lucide-react'
 import AddButton from '@/components/@globals/add-button'
 import { IoCardOutline } from 'react-icons/io5'
 
@@ -33,10 +33,10 @@ export default function Navbar() {
           name="Despesas"
         />
         <RouterLink
-          href="/cripto-&-invest"
-          icon={Bitcoin}
+          href="/invest"
+          icon={TrendingUp}
           isOpen={status.isSelected}
-          name="Cripto & Invest"
+          name="Invest"
         />
       </ul>
     </nav>

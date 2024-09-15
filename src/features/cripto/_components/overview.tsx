@@ -16,12 +16,15 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 // import dynamic from 'next/dynamic'
-// import TradingTickerTape from './trading-view/trading-ticker-tape'
-import TradingViewScreener from './trading-view/trading-view-screener'
 import { useGetQuotes } from '@/features/cripto/hooks/use-get-quotes'
 import { useCallback, useEffect, useState } from 'react'
 import QuoteCard from './quote-card'
 import { QuoteList } from '../entities/type-brapi-stock'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import CriptoList from './cripto-list'
+import WalletCard from '@/components/@globals/wallet-card'
+import { useGetDolar } from '../hooks/use-get-dolar'
+import { DollarSign } from 'lucide-react'
 
 const options = [
   { value: 'Finance', label: 'Finanças' },
@@ -34,6 +37,7 @@ export default function Overview() {
   const [sector, setSector] = useState(options[0].value)
   const [filteredQuotes, setFilteredQuotes] = useState<QuoteList[]>([])
 
+  const { data: dolar } = useGetDolar()
   const { data, isLoading, refetch } = useGetQuotes()
 
   const filterQuotes = useCallback(() => {
@@ -58,18 +62,20 @@ export default function Overview() {
   //   ssr: false,
   // })
 
-  // const MemoizedCandlestickChart = memo(CandlestickChart)
-
   return (
     <>
-      {/* <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <div className="col-span-7">
-          <TradingTickerTape />
-        </div>
-      </div> */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <WalletCard
+          className="col-span-1"
+          title="Dolar"
+          description="Preço do dolar hoje"
+          icon={DollarSign}
+          value={Number(dolar?.data.USDBRL.high)}
+        />
+      </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        {/* <Card className="col-span-4 lg:col-span-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
+        {/* <Card className="col-span-8 lg:col-span-2">
           <CardHeader>
             <CardTitle>Bitcoin agora</CardTitle>
             <CardDescription>
@@ -81,26 +87,24 @@ export default function Overview() {
           </CardContent>
         </Card> */}
 
-        <Card className="col-span-7">
+        <Card className="col-span-8">
           <CardHeader>
             <CardTitle>Criptomoedas</CardTitle>
             <CardDescription>
-              Acompanhe as principais criptomoedas
+              Lista das 30 principais criptomoedas do mercado
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <TradingViewScreener />
+            <CriptoList />
+            {/* <TradingViewScreener /> */}
           </CardContent>
         </Card>
 
-        <Card className="col-span-7">
+        <Card className="col-span-8">
           <div className="flex flex-col items-start justify-between md:flex-row md:items-end">
             <CardHeader>
               <CardTitle>Bolsa de valores</CardTitle>
-              <CardDescription>
-                Acompanhe as cotações mais relevantes do mercado de ações (
-                {getSectorLabel()}) - {filteredQuotes.length} cotas
-              </CardDescription>
+              <CardDescription>Filtre as cotações por setor</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -124,15 +128,26 @@ export default function Overview() {
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
-        {isLoading ? (
-          <div>Carregando...</div>
-        ) : (
-          filteredQuotes?.map((item) => (
-            <QuoteCard key={item.stock} {...item} />
-          ))
-        )}
-      </div>
+      <Card className="col-span-8">
+        <CardHeader>
+          <CardTitle>Cotas</CardTitle>
+          <CardDescription>
+            Acompanhe as cotações mais relevantes do mercado de ações (
+            {getSectorLabel()}) - {filteredQuotes.length} cotas
+          </CardDescription>
+        </CardHeader>
+        <ScrollArea className="flex h-[30rem] w-full px-4">
+          <div className="grid gap-4 py-2 md:grid-cols-2 lg:grid-cols-6">
+            {isLoading ? (
+              <div>Carregando...</div>
+            ) : (
+              filteredQuotes?.map((item) => (
+                <QuoteCard key={item.stock} {...item} />
+              ))
+            )}
+          </div>
+        </ScrollArea>
+      </Card>
     </>
   )
 }

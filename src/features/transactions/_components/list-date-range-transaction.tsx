@@ -8,8 +8,11 @@ import { filterTransactionsWithinDateRange } from '../utils/filter-transaction-w
 import { useDateStore } from '@/store/use-date-picker-store'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
+import { Fragment, useEffect, useState } from 'react'
 
 export default function ListDateRangeTransactions() {
+  const [isClient, setIsClient] = useState(false)
+
   const { dateRange } = useDateStore()
   const { transactionData, isLoading } = useGetTransactions()
 
@@ -17,6 +20,14 @@ export default function ListDateRangeTransactions() {
     from: dateRange.from || new Date(),
     to: dateRange.to || new Date(),
   })
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
 
   return (
     <ScrollArea className="flex h-80 w-full">
@@ -37,10 +48,9 @@ export default function ListDateRangeTransactions() {
           ?.slice(-30)
           ?.reverse()
           .map((transaction) => (
-            <>
+            <Fragment key={transaction.id as string}>
               <ListItem
-                key={transaction.id}
-                id={transaction.id ?? ''}
+                id={transaction.id as string}
                 type={transaction.transaction ? 'expense' : 'income'}
                 date={formattedDate(transaction.date?.toString() ?? '')}
                 icon={
@@ -53,7 +63,7 @@ export default function ListDateRangeTransactions() {
                 value={formatteCurrency(transaction.value)}
               />
               <Separator className="my-2" />
-            </>
+            </Fragment>
           ))
       )}
     </ScrollArea>

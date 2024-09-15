@@ -1,38 +1,38 @@
 'use client'
-import { useGetCrypto } from '@/features/cripto/hooks/use-get-crypto'
+import { Separator } from '@/components/ui/separator'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import ListItem, { CriptoCoinTypeProps } from './list-item'
+import { formatteCurrency } from '@/utils/format-currency-brl'
+import { useGetCrypto } from '@/features/cripto/hooks/use-get-crypto'
+import { Fragment } from 'react'
 
 export default function CriptoList() {
   const { data, isError, isLoading } = useGetCrypto()
+
   const sortedData = data?.sort(
     (a, b) => Number(b.quote.USD.price) - Number(a.quote.USD.price),
   )
+
   return (
-    <section className="size-full md:mb-4">
-      <ul className="flex h-96 max-h-[30rem] w-full flex-col items-center justify-start gap-2 overflow-scroll overflow-x-hidden lg:h-full">
-        {isError && (
-          <h1 className="text-xs text-white">Dados não podem ser carregados</h1>
-        )}
+    <ScrollArea className="flex h-80 w-full">
+      {isError && (
+        <h1 className="text-xs text-white">Dados não podem ser carregados</h1>
+      )}
 
-        {isLoading && (
-          <h1 className="text-xs text-muted-foreground">Carregando..</h1>
-        )}
+      {isLoading && (
+        <h1 className="text-xs text-muted-foreground">Carregando..</h1>
+      )}
 
-        {sortedData?.map((crypto: CriptoCoinTypeProps) => (
+      {sortedData?.slice(0, 30)?.map((crypto: CriptoCoinTypeProps) => (
+        <Fragment key={crypto.id}>
           <ListItem
-            key={crypto.id}
             name={crypto.name}
             symbol={crypto.symbol.toUpperCase()}
-            currentPrice={Number(crypto.quote.USD.price).toLocaleString(
-              'en-US',
-              {
-                style: 'currency',
-                currency: 'USD',
-              },
-            )}
+            currentPrice={formatteCurrency(Number(crypto.quote.USD.price))}
           />
-        ))}
-      </ul>
-    </section>
+          <Separator className="my-2" />
+        </Fragment>
+      ))}
+    </ScrollArea>
   )
 }

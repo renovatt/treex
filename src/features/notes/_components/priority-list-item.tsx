@@ -24,7 +24,7 @@ export default function PriorityListItem({
   return (
     <Dialog>
       <DialogTrigger asChild className="w-full">
-        <motion.li
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -41,7 +41,7 @@ export default function PriorityListItem({
           ) : (
             <Badge>Muito Importante</Badge>
           )}
-        </motion.li>
+        </motion.div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="items-start">

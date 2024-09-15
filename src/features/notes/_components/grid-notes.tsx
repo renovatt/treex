@@ -27,21 +27,18 @@ export default function GridNotes() {
   return (
     <section className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
       <WalletCard
-        // className="col-span-2"
         title="Total"
         description="Total de despesas"
         icon={CircleDollarSign}
         value={Number(total.toFixed(2))}
       />
       <WalletCard
-        // className="col-span-2"
         title="Despesas fixas"
         description="Previsão de despesas fixas"
         icon={CircleDollarSign}
         value={result}
       />
       <WalletCard
-        // className="col-span-2"
         title="Cartões de Crédito"
         description="Despesas dos cartões de crédito"
         icon={CircleDollarSign}
