@@ -25,7 +25,7 @@ export default function Overview() {
       <Card className="col-span-4">
         <CardHeader>
           <CardTitle>Comparativo</CardTitle>
-          <CardDescription>Comparativo dos últimos meses</CardDescription>
+          <CardDescription>Relação dos últimos 6 meses</CardDescription>
         </CardHeader>
         <CardContent>
           <OverviewBarMultipleChart />
@@ -45,7 +45,7 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-6">
         <CardHeader>
           <CardTitle>Evolução</CardTitle>
-          <CardDescription>Evolução nos últimos meses </CardDescription>
+          <CardDescription>Crescimento nos últimos meses </CardDescription>
         </CardHeader>
         <CardContent>
           <OverviewAreaChart />
@@ -55,7 +55,7 @@ export default function Overview() {
       <Card className="col-span-4 lg:col-span-2">
         <CardHeader>
           <CardTitle>Balanço</CardTitle>
-          <CardDescription>Análise entre entradas e saídas</CardDescription>
+          <CardDescription>Entradas e saídas</CardDescription>
         </CardHeader>
         <CardContent>
           <OverviewRadialChart />

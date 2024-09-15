@@ -1,7 +1,7 @@
 'use client'
 import useSideBarStore from '@/store/use-sidebar-store'
 import RouterLink from './router-link'
-import { LayoutDashboard, ArrowRightLeft, Bitcoin } from 'lucide-react'
+import { House, ArrowRightLeft, Bitcoin } from 'lucide-react'
 import AddButton from '@/components/@globals/add-button'
 import { IoCardOutline } from 'react-icons/io5'
 
@@ -13,9 +13,9 @@ export default function Navbar() {
       <ul className="flex w-full items-center justify-start gap-2 px-2 md:mt-14 md:flex-col">
         <RouterLink
           href="/dashboard"
-          icon={LayoutDashboard}
+          icon={House}
           isOpen={status.isSelected}
-          name="Dashboard"
+          name="Home"
         />
         <RouterLink
           href="/transactions"
